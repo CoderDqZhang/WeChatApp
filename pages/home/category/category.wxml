@@ -1,0 +1,32 @@
+
+<!--<loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading>  -->
+
+<!--<scroll-view scroll-y="true" style="height: 100%;" bindscrolltolower="loadMore" bindscrolltoupper="refesh">
+  <view wx:if="{{hasRefesh}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+    <icon type="waiting" size="45" />
+    <text>刷新中...</text>
+  </view>
+  <view wx:else style="display:none">
+    <text></text>
+  </view>
+  <view wx:for="{{ticketShow}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+    <template is="ticketShow" data="{{...item}}" />
+  </view>
+  </view>
+  <view class="tips1">
+    <view wx:if="{{hasMore}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;">
+      <icon type="waiting" size="45" />
+      <text>玩命的加载中...</text>
+    </view>
+    <view wx:else>
+      <text>没有更多内容了</text>
+    </view>
+  </view>
+</scroll-view>-->
+<import src="../../template/show_template.wxml"/>
+<import src="../../template/show_template.wxss"/>
+<view wx:for="{{shows.show_list}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+  <template is="show_template" data="{{...item}}" />
+</view>

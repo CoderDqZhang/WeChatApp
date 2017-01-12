@@ -1,0 +1,35 @@
+{
+  "pages":[
+    "pages/home/home/home",
+    "pages/template/show_template",
+    "pages/home/category/category",
+    "pages/home/scene/ticket_scen",
+    "pages/home/ticket_desc/ticket_desc",
+    "pages/mine/mine/mine",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#4bd4c5",
+    "navigationBarTitleText": "良票演出",
+    "navigationBarTextStyle":"#ffffff"
+  },
+  "tabBar":{
+   "color": "#384249",  
+   "selectedColor": "#4bd4c5",  
+   "backgroundColor": "#ffffff",
+   "borderStyle": "black",
+   "borderColor":"#384249", 
+   "list": [{  
+     "selectedIconPath": "images/tabBar/home_select.png",  
+     "iconPath": "images/tabBar/home_normal.png",  
+     "pagePath": "pages/home/home/home",
+     "text": "首页"  
+   },{  
+     "selectedIconPath": "images/tabBar/mine_select.png",  
+     "iconPath": "images/tabBar/mine_normal.png",  
+     "pagePath": "pages/mine/mine/mine",  
+     "text": "我的"  
+   }]  
+  }
+}

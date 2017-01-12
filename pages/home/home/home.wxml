@@ -1,0 +1,28 @@
+<template name="homeCategory">
+  <view>
+    <view class="categotyInfo">
+      <view class="title">
+        <text>{{title}}</text>
+      </view>
+      <view class="subtitle">
+        <text>{{subletitle}}</text>
+      </view>
+    </view>
+    <image src="src" class="photo">{{image}}</image>
+  </view>
+</template>
+<import src="../../template/show_template.wxml"/>
+<view class="topSession" style="height: 270px;">
+  <view wx:for="{{categoryArray}}" wx:key="categoryArray" class="category" bindtap="categoryTap" wx:for-item="item" data-category="{{item}}">
+    <template is="homeCategory" data="{{...item}}" />
+  </view>
+</view>
+<view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
+</view>
+<view class="ticketSession">
+  <view class="sessionTitle" style="margin-top:17px; margin-left:15px; margin-right:15px; height=35px;">近期尾票
+  </view>
+  <view wx:for="{{ticketShow}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+    <template is="show_template" data="{{...item}}" />
+  </view>
+</view>

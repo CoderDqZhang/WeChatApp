@@ -1,0 +1,19 @@
+<template name="ticketSession">
+  <view class="cellDetailInfo">
+    <view style="float:left;">
+      <view class="cellTitle"> {{name}}</view>
+    </view>
+    <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+    <view class="cellDetailView" wx:if="{{min_price != 0}}">
+      <text class="cellDetailInfo">{{min_price}}元起</text>
+    </view>
+    <view class="cellDetailView" wx:else>
+      <text class="cellDetail">暂时缺票</text>
+    </view>
+  </view>
+</template>
+<view class="topSession" style="height: 270px;">
+  <view wx:for="{{sessions}}" wx:key="sessions" class="sessions">
+    <template is="ticketSession" data="{{...item}}" />
+  </view>
+</view>

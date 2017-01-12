@@ -1,0 +1,21 @@
+
+<!--pages/template/show/show_template.wxml-->
+<template name="show_template">
+  <view class="ticketShowView" style="width: 100%;margin-top: 0px;padding-top: 15px;padding-bottom: 15px;flex-direction: row;height: 135px;">
+    <image src="{{cover}}" class="ticketPost" mode="aspectFill" style="margin-left: 15px;margin-top: 0px; width: 80px;height: 105px;float: left;"></image>
+    <view class="ticket_info" style=" margin-left: 105px;position: relative;margin-right:15px;height: 110px;margin-top: -12px;">
+      <view class="ticketTitle" style="font-family: SFUIText-Regular;color: #384249;font-size: 16px;margin-top: 12px;">{{title}}</view>
+      <view class="ticketTime" style="font-family: SFUIText-Regular;color: #A2ABB5;font-size: 13px;">{{show_date}}</view>
+      <view class="ticketLocation" style="font-family: SFUIText-Regular;color: #A2ABB5;font-size: 13px;">{{venue.name}}</view>
+      <view class="ticket_other" style="position: absolute;bottom: 0;left: 0;width: 100%;">
+        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-top: 2px;padding-left: 4px;padding-right: 4px;padding-bottom: 2px;border-radius: 2px;margin-right: 2px;font-size: 10px;" wx:if="{{0 < min_discount && min_discount < 1}}">{{min_discount * 10}}折</view>
+        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-top: 2px;padding-left: 4px;padding-right: 4px;padding-bottom: 2px;border-radius: 2px;margin-right: 2px;font-size: 10px;" wx:if="{{20 < ticket_count}}">还剩{{ticket_count}}张</view>
+        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-top: 2px;padding-left: 4px;padding-right: 4px;padding-bottom: 2px;border-radius: 2px;margin-right: 2px;font-size: 10px;" wx:else>最后{{ticket_count}}张</view>
+        <view class="ticket_price" style="display: inline-block;float: right;">
+          <text class="ticketMuch" style="font-family: SFUIText-Regular;color: #4BD4C5;font-size: 21px;margin-right: 3px;">{{min_price}}</text>
+          <text class="ticketMuchM" style="font-family: SFUIText-Regular;color: #BBC1CB;text-align: right;font-size: 10px;margin-right: 0px;">元</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
