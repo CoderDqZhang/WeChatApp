@@ -1,2 +1,23 @@
 <!--pages/home/ticket_desc/ticket_desc.wxml-->
-<text>pages/home/ticket_desc/ticket_desc.wxml</text>
+<template name="ticketDesc">
+  <view class="ticket_desc">
+    <image src="{{show.cover}}" class="ticketPost" mode="aspectFill"></image>
+    <view class="show_info">
+      <view class="show_title">{{show.title}}</view>
+      <view class="show_time">{{session.name}}</view>
+      <view class="show_location">{{show.venue.name}}</view>
+      <view class="show_other">
+        <view class="ticket_status" wx:if="{{0 < show.min_discount && show.min_discount < 1}}">{{show.min_discount * 10}}折</view>
+        <view class="ticket_status" wx:if="{{20 < show.ticket_count}}">还剩{{show.ticket_count}}张</view>
+        <view class="ticket_status" wx:else>最后{{show.ticket_count}}张</view>
+        <view class="show_service">
+          <text class="service">全部售门票，100%保真，安全交易，无票赔付</text>
+        </view>
+      </view>
+    </view>
+    <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 17px;" ></view>
+  </view>
+</template>
+<view class="ticketSession">
+  <template is="ticketDesc" data="{{...showDesc}}"/>
+</view>

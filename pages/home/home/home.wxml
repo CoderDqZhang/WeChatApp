@@ -20,7 +20,7 @@
 <view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
 </view>
 <view class="ticketSession">
-  <view class="sessionTitle" style="margin-top:17px; margin-left:15px; margin-right:15px; height=35px;">近期尾票
+  <view class="sessionTitle" style="margin-top:17px; margin-left:15px; margin-right:15px; height=35px;margin-bottom:15px;">近期尾票
   </view>
   <view wx:for="{{ticketShow}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
     <template is="show_template" data="{{...item}}" />

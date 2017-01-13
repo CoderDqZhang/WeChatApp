@@ -11,9 +11,12 @@
       <text class="cellDetail">暂时缺票</text>
     </view>
   </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2;"></view>
 </template>
-<view class="topSession" style="height: 270px;">
+<view style="height:100%;background: #EFEFF4;">
+  <view>
   <view wx:for="{{sessions}}" wx:key="sessions" class="sessions">
     <template is="ticketSession" data="{{...item}}" />
   </view>
+</view>
 </view>

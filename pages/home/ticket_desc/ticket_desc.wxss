@@ -1,1 +1,76 @@
 /* pages/home/ticket_desc/ticket_desc.wxss */
+
+.ticket_desc {
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 20px;
+  flex-direction: row;
+  height: 130px;
+}
+
+.ticketPost {
+  margin-left: 15px;
+  margin-top: 0px;
+  width: 110px;
+  border-radius: 3px;
+  height: 150px;
+  float: left;
+}
+
+.show_info {
+  margin-left: 137px;
+  position: relative;
+  margin-right: 15px;
+  height: 150px;
+  margin-top: -12px;
+}
+
+.show_title {
+  font-family: SFUIText-Regular;
+  color: #384249;
+  font-size: 16px;
+  margin-top: 12px;
+  line-height: 18px;
+}
+
+.show_time {
+  font-family: SFUIText-Regular;
+  color: #a2abb5;
+  font-size: 13px;
+}
+
+.show_location {
+  font-family: SFUIText-Regular;
+  color: #a2abb5;
+  font-size: 13px;
+}
+
+.show_other {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ticket_status {
+  display: inline-block;
+  background-color: #4bd4c5;
+  color: #fff;
+  padding-top: 1px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 1px;
+  border-radius: 2px;
+  margin-right: 2px;
+  font-size: 10px;
+}
+
+.show_service {
+  width: 100%;
+}
+
+.service {
+    font-family: SFUIText-Regular;
+    font-size: 12px;
+    color: #4bd4c5;
+}

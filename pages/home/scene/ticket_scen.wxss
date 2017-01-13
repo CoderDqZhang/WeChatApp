@@ -3,6 +3,7 @@
 .cellDetailInfo {
   height: 44px;
   width: 100%;
+  background-color: #FFFFFF;
 }
 
 .detailImage {
