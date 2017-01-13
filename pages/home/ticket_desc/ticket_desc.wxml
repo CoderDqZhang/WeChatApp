@@ -24,7 +24,7 @@
     <view class="ticket_normal_price_template">{{original_ticket.name}}</view>
     <view class="ticket_row_template">
       <view class="ticket_row_type">{{region}}</view>
-      <view class="ticket_deverliy_type">dsdsd</view>
+      <view class="ticket_deverliy_type">{{deliveType}}</view>
     </view>
     <view class="ticket_price_template">
       <view class="ticket_now_price_template">{{price}}</view>
@@ -32,6 +32,7 @@
       <view class="ticket_status" wx:else>最后{{remain_count}}张</view>
     </view>
   </view>
+  
 </template>
 <view class="ticketSession">
   <template is="ticketDesc" data="{{...showDesc}}" />
@@ -61,5 +62,6 @@
   <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 1px;"></view>
   <view wx:for="{{showDesc.ticket_list}}" wx:key="ticketInfos" class="ticketInfos" id="showTap" bindtap="showTap" wx:for-item="item" data-ticket="{{item}}">
     <template is="ticketInfo" data="{{...item}}" />
+    <view style=" margin-left: 15px;margin-right:15px;height: 1px; background-color: #E9EBF2; margin-top: 13px;"></view>
   </view>
 </view>

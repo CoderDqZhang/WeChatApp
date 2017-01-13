@@ -15,7 +15,7 @@
 </template>
 <view style="height:100%;background: #EFEFF4;">
   <view>
-  <view wx:for="{{sessions}}" wx:key="sessions" class="sessions">
+  <view wx:for="{{sessions}}" wx:key="sessions" class="sessions" id="showTap" bindtap="showTap" wx:for-item="item" data-session="{{item}}">
     <template is="ticketSession" data="{{...item}}" />
   </view>
 </view>

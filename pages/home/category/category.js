@@ -10,7 +10,6 @@ Page({
     },
     requestData: function (categoty) {
         var that = this;
-        console.log(JSON.parse(categoty))
         that.setData({
             categoryShow: JSON.parse(categoty)
         })

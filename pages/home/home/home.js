@@ -36,10 +36,9 @@ Page({
   requestData: function () {
     var that = this;
     app.func.requestGet('show/hot/', {}, function (res) {
-      for (var i = 0; i < res.length; i ++){
+      for (var i = 0; i < res.length; i++) {
         var dic_count = res[i].min_discount * 10
         res[i].min_discount = dic_count.toFixed(1)
-        console.log(res[i].min_discount)
       }
       that.setData({
         ticketShow: res
@@ -49,12 +48,14 @@ Page({
   showTap: function (event) {
     var data = event.currentTarget.dataset.show
     data.cover = ""
-    var show = JSON.stringify(data)
     if (event.currentTarget.dataset.show.session_count > 1) {
+      var show = JSON.stringify(data)
+
       wx.navigateTo({
         url: '../scene/ticket_scen?show=' + show
       })
     } else {
+      var show = JSON.stringify(data)
       wx.navigateTo({
         url: '../ticket_desc/ticket_desc?show=' + show
       })

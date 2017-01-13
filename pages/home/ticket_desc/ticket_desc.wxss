@@ -215,6 +215,12 @@
   font-size: 13px;
 }
 
+.ticket_deverliy_type{
+  margin-top: 5px;
+  color: #bbc1cb;
+  font-size: 10px;
+}
+
 .ticket_price_template {
   text-align: right;
   width: 500px;

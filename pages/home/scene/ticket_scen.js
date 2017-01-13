@@ -1,7 +1,8 @@
 var app = getApp()
+var sessionShow;
 Page({
     data: {
-        sessionShow: null,
+        showData:null,
         sessions: []
     },
     onLoad: function (opt) {
@@ -10,14 +11,21 @@ Page({
     requestData: function (show) {
         var that = this;
         that.setData({
-            sessionShow:JSON.parse(show)
+            sessionShow: JSON.parse(show)
         })
-        var url = "show/"+JSON.parse(show).id+"/session/"
+        var url = "show/" + JSON.parse(show).id + "/session/"
         app.func.requestGet(url, {}, function (res) {
             that.setData({
-                sessions: res
+                sessions: res,
             })
-            console.log(sessions)
         });
-    }
+    },
+    showTap: function (event) {
+        var that = this;
+        var session = event.currentTarget.dataset.session
+        that.data.sessionShow.session = session
+        wx.navigateTo({
+            url: '../ticket_desc/ticket_desc?show=' + JSON.stringify(that.data.sessionShow)
+        })
+    },
 })
