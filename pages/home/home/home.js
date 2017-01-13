@@ -36,6 +36,11 @@ Page({
   requestData: function () {
     var that = this;
     app.func.requestGet('show/hot/', {}, function (res) {
+      for (var i = 0; i < res.length; i ++){
+        var dic_count = res[i].min_discount * 10
+        res[i].min_discount = dic_count.toFixed(1)
+        console.log(res[i].min_discount)
+      }
       that.setData({
         ticketShow: res
       })

@@ -19,7 +19,10 @@ Page({
         })
         var url = "show/list/?cat_id=" + JSON.parse(categoty).id
         app.func.requestGet(url, {}, function (res) {
-            console.log(res)
+            for (var i = 0; i < res.show_list.length; i++) {
+                var dic_count = res.show_list[i].min_discount * 10
+                res.show_list[i].min_discount = dic_count.toFixed(1)
+            }
             that.setData({
                 shows: res
             })

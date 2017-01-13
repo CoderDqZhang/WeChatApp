@@ -14,8 +14,12 @@ Page({
         })
         var url = "show/" + JSON.parse(show).id + "/session/" + JSON.parse(show).session.id
         app.func.requestGet(url, {}, function (res) {
+            var data = res;
+            var imageUrl = data.show.cover
+            data.show = JSON.parse(show)
+            data.show.cover =  imageUrl
             that.setData({
-                showDesc: res
+                showDesc: data
             })
         });
     }
