@@ -1,0 +1,7 @@
+
+<!--pages/template/refresh_template.wxml-->
+<template name="refresh_template">
+  <view wx:if="{{shows.has_next}}" class="loadMore">
+    <text>玩命加载中...</text>
+  </view>
+</template>

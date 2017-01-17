@@ -1,0 +1,35 @@
+
+<!--pages/home/address/address.wxml-->
+<view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
+</view>
+<form bindsubmit="formSubmit">
+  <view class="title_input">
+    <view class="title">联系人姓名</view>
+    <input name="name" class="input_text" placeholder="联系人姓名"  placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 0px;"></view>
+  <view class="title_input">
+    <view class="title">联系人电话</view>
+    <input name="phone" class="input_text" placeholder="联系人电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
+    
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 0px;"></view>
+  <view class="picke_input">
+  <view class="section">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picket">
+        <view class="picket_select">
+            区域选择：{{provice[index]}}
+        </view>
+    </picker>
+</view> 
+    <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 0px;"></view>
+  <view class="detail_input">
+    <view class="detail_title">详细地址</view>
+    <input name="address" class="detail_text" placeholder="详细地址" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
+  </view>
+    <button formType="submit" class="confirm" >保存</button>
+</form>
+<!--<view class="bottom">
+</view>-->

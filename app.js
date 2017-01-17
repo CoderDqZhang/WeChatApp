@@ -1,5 +1,5 @@
 //app.js
-var http = require('gloable/service/http.js')  
+var http = require('gloable/service/http.js')
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -7,43 +7,62 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
-  onShow: function () {
-
-  },
-  onShow: function() {
-      // Do something when show.
-  },
-  onHide: function() {
-      // Do something when hide.
-  },
-  onError: function(msg) {
-    console.log(msg)
-  },
-  getUserInfo:function(cb){
+  getUserInfo: function (cb) {
     var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
+    // if (this.globalData.userInfo) {
+    //   typeof cb == "function" && cb(this.globalData.userInfo)
+    //   try {
+    //     var value = wx.getStorageSync('userInfo')
+    //     if (value) {
+    //       that.globalData.userInfo = value
+    //       // Do something with return value
+    //     }
+    //   } catch (e) {
+    //     // Do something when catch error
+    //   }
+    // } else {
       //调用登录接口
       wx.login({
-        success: function () {
+        success: function (res) {
           wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
+            success: function (resU) {
+              that.globalData.userInfo = resU.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
+              if (res.code) {
+                console.log(resU.userInfo)
+                console.log(res.code)
+                wx.request({
+                  url: "https://api.liangpiao.me/user/weixin_login/",
+                  data: {
+                    "gender": resU.userInfo.gender,
+                    "nickname": resU.userInfo.nickName,
+                    "avatar": resU.userInfo.avatarUrl,
+                    "code": res.code
+                  },
+                  method: 'post',
+                  success: function (res) {
+                    console.log(res.lp_session_id)
+                    try {
+                      wx.setStorageSync('userInfo', res)
+                    } catch (e) {
+                    }
+                    console.log(res)
+                  }
+                })
+              } else {
+                console.log('获取用户登录态失败！' + res.errMsg)
+              }
             }
           })
         }
       })
-    }
+    // }
   },
-  //这里可以设置全局变量
-  globalData:{
-    userInfo:null,
-    AppTheme_4BD4C5_Color:"4BD4C5"
+  globalData: {
+    userInfo: null
   },
-  func:{  
-    requestPost:http.requestPost, 
-    requestGet:http.requestGet,  
+  func: {
+    requestPost: http.requestPost,
+    requestGet: http.requestGet,
   }
 })

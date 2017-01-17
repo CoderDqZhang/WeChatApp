@@ -1,1 +1,96 @@
 /* pages/mine/mine/mine.wxss */
+
+.ticket_desc {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.show_title {
+  font-size: 17px;
+  margin-top: 15px;
+  color: #384249;
+  line-height: 18px;
+  max-height: 54px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.show_detail {
+  margin-top: 1px;
+  font-size: 13px;
+  color: #003c00;
+}
+
+.ticket_id {
+  margin-top: 1px;
+  font-size: 13px;
+  color: #bbc1cb;
+  margin-bottom: 15px;
+}
+
+.ticket_wid {
+  margin-top: 1px;
+  font-size: 13px;
+  color: #bbc1cb;
+  margin-bottom: 53px;
+}
+
+.show_session {
+  margin-top: 13px;
+  font-size: 13px;
+  color: #003c00;
+}
+
+.ticket_status {
+  margin-top: 13px;
+  font-family: PingFangSC-Regular;
+  font-size: 13px;
+  color: #8a96a2;
+}
+
+.ticket_waite_pay {
+  margin-top: 13px;
+  font-family: PingFangSC-Medium;
+  font-size: 13px;
+  color: #4bd4c5;
+}
+
+.ticket_pay {
+  flex-direction: row;
+  display: flex;
+  float: right;
+  position: relative;
+  margin-top: -43px;
+  font-size: 13px;
+  color: #bbc1cb;
+  margin-bottom: 15px;
+}
+
+.cancel_button {
+  padding-top: 7px;
+  padding-bottom: 5px;
+  border: 2px solid #4bd4c5;
+  border-radius: 3px;
+  color: #4bd4c5;
+  text-align: center;
+  border-width: 0.5px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.confim_button {
+  padding-top: 7px;
+  padding-bottom: 5px;
+  border-radius: 3px;
+  line-height: 18px;
+  align-content: center;
+  text-align: center;
+  width: 60px;
+  background-color: #4bd4c5;
+  margin-right: 0px;
+  color: #fff;
+}

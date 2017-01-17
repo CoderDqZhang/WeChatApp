@@ -25,8 +25,15 @@
     </view>
   </view>
 </scroll-view>-->
-<import src="../../template/show_template.wxml"/>
-<import src="../../template/show_template.wxss"/>
-<view wx:for="{{shows.show_list}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
-  <template is="show_template" data="{{...item}}" />
-</view>
+<import src="../../template/show_template.wxml" />
+<import src="../../template/refresh_template.wxml" />
+<scroll-view scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="refesh">
+<view class="tips">
+    <view wx:if="{{hase_refresh}}">
+    <text>刷新中...</text>
+    </view>
+  </view>
+  <view wx:for="{{shows.show_list}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+    <template is="show_template" data="{{...item}}" />
+  </view>
+</scroll-view>
