@@ -1,70 +1,82 @@
 /* pages/home/home.wxss */
+
 /** wxss **/
+
 /** 修改默认的navigator点击态 **/
+
 .navigator-hover {
-    color:blue;
+  color: blue;
 }
+
 /** 自定义其他点击态样式类 **/
+
 .other-navigator-hover {
-    color:red;
+  color: red;
 }
 
-.category{
-    width: 50%;
-    height: 79px;
-    margin-top: 3px;
-    display: inline-block;
+
+.category {
+  width: 50%;
+  height: 79px;
+  margin-top: 3px;
+  display: inline-block;
 }
 
-.categotyInfo{
-    margin-right:50px;
-    margin-top: 26px;
-    margin-left: 15px;
-    float: left;
+.categotyInfo {
+  margin-right: 50px;
+  margin-top: 26px;
+  margin-left: 15px;
+  float: left;
 }
 
-.photo{
-    width: 28px;
-    height: 38px;
-    float: right;
-    position: relative;
-    margin-left: 105px;
-    margin-right:15px;
-    margin-top: -35px;
-    background-color: #A2ABB5;
+.photo {
+  width: 28px;
+  height: 38px;
+  float: right;
+  position: relative;
+  margin-left: 105px;
+  margin-right: 15px;
+  margin-top: -35px;
+  background-color: #a2abb5;
 }
 
-.title{
-    font-family: SFUIText-Medium;
-    color: #384249;
-    font-size: 15px;
-}
-.subtitle{
-    font-family: SFUIText-Regular;
-    color: #BBC1CB;
-    font-size: 12px;
+.title {
+  font-family: SFUIText-Medium;
+  color: #384249;
+  font-size: 15px;
 }
 
-.sessionTitle{
-    font-family: SFUIText-Regular;
-    color: #A2ABB5;
-    font-size: 13px;
-    margin-left: 15px;
-    margin-top: 17px;
+.subtitle {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  color: #bbc1cb;
+  font-size: 12px;
 }
 
-.product_image{
-    opacity: 0;
-    width: 100%;
-    height: 70%;
-    transition: opacity 1s linear 2s;
+.sessionTitle {
+  font-family: SFUIText-Regular;
+  color: #a2abb5;
+  font-size: 13px;
+  margin-left: 15px;
+  margin-top: 17px;
 }
 
-.ticketText{
-    padding-top: 2px;
-    text-align: center;
+.product_image {
+  opacity: 0;
+  width: 100%;
+  height: 70%;
+  transition: opacity 1s linear 2s;
 }
 
-.loaded{
-    opacity: 1;
+.ticketText {
+  padding-top: 2px;
+  text-align: center;
+}
+
+.loaded {
+  opacity: 1;
 }

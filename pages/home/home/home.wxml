@@ -1,14 +1,14 @@
 <template name="homeCategory">
-  <view>
+  <view class="category_info">
     <view class="categotyInfo">
       <view class="title">
-        <text>{{title}}</text>
+        <text>{{name}}</text>
       </view>
       <view class="subtitle">
-        <text>{{subletitle}}</text>
+        <text>{{title}}</text>
       </view>
     </view>
-    <image src="src" class="photo">{{image}}</image>
+    <image src="{{icon}}" class="photo">{{image}}</image>
   </view>
 </template>
 <import src="../../template/show_template.wxml"/>

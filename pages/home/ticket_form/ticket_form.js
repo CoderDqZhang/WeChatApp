@@ -1,4 +1,5 @@
 // pages/home/ticket_form/ticket_form.js
+var app = getApp()
 Page({
   data: {
     sessionShow: null,
@@ -66,7 +67,7 @@ Page({
     that.data.deliveryMuchs.push("顺丰快递（" + that.data.ticket.delivery_price_sf.toString() + "）元")
     var form = that.data.orderForm
     form.delivery_type = tempDevery
-    form.delivery_price =  that.data.ticket.delivery_price
+    form.delivery_price = that.data.ticket.delivery_price
     that.setData({
       delivery_type: tempDevery,
       choosedelivery: that.data.deliverys[0],
@@ -118,28 +119,76 @@ Page({
     var data
     if (form.delivery_type == 1) {
       data = {
-        "ticket_id": that.data.ticket.id,
-        "ticket_count": that.data.ticket.buy_number,
-        "pay_type": "0",
-        "address_id": that.data.address.id,
-        "delivery_price": that.data.orderForm.delivery_price,
+        "ticket_id": that.data.ticket.id.toString(),
+        "ticket_count": that.data.ticket.buy_number.toString(),
+        "pay_type": "2",
+        "address_id": that.data.address.id.toString(),
+        "delivery_price": that.data.orderForm.delivery_price.toString(),
         "message": e.detail.value.message,
-        "delevery_type": that.data.delivery_type
+        "delivery_type": that.data.delivery_type.toString()
       }
     } else {
       data = {
-        "ticket_id": that.data.ticket.id,
-        "ticket_count": that.data.ticket.buy_number,
-        "pay_type": "0",
-        "delevery_type": that.data.delivery_type,
+        "ticket_id": that.data.ticket.id.toString(),
+        "ticket_count": that.data.ticket.buy_number.toString(),
+        "pay_type": "2",
+        "delivery_type": that.data.delivery_type.toString(),
         "delivery_price": "0",
-        "name": e.detail.value.name,
-        "phone": e.detail.value.phone,
-        "message": e.detail.value.message,
+        "name": e.detail.value.name.toString(),
+        "phone": e.detail.value.phone.toString(),
+        "message": e.detail.value.message.toString(),
       }
     }
-
     console.log(data)
+    app.func.requestPost('order/create/', data, function (res) {
+      console.log(res)
+      var wxpay = res.pay_url.wxpay
+      //       appid
+      // :
+      // "wx6c6b940e660449a2"
+      // noncestr
+      // :
+      // "at2ZjGsJbKAi0HXoTmwkvz135WSYVd6r"
+      // package
+      // :
+      // "Sign=WXPay"
+      // partnerid
+      // :
+      // "1409584902"
+      // prepayid
+      // :
+      // "wx2017011716535203b29762260781755313"
+      // sign
+      // :
+      // "CBE0188F34F21F8B6F559811C0DBB7CB"
+      // timestamp
+      // :
+      // "1484643232"
+      var payData = {
+        'prepayId':wxpay.prepayid,
+        'appId':wxpay.appid,
+        'timeStamp': wxpay.timestamp,
+        'nonceStr': wxpay.noncestr,
+        
+        'package': wxpay.package,
+        'signType': 'MD5',
+        'paySign': wxpay.sign,
+      }
+      console.log(payData)
+      wx.requestPayment({
+        'appId':wxpay.appid,
+        'timeStamp': wxpay.timestamp,
+        'nonceStr': wxpay.noncestr,
+        'package': wxpay.package,
+        'signType': 'MD5',
+        'paySign': wxpay.sign,
+        'success': function (wres) {
+          console.log(wres)
+        },
+        'fail': function (res) {
+        }
+      })
+    });
   },
   onReady: function () {
     // 页面渲染完成

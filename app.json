@@ -18,10 +18,10 @@
     "navigationBarTextStyle":"#ffffff"
   },
   "tabBar":{
-   "color": "#384249",  
+   "color": "#8A96A2",  
    "selectedColor": "#4bd4c5",  
    "backgroundColor": "#ffffff",
-   "borderStyle": "black",
+   "borderStyle": "white",
    "borderColor":"#384249", 
    "list": [{  
      "selectedIconPath": "images/tabBar/home_select.png",  

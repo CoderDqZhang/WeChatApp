@@ -32,7 +32,6 @@
       <view class="ticket_status_number" wx:else>最后{{remain_count}}张</view>
     </view>
   </view>
-  
 </template>
 <view class="ticketSession">
   <template is="ticketDesc" data="{{...showDesc}}" />

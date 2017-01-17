@@ -50,6 +50,7 @@ Page({
         if (event.currentTarget.dataset.show.session_count > 1) {
             var data = event.currentTarget.dataset.show
             data.cover = ""
+            data.category.icon = ""
             var show = JSON.stringify(data)
             wx.navigateTo({
                 url: '../scene/ticket_scen?show=' + show
