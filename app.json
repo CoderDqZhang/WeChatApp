@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/home/address/address",
     "pages/home/home/home",
     "pages/home/mine/mine",
     "pages/template/show_template",
@@ -7,7 +8,7 @@
     "pages/home/scene/ticket_scen",
     "pages/home/ticket_desc/ticket_desc",
     "pages/home/ticket_form/ticket_form",
-    "pages/home/address/address",
+    
     "pages/template/refresh_template",
     "pages/logs/logs"
   ],

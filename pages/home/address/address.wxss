@@ -47,33 +47,34 @@ page {
 }
 
 .picke_input {
-  display: inline-block;
   background-color: white;
+  flex-direction: row;
+  display: flex;
+  height: 44px;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
 .detail_text {
   position: absolute;
   margin-top: 3px;
-  margin-left: 105px;
+  margin-left: 108px;
   width: 50%;
   height: 42px;
 }
 
-.section {
-  width: 90%;
-  height: 44px;
-  display: inline-block;
-}
-
 .picket {
-  margin-top: 15px;
-  margin-left: 15px;
-  margin-right: 5px;
   font-size: 15px;
   color: #384249;
   width: 100%;
-  float: left;
+  letter-spacing: 0;
+}
+
+.picketunSelect{
+  font-size: 15px;
+  color: #BBC1CB;
+  width: 100%;
   letter-spacing: 0;
 }
 
@@ -82,7 +83,8 @@ page {
 }
 
 .input_text {
-  float: left;
+  margin-left: 4px;
+  /*background-color: #4bd4c5;*/
   margin-right: 30px;
 }
 
@@ -95,11 +97,9 @@ page {
 }
 
 .detailImage {
-  float: right;
   margin-right: 15px;
   width: 8px;
   height: 13px;
-  margin-top: 17px;
 }
 
 .confirm {

@@ -36,10 +36,21 @@ Page({
       "新疆维吾尔自治区",
       "香港特别行政区",
       "澳门地区"],
-    regions: "地区选择"
+    regions: "地区选择",
+    isSelect: false,
+    windowsWidth:0
   },
   onLoad: function (options) {
-    
+    var that = this
+    wx.getSystemInfo({
+      success: function(res) {
+        // success
+        that.setData({
+          windowWidth:res.windowWidth - 148
+        })
+        console.log(that.data.windowWidth)
+      }
+    })
     // 页面初始化 options为页面跳转所带来的参数
   },
   formSubmit: function (e) {
@@ -59,11 +70,27 @@ Page({
           "address": e.detail.value.address,
         }
         app.func.requestPost('user/address/', data, function (ures) {
+          var pages = getCurrentPages();
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.changeData(ures)
+          }
           try {
             wx.setStorageSync(res.data.data.id.toString(), ures)
-            wx.navigateTo({
-            url: '../ticket_form/ticket_form'
-        })
+            wx.navigateBack({
+              delta: 1
+            })
+            // wx.showToast({
+            //   title: '保存成功',
+            //   icon: 'success',
+            //   duration: 10000
+            // })
+
+            // setTimeout(function () {
+            //   wx.hideToast()
+            // }, 2000)
           } catch (e) {
             console.log(e)
           }
@@ -76,6 +103,7 @@ Page({
     console.log('picker发送选择改变，携带值为', this.data.provice[e.detail.value])
     this.setData({
       index: e.detail.value,
+      isSelect: true,
       regions: this.data.provice[e.detail.value]
     })
   },

@@ -29,10 +29,12 @@
     </view>
   </view>
   <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="cell_title_info_image_address" wx:if="{{ delivery_type == 1}}">
-    <view class="title_address" id="addressTap" bindtap="addressTap" wx:if="{{address == null}}">新增收货地址
+  <view class="cell_title_info_image" wx:if="{{ delivery_type == 1}}" id="addressTap" bindtap="addressTap">
+    <view class="title" wx:if="{{address == null}}">新增收货地址
     </view>
-    <view class="title_address" id="addressTap" bindtap="addressTap" wx:else>{{address.location}} {{address.address}} {{address.name}} {{address.mobile_num}}
+    <view class="title" wx:else>收货地址
+    </view>
+    <view class="detail">{{address.location}} {{address.address}} {{address.name}} {{address.mobile_num}}
     </view>
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>

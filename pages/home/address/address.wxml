@@ -5,29 +5,32 @@
 <form bindsubmit="formSubmit">
   <view class="title_input">
     <view class="title">联系人姓名</view>
-    <input name="name" class="input_text" placeholder="联系人姓名" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
+    <input name="name" class="input_text" placeholder="联系人姓名" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px;"/>
   </view>
   <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="title_input">
     <view class="title_phone">联系电话</view>
-    <input name="phone" class="input_text" placeholder="手机或固话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
-    
+    <input name="phone" class="input_text" placeholder="手机或固话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px;"/>
   </view>
   <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="picke_input">
-    <view class="section">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picket">
-        <view class="picket_select">
-          区域选择{{provice[index]}}
+    <view class="title">区域选择</view>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picket" wx:if="{{isSelect}}">
+        <view class="picket_select">{{provice[index]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picketunSelect" wx:else>
+        <view class="picket_select">区域选择
         </view>
       </picker>
     </view>
     <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
-    <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2;"></view>
   </view>
   <view class="detail_input">
+    <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: 0px;"></view>
     <view class="detail_title">详细地址</view>
-    <input name="address" class="detail_text" placeholder="街道门牌信息" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing:0;" />
+    <input name="address" class="detail_text" placeholder="街道门牌信息" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing:0;" style="width:{{windowWidth}}px;"/>
   </view>
   <button formType="submit" class="confirm">保存</button>
 </form>

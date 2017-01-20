@@ -14,6 +14,14 @@ Page({
     ticketMuch: 0,
     address: null
   },
+
+  changeData: function (data){
+    var that = this
+    that.setData({
+      address:data
+    })
+  },
+
   onLoad: function (options) {
     this.genderData(options.show)
     var that = this
