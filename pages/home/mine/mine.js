@@ -67,6 +67,11 @@ Page({
                         if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
                             that.data.tickets.order_list[j].status = 3;
                             that.data.tickets.order_list[j].status_desc = "待发货"
+                                                var tempTicket = that.data.tickets
+
+                            that.setData({
+                                tickets: tempTicket
+                            })
                             break;
                         }
                     }
@@ -85,7 +90,13 @@ Page({
             for (var j = 0; j < that.data.tickets.order_list.length; j++) {
 
                 if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
-                    that.data.tickets.order_list[j] = res;
+                    var show = that.data.tickets.order_list[j].show
+                    that.data.tickets.order_list[j].status = 1;
+                    that.data.tickets.order_list[j].status_desc = "用户取消"
+                    var tempTicket = that.data.tickets
+                    that.setData({
+                                tickets: tempTicket
+                            })
                     break;
                 }
             }
@@ -101,7 +112,12 @@ Page({
             for (var j = 0; j < that.data.tickets.order_list.length; j++) {
 
                 if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
-                    that.data.tickets.order_list[j] = res;
+                    that.data.tickets.order_list[j].status = 8;
+                    that.data.tickets.order_list[j].status_desc = "已完成"
+                    var tempTicket = that.data.tickets
+                    that.setData({
+                                tickets: tempTicket
+                            })
                     break;
                 }
             }
