@@ -1,0 +1,45 @@
+
+<!--pages/mine/mine/mine.wxml-->
+<template name="ticketList">
+  <view class="secondeSession" style="height: 10px; background-color: #EFEFF4;"></view>
+  <view class="ticket_desc">
+    <view class="ticket_waite_pay" wx:if="{{ status== 0 || status == 7}}">{{status_desc}}</view>
+    <view class="ticket_status" wx:else>{{status_desc}}</view>
+    <view style="height: .5px; background-color: #E9EBF2; margin-top: 13px;"></view>
+    <view class="show_info">
+      <view class="show_title">{{show.title}}</view>
+      <view class="show_session">场次：{{session.name}}</view>
+      <view class="show_detail">票面：{{ticket.original_ticket.name}} x {{ticket_count}}</view>
+      <view class="show_detail">区域：{{ticket_row}}</view>
+      <view class="show_detail">实付金额：{{total}}</view>
+      <view class="ticket_wid" wx:if="{{ status== 0 || status== 7}}">订单号：{{id}}</view>
+      <view class=" ticket_id" wx:else>订单号：{{id}}
+      </view>
+      <view class="ticket_pay" wx:if="{{ status== 0 || status == 7}}">
+      <view class="cancel_button" bindtap="cancelEventhandle" id="cancelTap" data-order="{{order_id}}" wx:if="{{ status== 0}}">取消</view>
+      <view class="confim_button" bindtap="payEventhandle" id="payTap" data-order="{{order_id}}" wx:if="{{ status== 0}}">付款</view>
+      <view class="confim_button" bindtap="reciveEventhandle" id="payTap" data-order="{{order_id}}" wx:if="{{ status== 7}}">确认收货</view>
+      </view>
+    </view>
+  </view>
+</template>
+ <!--<view class="noneTicketSession" wx:if="{{tickets.order_list.length > 0}}">
+  </view>-->
+   <view class="ticketListSession" >
+  <view wx:for="{{tickets.order_list}}" wx:key="ticketShow" class="ticketShowView">
+    <template is="ticketList" data="{{...item}}" />
+  </view>
+</view>
+<view class="tips1">
+    <view wx:if="{{tickets.has_next}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;height:49px; ">
+      <text style="font-size:13px;">玩命的加载中...</text>
+    </view>
+  </view>
+<!--<scroll-view scroll-y="true" bindscrolltolower="loadMore" bindscrolltoupper="refesh">
+  <view class="ticketListSession" >
+  <view wx:for="{{tickets.order_list}}" wx:key="ticketShow" class="ticketShowView">
+    <template is="ticketList" data="{{...item}}" />
+  </view>
+</view>
+  
+</scroll-view>-->

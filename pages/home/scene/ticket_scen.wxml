@@ -10,13 +10,13 @@
     <view class="cellDetailView" wx:else>
       <text class="cellDetail">暂时缺票</text>
     </view>
+    <view style="margin-left: 15px;height:.5px; background-color: #E9EBF2;"></view>
   </view>
-  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2;"></view>
 </template>
 <view style="height:100%;background: #EFEFF4;">
   <view>
   <view wx:for="{{sessions}}" wx:key="sessions" class="sessions" id="showTap" bindtap="showTap" wx:for-item="item" data-session="{{item}}">
-    <template is="ticketSession" data="{{...item}}" />
+    <template is="ticketSession" data="{{...item}}" />  
   </view>
 </view>
 </view>

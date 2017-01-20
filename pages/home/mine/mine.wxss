@@ -1,5 +1,12 @@
 /* pages/mine/mine/mine.wxss */
 
+page {
+  background-color: #efeff4;
+}
+.ticketShowView{
+  background-color: white;
+  height: 100%
+}
 .ticket_desc {
   margin-left: 15px;
   margin-right: 15px;
@@ -9,7 +16,7 @@
   font-size: 17px;
   margin-top: 15px;
   color: #384249;
-  line-height: 18px;
+  line-height: 22px;
   max-height: 54px;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
@@ -20,20 +27,20 @@
 }
 
 .show_detail {
-  margin-top: 1px;
   font-size: 13px;
-  color: #003c00;
+  line-height: 17px;
+  color: #8a96a2;
 }
 
 .ticket_id {
-  margin-top: 1px;
+  margin-top: 8px;
   font-size: 13px;
   color: #bbc1cb;
   margin-bottom: 15px;
 }
 
 .ticket_wid {
-  margin-top: 1px;
+  margin-top: 8px;
   font-size: 13px;
   color: #bbc1cb;
   margin-bottom: 53px;
@@ -42,7 +49,8 @@
 .show_session {
   margin-top: 13px;
   font-size: 13px;
-  color: #003c00;
+  line-height: 15px;
+  color: #8a96a2;
 }
 
 .ticket_status {
@@ -93,4 +101,10 @@
   background-color: #4bd4c5;
   margin-right: 0px;
   color: #fff;
+}
+
+.noneTicketSession{
+  width: 100%;
+  height: 100%;
+  background-color: #4bd4c5;
 }

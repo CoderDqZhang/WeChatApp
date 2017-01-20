@@ -143,49 +143,34 @@ Page({
     app.func.requestPost('order/create/', data, function (res) {
       console.log(res)
       var wxpay = res.pay_url.wxpay
-      //       appid
-      // :
-      // "wx6c6b940e660449a2"
-      // noncestr
-      // :
-      // "at2ZjGsJbKAi0HXoTmwkvz135WSYVd6r"
-      // package
-      // :
-      // "Sign=WXPay"
-      // partnerid
-      // :
-      // "1409584902"
-      // prepayid
-      // :
-      // "wx2017011716535203b29762260781755313"
-      // sign
-      // :
-      // "CBE0188F34F21F8B6F559811C0DBB7CB"
-      // timestamp
-      // :
-      // "1484643232"
       var payData = {
-        'prepayId':wxpay.prepayid,
-        'appId':wxpay.appid,
-        'timeStamp': wxpay.timestamp,
-        'nonceStr': wxpay.noncestr,
-        
+        // 'appId':wxpay.appid,
+        'timeStamp': wxpay.timeStamp,
+        'nonceStr': wxpay.nonceStr,
         'package': wxpay.package,
         'signType': 'MD5',
         'paySign': wxpay.sign,
+
       }
+
       console.log(payData)
       wx.requestPayment({
-        'appId':wxpay.appid,
-        'timeStamp': wxpay.timestamp,
-        'nonceStr': wxpay.noncestr,
+        // 'appId':wxpay.appid,
+        'timeStamp': wxpay.timeStamp,
+        'nonceStr': wxpay.nonceStr,
         'package': wxpay.package,
         'signType': 'MD5',
         'paySign': wxpay.sign,
         'success': function (wres) {
-          console.log(wres)
+          wx.switchTab({
+            url: '../mine/mine'
+          })
         },
         'fail': function (res) {
+          wx.switchTab({
+            url: '../mine/mine'
+          })
+          console.log(res)
         }
       })
     });

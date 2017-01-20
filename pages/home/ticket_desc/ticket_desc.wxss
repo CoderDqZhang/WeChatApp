@@ -1,18 +1,34 @@
 /* pages/home/ticket_desc/ticket_desc.wxss */
+page {
+  background-color: #efeff4;
+}
+
+.ticketSession{
+  background-color: white;
+}
+
+.ticketNumber{
+  background-color: white;
+}
+
+.tickets{
+  margin-top: -3px;
+  background-color: white;
+}
 
 .ticket_desc {
   width: 100%;
   margin-top: 0px;
   padding-top: 20px;
   flex-direction: row;
-  height: 130px;
+  height: 100%;
 }
 
 .ticketPost {
   margin-left: 15px;
   margin-top: 0px;
   width: 110px;
-  border-radius: 3px;
+  border-radius: 1.5px;
   height: 150px;
   float: left;
 }
@@ -21,7 +37,7 @@
   margin-left: 137px;
   position: relative;
   margin-right: 15px;
-  height: 150px;
+  height: 151px;
   margin-top: -12px;
 }
 
@@ -35,16 +51,17 @@
   color: #384249;
   font-size: 16px;
   margin-top: 12px;
-  line-height: 18px;
+  line-height: 22px;
 }
-
-.show_time {
+.show_session{
   color: #a2abb5;
+  line-height: 15px;
   font-size: 13px;
+  margin-top: 5px;
 }
-
-.show_location {
+.show_detail {
   color: #a2abb5;
+  line-height: 17px;
   font-size: 13px;
 }
 
@@ -66,7 +83,7 @@
   border-radius: 2px;
   margin-right: 2px;
   font-size: 10px;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
 .show_service {
@@ -82,28 +99,24 @@
   -webkit-box-orient: vertical;
   font-size: 12px;
   line-height: 13px;
+  margin-left: 1px;
   color: #4bd4c5;
 }
 
 .ticketNumber {
   width: 100%;
   height: 80px;
-  margin-top: 20px;
-  display: inline-block;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .ticket_number_info {
   font-size: 13px;
-  color: #384249;
-  margin-top: 12px;
-  text-align: center;
-}
-
-.ticket_other {
-  margin-top: 22.5px;
   margin-left: 15px;
-  margin-right: 15px;
-  height: 34px;
+  color: #384249;
+  text-align: center;
 }
 
 .ticket_number {
@@ -113,13 +126,14 @@
   border-radius: 3.0px;
   width: 140px;
   float: right;
+  margin-right: 15px;
   align-content: center;
   text-align: center;
   vertical-align: middle;
 }
 
 .subtract {
-  width: 40px;
+  width: 44px;
   float: left;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -128,7 +142,7 @@
 }
 
 .add { 
-  width: 40px;
+  width: 44px;
   float: right;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -149,41 +163,49 @@
 .ticket_tools {
   margin-left: 15px;
   margin-right: 15px;
-  height: 43px;
+  border: .5 solid #4bd4c5;
+  background-color: white;
   flex-direction: row;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tickets {
-  padding-top: 3px;
   width: 100%;
+  height: 100%;
 }
 
 .ticket_normal_price {
   text-align: left;
-  color: #8a96a2;
-  font-size: 11px;
   padding-top: 13px;
-  width: 500px;
+  padding-bottom: 13px;
+  color: #8a96a2;
+   width: 500px;
+  font-size: 11px;
+  height: 100%;
 }
 
 .ticket_row {
+  height: 100%;
   text-align: center;
   color: #8a96a2;
-  padding-top: 11px;
-  padding-bottom: 13px;
   font-size: 12px;
-  width: 500px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+   width: 500px;
   border-left: .5px solid #E9EBF2;
   border-right:.5px solid #E9EBF2; 
 }
 
 .ticket_now_price {
   text-align: right;
-  padding-top: 9px;
   color: #8a96a2;
-  font-size: 12px;
+  height: 100%;
+  padding-top: 13px;
+  padding-bottom: 13px;
   width: 500px;
+  font-size: 12px;
 }
 
 .thin-border-right::before {
@@ -223,10 +245,11 @@
 .ticket_row_type{
   color: #384249;
   font-size: 13px;
+  line-height: 15px;
 }
 
 .ticket_deverliy_type{
-  margin-top: 5px;
+  margin-top: 2px;
   color: #bbc1cb;
   font-size: 10px;
 }
@@ -240,6 +263,7 @@
     color: #4bd4c5;
     margin-bottom: 1px;
     height: 14px;
+    line-height: 15px;
     font-size: 14px;
 }
 
@@ -254,5 +278,5 @@
   border-radius: 2px;
   margin-right: 2px;
   font-size: 10px;
-  margin-top: -1px;
+  margin-top: -4px;
 }

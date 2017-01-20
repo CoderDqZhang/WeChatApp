@@ -4,28 +4,65 @@
 
 /** 修改默认的navigator点击态 **/
 
+page {
+  background-color: #efeff4;
+}
+
 .navigator-hover {
   color: blue;
 }
 
 /** 自定义其他点击态样式类 **/
 
+.category_info {
+  height: 80px;
+  margin-left: 15px;
+  margin-right: 0px;
+  border-bottom: 0.1px solid #e9ebf2;
+  border-right: 0.1px solid #e9ebf2;
+}
+
+.category_infol {
+  height: 80px;
+  margin-left: 15px;
+  margin-right: 0px;
+  border-right: 0.1px solid #e9ebf2;
+}
+
+.category_infos {
+  height: 80px;
+  margin-left: 0px;
+  margin-right: 15px;
+  border-bottom: 0.1px solid #e9ebf2;
+}
+
+.categotyInfos {
+  margin-right: 50px;
+  margin-top: 21px;
+  margin-left: 15px;
+  float: left;
+}
+
 .other-navigator-hover {
   color: red;
 }
 
-
 .category {
   width: 50%;
-  height: 79px;
+  height: 71px;
   margin-top: 3px;
   display: inline-block;
 }
 
 .categotyInfo {
   margin-right: 50px;
-  margin-top: 26px;
-  margin-left: 15px;
+  margin-top: 21px;
+  float: left;
+}
+
+.categotyInfos {
+  margin-right: 50px;
+  margin-top: 21px;
   float: left;
 }
 
@@ -33,15 +70,45 @@
   width: 28px;
   height: 38px;
   float: right;
+  border-radius: 1.5px;
   position: relative;
   margin-left: 105px;
   margin-right: 15px;
-  margin-top: -35px;
+  margin-top: -40px;
   background-color: #a2abb5;
 }
 
+.photos {
+  width: 28px;
+  height: 39px;
+  float: right;
+  border-radius: 1.5px;
+  position: relative;
+  margin-left: 120px;
+  margin-right: 0px;
+  margin-top: -40px;
+  background-color: #a2abb5;
+}
+
+.sessionTitle {
+  padding-top: 17px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.topSession{
+  height: 251px;
+  background-color: white;
+}
+
+.ticketSession{
+  margin-top: -10px;
+  background-color: white;
+}
+
 .title {
-  font-family: SFUIText-Medium;
+  font-weight: 500;
   color: #384249;
   font-size: 15px;
 }

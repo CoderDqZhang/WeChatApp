@@ -38,6 +38,7 @@ Page({
                 categoty.has_next = res.has_next
             }else{
                 categoty = res
+                wx.stopPullDownRefresh()
                 console.log(categoty)
             }
             that.setData({
@@ -68,7 +69,8 @@ Page({
             hase_refresh: true
         })
         that.data.shows.next_start = 0
-        that.requestData(that.data.shows, true)
+        that.requestData(that.data.shows, false)
+        
     },
 
     onReachBottom: function () {

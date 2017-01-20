@@ -1,5 +1,7 @@
 /* pages/home/scene/ticket_scen.wxss */
-
+page {
+  background-color: #efeff4;
+}
 .cellDetailInfo {
   height: 44px;
   width: 100%;
@@ -12,7 +14,7 @@
   width: 8px;
   height: 13px;
   margin-right: 15px;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .cellTitle {
@@ -26,7 +28,7 @@
 
 .cellDetail {
   font-family: PingFangSC-Regular;
-  font-size: 15px;
+  font-size: 14px;
   color: #bbc1cb;
   letter-spacing: 0;
 }

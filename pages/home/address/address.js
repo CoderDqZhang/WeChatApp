@@ -59,12 +59,11 @@ Page({
           "address": e.detail.value.address,
         }
         app.func.requestPost('user/address/', data, function (ures) {
-
-          console.log(ures)
-          //3535216744 addressId
-          //3535216720 userId
           try {
             wx.setStorageSync(res.data.data.id.toString(), ures)
+            wx.navigateTo({
+            url: '../ticket_form/ticket_form'
+        })
           } catch (e) {
             console.log(e)
           }

@@ -1,0 +1,13 @@
+page {
+  background-color: #efeff4;
+}
+.ticketSession{
+  margin-top: -10px;
+  background-color: white;
+}
+.sessionTitle {
+  padding-top: 17px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}

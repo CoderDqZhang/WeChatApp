@@ -8,21 +8,54 @@
         <text>{{title}}</text>
       </view>
     </view>
-    <image src="{{icon}}" class="photo">{{image}}</image>
+    <image src="{{icon}}" class="photo">{{image}}
+    </image>
   </view>
 </template>
-<import src="../../template/show_template.wxml"/>
-<view class="topSession" style="height: 270px;">
-  <view wx:for="{{categoryArray}}" wx:key="categoryArray" class="category" bindtap="categoryTap" wx:for-item="item" data-category="{{item}}">
-    <template is="homeCategory" data="{{...item}}" />
+<template name="homeCategorys">
+  <view class="category_infos">
+    <view class="categotyInfos">
+      <view class="title">
+        <text>{{name}}</text>
+      </view>
+      <view class="subtitle">
+        <text>{{title}}</text>
+      </view>
+    </view>
+    <image src="{{icon}}" class="photos">{{image}}
+    </image>
   </view>
-</view>
-<view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
+</template>
+<template name="homeCategoryl">
+  <view class="category_infol">
+    <view class="categotyInfo">
+      <view class="title">
+        <text>{{name}}</text>
+      </view>
+      <view class="subtitle">
+        <text>{{title}}</text>
+      </view>
+    </view>
+    <image src="/images/gloable/all_catogry.jpg" class="photo">{{image}}
+    </image>
+  </view>
+</template>
+<import src="../../template/show_template.wxml" />
+<view style="width:100%; height: 15px; background-color: #FFFFFF;"></view>
+<view class="topSession">
+  <view wx:for="{{categoryArray}}" wx:key="categoryArray" class="category" bindtap="categoryTap" wx:for-item="item" data-category="{{item}}">
+  <template is="homeCategoryl" wx:if="{{index == 4}}" data="{{...item}}" />
+    <template is="homeCategory" wx:elif="{{index%2 == 0}}" data="{{...item}}" />
+    <template is="homeCategorys" wx:else data="{{...item}}" />
+  </view>
 </view>
 <view class="ticketSession">
-  <view class="sessionTitle" style="margin-top:17px; margin-left:15px; margin-right:15px; height=35px;margin-bottom:10px;">近期尾票
+  <view class="sessionTitle">近期尾票
   </view>
   <view wx:for="{{ticketShow}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
-    <template is="show_template" data="{{...item}}" />
+    <template is="show_template" data="{{...item}}" 
+    />
+
+     <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}" ></view>
   </view>
 </view>
