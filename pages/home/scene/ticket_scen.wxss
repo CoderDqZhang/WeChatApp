@@ -1,11 +1,13 @@
 /* pages/home/scene/ticket_scen.wxss */
+
 page {
   background-color: #efeff4;
 }
+
 .cellDetailInfo {
   height: 44px;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #fff;
 }
 
 .detailImage {
@@ -20,21 +22,18 @@ page {
 .cellTitle {
   margin-top: 12px;
   margin-left: 15px;
-  font-family: SFUIText-Regular;
   font-size: 15px;
   color: #384249;
   letter-spacing: 0;
 }
 
 .cellDetail {
-  font-family: PingFangSC-Regular;
   font-size: 14px;
   color: #bbc1cb;
   letter-spacing: 0;
 }
 
-.cellDetailInfo{
-    font-family: PingFangSC-Regular;
+.cellDetailInfo {
   font-size: 15px;
   color: #4bd4c5;
   letter-spacing: 0;
