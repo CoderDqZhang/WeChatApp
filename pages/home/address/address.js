@@ -38,15 +38,15 @@ Page({
       "澳门地区"],
     regions: "地区选择",
     isSelect: false,
-    windowsWidth:0
+    windowsWidth: 0
   },
   onLoad: function (options) {
     var that = this
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         // success
         that.setData({
-          windowWidth:res.windowWidth - 148
+          windowWidth: res.windowWidth - 148
         })
         console.log(that.data.windowWidth)
       }
@@ -70,6 +70,16 @@ Page({
           "address": e.detail.value.address,
         }
         app.func.requestPost('user/address/', data, function (ures) {
+          if (ures.errors != null) {
+            wx.showModal({
+              title: ures.errors[0].error[0].toString(),
+              success: function (uwres) {
+                if (uwres.confirm) {
+                }
+              }
+            })
+            return
+          }
           var pages = getCurrentPages();
           if (pages.length > 1) {
             //上一个页面实例对象

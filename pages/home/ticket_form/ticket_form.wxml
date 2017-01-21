@@ -13,7 +13,6 @@
       <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
       <view class="show_detail">票款：{{ticket.all_much}} 元</view>
       </view>
-      
     </view>
   </view>
 </template>

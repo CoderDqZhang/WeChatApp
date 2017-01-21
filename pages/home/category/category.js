@@ -20,7 +20,7 @@ Page({
                 categoryShow: JSON.parse(categoty)
             })
             wx.setNavigationBarTitle({
-                title: JSON.parse(categoty).title
+                title: JSON.parse(categoty).name
             })
             url = "show/list/?cat_id=" + JSON.parse(categoty).id
 
@@ -53,10 +53,15 @@ Page({
             data.cover = ""
             data.category.icon = ""
             var show = JSON.stringify(data)
+            console.log(show)
             wx.navigateTo({
                 url: '../scene/ticket_scen?show=' + show
             })
         } else {
+             var data = event.currentTarget.dataset.show
+            data.cover = ""
+            data.category.icon = ""
+            var show = JSON.stringify(data)
             wx.navigateTo({
                 url: '../ticket_desc/ticket_desc?show=' + show
             })
