@@ -5,11 +5,15 @@
     </view>
     <view class="show_info">
       <view class="show_title">{{title}}</view>
-      <view class="show_session">场次：{{session.name}}</view>
-      <view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>
+      <view class="show_ticket_info">
+        <view class="show_session">场次：{{session.name}}</view>
+      <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
       <view class="show_detail">票面：{{ticket.original_ticket.name}}x{{ticket.buy_number}}</view>
-      <view class="show_detail">区域：{{ticket_row}}</view>
-      <view class="show_detail_much">票款：{{ticket.all_much}}</view>
+      <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
+      <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
+      <view class="show_detail">票款：{{ticket.all_much}} 元</view>
+      </view>
+      
     </view>
   </view>
 </template>
@@ -28,13 +32,13 @@
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image" wx:if="{{ delivery_type == 1}}" id="addressTap" bindtap="addressTap">
     <view class="title" wx:if="{{address == null}}">新增收货地址
     </view>
-    <view class="title" wx:else>收货地址
+    <view class="address_title" wx:else>收货地址
     </view>
-    <view class="detail">{{address.location}} {{address.address}} {{address.name}} {{address.mobile_num}}
+    <view class="address_detail">{{address.name}} {{address.mobile_num}} {{address.location}} {{address.address}} 
     </view>
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
@@ -44,7 +48,7 @@
     <view class="input_title">联系人姓名</view>
     <input name="name" class="input_text" placeholder="联系人姓名" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
   </view>
-  <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image" wx:if="{{            delivery_type == 1}}" bindtap="deliveryMuchTap">
     <view class="title">配送方式
     </view>
@@ -58,7 +62,7 @@
     <view class="input_title">联系人电话</view>
     <input name="phone" class="input_text" placeholder="联系人电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
   </view>
-  <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image">
     <view class="title">小计
     </view>
@@ -67,12 +71,12 @@
     <view class="detail_much" wx:else>{{ticketMuch}}元
     </view>
   </view>
-  <view style=" margin-left: 15px;height: .5px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_input">
     <input name="message" class="input_text" placeholder="备注关于本次交易特别说明" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
   </view>
   <view class="bottomView">
     <view class="introduct">票品售出后不可退换，可转授</view>
-    <button formType="submit" class="confim">提交</button>
+    <button formType="submit"  class="confim">提交</button>
   </view>
 </form>

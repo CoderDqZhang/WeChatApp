@@ -38,7 +38,7 @@ page {
 }
 
 .detail_title {
-  margin-top: 15px;
+  margin-top: 13px;
   margin-left: 15px;
   margin-right: 5px;
   float: left;
@@ -58,6 +58,7 @@ page {
 
 .detail_text {
   position: absolute;
+  color: #8a96a2;
   margin-top: 3px;
   margin-left: 108px;
   width: 50%;
@@ -80,12 +81,14 @@ page {
 
 .picket_select {
   width: 100%;
+  color: #8a96a2;
 }
 
 .input_text {
   margin-left: 4px;
   /*background-color: #4bd4c5;*/
   margin-right: 30px;
+  color: #8a96a2;
 }
 
 .region_text {

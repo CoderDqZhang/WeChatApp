@@ -15,31 +15,30 @@ page {
 /** 自定义其他点击态样式类 **/
 
 .category_info {
-  height: 80px;
-  margin-left: 15px;
-  margin-right: 0px;
-  border-bottom: 0.1px solid #e9ebf2;
-  border-right: 0.1px solid #e9ebf2;
+  height: 160rpx;
+  margin-left: 30rpx;
+  border-bottom: 1rpx solid #e9ebf2;
+  border-right: 1rpx solid #e9ebf2;
 }
 
 .category_infol {
-  height: 80px;
-  margin-left: 15px;
+  height: 160rpx;
+  margin-left: 30rpx;
   margin-right: 0px;
-  border-right: 0.1px solid #e9ebf2;
+  border-right: 1rpx solid #e9ebf2;
 }
 
 .category_infos {
-  height: 80px;
+  height: 160rpx;
   margin-left: 0px;
-  margin-right: 15px;
-  border-bottom: 0.1px solid #e9ebf2;
+  margin-right: 30rpx;
+  border-bottom: 1rpx solid #e9ebf2;
 }
 
 .categotyInfos {
-  margin-right: 50px;
-  margin-top: 21px;
-  margin-left: 15px;
+  margin-right: 100rpx;
+  margin-top: 42rpx;
+  margin-left: 30rpx;
   float: left;
 }
 
@@ -49,68 +48,68 @@ page {
 
 .category {
   width: 50%;
-  height: 71px;
-  margin-top: 3px;
+  height: 142rpx;
+  margin-top: 6rpx;
   display: inline-block;
 }
 
 .categotyInfo {
-  margin-right: 50px;
-  margin-top: 21px;
+  margin-right: 100rpx;
+  margin-top: 42rpx;
   float: left;
 }
 
 .categotyInfos {
-  margin-right: 50px;
-  margin-top: 21px;
+  margin-right: 100rpx;
+  margin-top: 42rpx;
   float: left;
 }
 
 .photo {
-  width: 28px;
-  height: 38px;
+  width: 56rpx;
+  height: 76rpx;
   float: right;
-  border-radius: 1.5px;
+  border-radius: 4rpx;
   position: relative;
-  margin-left: 105px;
-  margin-right: 15px;
-  margin-top: -40px;
+  margin-left: 210rpx;
+  margin-right: 30rpx;
+  margin-top: -80rpx;
   background-color: #a2abb5;
 }
 
 .photos {
-  width: 28px;
-  height: 39px;
+  width: 56rpx;
+  height: 78rpx;
   float: right;
-  border-radius: 1.5px;
+  border-radius: 4rpx;
   position: relative;
-  margin-left: 120px;
+  margin-left: 240rpx;
   margin-right: 0px;
-  margin-top: -40px;
+  margin-top: -80rpx;
   background-color: #a2abb5;
 }
 
 .sessionTitle {
-  padding-top: 17px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 10px;
+  padding-top: 34rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .topSession{
-  height: 251px;
+  height: 502rpx;
   background-color: white;
 }
 
 .ticketSession{
-  margin-top: -10px;
+  margin-top: -20rpx;
   background-color: white;
 }
 
 .title {
   font-weight: 500;
   color: #384249;
-  font-size: 15px;
+  font-size: 30rpx;
 }
 
 .subtitle {
@@ -121,15 +120,15 @@ page {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   color: #bbc1cb;
-  font-size: 12px;
+  font-size: 24rpx;
 }
 
 .sessionTitle {
   font-family: SFUIText-Regular;
   color: #a2abb5;
-  font-size: 13px;
-  margin-left: 15px;
-  margin-top: 17px;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+  margin-top: 34rpx;
 }
 
 .product_image {
@@ -140,7 +139,7 @@ page {
 }
 
 .ticketText {
-  padding-top: 2px;
+  padding-top: 4rpx;
   text-align: center;
 }
 

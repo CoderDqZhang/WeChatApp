@@ -12,13 +12,24 @@ Page({
     delivery_muchs: "",
     allMuch: 0,
     ticketMuch: 0,
-    address: null
+    address: null,
+    widowsWidth:0
   },
 
-  changeData: function (data){
+  changeData: function (data) {
     var that = this
     that.setData({
-      address:data
+      address: data
+    })
+    var that = this
+    wx.getSystemInfo({
+      success: function(res) {
+        // success
+        that.setData({
+          windowWidth:res.windowWidth - 148
+        })
+        console.log(that.data.windowWidth)
+      }
     })
   },
 
@@ -45,10 +56,11 @@ Page({
     var that = this;
     that.setData({
       sessionShow: JSON.parse(show),
+      shareTitle: show.title
     })
+  
     that.data.sessionShow.cover = that.data.sessionShow.cover + "?" + that.data.sessionShow.cover_end
     that.data.ticket = that.data.sessionShow.ticket
-    that.data.ticket.delivery_type = "1,2,3"
     var arr = that.data.ticket.delivery_type.split(',')
     var tempDevery = ""
     for (var i = 0; i < arr.length; i++) {

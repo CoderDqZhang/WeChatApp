@@ -32,7 +32,7 @@
   </view>
   <view wx:for="{{shows.show_list}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
     <template is="show_template" data="{{...item}}" />
-    <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}"></view>
+    <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}"></view>
   </view>
   <view class="tips1">
     <view wx:if="{{shows.has_next}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;height:49px;">

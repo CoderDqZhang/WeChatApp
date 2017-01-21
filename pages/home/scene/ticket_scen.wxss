@@ -5,7 +5,7 @@ page {
 }
 
 .cellDetailInfo {
-  height: 44px;
+  height: 88rpx;
   width: 100%;
   background-color: #fff;
 }
@@ -13,28 +13,28 @@ page {
 .detailImage {
   float: right;
   position: relative;
-  width: 8px;
-  height: 13px;
-  margin-right: 15px;
-  margin-top: 16px;
+  width: 16rpx;
+  height: 26rpx;
+  margin-right: 30rpx;
+  margin-top: 32rpx;
 }
 
 .cellTitle {
-  margin-top: 12px;
-  margin-left: 15px;
-  font-size: 15px;
+  margin-top: 24rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
   color: #384249;
   letter-spacing: 0;
 }
 
 .cellDetail {
-  font-size: 14px;
+  font-size: 28rpx;
   color: #bbc1cb;
   letter-spacing: 0;
 }
 
 .cellDetailInfo {
-  font-size: 15px;
+  font-size: 30rpx;
   color: #4bd4c5;
   letter-spacing: 0;
 }
@@ -42,6 +42,6 @@ page {
 .cellDetailView {
   float: right;
   position: relative;
-  margin-top: 12px;
-  margin-right: 15px;
+  margin-top: 24rpx;
+  margin-right: 30rpx;
 }

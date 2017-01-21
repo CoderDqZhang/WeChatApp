@@ -5,7 +5,7 @@
     <image src="{{show.cover}}" class="ticketPost" mode="aspectFill"></image>
     <view class="show_info">
       <view class="show_title">{{show.title}}</view>
-      <view class="show_session">{{session.name}}</view>
+      <view class="show_detail">{{session.name}}</view>
       <view class="show_detail">{{show.venue.name}}</view>
       <view class="show_other">
         <view class="ticket_status" wx:if="{{0 < show.min_discount && show.min_discount < 1}}">{{show.min_discount}}折</view>
@@ -16,7 +16,7 @@
         </view>
       </view>
     </view>
-    <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 17px;"></view>
+    <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 17px;"></view>
   </view>
 </template>
 <template name="ticketInfo">
@@ -27,7 +27,7 @@
       <view class="ticket_deverliy_type">{{deliveType}}</view>
     </view>
     <view class="ticket_price_template">
-      <view class="ticket_now_price_template">{{price}}</view>
+      <view class="ticket_now_price_template">{{price}}元</view>
       <view class="ticket_status_number" wx:if="{{20 < remain_count}}">还剩{{remain_count}}张</view>
       <view class="ticket_status_number" wx:else>最后{{remain_count}}张</view>
     </view>
@@ -47,7 +47,7 @@
   </view>
 </view>
 <view class="tickets">
-<view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2;"></view>
+<view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
 <view class="ticket_tools">
   <view class="ticket_normal_price">票面价格
   </view>
@@ -56,9 +56,9 @@
   <view class="ticket_now_price">价格
   </view>
 </view>
-  <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 0px;"></view>
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 0px;"></view>
   <view wx:for="{{showDesc.ticket_list}}" wx:key="ticketInfos" class="ticketInfos" id="showTap" bindtap="ticketTap" wx:for-item="item" data-ticket="{{item}}">
     <template is="ticketInfo" data="{{...item}}" />
-    <view style=" margin-left: 15px;margin-right:15px;height: .5px; background-color: #E9EBF2; margin-top: 15.5px;"></view>
+    <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:32rpx;"></view>
   </view>
 </view>

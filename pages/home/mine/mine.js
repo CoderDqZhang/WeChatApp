@@ -2,10 +2,19 @@ var app = getApp()
 Page({
     data: {
         tickets: {},
+        windowsHeigth:0
     },
     onLoad: function (opt) {
         this.requestData(false)
         var that = this
+        wx.getSystemInfo({
+          success: function(res) {
+              that.setData({
+                  windowsHeigth:res.windowHeight
+              })
+            // success
+          }
+        })
     },
     requestData: function (isNext) {
         var that = this;
@@ -41,18 +50,7 @@ Page({
         console.log(event.currentTarget.dataset)
 
         app.func.requestGet(url, {}, function (res) {
-            console.log(res)
             var wxpay = res.wxpay
-            var payData = {
-                // 'appId':wxpay.appid,
-                'timeStamp': wxpay.timeStamp,
-                'nonceStr': wxpay.nonceStr,
-                'package': wxpay.package,
-                'signType': 'MD5',
-                'paySign': wxpay.sign,
-
-            }
-            console.log(payData)
             wx.requestPayment({
                 // 'appId':wxpay.appid,
                 'timeStamp': wxpay.timeStamp,
@@ -67,7 +65,7 @@ Page({
                         if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
                             that.data.tickets.order_list[j].status = 3;
                             that.data.tickets.order_list[j].status_desc = "待发货"
-                                                var tempTicket = that.data.tickets
+                            var tempTicket = that.data.tickets
 
                             that.setData({
                                 tickets: tempTicket
@@ -83,24 +81,38 @@ Page({
         });
     },
     cancelEventhandle: function (event) {
-        var that = this
-        var url = "order/" + event.currentTarget.dataset.order + "/"
-        app.func.requestPost(url, { "status": "1" }, function (res) {
-            console.log(res)
-            for (var j = 0; j < that.data.tickets.order_list.length; j++) {
+        var that = this;
+        wx.showModal({
+            title: '确定要放弃本次交易吗',
+            content: '',
+            cancelText:'稍等一会',
+            confirmText:'不买了',
+            cancelColor:'#4bd4c5',
+            confirmColor:'#384249',
+            success: function (res) {
+                if (res.confirm) {
+                    var url = "order/" + event.currentTarget.dataset.order + "/"
+                    app.func.requestPost(url, { "status": "1" }, function (res) {
+                        console.log(res)
+                        console.log(that.data.tickets.order_list)
+                        for (var j = 0; j < that.data.tickets.order_list.length; j++) {
 
-                if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
-                    var show = that.data.tickets.order_list[j].show
-                    that.data.tickets.order_list[j].status = 1;
-                    that.data.tickets.order_list[j].status_desc = "用户取消"
-                    var tempTicket = that.data.tickets
-                    that.setData({
-                                tickets: tempTicket
-                            })
-                    break;
+                            if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
+                                var show = that.data.tickets.order_list[j].show
+                                that.data.tickets.order_list[j].status = 1;
+                                that.data.tickets.order_list[j].status_desc = "交易取消"
+                                var tempTicket = that.data.tickets
+                                that.setData({
+                                    tickets: tempTicket
+                                })
+                                break;
+                            }
+                        }
+                    });
                 }
             }
-        });
+        })
+
     },
 
 
@@ -116,8 +128,8 @@ Page({
                     that.data.tickets.order_list[j].status_desc = "已完成"
                     var tempTicket = that.data.tickets
                     that.setData({
-                                tickets: tempTicket
-                            })
+                        tickets: tempTicket
+                    })
                     break;
                 }
             }

@@ -3,7 +3,10 @@ Page({
     data: {
         sessionShow: null,
         showDesc: null,
-        ticketNumber: 1
+        ticketNumber: 1,
+        shareTitle: '',
+        sharesubletitle: '',
+        shareData:null
     },
     onLoad: function (opt) {
         this.requestData(opt.show)
@@ -11,8 +14,10 @@ Page({
     requestData: function (show) {
         var that = this;
         that.setData({
+            shareData:JSON.parse(show),
             sessionShow: JSON.parse(show)
         })
+
         var url = "show/" + JSON.parse(show).id + "/session/" + JSON.parse(show).session.id
         app.func.requestGet(url, {}, function (res) {
             var data = res;
@@ -24,7 +29,7 @@ Page({
                 if (data.ticket_list[i].region == "") {
                     ticket_row = "择优分配"
                 } else {
-                    ticket_row = data.ticket_list[i].row != "" ? data.ticket_list[i].row + "排" : "择优分配"
+                    ticket_row = data.ticket_list[i].row != "" ? res.ticket_list[i].region + ' ' + data.ticket_list[i].row + "排" : "择优分配"
                 }
                 data.ticket_list[i].region = ticket_row
                 var arr = data.ticket_list[i].delivery_type.split(',');
@@ -47,9 +52,23 @@ Page({
                 data.ticket_list[i].deliveType = deliveType
                 console.log(data.ticket_list[i].deliveType)
             }
+            var subtitle = ''
+            for (var j = 0; j < res.ticket_list.length; j++) {
+                var ticket_row = ''
+                if (res.ticket_list[j].region == '') {
+                    ticket_row = ''
+                } else {
+                    ticket_row = res.ticket_list[j].region != '择优分配' ? res.ticket_list[j].region : ''
+                }
+                subtitle = subtitle + res.ticket_list[j].original_ticket.price + ' ' + ticket_row + '*' + res.ticket_list[j].remain_count + '张' + '、'
+            }
+            console.log(subtitle)
             that.setData({
                 showDesc: data,
-                sessionShow: data.show
+                sessionShow: data.show,
+                shareTitle: data.show.title,
+                sharesubletitle: subtitle
+
             })
         });
     },
@@ -103,10 +122,11 @@ Page({
         })
     },
     onShareAppMessage: function () {
-    return {
-      title: 'sessionShow.title',
-      desc: 'sessionShow.session.name',
-      path: 'pages/home/ticket_desc/ticket_desc'
-    }
-  },
+        var that = this
+        return {
+            title: that.data.shareTitle,
+            desc: that.data.sharesubletitle,
+            path: 'pages/home/ticket_desc/ticket_desc?show=' + JSON.stringify(that.data.shareData)
+        }
+    },
 })
