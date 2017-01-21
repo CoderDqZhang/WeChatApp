@@ -13,7 +13,6 @@ page {
   margin-top: 0px;
   flex-direction: row;
   display: flex;
-  min-height: 370rpx;
 }
 
 .show_cover {
@@ -218,5 +217,5 @@ page {
   letter-spacing: 0;
   text-align: center;
   padding-top: 10rpx;
-  padding-b: 10rpx;
+  padding-bottom: 10rpx;
 }

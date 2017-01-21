@@ -24,7 +24,7 @@
     </view>
   </view>
 </template>
-<view class="noneTicketSession" wx:if="{{tickets.order_list.length == 0}}" style="height:{{                  windowsHeigth}}px;">
+<view class="noneTicketSession" wx:if="{{isHaveOrder}}" style="height:{{                  windowsHeigth}}px;">
   <view class="none_cover">
     <image src="/images/gloable/Icon_Default.png" mode="aspectFill" class="cover"></image>
   </view>
@@ -38,7 +38,7 @@
     <template is="ticketList" data="{{...item}}" />
   </view>
 </view>
-<view class="tips1" wx:if="{{tickets.order_list.length != 0}}">
+<view class="tips1" wx:if="{{!isHaveOrder}}">
   <view wx:if="{{tickets.has_next}}" style="display: flex;flex-direction: row;align-items: center;align-self: center;justify-content: center;height:49px; ">
     <text style="font-size:13px;">玩命的加载中...</text>
   </view>

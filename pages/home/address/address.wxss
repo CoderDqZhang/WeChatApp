@@ -106,19 +106,16 @@ page {
 }
 
 .confirm {
-  border-radius: 3.0px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 30px;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 60rpx;
   background-color: #4bd4c5;
-  font-size: 15px;
+  font-size: 30rpx;
   color: #fff;
   letter-spacing: 0;
   text-align: center;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-color: #4bd4c5;
-  border-width:0px;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 
 .bottom {

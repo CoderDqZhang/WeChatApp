@@ -13,7 +13,7 @@ Page({
     allMuch: 0,
     ticketMuch: 0,
     address: null,
-    widowsWidth:0
+    widowsWidth: 0
   },
 
   changeData: function (data) {
@@ -23,10 +23,10 @@ Page({
     })
     var that = this
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         // success
         that.setData({
-          windowWidth:res.windowWidth - 148
+          windowWidth: res.windowWidth - 148
         })
         console.log(that.data.windowWidth)
       }
@@ -58,7 +58,7 @@ Page({
       sessionShow: JSON.parse(show),
       shareTitle: show.title
     })
-  
+
     that.data.sessionShow.cover = that.data.sessionShow.cover + "?" + that.data.sessionShow.cover_end
     that.data.ticket = that.data.sessionShow.ticket
     var arr = that.data.ticket.delivery_type.split(',')
@@ -161,7 +161,16 @@ Page({
     }
     console.log(data)
     app.func.requestPost('order/create/', data, function (res) {
-      console.log(res)
+      if (res.errors != null) {
+        wx.showModal({
+          title: res.errors[0].error[0].toString(),
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+        return
+      }
       var wxpay = res.pay_url.wxpay
       var payData = {
         // 'appId':wxpay.appid,

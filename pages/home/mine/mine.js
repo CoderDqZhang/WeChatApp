@@ -2,7 +2,8 @@ var app = getApp()
 Page({
     data: {
         tickets: {},
-        windowsHeigth:0
+        windowsHeigth:0,
+        isHaveOrder:false
     },
     onLoad: function (opt) {
         this.requestData(false)
@@ -39,7 +40,9 @@ Page({
 
             }
             console.log(tempTicket)
+            var haveData = 
             that.setData({
+                isHaveOrder: tempTicket.order_list.length == 0 ? false : true,
                 tickets: tempTicket
             })
         });

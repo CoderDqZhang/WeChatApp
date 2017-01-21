@@ -19,15 +19,13 @@ page {
 
 .ticket_desc {
   width: 100%;
-  margin-top: 0px;
-  padding-top: 40rpx;
+  padding-top: 30rpx;
   flex-direction: row;
   height: 100%;
 }
 
 .ticketPost {
   margin-left: 30rpx;
-  margin-top: 0px;
   width: 220rpx;
   border-radius: 4rpx;
   height: 300rpx;
@@ -102,7 +100,8 @@ page {
   -webkit-box-orient: vertical;
   font-size: 24rpx;
   line-height: 32rpx;
-  margin-left: 2rpx;
+  margin-top: 1rpx;
+  margin-left: -2rpx;
   color: #4bd4c5;
 }
 
