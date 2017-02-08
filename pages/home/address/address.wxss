@@ -110,12 +110,10 @@ page {
   margin-right: 30rpx;
   margin-top: 60rpx;
   background-color: #4bd4c5;
-  font-size: 30rpx;
+  font-size: 36rpx;
   color: #fff;
   letter-spacing: 0;
   text-align: center;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
 }
 
 .bottom {

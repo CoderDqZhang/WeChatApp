@@ -28,7 +28,7 @@
 <import src="../../template/show_template.wxml" />
 <import src="../../template/refresh_template.wxml" />
 <view class="ticketSession">
-<view class="sessionTitle">
+  <view class="sessionTitle" wx:if="{{shows.show_list.length > 0}}">
   </view>
   <view wx:for="{{shows.show_list}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
     <template is="show_template" data="{{...item}}" />

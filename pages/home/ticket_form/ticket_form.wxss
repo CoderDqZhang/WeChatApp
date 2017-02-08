@@ -23,7 +23,7 @@ page {
 .ticketPost {
   margin-left: 30rpx;
   margin-top: 30rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
   width: 220rpx;
   border-radius: 4rpx;
   height: 300rpx;
@@ -144,7 +144,7 @@ page {
 }
 
 .detail_image {
-  margin-top: -6rpx;
+  margin-top: -18rpx;
   width: 16rpx;
   height: 26rpx;
 }
@@ -212,10 +212,9 @@ page {
   margin-right: 30rpx;
   margin-top: 60rpx;
   background-color: #4bd4c5;
-  font-size: 30rpx;
+  font-size: 36rpx;
   color: #fff;
   letter-spacing: 0;
   text-align: center;
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  
 }

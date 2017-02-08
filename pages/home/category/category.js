@@ -16,6 +16,7 @@ Page({
         if (isNext) {
             url = url = "show/list/?cat_id=0&start=" + categoty.next_start
         } else {
+            console.log(categoty)
             that.setData({
                 categoryShow: JSON.parse(categoty)
             })

@@ -73,9 +73,23 @@ Page({
           if (ures.errors != null) {
             wx.showModal({
               title: ures.errors[0].error[0].toString(),
+              showCancel: false,
+              confirmText: "知道了",
+              confirmColor: "#4bd4c5",
               success: function (uwres) {
                 if (uwres.confirm) {
                 }
+              }
+            })
+            return
+          }
+          if (res.message != null) {
+            wx.showModal({
+              title: "请允许获取用户信息",
+              confirmColor: "#4bd4c5",
+              confirmText: "知道了",
+              success: function (res) {
+                console.log('用户点击确定')
               }
             })
             return
@@ -105,6 +119,16 @@ Page({
             console.log(e)
           }
         });
+      },
+      fail: function () {
+        wx.showModal({
+            title: "请允许获取用户信息",
+            confirmColor: "#4bd4c5",
+            confirmText: "知道了",
+            success: function (res) {
+              console.log('用户点击确定')
+            }
+          })
       }
     })
 

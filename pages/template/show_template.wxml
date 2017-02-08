@@ -12,8 +12,8 @@
       <view class="ticketTime" style="color: #A2ABB5;font-size: 13px;margin-top: 4px; line-height:17px;">{{show_date}}</view>
       <view class="ticketLocation" style="color: #A2ABB5;font-size: 13px; line-height:17px;">{{venue.name}}</view>
       <view class="ticket_other" style="position: absolute;bottom: 0;left: 0;width: 100%;">
-        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-top: 1px;padding-left: 4px;padding-right: 4px;padding-bottom: 1px;border-radius: 1.5px;margin-right: 2px;font-size: 10px;" wx:if="{{0 < min_discount && min_discount < 10}}">{{min_discount}}折</view>
-        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-top: 1px;padding-left: 4px;padding-right: 4px;padding-bottom: 1px;border-radius: 2px;margin-right: 2px;font-size: 10px;" wx:if="{{20 > ticket_count && ticket_count != 0}}">最后{{ticket_count}}张</view>
+        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-left: 4px;padding-right: 4px;border-radius: 1.5px;margin-right: 2px;font-size: 10px; height:100%;" wx:if="{{0 < min_discount && min_discount < 10}}">{{min_discount}}折</view>
+        <view class="ticketStatus" style="display: inline-block;background-color: #4BD4C5;color: #ffffff;padding-left: 4px;padding-right: 4px;border-radius: 2px;margin-right: 2px;font-size: 10px; height:100%;" wx:if="{{20 > ticket_count && ticket_count != 0}}">最后{{ticket_count}}张</view>
         <view class="ticket_price" style="display: inline-block;float: right;">
           <text class="ticketMuch" style="color: #4BD4C5;font-size: 21px;margin-right: 3px;" wx:if="{{min_price != 0 && ticket_count != 0}}">{{min_price}}</text>
           <text class="ticketMuchM" style="color: #BBC1CB;text-align: right;font-size: 10px;margin-right: 0px;" wx:if="{{ticket_count == 0 || min_price == 0}}">暂时缺票</text>

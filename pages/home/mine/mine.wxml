@@ -30,11 +30,13 @@
   </view>
   <view class="none_text">
     <view>还没有订单</view>
-    <view style="margin-top:10rpx;">快去首页挑选喜欢的演出活动吧</view>
+    <view style="margin-top:0rpx;">快去首页挑选喜欢的演出活动吧</view>
   </view>
 </view>
 <view class="ticketListSession" wx:else>
-  <view wx:for="{{tickets.order_list}}" wx:key="ticketShow" class="ticketShowView">
+<!--id="orderTap" bindtap="orderTap" wx:for-item="item" data-order="{{item}}"-->
+  <view wx:for="{{tickets.order_list}}"
+  wx:key="ticketShow" class="ticketShowView" id="orderTap" bindtap="orderTap" wx:for-item="item" data-order="{{item}}" >
     <template is="ticketList" data="{{...item}}" />
   </view>
 </view>

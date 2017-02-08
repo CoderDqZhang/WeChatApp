@@ -1,8 +1,9 @@
-// var rootDocment = 'https://api.niceticket.cc/';//你的域名  
-var rootDocment = 'https://api.liangpiao.me/'
+var rootDocment = 'https://api.niceticket.cc/';//你的域名  
+// var rootDocment = 'https://api.liangpiao.me/'
 
 function requestPost(url, data, cb) {
   var lp_session_id;
+  console.log("请求post")
   wx.getStorage({
     key: 'userInfo',
     success: function (res) {
@@ -14,21 +15,35 @@ function requestPost(url, data, cb) {
         method: 'post',
         header: {
           'content-type': 'application/json',
-          'Authorization':res.data.data.lp_session_id
+          'Authorization': res.data.data.lp_session_id
         },
         success: function (res) {
           return typeof cb == "function" && cb(res.data)
         },
         fail: function () {
           return typeof cb == "function" && cb(false)
-        }
+        },
       })
+    },
+    fail: function () {
+      if (res.message != null) {
+        wx.showModal({
+          title: "请允许获取用户信息",
+          confirmColor: "#4bd4c5",
+          confirmText: "知道了",
+          success: function (res) {
+            console.log('用户点击确定')
+          }
+        })
+      }
+      return typeof cb == "function" && cb(false)
     }
   })
 }
 
 function requestGet(url, data, cb) {
   var lp_session_id;
+  console.log("请求get")
   wx.getStorage({
     key: 'userInfo',
     success: function (res) {
@@ -39,7 +54,7 @@ function requestGet(url, data, cb) {
         data: data,
         header: {
           'content-type': 'application/json',
-          'Authorization':res.data.data.lp_session_id
+          'Authorization': res.data.data.lp_session_id
         },
         method: 'get',
         success: function (res) {
@@ -47,8 +62,27 @@ function requestGet(url, data, cb) {
         },
         fail: function () {
           return typeof cb == "function" && cb(false)
-        }
+        },
+
       })
+    },
+    fail: function () {
+      wx.request({
+        url: rootDocment + url,
+        data: data,
+        header: {
+          'content-type': 'application/json',
+        },
+        method: 'get',
+        success: function (res) {
+          return typeof cb == "function" && cb(res.data)
+        },
+        fail: function () {
+          return typeof cb == "function" && cb(false)
+        },
+
+      })
+      console.log("用户信息获取失败")
     }
   })
 }

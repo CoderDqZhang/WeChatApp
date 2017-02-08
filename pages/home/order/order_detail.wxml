@@ -1,0 +1,72 @@
+
+<!--pages/home/order/order_detail.wxml-->
+<template name="ticketDesc">
+  <view class="ticket_desc">
+    <view class="show_cover">
+      <image src="{{show.cover}}" class="ticketPost" mode="aspectFill"></image>
+    </view>
+    <view class="show_info">
+      <view class="show_title">{{show.title}}</view>
+      <view class="show_ticket_info">
+        <view class="show_session">场次：{{session.name}}</view>
+
+        <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
+        <view class="show_detail">票面：{{ticket.original_ticket.name}}x{{ticket.buy_number}}</view>
+        <view class="show_detail">数量：{{ticket_count}}</view>
+        <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
+        <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
+      </view>
+    </view>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
+</template>
+<view class="ticketSession">
+  <template is="ticketDesc" data="{{...order}}" />
+</view>
+<view class="location">
+  <view class="address">
+    <view class="venue">{{order.show.venue.name}}
+    </view>
+    <view class="venue_address">{{order.show.venue.address}}
+    </view>
+  </view>
+  <view class="image">
+    <image src="/images/gloable/Icon_Finished.png" mode="aspectFill" class="locationImage"></image>
+  </view>
+</view>
+<view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1rpx;"></view>
+<view class="ticket_price">
+  <view class="ticke_info">
+    <view class="info">价格
+    </view>
+    <view class="info">折扣
+    </view>
+    <view class="info">快递价格
+    </view>
+  </view>
+  <view class="ticke_price">
+    <view class="detail_info">{{order.ticket.price}}.00 元
+    </view>
+    <view class="detail_info">0.00 元
+    </view>
+    <view class="detail_info">{{order.ticket.delivery_price}}.00 元
+    </view>
+  </view>
+</view>
+<view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1rpx;"></view>
+<view class="ticket_sum">
+  <view class="ticke_sum_info">实付金额
+  </view>
+  <view class="sum_price">{{order.total}}元
+  </view>
+</view>
+<view style="margin-top: 30rpx;">
+  <view class="server_info">订单号：{{order.id}}
+  </view>
+  <view class="server_info">订单时间：{{order.created}}
+  </view>
+  <view class="server_info">客服电话：400-873-8011
+  </view>
+  <view class="server_info">客服工作时间：周一至周六 9:00-21:00
+  </view>
+</view>

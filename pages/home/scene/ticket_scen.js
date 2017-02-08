@@ -24,6 +24,7 @@ Page({
         var that = this;
         var session = event.currentTarget.dataset.session
         that.data.sessionShow.session = session
+        session.venue_map=""
         wx.navigateTo({
             url: '../ticket_desc/ticket_desc?show=' + JSON.stringify(that.data.sessionShow)
         })

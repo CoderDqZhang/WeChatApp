@@ -1,0 +1,168 @@
+/* pages/home/order/order_detail.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.ticketSession {
+  background-color: white;
+}
+
+.ticket_desc {
+  width: 100%;
+  margin-top: 0px;
+  flex-direction: row;
+  display: flex;
+}
+
+.show_cover {
+  width: 270rpx;
+  height: 100%;
+}
+
+.ticketPost {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  width: 220rpx;
+  border-radius: 4rpx;
+  height: 300rpx;
+}
+
+.show_ticket_info {
+  margin-bottom: 30rpx;
+}
+
+.show_info {
+  margin-left: 20rpx;
+  margin-right: 30rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+
+.show_title {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: #384249;
+  font-size: 32rpx;
+  margin-top: 30rpx;
+  line-height: 44rpx;
+}
+
+.show_session {
+  color: #a2abb5;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  line-height: 36rpx;
+}
+
+.show_detail {
+  color: #a2abb5;
+  font-size: 24rpx;
+  line-height: 36rpx;
+}
+
+.address {
+  margin-left: 30rpx;
+  width: 2000rpx;
+}
+
+.image {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  margin-right: 30rpx;
+}
+
+.location {
+  min-height: 154rpx;
+  background-color: white;
+  flex-direction: row;
+  display: flex;
+  align-items: space-between;
+}
+
+.venue {
+  margin-top: 44rpx;
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.venue_address {
+  font-size: 24rpx;
+  margin-top: 8rpx;
+  color: #bbc1cb;
+}
+
+.locationImage {
+  margin-left: 60rpx;
+  width: 74rpx;
+  height: 74rpx;
+}
+
+.ticket_price {
+  min-height: 238rpx;
+  background-color: white;
+  flex-direction: row;
+  display: flex;
+  align-items: space-between;
+}
+
+.ticke_info {
+  margin-left: 30rpx;
+  width: 5000rpx;
+}
+
+.ticke_price {
+  flex-direction: column;
+  align-items: flex-end;
+  display: flex;
+  width: 5000rpx;
+  margin-right: 30rpx;
+}
+
+.info {
+  margin-top: 36rpx;
+  font-size: 24rpx;
+  color: #384249;
+}
+
+.detail_info {
+  margin-top: 36rpx;
+  font-size: 24rpx;
+  color: #384249;
+}
+
+.ticket_sum{
+  min-height: 104rpx;
+  background-color: white;
+  flex-direction: row;
+  display: flex;
+  align-items: space-between;
+}
+.ticke_sum_info{
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  font-size: 24rpx;
+  width: 5000rpx;
+  color: #384249;
+}
+.sum_price{
+  margin-right: 30rpx;
+  text-align: right;
+  margin-top: 40rpx;
+  font-size: 24rpx;
+  width: 5000rpx;
+  color: #4bd4c5;
+}
+.server_info{
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #BBC1CB;
+}

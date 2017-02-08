@@ -17,6 +17,11 @@ page {
 .category_info {
   height: 160rpx;
   margin-left: 30rpx;
+  flex-direction: row;
+  margin-top: 14rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1rpx solid #e9ebf2;
   border-right: 1rpx solid #e9ebf2;
 }
@@ -25,21 +30,49 @@ page {
   height: 160rpx;
   margin-left: 30rpx;
   margin-right: 0px;
+  flex-direction: row;
+  margin-top: 14rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-right: 1rpx solid #e9ebf2;
 }
 
 .category_infos {
   height: 160rpx;
   margin-left: 0px;
+  margin-top: 14rpx;
   margin-right: 30rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1rpx solid #e9ebf2;
 }
 
+.photo {
+  width: 57rpx;
+  height: 77rpx;
+  margin-top: 20rpx;
+  border-radius: 4rpx;
+  margin-right: 30rpx;
+}
+
+.photos {
+  width: 57rpx;
+  height: 77rpx;
+  margin-top: 20rpx;
+  border-radius: 4rpx;
+  margin-right: 0px;
+}
+
+.categotyInfo{
+  margin-top: 18rpx;
+}
+
 .categotyInfos {
-  margin-right: 100rpx;
-  margin-top: 42rpx;
+  margin-top: 18rpx;
   margin-left: 30rpx;
-  float: left;
 }
 
 .other-navigator-hover {
@@ -53,42 +86,6 @@ page {
   display: inline-block;
 }
 
-.categotyInfo {
-  margin-right: 100rpx;
-  margin-top: 42rpx;
-  float: left;
-}
-
-.categotyInfos {
-  margin-right: 100rpx;
-  margin-top: 42rpx;
-  float: left;
-}
-
-.photo {
-  width: 56rpx;
-  height: 76rpx;
-  float: right;
-  border-radius: 4rpx;
-  position: relative;
-  margin-left: 210rpx;
-  margin-right: 30rpx;
-  margin-top: -80rpx;
-  background-color: #a2abb5;
-}
-
-.photos {
-  width: 56rpx;
-  height: 78rpx;
-  float: right;
-  border-radius: 4rpx;
-  position: relative;
-  margin-left: 240rpx;
-  margin-right: 0px;
-  margin-top: -80rpx;
-  background-color: #a2abb5;
-}
-
 .sessionTitle {
   padding-top: 34rpx;
   margin-left: 30rpx;
@@ -97,7 +94,7 @@ page {
 }
 
 .topSession{
-  height: 502rpx;
+  height: 510rpx;
   background-color: white;
 }
 
@@ -120,6 +117,7 @@ page {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   color: #bbc1cb;
+  margin-right: 15px;
   font-size: 24rpx;
 }
 

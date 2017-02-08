@@ -8,17 +8,14 @@ Page({
     userInfo: {}
   },
   onLoad: function (opt) {
-    this.requestData()
+    console.log("首页数据")
     var that = this
     //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+
+    that.requestData()
   },
   requestData: function () {
+    console.log("请求数据")
     var that = this;
     var tempData = [{}, {}, {}, {}, {
       name: "全部",
@@ -42,12 +39,17 @@ Page({
           tempData[3] = cres[j]
         }
       }
+
       that.setData({
         categoryArray: tempData
       })
+      console.log("fsdf")
     });
 
-    console.log(that.data.categoryArray)
+    if (that.data.categoryArray.lenght < 1) {
+      console.log("that.data.categoryArray")
+      that.requestData()
+    }
     app.func.requestGet('show/hot/', {}, function (res) {
       for (var i = 0; i < res.length; i++) {
         var dic_count = res[i].min_discount * 10
@@ -57,11 +59,18 @@ Page({
         ticketShow: res
       })
     });
+    if (that.data.categoryArray.length == 0) {
+      console.log("0")
+    }else{
+      console.log("1")
+    }
 
+    wx.stopPullDownRefresh()
   },
   showTap: function (event) {
     var data = event.currentTarget.dataset.show
     data.cover = ""
+    data.session.v
     data.category.icon = ""
     if (event.currentTarget.dataset.show.session_count > 1) {
       var show = JSON.stringify(data)
@@ -70,6 +79,7 @@ Page({
         url: '../scene/ticket_scen?show=' + show
       })
     } else {
+      data.session.venue_map = ""
       var show = JSON.stringify(data)
       console.log(show)
       wx.navigateTo({
@@ -79,8 +89,14 @@ Page({
   },
 
   categoryTap: function (event) {
+    var data = event.currentTarget.dataset.category
+    data.icon = ""
     wx.navigateTo({
-      url: '../category/category?categoty=' + JSON.stringify(event.currentTarget.dataset.category)
+      url: '../category/category?categoty=' + JSON.stringify(data)
     })
-  }
+  },
+  onPullDownRefresh: function () {
+    var that = this
+    that.requestData()
+  },
 })

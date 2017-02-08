@@ -4,11 +4,6 @@ page {
   background-color: #efeff4;
 }
 
-.ticketShowView {
-  background-color: white;
-  height: 100%;
-}
-
 .ticket_desc {
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -38,6 +33,7 @@ page {
   margin-top: 16rpx;
   font-size: 26rpx;
   color: #bbc1cb;
+  min-height: 80rpx;
   margin-bottom: 30rpx;
 }
 
@@ -45,6 +41,7 @@ page {
   margin-top: 16rpx;
   font-size: 26rpx;
   color: #bbc1cb;
+  min-height: 80rpx;
   margin-bottom: 106rpx;
 }
 
@@ -57,7 +54,6 @@ page {
 
 .ticket_status {
   margin-top: 26rpx;
-  font-family: PingFangSC-Regular;
   font-size: 26rpx;
   color: #8a96a2;
 }
@@ -76,7 +72,6 @@ page {
   margin-top: -86rpx;
   font-size: 26rpx;
   color: #bbc1cb;
-  margin-bottom: 30rpx;
 }
 
 .cancel_button {
@@ -89,6 +84,9 @@ page {
   border-width: 1rpx;
   width: 120rpx;
   margin-right: 20rpx;
+}
+.ticketListSession{
+  background-color: white;
 }
 
 .confim_button {
@@ -105,8 +103,6 @@ page {
 
 .noneTicketSession {
   width: 100%;
-  height: 375px;
-  background-color: white;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -114,13 +110,13 @@ page {
 }
 
 .cover {
-  width: 143rpx;
-  height: 210rpx;
+  width: 136rpx;
+  height: 190rpx;
 }
 
 .none_text {
   margin-top: 75rpx;
   text-align: center;
   font-size: 32rpx;
-  color: #dde0e5;
+  color: #BBC1CB;
 }
