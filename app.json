@@ -5,7 +5,7 @@
     "pages/home/order_list/order",
     "pages/home/login/login",
     "pages/home/order/order_detail",
-    "pages/sell/sell/sell",
+    "pages/home/sell/sell",
     "pages/template/show_template",
     "pages/home/category/category",
     "pages/home/scene/ticket_scen",

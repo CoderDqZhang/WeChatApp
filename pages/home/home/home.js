@@ -23,7 +23,6 @@ Page({
     var userInfo = wx.getStorageSync('userInfo')
     console.log("userInfo" + userInfo)
     if (userInfo != "") {
-      console.log("球球")
       that.setData({
         isAllowUser: false
       })
@@ -47,10 +46,10 @@ Page({
       for (var j = 0; j < cres.length; j++) {
         console.log(cres[j])
         if (cres[j].name == "话剧歌剧") {
-          tempData[0] = cres[j]
+          tempData[1] = cres[j]
         }
         if (cres[j].name == "演唱会") {
-          tempData[1] = cres[j]
+          tempData[0] = cres[j]
         }
         if (cres[j].name == "音乐会") {
           tempData[2] = cres[j]

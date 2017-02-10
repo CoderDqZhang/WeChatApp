@@ -1,4 +1,4 @@
-// pages/sell/sell/sell.js
+// pages/home/sell/sell.js
 Page({
   data:{},
   onLoad:function(options){
