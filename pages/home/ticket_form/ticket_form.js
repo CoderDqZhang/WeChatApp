@@ -143,16 +143,6 @@ Page({
     console.log(that.data)
 
     if (form.delivery_type == 1) {
-      if (that.data.address == null) {
-        wx.showModal({
-          title: "请输入地址",
-          confirmColor: "#4bd4c5",
-          confirmText: "知道了",
-          success: function (res) {
-            console.log('用户点击确定')
-          }
-        })
-      }
       data = {
         "ticket_id": that.data.ticket.id.toString(),
         "ticket_count": that.data.ticket.buy_number.toString(),
@@ -175,8 +165,13 @@ Page({
       }
     }
     console.log(data)
+    wx.showToast({
+      title:'加载中...',
+      icon: 'loading',
+      duration: 2000
+    })
     app.func.requestPost('order/create/', data, function (res) {
-      console.log(res)
+      wx.hideToast()
       if (res.errors != null) {
         wx.showModal({
           title: res.errors[0].error[0].toString(),
@@ -186,17 +181,6 @@ Page({
           success: function (res) {
             if (res.confirm) {
             }
-          }
-        })
-        return
-      }
-      if (res.message != null) {
-        wx.showModal({
-          title: "请允许获取用户信息",
-          confirmColor: "#4bd4c5",
-          confirmText: "知道了",
-          success: function (res) {
-            console.log('用户点击确定')
           }
         })
         return

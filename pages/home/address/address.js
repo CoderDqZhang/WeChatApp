@@ -38,7 +38,9 @@ Page({
       "澳门地区"],
     regions: "地区选择",
     isSelect: false,
-    windowsWidth: 0
+    windowsWidth: 0,
+    windowsHeigth: 0,
+    isAllowUser:false
   },
   onLoad: function (options) {
     var that = this
@@ -46,22 +48,35 @@ Page({
       success: function (res) {
         // success
         that.setData({
-          windowWidth: res.windowWidth - 148
+          windowWidth: res.windowWidth - 148,
+          windowsHeigth: res.windowHeight
         })
         console.log(that.data.windowWidth)
       }
     })
+    var userInfo = wx.getStorageSync('userInfo')
+    console.log("userInfo" + userInfo)
+    if (userInfo != "") {
+      that.setData({
+        isAllowUser: false 
+      })
+    } else {
+      that.setData({
+        isAllowUser: true
+      })
+    }
     // 页面初始化 options为页面跳转所带来的参数
   },
   formSubmit: function (e) {
     console.log(e)
     var location = this.data.regions
     console.log(location)
-    wx.getStorage({
-      key: 'userInfo',
-      success: function (res) {
-        console.log("test" + res.data.data.id)
-        var data = {
+    wx.showToast({
+      title:'保存中',
+      icon: 'loading',
+      duration: 2000
+    })
+    var data = {
           "name": e.detail.value.name,
           "id": 0,
           "default": 1,
@@ -70,6 +85,7 @@ Page({
           "address": e.detail.value.address,
         }
         app.func.requestPost('user/address/', data, function (ures) {
+          wx.hideToast()
           if (ures.errors != null) {
             wx.showModal({
               title: ures.errors[0].error[0].toString(),
@@ -83,17 +99,6 @@ Page({
             })
             return
           }
-          if (res.message != null) {
-            wx.showModal({
-              title: "请允许获取用户信息",
-              confirmColor: "#4bd4c5",
-              confirmText: "知道了",
-              success: function (res) {
-                console.log('用户点击确定')
-              }
-            })
-            return
-          }
           var pages = getCurrentPages();
           if (pages.length > 1) {
             //上一个页面实例对象
@@ -102,35 +107,96 @@ Page({
             prePage.changeData(ures)
           }
           try {
-            wx.setStorageSync(res.data.data.id.toString(), ures)
+            wx.setStorageSync(e.detail.value.phone, ures)
             wx.navigateBack({
               delta: 1
             })
-            // wx.showToast({
-            //   title: '保存成功',
-            //   icon: 'success',
-            //   duration: 10000
-            // })
+            wx.showToast({
+              title: '保存成功',
+              icon: 'success',
+              duration: 10000
+            })
 
-            // setTimeout(function () {
-            //   wx.hideToast()
-            // }, 2000)
+            setTimeout(function () {
+              wx.hideToast()
+            }, 2000)
           } catch (e) {
             console.log(e)
           }
         });
-      },
-      fail: function () {
-        wx.showModal({
-            title: "请允许获取用户信息",
-            confirmColor: "#4bd4c5",
-            confirmText: "知道了",
-            success: function (res) {
-              console.log('用户点击确定')
-            }
-          })
-      }
-    })
+    // wx.getStorage({
+    //   key: 'userInfo',
+    //   success: function (res) {
+    //     console.log("test" + res.data.data.id)
+        
+    //   },
+    //   fail: function () {
+    //     console.log('获取用户登录态失败！')
+    //     wx.login({
+    //     success: function (res) {
+    //       console.log('获取用户登录态失败！' + res)
+    //       wx.getUserInfo({
+    //         success: function (resU) {
+    //          console.log('获取用户登录态失败！获取用户信息' + resU)
+    //           that.globalData.userInfo = resU.userInfo
+    //           typeof cb == "function" && cb(that.globalData.userInfo)
+    //           if (res.code) {
+    //             console.log(resU.userInfo)
+    //             console.log(res.code)
+    //             wx.request({
+    //               url: "https://api.niceticket.cc/user/weixin_login/",
+    //               data: {
+    //                 "gender": resU.userInfo.gender,
+    //                 "nickname": resU.userInfo.nickName,
+    //                 "avatar": resU.userInfo.avatarUrl,
+    //                 "code": res.code
+    //               },
+    //               method: 'post',
+    //               success: function (res) {
+    //                 console.log(res.lp_session_id)
+    //                 console.log(res)
+    //                 try {
+    //                   wx.setStorageSync('userInfo', res)
+    //                 } catch (e) {
+    //                 }
+    //               }
+    //             })
+    //             // wx.request({
+    //             //   url: "https://api.liangpiao.me/user/weixin_login/",
+    //             //   data: {
+    //             //     "gender": resU.userInfo.gender,
+    //             //     "nickname": resU.userInfo.nickName,
+    //             //     "avatar": resU.userInfo.avatarUrl,
+    //             //     "code": res.code
+    //             //   },
+    //             //   method: 'post',
+    //             //   success: function (res) {
+    //             //     console.log(res.lp_session_id)
+    //             //     try {
+    //             //       wx.setStorageSync('userInfo', res)
+    //             //     } catch (e) {
+    //             //     }
+    //             //     console.log(res)
+    //             //   }
+    //             // })
+    //           } else {
+    //             console.log('获取用户登录态失败！')
+    //             console.log('获取用户登录态失败！')
+    //           }
+    //         }
+    //       })
+    //     }
+    //   })
+    //     // wx.showModal({
+    //     //   title: "请允许获取用户信息",
+    //     //   confirmColor: "#4bd4c5",
+    //     //   confirmText: "知道了",
+    //     //   success: function (res) {
+    //     //     console.log('用户点击确定')
+    //     //   }
+    //     // })
+    //   }
+    // })
 
   },
   bindPickerChange: function (e) {

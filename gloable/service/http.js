@@ -7,7 +7,6 @@ function requestPost(url, data, cb) {
   wx.getStorage({
     key: 'userInfo',
     success: function (res) {
-      console.log("test" + res.data.data.lp_session_id)
       lp_session_id = res.data.data.lp_session_id
       wx.request({
         url: rootDocment + url,
@@ -47,7 +46,7 @@ function requestGet(url, data, cb) {
   wx.getStorage({
     key: 'userInfo',
     success: function (res) {
-      console.log("test" + res.data.data.lp_session_id)
+      console.log(res)
       lp_session_id = res.data.data.lp_session_id
       wx.request({
         url: rootDocment + url,

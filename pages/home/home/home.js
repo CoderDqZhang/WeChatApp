@@ -5,13 +5,33 @@ Page({
     categoryArray: [],
     ticketShow: [],
     catagorys: [],
-    userInfo: {}
+    userInfo: {},
+    isAllowUser: false,
+    windowsHeigth: 0,
   },
   onLoad: function (opt) {
     console.log("首页数据")
     var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          windowsHeigth: res.windowHeight
+        })
+      }
+    })
     //调用应用实例的方法获取全局数据
-
+    var userInfo = wx.getStorageSync('userInfo')
+    console.log("userInfo" + userInfo)
+    if (userInfo != "") {
+      console.log("球球")
+      that.setData({
+        isAllowUser: false
+      })
+    } else {
+      that.setData({
+        isAllowUser: true
+      })
+    }
     that.requestData()
   },
   requestData: function () {
@@ -61,7 +81,7 @@ Page({
     });
     if (that.data.categoryArray.length == 0) {
       console.log("0")
-    }else{
+    } else {
       console.log("1")
     }
 
@@ -70,7 +90,6 @@ Page({
   showTap: function (event) {
     var data = event.currentTarget.dataset.show
     data.cover = ""
-    data.session.v
     data.category.icon = ""
     if (event.currentTarget.dataset.show.session_count > 1) {
       var show = JSON.stringify(data)
@@ -97,6 +116,19 @@ Page({
   },
   onPullDownRefresh: function () {
     var that = this
-    that.requestData()
+    var userInfo = wx.getStorageSync('userInfo')
+    console.log("userInfo" + userInfo)
+    if (userInfo != "") {
+      that.setData({
+        isAllowUser: false
+      })
+      console.log(userInfo.data)
+      that.requestData()
+    } else {
+      that.setData({
+        isAllowUser: true
+      })
+      wx.stopPullDownRefresh()
+    }
   },
 })

@@ -2,6 +2,8 @@
   "pages":[
     "pages/home/home/home",
     "pages/home/mine/mine",
+    "pages/home/order_list/order",
+    "pages/home/login/login",
     "pages/home/order/order_detail",
     "pages/sell/sell/sell",
     "pages/template/show_template",

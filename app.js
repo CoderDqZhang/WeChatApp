@@ -17,11 +17,14 @@ App({
   },
   getUserInfo: function (cb) {
     var that = this
+    console.log(that)
+
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
       try {
         var value = wx.getStorageSync('userInfo')
         console.log(value)
+
         if (value) {
           that.globalData.userInfo = value
           // Do something with return value
@@ -52,8 +55,17 @@ App({
                   success: function (res) {
                     console.log(res.lp_session_id)
                     console.log(res)
+                    var pages = getCurrentPages();
+                    console.log(pages)
+                    var home = pages[0]
+                    console.log(home)
+                    home.setData({
+                      isAllowUser: false
+                    })
+                    console.log(home)
                     try {
                       wx.setStorageSync('userInfo', res)
+
                     } catch (e) {
                     }
                   }

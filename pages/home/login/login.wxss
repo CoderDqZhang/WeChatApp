@@ -1,0 +1,41 @@
+/* pages/home/login/login.wxss */
+
+.phoneInput {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  height: 92rpx;
+}
+
+.senderCode {
+  background-color: #4bd4c5;
+  height: 40rpx;
+  width: 140rpx;
+  padding-top: 18rpx;
+  margin-top: 90rpx;
+  text-align: center;
+  margin-right: 30rpx;
+  font-size: 24rpx;
+  color: white;
+  border-radius: 4rpx;
+}
+
+.input_text {
+  margin-top: 90rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.input_text_phone {
+  margin-top: 90rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.confim{
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  background-color: #4bd4c5;
+  color: white;
+}

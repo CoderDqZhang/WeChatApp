@@ -144,3 +144,23 @@ page {
 .loaded {
   opacity: 1;
 }
+
+.noneTicketSession {
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.none_covers {
+  width: 136rpx;
+  height: 190rpx;
+}
+
+.none_text {
+  margin-top: 75rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #BBC1CB;
+}

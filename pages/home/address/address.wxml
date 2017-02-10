@@ -1,39 +1,50 @@
 
 <!--pages/home/address/address.wxml-->
-<view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
+<view class="noneTicketSession" wx:if="{{isAllowUser}}" style="height:{{                  windowsHeigth}}px;">
+  <view class="none_cover">
+    <image src="/images/gloable/Icon_Default.png" mode="aspectFill" class="none_covers"></image>
+  </view>
+  <view class="none_text">
+    <view>须完成微信授权才能继续使用</view>
+    <view style="margin-top:0rpx;">请稍后重试</view>
+  </view>
 </view>
-<form bindsubmit="formSubmit">
-  <view class="title_input">
-    <view class="title">联系人姓名</view>
-    <input name="name" class="input_text" placeholder="联系人姓名" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px;"/>
+<view wx:else>
+  <view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
   </view>
-  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="title_input">
-    <view class="title_phone">联系电话</view>
-    <input name="phone" class="input_text" placeholder="手机或固话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px; " type="number"/>
-  </view>
-  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="picke_input">
-    <view class="title">区域选择</view>
-    <view class="section" style="width:{{windowWidth}}px;">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picket" wx:if="{{isSelect}}">
-        <view class="picket_select">{{provice[index]}}
-        </view>
-      </picker>
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picketunSelect" wx:else>
-        <view class="picketunSelect">区域选择
-        </view>
-      </picker>
+  <form bindsubmit="formSubmit">
+    <view class="title_input">
+      <view class="title">联系人姓名</view>
+      <input name="name" class="input_text" placeholder="联系人姓名" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px;" />
     </view>
-    <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
-  </view>
-  <view class="detail_input">
-    <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: 0px;"></view>
-    <view class="detail_title">详细地址</view>
-    <input name="address" class="detail_text" placeholder="街道门牌信息" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing:0;" style="width:{{windowWidth}}px;"/>
-  </view>
-  <button formType="submit" class="confirm">保存</button>
-</form>
+    <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
+    <view class="title_input">
+      <view class="title_phone">联系电话</view>
+      <input name="phone" class="input_text" placeholder="手机或固话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" style="width:{{windowWidth}}px; " type="number" />
+    </view>
+    <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
+    <view class="picke_input">
+      <view class="title">区域选择</view>
+      <view class="section" style="width:{{windowWidth}}px;">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picket" wx:if="{{isSelect}}">
+          <view class="picket_select">{{provice[index]}}
+          </view>
+        </picker>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{provice}}" class="picketunSelect" wx:else>
+          <view class="picketunSelect">区域选择
+          </view>
+        </picker>
+      </view>
+      <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+    </view>
+    <view class="detail_input">
+      <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: 0px;"></view>
+      <view class="detail_title">详细地址</view>
+      <input name="address" class="detail_text" placeholder="街道门牌信息" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing:0;" style="width:{{windowWidth}}px;" />
+    </view>
+    <button formType="submit" class="confirm">保存</button>
+  </form>
+</view>
 
 <!--<view class="bottom">
 </view>-->
