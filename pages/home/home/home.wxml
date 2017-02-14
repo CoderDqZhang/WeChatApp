@@ -49,7 +49,7 @@
   </view>
   <view class="none_text">
     <view>须完成微信授权才能继续使用</view>
-    <view style="margin-top:0rpx;">请稍后重试</view>
+    <view style="margin-top:0rpx;">请删除后重新授权</view>
   </view>
 </view>
 <view wx:else>

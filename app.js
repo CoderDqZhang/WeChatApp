@@ -1,5 +1,6 @@
 //app.js
 var http = require('gloable/service/http.js')
+var TD = require('gloable/service/tdweapp.js');
 App({
   data: {
     userInfo: {}
@@ -14,6 +15,18 @@ App({
       //更新数据
       that.globalData.userInfo = userInfo
     })
+    TD.launch({
+            appkey: '949AC2A588DA47B9AA5499B5CB15250D',
+            appName: '良票演出',
+            versionName: 'v1.0.0',
+            versionCode: 'v1.0.0',
+            autoOnAppShow: true,
+            autoOnAppHide: true,
+            autoOnPageUnload: true,
+            autoOnPullDownRefresh: true,
+            autoOnReachBottom: true,
+            autoOnShare: true
+        });
   },
   getUserInfo: function (cb) {
     var that = this
@@ -59,9 +72,10 @@ App({
                     console.log(pages)
                     var home = pages[0]
                     console.log(home)
-                    home.setData({
-                      isAllowUser: false
-                    })
+                    home.isAllowUser = false
+                    // home.setData({
+                    //   isAllowUser: false
+                    // })
                     console.log(home)
                     try {
                       wx.setStorageSync('userInfo', res)

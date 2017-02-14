@@ -5,7 +5,7 @@ Page({
         windowsHeigth: 0,
         isHaveOrder: false,
         showText:"须完成微信授权才能继续使用",
-        showText1:"请稍后重试",
+        showText1:"请删除后重新授权",
         userInfo:null
     },
     onLoad: function (opt) {

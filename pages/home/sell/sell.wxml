@@ -1,1 +1,38 @@
+
 <!--pages/home/sell/sell.wxml-->
+<template name="ticketManager">
+  <view class="ticket_desc">
+    <view class="show_cover">
+      <image src="{{cover}}" class="ticketPost" mode="aspectFill"></image>
+    </view>
+    <view class="show_info">
+      <view class="show_title">{{title}}</view>
+      <view class="show_ticket_info">
+        <view class="show_session">场次：{{sessionTitle}}</view>
+
+        <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
+        <view class="show_detail">票面：{{ticketName}}</view>
+        <view class="show_detail">在售：{{ticketCount}} 已售 {{ticketSold}}</view>
+      </view>
+    </view>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
+  <view class="ticketPrice">
+    <view class="price">
+      <view class="ticketinfo">
+        <view class="infoPrice">售票价格:
+        </view>
+        <view class="ticketMinPrice">{{ticketPrice}}
+        </view>
+        <view class="ticket_sevice">    元
+        </view>
+      </view>
+    </view>
+    <view class="ticketBtn"></view>
+  </view>
+</template>
+<view>
+  <view wx:for="{{ticketSells}}" wx:key="ticketShow" class="ticketShowView" id="sellTap" bindtap="sellTap" wx:for-item="item" data-sellTicket="{{item}}">
+    <template is="ticketManager" data="{{...item}}" />
+  </view>
+</view>

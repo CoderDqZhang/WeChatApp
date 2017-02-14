@@ -13,7 +13,9 @@ Page({
     allMuch: 0,
     ticketMuch: 0,
     address: null,
-    widowsWidth: 0
+    widowsWidth: 0,
+    numbers: [],
+    tempNumber: 1
   },
 
   changeData: function (data) {
@@ -52,6 +54,15 @@ Page({
     })
     // 页面初始化 options为页面跳转所带来的参数
   },
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', this.data.numbers[e.detail.value])
+    this.setData({
+      index: e.detail.value,
+      isSelect: true,
+      regions: this.data.numbers[e.detail.value],
+      allMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price + this.data.ticket.delivery_price
+    })
+  },
   genderData: function (show) {
     var that = this;
     that.setData({
@@ -63,12 +74,31 @@ Page({
     that.data.ticket = that.data.sessionShow.ticket
     var arr = that.data.ticket.delivery_type.split(',')
     var tempDevery = ""
+    var tmpNumber = []
+    console.log(that.data.sessionShow.ticket)
+    if (that.data.sessionShow.ticket.sell_type == 2) {
+      tmpNumber.push(that.data.sessionShow.ticket.remain_count)
+      var much = that.data.sessionShow.ticket.remain_count * that.data.sessionShow.ticket.price
+      that.setData({
+        tempNumber: that.data.sessionShow.ticket.remain_count,
+        allMuch: much,
+        numbers: tmpNumber
+      })
+    } else {
+      for (var i = 1; i <= that.data.sessionShow.ticket.remain_count; i++) {
+        tmpNumber.push(i)
+      }
+      that.setData({
+        numbers: tmpNumber,
+        allMuch: that.data.sessionShow.ticket.price
+      })
+    }
+    console.log(that.data.allMuch)
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] == "1") {
         that.data.deliverys.push("快递")
         if (tempDevery == "") {
           tempDevery = 1
-
         }
 
       } else if (arr[i] == "2") {
@@ -88,13 +118,15 @@ Page({
     var form = that.data.orderForm
     form.delivery_type = tempDevery
     form.delivery_price = that.data.ticket.delivery_price
+    console.log(that.data.ticket.allMuch)
     that.setData({
       delivery_type: tempDevery,
       choosedelivery: that.data.deliverys[0],
       delivery_muchs: that.data.deliveryMuchs[0],
-      allMuch: that.data.ticket.all_much + that.data.ticket.delivery_price,
-      ticketMuch: that.data.ticket.all_much
+      allMuch: that.data.allMuch + that.data.ticket.delivery_price,
+      // allMuch: "600"
     })
+    console.log(that.data.allMuch)
   },
   chooseDelivery: function () {
     var that = this
@@ -124,7 +156,7 @@ Page({
           that.data.orderForm.delivery_price = res.tapIndex == 0 ? that.data.ticket.delivery_price : that.data.ticket.delivery_price_sf
           that.setData({
             delivery_muchs: that.data.deliveryMuchs[res.tapIndex],
-            allMuch: that.data.ticket.all_much + (res.tapIndex == 0 ? that.data.ticket.delivery_price : that.data.ticket.delivery_price_sf)
+            allMuch: that.data.allMuch + (res.tapIndex == 0 ? that.data.ticket.delivery_price : that.data.ticket.delivery_price_sf)
           })
         }
       }
@@ -143,6 +175,19 @@ Page({
     console.log(that.data)
 
     if (form.delivery_type == 1) {
+      if (that.data.address == null) {
+        wx.showModal({
+          title: "请输入收货地址",
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+        return
+      }
       data = {
         "ticket_id": that.data.ticket.id.toString(),
         "ticket_count": that.data.ticket.buy_number.toString(),
@@ -166,7 +211,7 @@ Page({
     }
     console.log(data)
     wx.showToast({
-      title:'加载中...',
+      title: '加载中...',
       icon: 'loading',
       duration: 2000
     })

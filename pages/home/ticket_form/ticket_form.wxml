@@ -8,10 +8,9 @@
       <view class="show_ticket_info">
         <view class="show_session">场次：{{session.name}}</view>
       <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
-      <view class="show_detail">票面：{{ticket.original_ticket.name}}x{{ticket.buy_number}}</view>
+      <view class="show_detail">票面：{{ticket.original_ticket.name}}</view>
       <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
       <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
-      <view class="show_detail">票款：{{ticket.all_much}} 元</view>
       </view>
     </view>
   </view>
@@ -22,6 +21,26 @@
 <view class="secondeSession" style="height: 10px; background-color: #EFEFF4;">
 </view>
 <form bindsubmit="formSubmit" class="formClass">
+  <view class="cell_title_info_image">
+    <view class="title">购买数量
+    </view>
+    <view class="section" style="width:{{windowWidth}}px;">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="picket" wx:if="{{isSelect}}">
+          <view class="detail">{{numbers[index]}}
+          </view>
+        </picker>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="address_detail" wx:else>
+          <view class="detail">{{tempNumber}}
+          </view>
+        </picker>
+      </view>
+    <!--<view class="detail">{{choosedelivery}}
+    </view>-->
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>
+  </view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image" bindtap="chooseDelivery">
     <view class="title">配送方式
     </view>

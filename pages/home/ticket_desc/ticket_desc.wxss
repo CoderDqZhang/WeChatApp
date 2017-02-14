@@ -40,7 +40,14 @@ page {
   margin-top: -24rpx;
 }
 
+.showInfo{
+  padding-top: 40rpx;
+  padding-bottom: 46rpx;
+  background-color: white;
+}
+
 .show_title {
+  margin-left: 30rpx;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -48,18 +55,25 @@ page {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: #384249;
-  font-size: 32rpx;
-  margin-top: 24rpx;
+  font-size: 36rpx;
   line-height: 44rpx;
+  margin-bottom: 15rpx;
 }
 
 .show_session {
+  margin-top: 10rpx;
   color: #a2abb5;
   line-height: 30rpx;
-  font-size: 24rpx;
-  margin-top: 10rpx;
+  font-size: 26rpx;
+  margin-left: 30rpx;
 }
-
+.show_venue{
+  color: #a2abb5;
+  line-height: 30rpx;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+  margin-top: 5rpx;
+}
 .show_detail {
   color: #a2abb5;
   line-height: 34rpx;
