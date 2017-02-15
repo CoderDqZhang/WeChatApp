@@ -1,0 +1,28 @@
+
+<!--pages/sell/sell_list/sell_list.wxml-->
+<template name="show_template">
+  <view class="ticketShowView">
+    <view class="ticketImage">
+      <image src="{{cover}}" class="ticketPost" mode="aspectFill"></image>
+    </view>
+    <view class="ticket_info">
+      <view class="ticketTitle">
+        <text>{{title}}</text>
+      </view>
+      <view class="ticketTime">{{show_date}}</view>
+      <view class="ticketLocation">{{venue.name}}</view>
+      <view class="ticket_other">
+        <view class="ticket_price">
+          <text class="ticketMuch" wx:if="{{min_price != 0 && ticket_count != 0}}">{{min_price}}-{{max_price}}</text>
+          <text class="ticketMuchM" wx:if="{{ticket_count == 0 || min_price == 0}}">暂时缺票</text>
+          <text class="ticketMuchM" wx:else>元</text>
+        </view>
+        <view class="sellButton">卖票</view>
+      </view>
+    </view>
+  </view>
+</template>
+<view wx:for="{{sellList}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+  <template is="show_template" data="{{...item}}" />
+  <view style="margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}"></view>
+</view>

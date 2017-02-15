@@ -61,8 +61,8 @@ Page({
         app.func.requestGet(url, {}, function (res) {
             var data = res;
             var imageUrl = data.show.cover
-            data.show = JSON.parse(show)
-            data.show.cover = imageUrl
+            console.log(that.data)
+            that.data.sessionShow.cover = imageUrl
             that.genderData(data.ticket_list)
         });
     },
@@ -83,11 +83,11 @@ Page({
             }
             for (var j = 0; j < arr.length; j++) {
                 if (arr[j] == "1") {
-                    deliveType = deliveType + "快递 "
+                    deliveType = deliveType + "快递"
                 } else if (arr[j] == "2") {
-                    deliveType = deliveType + "上门自取 "
+                    deliveType = deliveType + "上门自取"
                 } else if (arr[j] == "3") {
-                    deliveType = deliveType + "自取 "
+                    deliveType = deliveType + "自取"
                 }
             }
             if (tickets[i].seat_type == 1) {
@@ -125,6 +125,7 @@ Page({
         }
         console.log(subtitle)
         console.log(that.data.sessionShow)
+        that.data.sessionShow.session.ticket_list = tickets
         that.setData({
             showDesc: that.data.sessionShow.session,
             shareTitle: that.data.sessionShow.title,
@@ -133,23 +134,6 @@ Page({
         })
     },
 
-    // btn_subtract: function () {
-    //     var that = this
-    //     var number_ticket = that.data.ticketNumber
-    //     if (number_ticket > 1) {
-    //         that.setData({
-    //             ticketNumber: number_ticket - 1
-    //         })
-    //     }
-
-    // },
-    // btn_add: function () {
-    //     var that = this
-    //     var number_ticket = that.data.ticketNumber
-    //     that.setData({
-    //         ticketNumber: number_ticket + 1
-    //     })
-    // },
     ticketTap: function (event) {
         var that = this;
         var ticket = event.currentTarget.dataset.ticket
@@ -182,23 +166,16 @@ Page({
             url: '../ticket_form/ticket_form?show=' + JSON.stringify(that.data.sessionShow)
         })
     },
-    //     XXX380、580、980有票
-    // XXX380、580、980有票，需要的联系
-    // XXX380、580、980有票，欢迎各位老板
-    // XXX380、580、980有票，欢迎打包
-    // XXX380、580、980有票，便宜出，需要的联系
-    // XXX380、580、980有票便宜
     onShareAppMessage: function () {
         var that = this
         var shareTitle = ""
         if (that.data.sessionShow.session.shareTitle == null) {
             shareTitle = that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (5 + 1))]
         } else {
-            shareTitle = that.data.sessionShow.session.shareTitle + that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (6 + 1))]
+            shareTitle = that.data.sessionShow.session.shareTitle + that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (5 + 1))]
         }
         return {
             title: shareTitle,
-            // title: that.data.shareTitle,
             desc: that.data.sharesubletitle,
             path: 'pages/home/ticket_desc/ticket_desc?show=' + JSON.stringify(that.data.shareData)
         }

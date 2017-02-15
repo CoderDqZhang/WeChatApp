@@ -62,11 +62,9 @@ Page({
       that.setData({
         categoryArray: tempData
       })
-      console.log("fsdf")
     });
 
     if (that.data.categoryArray.lenght < 1) {
-      console.log("that.data.categoryArray")
       that.requestData()
     }
     app.func.requestGet('show/hot/', {}, function (res) {

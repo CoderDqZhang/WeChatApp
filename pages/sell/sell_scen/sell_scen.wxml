@@ -1,0 +1,23 @@
+<!--pages/sell/sell_scen/sell_scen.wxml-->
+<template name="ticketSession">
+  <view class="cellDetailInfo">
+    <view style="float:left;">
+      <view class="cellTitle"> {{name}}</view>
+    </view>
+    <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+    <view class="cellDetailView" wx:if="{{min_price != 0}}">
+      <text class="cellDetailInfo">{{min_price}}元起</text>
+    </view>
+    <view class="cellDetailView" wx:else>
+      <text class="cellDetail">暂时缺票</text>
+    </view>
+    <view style="margin-left: 15px;height:1rpx; background-color: #E9EBF2;"></view>
+  </view>
+</template>
+<view style="height:100%;background: #EFEFF4;">
+  <view>
+  <view wx:for="{{sessions}}" wx:key="sessions" class="sessions" id="showTap" bindtap="showTap" wx:for-item="item" data-session="{{item}}">
+    <template is="ticketSession" data="{{...item}}" />  
+  </view>
+</view>
+</view>

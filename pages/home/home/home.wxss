@@ -61,7 +61,7 @@ page {
 .photos {
   width: 57rpx;
   height: 77rpx;
-  margin-top: 20rpx;
+  margin-top: 15rpx;
   border-radius: 4rpx;
   margin-right: 0px;
 }

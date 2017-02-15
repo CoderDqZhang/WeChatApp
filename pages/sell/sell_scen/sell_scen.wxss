@@ -1,0 +1,46 @@
+/* pages/sell/sell_scen/sell_scen.wxss */
+page {
+  background-color: #efeff4;
+}
+
+.cellDetailInfo {
+  height: 88rpx;
+  width: 100%;
+  background-color: #fff;
+}
+
+.detailImage {
+  float: right;
+  position: relative;
+  width: 16rpx;
+  height: 26rpx;
+  margin-right: 30rpx;
+  margin-top: 32rpx;
+}
+
+.cellTitle {
+  margin-top: 24rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+  color: #384249;
+  letter-spacing: 0;
+}
+
+.cellDetail {
+  font-size: 28rpx;
+  color: #bbc1cb;
+  letter-spacing: 0;
+}
+
+.cellDetailInfo {
+  font-size: 30rpx;
+  color: #4bd4c5;
+  letter-spacing: 0;
+}
+
+.cellDetailView {
+  float: right;
+  position: relative;
+  margin-top: 24rpx;
+  margin-right: 30rpx;
+}

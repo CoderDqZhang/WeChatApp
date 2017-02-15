@@ -1,7 +1,10 @@
 {
-  "pages":[
+  "pages": [
     "pages/home/home/home",
     "pages/home/mine/mine",
+    "pages/sell/sell_form/sell_form",
+    "pages/sell/sell_list/sell_list",
+    "pages/sell/sell_scen/sell_scen",
     "pages/home/order_list/order",
     "pages/home/login/login",
     "pages/home/order/order_detail",
@@ -15,29 +18,38 @@
     "pages/template/refresh_template",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#4bd4c5",
     "navigationBarTitleText": "良票演出",
-    "navigationBarTextStyle":"#ffffff",
+    "navigationBarTextStyle": "#ffffff",
     "backgroundColor": "#efeff4"
   },
-  "tabBar":{
-   "color": "#8A96A2",  
-   "selectedColor": "#4bd4c5",  
-   "backgroundColor": "#f8f8fa",
-   "borderStyle": "white",
-   "borderColor":"#384249", 
-   "list": [{  
-     "selectedIconPath": "images/tabBar/home_select.png",  
-     "iconPath": "images/tabBar/home_normal.png",  
-     "pagePath": "pages/home/home/home",
-     "text": "首页"  
-   },{  
-     "selectedIconPath": "images/tabBar/mine_select.png",  
-     "iconPath": "images/tabBar/mine_normal.png",  
-     "pagePath": "pages/home/mine/mine",  
-     "text": "我的"  
-   }]  
+  "tabBar": {
+    "color": "#8A96A2",
+    "selectedColor": "#4bd4c5",
+    "backgroundColor": "#f8f8fa",
+    "borderStyle": "white",
+    "borderColor": "#384249",
+    "list": [
+      {
+        "selectedIconPath": "images/tabBar/home_select.png",
+        "iconPath": "images/tabBar/home_normal.png",
+        "pagePath": "pages/home/home/home",
+        "text": "首页"
+      },
+      {  
+     "selectedIconPath": "images/tabBar/sell_select.png",  
+     "iconPath": "images/tabBar/sell_normal.png",  
+     "pagePath": "pages/sell/sell_list/sell_list",
+     "text": "卖票"  
+   },
+      {
+        "selectedIconPath": "images/tabBar/mine_select.png",
+        "iconPath": "images/tabBar/mine_normal.png",
+        "pagePath": "pages/home/mine/mine",
+        "text": "我的"
+      }
+    ]
   }
 }

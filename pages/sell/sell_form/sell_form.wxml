@@ -1,0 +1,24 @@
+
+<!--pages/sell/sell_form/sell_form.wxml-->
+<view class="showInfo">
+  <view class="sessionTitle">{{sessionShow.title}}</view>
+  <view class="sessionName">{{sessionShow.session.name}}</view>
+  <view class="sessionName">{{sessionShow.venue.name}}</view>
+</view>
+<view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-right: 15rpx; margin-top: 56rpx;"></view>
+<view class="tickeCategory">票面类型
+</view>
+<view class="ticketPrices">
+  <view wx:for="{{ticketPrice}}" wx:key="ticketPrices" class="ticketPrice" id="ticketPriceTap" bindtap="ticketPriceTap" wx:for-item="item" data-ticketChoice="{{item}}">
+    <view wx:if="{{item.isSelect}}" class="price_select">{{item.id}}</view>
+    <view wx:else class="price_normal">{{item.id}}</view>
+  </view>
+</view>
+<view class="tickeCategory">售卖数量
+</view>
+<view class="ticketNumber">
+  <view class="buttonSb" bindtap="buttonSbTap">-</view>
+  <!--<view clasa="ddd">输入数量</view>-->
+  <input class="inputText" placeholder="1" value="{{numberTicket}}" bindinput="numberInput"/>
+  <view class="buttonAdd" bindtap="buttonAddTap">+</view>
+</view>
