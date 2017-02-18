@@ -1,0 +1,91 @@
+/* pages/sell/sell_form_confirm/sell_form_confirm.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.cell_title_info_image {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 88rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.title {
+  width: 600rpx;
+  font-size: 30rpx;
+  color: #384249;
+}
+
+.detail {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500rpx;
+  margin-right: 12rpx;
+  text-align: right;
+  font-size: 30rpx;
+  color: #8a96a2;
+  letter-spacing: 0;
+}
+
+.detail_image {
+  margin-top: -18rpx;
+  width: 16rpx;
+  height: 26rpx;
+}
+
+.service {
+  margin-top: 30rpx;
+  height: 224rpx;
+  background-color: white;
+  padding-top: 26rpx;
+}
+
+.serviceMuch {
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-top: 32rpx;
+}
+
+.serviceTitle {
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.allMuch {
+  font-size: 26rpx;
+  color: #4bd4c5;
+}
+
+.serviceInfo {
+  font-size: 24rpx;
+  color: #bbc1cb;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+
+.serviceInfos {
+  margin-top: 5rpx;
+  font-size: 24rpx;
+  color: #bbc1cb;
+  margin-left: 30rpx;
+}
+.next {
+  text-align: center;
+  font-size: 30rpx;
+  padding-top: 28rpx;
+  width: 100%;
+  height: 68rpx;
+  background-color: #4bd4c5;
+  color: white;
+  position: absolute;
+  bottom: 0;
+}

@@ -7,10 +7,11 @@
       <view class="show_title">{{title}}</view>
       <view class="show_ticket_info">
         <view class="show_session">场次：{{session.name}}</view>
-      <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
-      <view class="show_detail">票面：{{ticket.original_ticket.name}}</view>
-      <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
-      <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
+
+        <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
+        <view class="show_detail">票面：{{ticket.original_ticket.name}}</view>
+        <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
+        <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
       </view>
     </view>
   </view>
@@ -25,17 +26,15 @@
     <view class="title">购买数量
     </view>
     <view class="section" style="width:{{windowWidth}}px;">
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="picket" wx:if="{{isSelect}}">
-          <view class="detail">{{numbers[index]}}
-          </view>
-        </picker>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="address_detail" wx:else>
-          <view class="detail">{{tempNumber}}
-          </view>
-        </picker>
-      </view>
-    <!--<view class="detail">{{choosedelivery}}
-    </view>-->
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="picket" wx:if="{{isSelect}}">
+        <view class="detail_margin">{{numbers[index]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{numbers}}" class="address_detail" wx:else>
+        <view class="detail">{{tempNumber}}
+        </view>
+      </picker>
+    </view>
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
@@ -56,7 +55,7 @@
     </view>
     <view class="address_title" wx:else>收货地址
     </view>
-    <view class="address_detail">{{address.name}} {{address.mobile_num}} {{address.location}} {{address.address}} 
+    <view class="address_detail">{{address.name}} {{address.mobile_num}} {{address.location}} {{address.address}}
     </view>
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
@@ -95,6 +94,6 @@
   </view>
   <view class="bottomView">
     <view class="introduct">票品售出后不可退换，可转授</view>
-    <button formType="submit"  class="confim">提交</button>
+    <button formType="submit" class="confim">提交</button>
   </view>
 </form>

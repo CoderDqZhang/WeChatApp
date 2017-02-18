@@ -107,7 +107,7 @@ Page({
             prePage.changeData(ures)
           }
           try {
-            wx.setStorageSync(e.detail.value.phone, ures)
+            wx.setStorageSync("address", ures)
             wx.navigateBack({
               delta: 1
             })

@@ -1,0 +1,58 @@
+/* pages/sell/sell_delivery/sell_delivery.wxss */
+page {
+  background-color: #efeff4;
+}
+
+.cell_title_info_image{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 142rpx;
+    background-color: white;
+}
+
+.cell_title{
+    margin-left: 30rpx;
+}
+
+.swithClass{
+    margin-right: 30rpx;
+    margin-top: 4rpx;
+}
+
+.title{
+    font-size: 28rpx;
+    color: #384249;
+    margin-bottom: 4rpx;
+}
+.detail_title{
+    font-size: 24rpx;
+    color: #A2ABB5;
+}
+
+.inputClass{
+    background-color: white;
+}
+
+.inputText{
+    margin-left: 30rpx;
+    height: 100rpx;
+}
+
+.swithClass{
+    color: #4bd4c5;
+}
+
+.next {
+  text-align: center;
+  font-size: 30rpx;
+  padding-top: 28rpx;
+  width: 100%;
+  height: 68rpx;
+  background-color: #4bd4c5;
+  color: white;
+  position: absolute;
+  bottom: 0;
+}
+

@@ -57,7 +57,8 @@ App({
                 console.log(resU.userInfo)
                 console.log(res.code)
                 wx.request({
-                  url: "https://api.niceticket.cc/user/weixin_login/",
+                    url: "https://api.liangpiao.me/user/weixin_login/",
+                  // url: "https://api.niceticket.cc/user/weixin_login/",
                   data: {
                     "gender": resU.userInfo.gender,
                     "nickname": resU.userInfo.nickName,

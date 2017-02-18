@@ -24,8 +24,6 @@ Page({
                 isHaveOrder: false,
                 userInfo:user.data
             })
-            console.log(userInfo.data)
-            // console.log(userInfo.avate)
         } else {
             that.setData({
                 isHaveOrder: true

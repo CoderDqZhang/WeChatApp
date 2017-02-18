@@ -2,7 +2,7 @@
 <!--pages/sell/sell_form/sell_form.wxml-->
 <view class="showInfo">
   <view class="sessionTitle">{{sessionShow.title}}</view>
-  <view class="sessionName">{{sessionShow.session.name}}</view>
+  <view class="sessionName">{{sessionShow.session.start_time}}</view>
   <view class="sessionName">{{sessionShow.venue.name}}</view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-right: 15rpx; margin-top: 56rpx;"></view>
@@ -18,7 +18,28 @@
 </view>
 <view class="ticketNumber">
   <view class="buttonSb" bindtap="buttonSbTap">-</view>
+
   <!--<view clasa="ddd">输入数量</view>-->
-  <input class="inputText" placeholder="1" value="{{numberTicket}}" bindinput="numberInput"/>
+  <input class="inputText" placeholder="1" value="{{numberTicket}}" bindinput="numberInput" />
   <view class="buttonAdd" bindtap="buttonAddTap">+</view>
 </view>
+<view class="sellPrice">
+  <view class="sell_price">售卖价格
+  </view>
+  <view class="sell_suggestPrice">使用建议价格
+  </view>
+</view>
+<input class="sellPriceText" placeholder="0" value="{{sellPriceTicket}}" bindinput="sellPriceInput" />
+<view class="service">
+<text class="servicePrice">良票优先显示相同区域更低的票价
+</text>
+</view>
+<view style="margin-left:30rpx;">
+  <text class="servicePrice">当前区域平均售价</text>
+  <text class="servicePrice">280.00</text>
+  <text class="servicePrice">元，</text>
+  <text class="servicePrice">建议售价</text>
+  <text class="servicePriced">220.00</text>
+  <text class="servicePrice">元</text>
+</view>
+<view class="next" bindtap="nextTap">继续</view>

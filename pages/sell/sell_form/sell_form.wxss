@@ -109,3 +109,60 @@
   height: 82rpx;
   border-left: 1rpx solid #384249;
 }
+
+.sellPrice {
+  margin-top: 40rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sell_price {
+  font-size: 26rpx;
+  color: #384249;
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+}
+
+.sell_suggestPrice {
+  font-size: 26rpx;
+  color: #4bd4c5;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 50rpx;
+}
+
+.sellPriceText {
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 72rpx;
+}
+
+.service {
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+}
+
+.servicePrice {
+  font-size: 24rpx;
+  color: #bbc1cb;
+}
+
+.servicePriced {
+  font-size: 24rpx;
+  color: #4bd4c5;
+}
+
+.next {
+  text-align: center;
+  font-size: 30rpx;
+  padding-top: 28rpx;
+  width: 100%;
+  height: 68rpx;
+  background-color: #4bd4c5;
+  color: white;
+  position: absolute;
+  bottom: 0;
+}

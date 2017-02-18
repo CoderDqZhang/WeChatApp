@@ -1,0 +1,46 @@
+<!--pages/sell/sell_delivery/sell_delivery.wxml-->
+<view class="cell_title_info_image">
+  <view class="cell_title">
+    <view class="title">普通快递（8元）、顺丰快递（13元）
+    </view>
+    <view class="detail_title">超出部分由商家自行承担
+    </view>
+  </view>
+  <view class="swithClass">
+    <switch bindchange="expressChange" />
+  </view>
+</view>
+<view class="cell_title_info_image">
+  <view class="cell_title">
+    <view class="title">现场取票
+    </view>
+  </view>
+  <view class="swithClass">
+    <switch bindchange="siteChange" />
+  </view>
+</view>
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view wx:if="{{isSite}}"  class="inputClass">
+    <input class="inputText" bindinput="location" placeholder="输入取票地点" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+    <input class="inputText" bindinput="time" placeholder="输入取票时间" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+    <input class="inputText" bindinput="phone" placeholder="联系电话" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+</view>
+<view class="cell_title_info_image">
+  <view class="cell_title">
+    <view class="title">上门自取
+    </view>
+  </view>
+  <view class="swithClass">
+    <switch bindchange="visitChange" />
+  </view>
+</view>
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view wx:if="{{isVisite}}" class="inputClass">
+    <input class="inputText" bindinput="visitLocation" placeholder="输入取票地点" placeholder="输入取票地点" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" bindinput="visitTime" placeholder="输入取票时间" placeholder="输入取票时间" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" bindinput="visitPhone" placeholder="联系电话" placeholder="输入取票电话" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+</view>
+<view class="next" bindtap="nextTap">保存</view>

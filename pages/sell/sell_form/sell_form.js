@@ -5,137 +5,24 @@ Page({
     sessionShow: null,
     ticketPrice: [],
     numberTicket: 1,
-    sellTicket: {
-      "delivery_type_choices": [
-        [
-          "1",
-          "快递"
-        ],
-        [
-          "2",
-          "现场自取"
-        ],
-        [
-          "3",
-          "上门自取"
-        ]
-      ],
-      "sell_type_choices": [
-        [
-          "1",
-          "单卖"
-        ],
-        [
-          "2",
-          "必须一起卖"
-        ]
-      ],
-      "region_choices": [
-        [
-          "择优分配",
-          "择优分配"
-        ]
-      ],
-      "ticket_choices": [
-        [
-          "3535223114",
-          "380"
-        ],
-        [
-          "3535223109",
-          "480"
-        ],
-        [
-          "3535223108",
-          "680"
-        ],
-        [
-          "3535223111",
-          "880"
-        ],
-        [
-          "3535223110",
-          "1280"
-        ],
-        [
-          "3535223105",
-          "1680"
-        ]
-      ],
-      "seat_type_choices": [
-        [
-          "0",
-          "默认"
-        ],
-        [
-          "1",
-          "连坐"
-        ],
-        [
-          "2",
-          "散座"
-        ]
-      ],
-      "row": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        31,
-        32,
-        33,
-        34,
-        35,
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49,
-        50
-      ]
+    sellTicket: {},
+    sellForm: {
+      "show_session_ticket": "",
+      "seat_type": "",
+      "price": "",
+      "region": "",
+      "sell_type": "",
+      "ticket_count": "",
+      "row": ""
     },
-    sellForm: null
+    selectTicketPrice: "",
+    sellPriceTicket: 1,
+    sellPrice: ""
   },
   onLoad: function (options) {
     this.setData({
       sessionShow: JSON.parse(options.sellShow)
     })
-    this.genderData()
     console.log(this.data.sellTicket)
     console.log(this.data.sessionShow)
     this.requestData()
@@ -147,6 +34,7 @@ Page({
       var isSelect = false
       if (i == 0) {
         isSelect = true
+        this.data.selectTicketPrice = this.data.sellTicket.ticket_choices[i][0]
       }
       tempChoices.push({ "id": this.data.sellTicket.ticket_choices[i][1], "name": this.data.sellTicket.ticket_choices[i][0], "price": "100", "isSelect": isSelect })
     }
@@ -158,9 +46,11 @@ Page({
     var that = this
     var url = "supplier/show/" + that.data.sessionShow.id + "/session/" + that.data.sessionShow.session.id + "/ticket/"
     app.func.requestGet(url, {}, function (res) {
+      console.log(res)
       that.setData({
-        sellForm: res
+        sellTicket: res
       })
+      that.genderData()
       console.log(that.data.sellForm)
     });
   },
@@ -173,6 +63,7 @@ Page({
       if (tempTicketChoice.name != event.currentTarget.dataset.ticketchoice.name) {
         tempTicketChoice.isSelect = false
       } else {
+        this.data.selectTicketPrice = tempTicketChoice.name
         tempTicketChoice.isSelect = true
       }
       updataChoice.push(tempTicketChoice)
@@ -180,9 +71,8 @@ Page({
     this.setData({
       ticketPrice: updataChoice
     })
-    console.log()
   },
-  
+
   buttonSbTap: function () {
     if (this.data.numberTicket != 1) {
       this.setData({
@@ -199,7 +89,32 @@ Page({
   numberInput: function (data) {
     var numberText = parseInt(data.detail.value)
     this.setData({
-      numberTicket: numberText 
+      numberTicket: numberText
+    })
+  },
+  sellPriceInput: function (data) {
+    var sellPrice = parseInt(data.detail.value)
+    this.setData({
+      sellPrice: sellPrice
+    })
+  },
+  nextTap: function () {
+    this.data.sellForm.show_session_ticket = this.data.selectTicketPrice
+    this.data.sellForm.ticket_count = this.data.numberTicket
+    this.data.sellForm.price = this.data.sellPrice
+    console.log(this.data.sellForm)
+    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket,"ticketSession":this.data.sessionShow}
+    wx.navigateTo({
+      url: '../sell_form_confirm/sell_form_confirm?sell_confim=' + JSON.stringify(confirm),
+      success: function (res) {
+        // success
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
     })
   },
   onReady: function () {

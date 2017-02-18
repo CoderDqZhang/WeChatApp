@@ -3,7 +3,7 @@
 <form bindsubmit="formSubmit" class="formClass">
   <view class="phoneInput">
     <input name="phone" class="input_text_phone" placeholder="电话号码" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" bindinput="inputPhone" type="text" />
-    <view class="senderCode" bindtap="senderCode">{{second}} S
+    <view class="senderCode" bindtap="senderCode">{{second}}
     </view>
   </view>
   <input name="code" class="input_text" placeholder="验证码" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />

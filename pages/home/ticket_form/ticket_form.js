@@ -52,10 +52,26 @@ Page({
         })
       }
     })
+    wx.getStorage({
+      key: 'address',
+      success: function(res){
+        // success
+        that.setData({
+          address:res.data
+        })
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
     // 页面初始化 options为页面跳转所带来的参数
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', this.data.numbers[e.detail.value])
+    console.log('picker发送选择改变，携带值为', this.data.numbers[e.detail.value] + 1)
+    this.data.ticket.buy_number = parseInt(e.detail.value) + 1
     this.setData({
       index: e.detail.value,
       isSelect: true,

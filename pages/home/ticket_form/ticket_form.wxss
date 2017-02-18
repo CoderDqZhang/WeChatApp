@@ -115,6 +115,14 @@ page {
   letter-spacing: 0;
 }
 
+.detail_margin{
+  width: 500rpx;
+  margin-right: 12rpx;
+  text-align: right;
+  font-size: 30rpx;
+  color: #8a96a2;
+}
+
 .address_title{
   width: 200rpx;
   font-size: 30rpx;

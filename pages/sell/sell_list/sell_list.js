@@ -2,7 +2,8 @@
 var app = getApp()
 Page({
   data: {
-    sellList: []
+    sellList: [],
+    isHaveOrder: null
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -18,6 +19,23 @@ Page({
     });
   },
   showTap: function (event) {
+    var that = this
+    var user = wx.getStorageSync('userInfo')
+    if (user != "" && user.data.role == "default") {
+      wx.redirectTo({
+        url: '../login/login',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+      return
+    }
     var data = event.currentTarget.dataset.show
     data.cover = ""
     data.category.icon = ""
