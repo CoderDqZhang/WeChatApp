@@ -2,15 +2,15 @@
   "pages": [    
     "pages/home/home/home",
     "pages/home/mine/mine",
-    "pages/sell/sell_form/sell_form",
-    "pages/sell/sell_form_confirm/sell_form_confirm",
-    "pages/sell/sell_delivery/sell_delivery",
-    "pages/sell/sell_list/sell_list",
-    "pages/sell/sell_scen/sell_scen",
-    "pages/home/order_list/order",
-    "pages/sell/login/login",
-    "pages/home/order/order_detail",
     "pages/home/sell/sell",
+    "pages/home/order_list/order",
+    "pages/home/login/login",
+    "pages/home/sell_form/sell_form",
+    "pages/home/sell_form_confirm/sell_form_confirm",
+    "pages/home/sell_delivery/sell_delivery",
+    "pages/home/sell_list/sell_list",
+    "pages/home/sell_scen/sell_scen",
+    "pages/home/order/order_detail",
     "pages/template/show_template",
     "pages/home/category/category",
     "pages/home/scene/ticket_scen",
@@ -43,7 +43,7 @@
       {
         "selectedIconPath": "images/tabBar/sell_select.png",
         "iconPath": "images/tabBar/sell_normal.png",
-        "pagePath": "pages/sell/sell_list/sell_list",
+        "pagePath": "pages/home/sell_list/sell_list",
         "text": "卖票"
       },
       {

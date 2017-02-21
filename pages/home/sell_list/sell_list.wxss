@@ -1,5 +1,7 @@
 /* pages/sell/sell_list/sell_list.wxss */
-
+page {
+  background-color: #efeff4;
+}
 .ticketShowView {
   width: 100%;
   margin-top: 0px;

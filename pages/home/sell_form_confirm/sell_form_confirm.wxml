@@ -77,9 +77,9 @@
 <view class="service">
   <view class="serviceMuch">
     <text class="serviceTitle">结算总价：</text>
-    <text class="allMuch">00.00</text>
+    <text class="allMuch">{{sellMuch}}.00</text>
     <text class="serviceTitle"> 元</text>
-    <text class="serviceTitle"> 交易手续费：00.00 元</text>
+    <text class="serviceTitle">      交易手续费：{{poundage}} 元</text>
   </view>
   <view class="much">
     <view class="serviceInfo">第三方支付平台手续费1%

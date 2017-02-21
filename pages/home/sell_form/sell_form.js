@@ -16,16 +16,31 @@ Page({
       "row": ""
     },
     selectTicketPrice: "",
-    sellPriceTicket: 1,
+    sellPriceTicket: "",
     sellPrice: ""
   },
   onLoad: function (options) {
-    this.setData({
-      sessionShow: JSON.parse(options.sellShow)
-    })
-    console.log(this.data.sellTicket)
-    console.log(this.data.sessionShow)
-    this.requestData()
+    if (options.ticketEdit != null) {
+      var editData = JSON.parse(options.ticketEdit)
+      console.log(editData)
+      this.setData({
+        sessionShow: editData.sessionShow,
+        'sellForm.show_session_ticket': editData.ticket.id,
+        'sellForm.seat_type': editData.ticket.seat_type,
+        'sellForm.sell_type': editData.ticket.sell_type,
+        'sellForm.ticket_count': editData.ticket.ticket_count,
+        'sellForm.price': editData.ticket.price,
+        'sellForm.region': editData.ticket.region,
+        'sellForm.row': editData.ticket.row,
+      })
+    } else {
+      this.setData({
+        sessionShow: JSON.parse(options.sellShow)
+      })
+      console.log(this.data.sellTicket)
+      console.log(this.data.sessionShow)
+      this.requestData()
+    }
     // 页面初始化 options为页面跳转所带来的参数
   },
   genderData: function () {
@@ -74,6 +89,7 @@ Page({
   },
 
   buttonSbTap: function () {
+
     if (this.data.numberTicket != 1) {
       this.setData({
         numberTicket: this.data.numberTicket - 1
@@ -95,7 +111,8 @@ Page({
   sellPriceInput: function (data) {
     var sellPrice = parseInt(data.detail.value)
     this.setData({
-      sellPrice: sellPrice
+      sellPrice: sellPrice,
+      sellPriceTicket: sellPrice == "0" ? "" : sellPrice
     })
   },
   nextTap: function () {
@@ -103,7 +120,7 @@ Page({
     this.data.sellForm.ticket_count = this.data.numberTicket
     this.data.sellForm.price = this.data.sellPrice
     console.log(this.data.sellForm)
-    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket,"ticketSession":this.data.sessionShow}
+    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket, "ticketSession": this.data.sessionShow }
     wx.navigateTo({
       url: '../sell_form_confirm/sell_form_confirm?sell_confim=' + JSON.stringify(confirm),
       success: function (res) {
@@ -114,6 +131,18 @@ Page({
       },
       complete: function () {
         // complete
+      }
+    })
+  },
+  showTap: function () {
+    wx.showModal({
+      title: "请输入售卖价格",
+      showCancel: false,
+      confirmText: "知道了",
+      confirmColor: "#4bd4c5",
+      success: function (res) {
+        if (res.confirm) {
+        }
       }
     })
   },

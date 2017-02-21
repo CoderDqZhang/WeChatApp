@@ -118,5 +118,7 @@ App({
   func: {
     requestPost: http.requestPost,
     requestGet: http.requestGet,
+    requestPut: http.requestPut,
+    requestDelete: http.requestDelete
   }
 })

@@ -151,11 +151,93 @@ Page({
   data: {
     ticketSell: [],
     ticketSells: [],
-    ticketList: "dfss"
+    ticketList: "dfss",
+    currentTab: 0,
+    winWidth: 0,
+    winHeight: 0,
+    showText:"",
+    showText1: "快去首页挑选喜欢的演出活动吧",
+    isHaveOrder: false,
+    orders:{}
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    var that = this;
+    /** 
+     * 获取系统信息 
+     */
+    wx.getSystemInfo({
+
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+
+    });
     this.requestData()
+    this.requestOrderData(false)
+  },
+  /** 
+     * 滑动切换tab 
+     */
+  bindChange: function (e) {
+
+    var that = this;
+    that.setData({ currentTab: e.detail.current });
+
+  },
+  /** 
+   * 点击tab切换 
+   */
+  swichNav: function (e) {
+
+    var that = this;
+
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  },
+  requestOrderData: function (isNext) {
+    var that = this;
+    that.setData({
+      isHaveOrder: false
+    })
+    var tempTicket = that.data.orders
+    var url
+    if (isNext) {
+      url = url = "supplier/order/?page=" + tempTicket.next_page
+    } else {
+      url = 'supplier/order/'
+    }
+    app.func.requestGet(url, {}, function (res) {
+      console.log(res)
+      if (isNext) {
+        for (var j = 0; j < res.order_list.length; j++) {
+          tempTicket.order_list.push(res.order_list[j])
+        }
+        tempTicket.next_page = res.next_page
+        tempTicket.has_next = res.has_next
+      } else {
+        tempTicket = res
+        console.log(tempTicket)
+        wx.stopPullDownRefresh()
+
+      }
+      console.log(tempTicket.order_list.length)
+      var haveData =
+        that.setData({
+          isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
+          orders: tempTicket,
+          showText: "还没有订单",
+          showText1: "快去首页挑选喜欢的演出活动吧"
+        })
+    });
   },
   requestData: function () {
     var that = this
@@ -186,8 +268,10 @@ Page({
   sellTap: function (event) {
     var sellTicket = event.currentTarget.dataset.sellticket
     console.log(sellTicket)
+    var userInfo = wx.getStorageSync('userInfo')
+    sellTicket.lp_session_id = userInfo.data.lp_session_id
+
     if (sellTicket.session_list.length > 1) {
-      console.log("ddd")
       var imageUrl = sellTicket.cover
       var arr = imageUrl.split('?')
       sellTicket.cover = arr[0]
@@ -233,6 +317,7 @@ Page({
       })
     }
   },
+
   onReady: function () {
     // 页面渲染完成
   },

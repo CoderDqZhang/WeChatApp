@@ -14,7 +14,9 @@ Page({
     selectType: false,
     selectRegion: false,
     selectRow: false,
-    selectDelivery: false
+    selectDelivery: false,
+    sellMuch: 0.00,
+    poundage: 0.00
   },
   changeData: function (res) {
     if (res.express.isSelect) {
@@ -68,13 +70,16 @@ Page({
       tempSellRgion.push(this.data.sell_confim.sellTicket.region_choices[j][0])
     }
     var tempSellRow = []
+    tempSellRow.push("择优分配")
     for (var k = 0; k < this.data.sell_confim.sellTicket.row.length; k++) {
       tempSellRow.push(this.data.sell_confim.sellTicket.row[k])
     }
     this.setData({
       sellType: tempSellType,
       sellRegion: tempSellRgion,
-      sellRow: tempSellRow
+      sellRow: tempSellRow,
+      sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
+      poundage: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01
     })
   },
   seatTypeChange: function (e) {
@@ -100,11 +105,20 @@ Page({
     })
   },
   bindPickerRow: function (e) {
-    this.setData({
-      rowIndex: e.detail.value,
-      "sell_confim.sellForm.row": this.data.sellRow[e.detail.value] == "" ? "择优分配" : this.data.sellRow[e.detail.value],
-      selectRow: true
-    })
+    if (this.data.sell_confim.sellForm.region == "择优分配") {
+      this.setData({
+        rowIndex: "0",
+        "sell_confim.sellForm.row": "择优分配",
+        selectRow: true
+      })
+      return
+    } else {
+      this.setData({
+        rowIndex: e.detail.value,
+        "sell_confim.sellForm.row": this.data.sellRow[e.detail.value] == "" ? "择优分配" : this.data.sellRow[e.detail.value],
+        selectRow: true
+      })
+    }
   },
   deliveryTap: function (e) {
     wx.navigateTo({
@@ -122,6 +136,7 @@ Page({
   },
   nextTap: function () {
     console.log(this.data)
+    var that = this
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/session/" + this.data.sell_confim.ticketSession.session.id + "/ticket/"
     wx.showToast({
       title: '挂票中...',
@@ -152,7 +167,63 @@ Page({
       setTimeout(function () {
         wx.hideToast()
       }, 2000)
+      that.requestOneShowTicket()
     })
+  },
+  requestOneShowTicket: function () {
+    var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/ticket/"
+    app.func.requestGet(url, {}, function (res) {
+      console.log(res)
+      var sessionShow = res.show
+      sessionShow.session_list = res.session_list
+      var userInfo = wx.getStorageSync('userInfo')
+      sessionShow.lp_session_id = userInfo.data.lp_session_id
+      if (sessionShow.session_list.length > 1) {
+        var imageUrl = sessionShow.cover
+        var arr = imageUrl.split('?')
+        sessionShow.cover = arr[0]
+        sessionShow.cover_end = arr[1]
+        sessionShow.category.icon = ""
+        var show = JSON.stringify(sellTicket)
+
+        wx.navigateTo({
+          url: '../scene/ticket_scen?sellShow=' + show,
+          success: function (res) {
+            // success
+          },
+          fail: function () {
+            // fail
+          },
+          complete: function () {
+            // complete
+          }
+        })
+      } else {
+        var sessionShow = res.show
+        sessionShow.session = sessionShow.session_list[0]
+        var imageUrl = sessionShow.cover
+        var arr = imageUrl.split('?')
+        sellTicket.cover = arr[0]
+        sellTicket.cover_end = arr[1]
+        sessionShow.category.icon = ""
+        sessionShow.venue.venue_map = ""
+        console.log(sessionShow)
+        // that.data.sessionShow.session = session
+        var sellShow = JSON.stringify(sessionShow)
+        wx.navigateTo({
+          url: '../ticket_desc/ticket_desc?sellShow=' + sellShow,
+          success: function (res) {
+            // success
+          },
+          fail: function () {
+            // fail
+          },
+          complete: function () {
+            // complete
+          }
+        })
+      }
+    });
   },
   onReady: function () {
     // 页面渲染完成

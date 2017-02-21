@@ -4,122 +4,48 @@ page {
   background-color: #efeff4;
 }
 
-.ticket_desc {
+.swiper-tab {
   width: 100%;
-  margin-top: 0px;
-  flex-direction: row;
-  display: flex;
-}
-
-.show_cover {
-  width: 270rpx;
-  height: 100%;
-}
-
-.ticketPost {
-  margin-left: 30rpx;
-  margin-top: 30rpx;
-  margin-bottom: 20rpx;
-  width: 220rpx;
-  border-radius: 4rpx;
-  height: 300rpx;
-}
-
-.show_ticket_info {
-  margin-bottom: 30rpx;
-}
-
-.show_info {
-  margin-left: 20rpx;
-  margin-right: 30rpx;
-  flex-direction: column;
-  display: flex;
-  justify-content: space-between;
-}
-
-.show_title {
-  text-overflow: -o-ellipsis-lastline;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  color: #384249;
-  font-size: 32rpx;
-  margin-top: 30rpx;
-  line-height: 44rpx;
-}
-
-.show_session {
-  color: #a2abb5;
-  font-size: 24rpx;
-  margin-top: 10rpx;
-  line-height: 36rpx;
-  text-overflow: -o-ellipsis-lastline;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.show_detail {
-  color: #a2abb5;
-  font-size: 24rpx;
-  line-height: 36rpx;
-  text-overflow: -o-ellipsis-lastline;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.ticketShowView {
+  border-bottom: 1rpx solid #E9EBF2;
+  text-align: center;
+  line-height: 80rpx;
   background-color: white;
 }
 
-.ticketPrice {
-  flex-direction: row;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  width: 100%;
-  min-height: 120rpx;
-  margin-bottom: 30rpx;
-}
-
-.price {
-  margin-left: 30rpx;
-  width: 50%;
-  align-items: center;
-}
-
-.ticketBtn {
-  margin-right: 30rpx;
-}
-
-.ticketinfo {
-  width: 100%;
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-}
-
-.infoPrice {
-  font-size: 24rpx;
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 33.33%;
   color: #384249;
+
 }
 
-.ticketMinPrice {
-  font-size: 36rpx;
+.swiper-container{
+  position: fixed;
+}
+
+.on {
   color: #4bd4c5;
-  margin-left: 10rpx;
+  border-bottom: 2rpx solid #4bd4c5;
 }
 
-.ticket_sevice {
-  margin-left: 10rpx;
-  font-size: 24rpx;
-  color: #384249;
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
+  text-align: center;
+}
+
+.testList{
+  align-items: flex-start;
+  text-align: left;
+  background-color: rebeccapurple;
+}
+.dfs{
+  margin-left: 30rpx;
+  background-color: seagreen;
 }

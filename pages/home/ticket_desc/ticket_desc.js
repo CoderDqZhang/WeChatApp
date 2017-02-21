@@ -21,14 +21,17 @@ Page({
         sharesubletitle: '',
         shareData: null,
         shareName: ["有票", "有票，需要的联系", "有票，欢迎各位老板", "有票，欢迎打包", "有票，便宜出", "有票便宜"],
-        ticketPrices: []
+        ticketPrices: [],
+        ticketChange: []
     },
     onLoad: function (opt) {
         if (opt.sellShow != null) {
             console.log(opt.sellShow)
+            var userInfo = wx.getStorageInfoSync('userInfo')
             this.setData({
                 sessionShow: JSON.parse(opt.sellShow),
-                shareData: JSON.parse(opt.sellShow)
+
+                shareData: JSON.parse(opt.sellShow),
             })
             wx.setNavigationBarTitle({
                 title: this.data.sessionShow.session.name,
@@ -45,8 +48,11 @@ Page({
     requestData: function (show) {
         var that = this;
         console.log(that.data.shareName[Math.floor(Math.random() * (6 + 1))])
+        var userInfo = wx.getStorageInfoSync('userInfo')
+
         that.setData({
             shareData: JSON.parse(show),
+            'shareData.lp_session': "userTicket",
             sessionShow: JSON.parse(show)
         })
 
@@ -135,21 +141,155 @@ Page({
     },
 
     ticketTap: function (event) {
-        var that = this;
         var ticket = event.currentTarget.dataset.ticket
-        var ticket_number = that.data.ticketNumber
-        if (ticket_number < ticket.remain_count && ticket.sell_type == 2) {
-            wx.showModal({
-                title: "必须打包" + ticket.remain_count + "张购买",
-                success: function (res) {
-                    if (res.confirm) {
-                        that.pushConfim(ticket.remain_count, ticket)
-                    }
+
+        var that = this;
+        var userInfo = wx.getStorageSync('userInfo')
+        if (that.data.shareData.lp_session_id = userInfo.data.lp_session_id) {
+            var ticketList = that.data.showDesc.ticket_list
+            var tempTicket
+            for (var j = 0; j < ticketList.length; j++) {
+
+                if (ticketList[j].id = ticket.id) {
+                    that.connectService(ticketList[j])
+                    break;
                 }
-            })
+            }
+
         } else {
-            that.pushConfim(ticket_number < ticket.remain_count ? ticket_number : ticket.remain_count, ticket)
+            var ticket_number = that.data.ticketNumber
+            if (ticket_number < ticket.remain_count && ticket.sell_type == 2) {
+                wx.showModal({
+                    title: "必须打包" + ticket.remain_count + "张购买",
+                    success: function (res) {
+                        if (res.confirm) {
+                            that.pushConfim(ticket.remain_count, ticket)
+                        }
+                    }
+                })
+            } else {
+                that.pushConfim(ticket_number < ticket.remain_count ? ticket_number : ticket.remain_count, ticket)
+            }
         }
+
+    },
+    connectService: function (ticket) {
+        var tempList = []
+        if (ticket.status != 2) {
+            if (ticket.status == 0) {
+                tempList.push("删除")
+            }
+            tempList.push(ticket.status == 1 ? "下架" : "上架")
+        }
+        tempList.push("编辑")
+        this.setData({
+            ticketChange: tempList
+        })
+        var that = this
+        wx.showActionSheet({
+            itemList: that.data.ticketChange,
+            success: function (res) {
+                that.changeTicketStatus(that.data.ticketChange[res.tapIndex], ticket)
+                console.log(res.tapIndex)
+            },
+            fail: function (res) {
+                console.log(res.errMsg)
+            }
+        })
+    },
+    changeTicketStatus: function (data, ticket) {
+        if (data == "编辑") {
+            this.requestEditTicket(ticket)
+        } else if (data == "上架") {
+            this.requestChangeTicket(ticket)
+        } else if (data == "下架") {
+            this.requestChangeTicket(ticket)
+        } else if (data == "删除") {
+            this.requestDeleteTicket(ticket)
+        }
+    },
+    requestChangeTicket: function (ticket) {
+        var that = this
+        let url = "supplier/ticket/" + ticket.id + "/"
+        app.func.requestPut(url, {}, function (res) {
+            console.log(res)
+            var ticketList = that.data.showDesc.ticket_list
+            for (var j = 0; j < ticketList.length; j++) {
+
+                if (ticketList[j].id == ticket.id) {
+                    var ticket_list = ticketList[j]
+                    ticketList[j].status = ticketList[j].status == 1 ? 0 : 1;
+                    ticketList[j].status_desc = ticket.status == 1 ? "已上线" : "已下线"
+                    var tempTicket = ticketList
+                    that.setData({
+                        'that.data.showDesc.ticket_list': tempTicket
+                    })
+                    break;
+                }
+            }
+            if (res.errors != null) {
+                wx.showModal({
+                    title: res.errors[0].error[0].toString(),
+                    showCancel: false,
+                    confirmText: "知道了",
+                    confirmColor: "#4bd4c5",
+                    success: function (res) {
+                        if (res.confirm) {
+                        }
+                    }
+                })
+                return
+            }
+        });
+    },
+    requestDeleteTicket: function (ticket) {
+        var that = this
+        let url = "supplier/ticket/" + ticket.id + "/"
+        app.func.requestDelete(url, {}, function (res) {
+            var ticketList = that.data.showDesc.ticket_list
+            var tempTicket = []
+            for (var j = 0; j < ticketList.length; j++) {
+
+                if (ticketList[j].id != ticket.id) {
+                    tempTicket.push(ticketList[j])
+                }
+            }
+             var ticketList = that.data.showDesc.ticket_list
+            that.setData({
+                        'that.data.showDesc.ticket_list': tempTicket
+                    })
+                    console.log(that.data.showDesc.ticket_list)
+            if (res.errors != null) {
+                wx.showModal({
+                    title: res.errors[0].error[0].toString(),
+                    showCancel: false,
+                    confirmText: "知道了",
+                    confirmColor: "#4bd4c5",
+                    success: function (res) {
+                        if (res.confirm) {
+                        }
+                    }
+                })
+                return
+            }
+        });
+    },
+    requestEditTicket: function (ticket) {
+        var that = this
+        console.log(that.data)
+        var ticketEdit = {"sessionShow":that.data.sessionShow,"ticket":ticket}
+        wx.navigateTo({
+          url: '../sell_form/sell_form?ticketEdit=' + JSON.stringify(ticketEdit),
+          success: function(res){
+            // success
+          },
+          fail: function() {
+            // fail
+          },
+          complete: function() {
+            // complete
+          }
+        })
     },
     pushConfim: function (ticket_number, ticket) {
         var that = this;

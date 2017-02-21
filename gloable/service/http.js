@@ -1,6 +1,84 @@
 // var rootDocment = 'https://api.niceticket.cc/';//你的域名  
 var rootDocment = 'https://api.liangpiao.me/'
 
+function requestPut(url, data, cb) {
+  var lp_session_id;
+  console.log("请求post")
+  wx.getStorage({
+    key: 'userInfo',
+    success: function (res) {
+      lp_session_id = res.data.data.lp_session_id
+      wx.request({
+        url: rootDocment + url,
+        data: data,
+        method: 'put',
+        header: {
+          'content-type': 'application/json',
+          'Authorization': res.data.data.lp_session_id
+        },
+        success: function (res) {
+          return typeof cb == "function" && cb(res.data)
+        },
+        fail: function () {
+          return typeof cb == "function" && cb(false)
+        },
+      })
+    },
+    fail: function () {
+      if (res.message != null) {
+        wx.showModal({
+          title: "请允许获取用户信息",
+          confirmColor: "#4bd4c5",
+          confirmText: "知道了",
+          success: function (res) {
+            console.log('用户点击确定')
+          }
+        })
+      }
+      return typeof cb == "function" && cb(false)
+    }
+  })
+}
+
+function requestDelete(url, data, cb) {
+  var lp_session_id;
+  console.log("请求delete")
+  wx.getStorage({
+    key: 'userInfo',
+    success: function (res) {
+      lp_session_id = res.data.data.lp_session_id
+      wx.request({
+        url: rootDocment + url,
+        data: data,
+        method: 'delete',
+        header: {
+          'content-type': 'application/json',
+          'Authorization': res.data.data.lp_session_id
+        },
+        success: function (res) {
+          return typeof cb == "function" && cb(res.data)
+        },
+        fail: function () {
+          return typeof cb == "function" && cb(false)
+        },
+      })
+    },
+    fail: function () {
+      if (res.message != null) {
+        wx.showModal({
+          title: "请允许获取用户信息",
+          confirmColor: "#4bd4c5",
+          confirmText: "知道了",
+          success: function (res) {
+            console.log('用户点击确定')
+          }
+        })
+      }
+      return typeof cb == "function" && cb(false)
+    }
+  })
+}
+
 function requestPost(url, data, cb) {
   var lp_session_id;
   console.log("请求post")
@@ -88,3 +166,5 @@ function requestGet(url, data, cb) {
 
 module.exports.requestPost = requestPost
 module.exports.requestGet = requestGet
+module.exports.requestDelete = requestDelete
+module.exports.requestPut = requestPut
