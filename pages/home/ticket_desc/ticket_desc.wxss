@@ -4,10 +4,6 @@ page {
   background-color: #efeff4;
 }
 
-.ticketSession {
-  background-color: white;
-}
-
 .ticketNumber {
   background-color: white;
 }
@@ -40,7 +36,7 @@ page {
   margin-top: -24rpx;
 }
 
-.showInfo{
+.showInfo {
   padding-top: 40rpx;
   padding-bottom: 46rpx;
   background-color: white;
@@ -67,13 +63,15 @@ page {
   font-size: 26rpx;
   margin-left: 30rpx;
 }
-.show_venue{
+
+.show_venue {
   color: #a2abb5;
   line-height: 30rpx;
   font-size: 26rpx;
   margin-left: 30rpx;
   margin-top: 5rpx;
 }
+
 .show_detail {
   color: #a2abb5;
   line-height: 34rpx;
@@ -144,22 +142,6 @@ page {
   justify-content: center;
   height: 68rpx;
   align-items: center;
-}
-
-.subtract {
-  padding-top: 13rpx;
-  padding-bottom: 13rpx;
-  text-align: center;
-  width: 80rpx;
-  border-right: 1rpx solid #384249;
-}
-
-.add {
-  padding-top: 13rpx;
-  padding-bottom: 13rpx;
-  text-align: center;
-  width: 80rpx;
-  border-left: 1rpx solid #384249;
 }
 
 .number_text {
@@ -266,8 +248,29 @@ page {
   width: 1000rpx;
 }
 
+.ticket_normal_price_template_0{
+  text-align: left;
+  color: #384249;
+  font-size: 26rpx;
+  width: 1000rpx;
+}
+
 .ticket_now_price_template {
-  color: #4bd4c5;
+  color: #bbc1cb;
+  margin-bottom: 8rpx;
+  height: 18rpx;
+  line-height: 30rpx;
+  font-size: 26rpx;
+}
+
+.ticket_row_type_0{
+  color: #bbc1cb;
+  font-size: 26rpx;
+  line-height: 30rpx;
+}
+
+.ticket_now_price_template_0{
+  color: #bbc1cb;
   margin-bottom: 8rpx;
   height: 18rpx;
   line-height: 30rpx;

@@ -2,7 +2,17 @@
 var app = getApp()
 Page({
   data: {
-    tempText: "请选择",
+    temp_sell_type: "请选择",
+    temp_region_type: "请选择",
+    temp_row_type: "请选择",
+    temp_delivery_type: "请选择",
+    isCheck: false,
+    deliveryStr: "",
+    address: {
+      'isExpress': false,
+      'isVisite': false,
+      'isSite': false
+    },
     sellTicket: {},
     sell_confim: null,
     sellType: "",
@@ -16,14 +26,20 @@ Page({
     selectRow: false,
     selectDelivery: false,
     sellMuch: 0.00,
-    poundage: 0.00
+    poundage: 0.00,
+
   },
   changeData: function (res) {
+    this.data.sellDelivery = ""
     if (res.express.isSelect) {
       this.setData({
         sellDelivery: this.data.sellDelivery + "快递 ",
         delivery_type: this.data.delivery_type + "1,",
         selectDelivery: true
+      })
+    }else {
+      this.setData({
+        'address.isExpress': false
       })
     }
     if (res.visite.isSelect) {
@@ -36,6 +52,10 @@ Page({
         selectDelivery: true
 
       })
+    } else {
+      this.setData({
+        'address.isVisite': false
+      })
     }
     if (res.site.isSelect) {
       this.setData({
@@ -45,6 +65,10 @@ Page({
         "sell_confim.sellForm.self_get_ticket_address": res.site.location,
         "sell_confim.sellForm.self_get_ticket_phone": res.site.phone,
         selectDelivery: true
+      })
+    }else {
+      this.setData({
+        'address.isSite': false
       })
     }
     this.setData({
@@ -81,6 +105,61 @@ Page({
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
       poundage: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01
     })
+    if (this.data.sell_confim.sellForm.sell_type != "") {
+      this.setData({
+        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "单卖" : "必须一起卖",
+      })
+    }
+    if (this.data.sell_confim.sellForm.region != "") {
+      this.setData({
+        temp_region_type: this.data.sell_confim.sellForm.region.split(' ')[0],
+      })
+    }
+    if (this.data.sell_confim.sellForm.row != "") {
+      this.setData({
+        temp_row_type: this.data.sell_confim.sellForm.row,
+      })
+    }
+    if (this.data.sell_confim.sellForm.seat_type != "") {
+      this.setData({
+        isCheck: this.data.sell_confim.sellForm.seat_type == 1 ? true : false
+      })
+    }
+    if (this.data.sell_confim.sellForm.delivery_type != "") {
+      var delivery = ""
+      var arr = this.data.sell_confim.sellForm.delivery_type.split(',')
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == "1") {
+          delivery = delivery + "快递 "
+          this.setData({
+            'address.isExpress': true
+          })
+        }
+        if (arr[i] == "2") {
+          delivery = delivery + "现场取票 ",
+            this.setData({
+              'address.isVisite': true
+            })
+        }
+        if (arr[i] == "3") {
+          delivery = delivery + "上门自取 ",
+            this.setData({
+              'address.isSite': true
+            })
+        }
+      }
+      var sellForm = this.data.sell_confim.sellForm
+      this.setData({
+        deliveryStr: delivery,
+        'address.scene_get_ticket_address': sellForm.scene_get_ticket_address,
+        'address.scene_get_ticket_date': sellForm.scene_get_ticket_date,
+        'address.scene_get_ticket_phone': sellForm.scene_get_ticket_phone,
+        'address.self_get_ticket_address': sellForm.self_get_ticket_address,
+        'address.self_get_ticket_date': sellForm.self_get_ticket_date,
+        'address.self_get_ticket_phone': sellForm.self_get_ticket_phone,
+        'address.scene_get_ticket_address': sellForm.scene_get_ticket_address
+      })
+    }
   },
   seatTypeChange: function (e) {
     this.setData({
@@ -122,7 +201,7 @@ Page({
   },
   deliveryTap: function (e) {
     wx.navigateTo({
-      url: '../sell_delivery/sell_delivery',
+      url: '../sell_delivery/sell_delivery?address=' + JSON.stringify(this.data.address),
       success: function (res) {
         // success
       },

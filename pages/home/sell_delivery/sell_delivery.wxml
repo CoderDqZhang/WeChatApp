@@ -7,7 +7,7 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="expressChange" />
+    <switch bindchange="expressChange" checked="{{isExpressage}}"/>
   </view>
 </view>
 <view class="cell_title_info_image">
@@ -16,16 +16,16 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="siteChange" />
+    <switch bindchange="siteChange" checked="{{isSite}}"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
 <view wx:if="{{isSite}}"  class="inputClass">
-    <input class="inputText" bindinput="location" placeholder="输入取票地点" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.site.location}}" bindinput="location" placeholder="输入取票地点" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-    <input class="inputText" bindinput="time" placeholder="输入取票时间" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.site.time}}" bindinput="time" placeholder="输入取票时间" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-    <input class="inputText" bindinput="phone" placeholder="联系电话" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.site.phone}}" bindinput="phone" placeholder="联系电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
 </view>
 <view class="cell_title_info_image">
@@ -34,13 +34,13 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="visitChange" />
+    <switch bindchange="visitChange" checked="{{isVisite}}"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
 <view wx:if="{{isVisite}}" class="inputClass">
-    <input class="inputText" bindinput="visitLocation" placeholder="输入取票地点" placeholder="输入取票地点" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
-    <input class="inputText" bindinput="visitTime" placeholder="输入取票时间" placeholder="输入取票时间" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
-    <input class="inputText" bindinput="visitPhone" placeholder="联系电话" placeholder="输入取票电话" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.visite.location}}" bindinput="visitLocation" placeholder="输入取票地点" placeholder="输入取票地点" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.visite.time}}" bindinput="visitTime" placeholder="输入取票时间" placeholder="输入取票时间" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
+    <input class="inputText" value="{{deliveryForm.visite.phone}}" bindinput="visitPhone" placeholder="联系电话" placeholder="输入取票电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
 </view>
 <view class="next" bindtap="nextTap">保存</view>

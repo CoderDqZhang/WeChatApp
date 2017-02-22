@@ -38,6 +38,8 @@ page {
 .inputText{
     margin-left: 30rpx;
     height: 100rpx;
+    color: #384249;
+    font-size: 30rpx;
 }
 
 .swithClass{

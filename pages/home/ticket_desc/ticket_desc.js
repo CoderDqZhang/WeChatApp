@@ -52,7 +52,7 @@ Page({
 
         that.setData({
             shareData: JSON.parse(show),
-            'shareData.lp_session': "userTicket",
+            'shareData.lp_session_id': "userTicket",
             sessionShow: JSON.parse(show)
         })
 
@@ -145,16 +145,17 @@ Page({
 
         var that = this;
         var userInfo = wx.getStorageSync('userInfo')
-        if (that.data.shareData.lp_session_id = userInfo.data.lp_session_id) {
+        if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id) {
             var ticketList = that.data.showDesc.ticket_list
             var tempTicket
-            for (var j = 0; j < ticketList.length; j++) {
+            that.connectService(ticket)
+            // for (var j = 0; j < ticketList.length; j++) {
 
-                if (ticketList[j].id = ticket.id) {
-                    that.connectService(ticketList[j])
-                    break;
-                }
-            }
+            //     if (ticketList[j].id = ticket.id) {
+            //         that.connectService(ticket)
+            //         break;
+            //     }
+            // }
 
         } else {
             var ticket_number = that.data.ticketNumber

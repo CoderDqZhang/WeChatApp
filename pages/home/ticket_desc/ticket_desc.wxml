@@ -22,13 +22,16 @@
 </template>-->
 <template name="ticketInfo">
   <view class="ticket_info">
-    <view class="ticket_normal_price_template">{{original_ticket.name}}</view>
+    <view wx:if="{{status == 0}}" class="ticket_normal_price_template">{{original_ticket.name}}</view>
+    <view wx:else class="ticket_normal_price_template_0">{{original_ticket.name}}</view>
     <view class="ticket_row_template">
-      <view class="ticket_row_type">{{region}}</view>
+      <view wx:if="{{status == 0}}" class="ticket_row_type_0">{{region}}</view>
+      <view wx:else class="ticket_row_type">{{region}}</view>
       <view class="ticket_deverliy_type">{{deliveType}}</view>
     </view>
     <view class="ticket_price_template">
-      <view class="ticket_now_price_template">{{price}}元</view>
+      <view wx:if="{{status == 0}}" class="ticket_now_price_template_0">{{price}}元</view>
+      <view wx:else class="ticket_now_price_template">{{price}}元</view>
       <view class="ticket_status_number" wx:if="{{20 < remain_count}}">还剩{{remain_count}}张</view>
       <view class="ticket_status_number" wx:else>最后{{remain_count}}张</view>
     </view>
@@ -48,6 +51,7 @@
     <view type="default" bindtap="btn_add" class="add">+</view>
   </view>
 </view>-->
+
 <!--<view class="showInfo">
   <view class="show_title">{{showDesc.show.title}}</view>
   <view class="show_session">{{showDesc.session.name}}</view>

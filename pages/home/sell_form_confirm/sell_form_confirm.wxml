@@ -9,7 +9,7 @@
       </view>
     </picker>
     <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="address_detail" wx:else>
-      <view class="detail">{{tempText}}
+      <view class="detail">{{temp_sell_type}}
       </view>
     </picker>
   </view>
@@ -27,7 +27,7 @@
       </view>
     </picker>
     <picker bindchange="bindPickerRegion" value="{{index}}" range="{{sellRegion}}" class="address_detail" wx:else>
-      <view class="detail">{{tempText}}
+      <view class="detail">{{temp_region_type}}
       </view>
     </picker>
   </view>
@@ -45,7 +45,7 @@
       </view>
     </picker>
     <picker bindchange="bindPickerRow" value="{{index}}" range="{{sellRow}}" class="address_detail" wx:else>
-      <view class="detail">{{tempText}}
+      <view class="detail">{{temp_row_type}}
       </view>
     </picker>
   </view>
@@ -57,7 +57,7 @@
   <view class="title">连坐
   </view>
   <view>
-    <switch bindchange="seatTypeChange" />
+    <switch bindchange="seatTypeChange" checked="{{isCheck}}" />
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
@@ -67,7 +67,7 @@
   <view class="section" style="width:{{windowWidth}}px;">
     <view class="detail" wx:if="{{selectDelivery}}">{{sellDelivery}}
     </view>
-    <view class="detail" wx:else>{{tempText}}
+    <view class="detail" wx:else>{{deliveryStr}}
     </view>
   </view>
   <view class="detail_image">

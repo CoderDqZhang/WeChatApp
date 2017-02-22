@@ -34,10 +34,40 @@ Page({
       "express": {
         "isSelect": false
       }
-    }
+    },
+    address: {}
   },
 
   onLoad: function (options) {
+    this.setData({
+      address: JSON.parse(options.address)
+    })
+    if (this.data.address.isExpress) {
+      this.setData({
+        isExpressage: true,
+        'deliveryForm.express.isSelect': true
+      })
+    }
+    if (this.data.address.isVisite) {
+      this.setData({
+        isVisite: true,
+        'deliveryForm.visite.isSelect': true,
+        'deliveryForm.visite.location': this.data.address.scene_get_ticket_address,
+        'deliveryForm.visite.time': this.data.address.scene_get_ticket_date,
+        'deliveryForm.visite.phone': this.data.address.scene_get_ticket_phone
+      })
+    }
+    if (this.data.address.isSite) {
+      this.setData({
+        isSite: true,
+        'deliveryForm.site.isSelect': true,
+        'deliveryForm.visite.isSelect': true,
+        'deliveryForm.site.location': this.data.address.self_get_ticket_address,
+        'deliveryForm.site.time': this.data.address.self_get_ticket_date,
+        'deliveryForm.site.phone': this.data.address.self_get_ticket_phone
+      })
+    }
+    console.log(this.data.address)
     // 页面初始化 options为页面跳转所带来的参数
   },
   expressChange: function (e) {
@@ -105,13 +135,13 @@ Page({
     }
     wx.navigateBack({
       delta: 1, // 回退前 delta(默认为1) 页面
-      success: function(res){
+      success: function (res) {
         // success
       },
-      fail: function() {
+      fail: function () {
         // fail
       },
-      complete: function() {
+      complete: function () {
         // complete
       }
     })

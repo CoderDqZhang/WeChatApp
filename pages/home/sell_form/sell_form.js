@@ -32,25 +32,50 @@ Page({
         'sellForm.price': editData.ticket.price,
         'sellForm.region': editData.ticket.region,
         'sellForm.row': editData.ticket.row,
+        "sellForm.scene_get_ticket_date": editData.ticket.scene_get_ticket_date,
+        "sellForm.scene_get_ticket_address": editData.ticket.scene_get_ticket_address,
+        "sellForm.scene_get_ticket_phone": editData.ticket.scene_get_ticket_phone,
+        "sellForm.self_get_ticket_date": editData.ticket.self_get_ticket_date,
+        "sellForm.self_get_ticket_address": editData.ticket.self_get_ticket_address,
+        "sellForm.self_get_ticket_phone": editData.ticket.self_get_ticket_phone,
+        "sellForm.delivery_type": editData.ticket.delivery_type,
+        "sellForm.seat_type": editData.ticket.seat_type,
+        "sellForm.sell_type": editData.ticket.sell_type,
+        numberTicket: editData.ticket.ticket_count,
+        sellPrice: editData.ticket.price,
+        sellPriceTicket: editData.ticket.price,
+        selectTicketPrice: editData.ticket.original_ticket.id
       })
+      this.requestData()
+
     } else {
       this.setData({
         sessionShow: JSON.parse(options.sellShow)
       })
+      this.requestData()
+
       console.log(this.data.sellTicket)
       console.log(this.data.sessionShow)
-      this.requestData()
     }
     // 页面初始化 options为页面跳转所带来的参数
   },
   genderData: function () {
     var tempChoices = []
+    var that = this
     for (var i = 0; i < this.data.sellTicket.ticket_choices.length; i++) {
       var isSelect = false
-      if (i == 0) {
-        isSelect = true
-        this.data.selectTicketPrice = this.data.sellTicket.ticket_choices[i][0]
+      if (that.data.selectTicketPrice != "") {
+        if (that.data.selectTicketPrice == this.data.sellTicket.ticket_choices[i][0]) {
+          isSelect = true
+          this.data.selectTicketPrice = this.data.sellTicket.ticket_choices[i][0]
+        }
+      } else {
+        if (i == 0) {
+          isSelect = true
+          this.data.selectTicketPrice = this.data.sellTicket.ticket_choices[i][0]
+        }
       }
+
       tempChoices.push({ "id": this.data.sellTicket.ticket_choices[i][1], "name": this.data.sellTicket.ticket_choices[i][0], "price": "100", "isSelect": isSelect })
     }
     this.setData({
