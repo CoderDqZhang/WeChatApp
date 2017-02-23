@@ -245,18 +245,25 @@ page {
 
 .ticket_price_template {
   text-align: right;
+  color: #384249;
+  width: 1000rpx;
+}
+
+.ticket_price_template_0 {
+  text-align: right;
+  color: #bbc1cb;
   width: 1000rpx;
 }
 
 .ticket_normal_price_template_0{
   text-align: left;
-  color: #384249;
+  color: #bbc1cb;
   font-size: 26rpx;
   width: 1000rpx;
 }
 
 .ticket_now_price_template {
-  color: #bbc1cb;
+  color: #384249;
   margin-bottom: 8rpx;
   height: 18rpx;
   line-height: 30rpx;

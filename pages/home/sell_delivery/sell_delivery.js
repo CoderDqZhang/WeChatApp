@@ -126,6 +126,34 @@ Page({
   },
   nextTap: function () {
     console.log(this.data)
+    if (this.data.deliveryForm.visite.isSelect) {
+      if (this.data.deliveryForm.visite.time == "") {
+        this.showTosk("请输入时间")
+        return
+      }
+      if (this.data.deliveryForm.visite.phone == "") {
+        this.showTosk("请输入电话")
+        return
+      }
+      if (this.data.deliveryForm.visite.location == "") {
+        this.showTosk("请输入地址")
+        return
+      }
+    }
+    if (this.data.deliveryForm.site.isSelect) {
+      if (this.data.deliveryForm.site.time == "") {
+        this.showTosk("请输入时间")
+        return
+      }
+      if (this.data.deliveryForm.site.phone == "") {
+        this.showTosk("请输入电话")
+        return
+      }
+      if (this.data.deliveryForm.site.location == "") {
+        this.showTosk("请输入地址")
+        return
+      }
+    }
     var pages = getCurrentPages();
     if (pages.length > 1) {
       //上一个页面实例对象
@@ -145,34 +173,29 @@ Page({
         // complete
       }
     })
-    // try {
-    //   wx.setStorageSync("快递", ures)
-    //   wx.navigateBack({
-    //     delta: 1
-    //   })
-    //   wx.showToast({
-    //     title: '保存成功',
-    //     icon: 'success',
-    //     duration: 10000
-    //   })
-
-    //   setTimeout(function () {
-    //     wx.hideToast()
-    //   }, 2000)
-    // } catch (e) {
-    //   console.log(e)
-    // }
   },
-  onReady: function () {
-    // 页面渲染完成
+  showTosk: function (str) {
+    wx.showModal({
+      title: str,
+      showCancel: false,
+      confirmText: "知道了",
+      confirmColor: "#4bd4c5",
+      success: function (res) {
+        if (res.confirm) {
+        }
+      }
+    })
   },
-  onShow: function () {
-    // 页面显示
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
-  }
+onReady: function () {
+  // 页面渲染完成
+},
+onShow: function () {
+  // 页面显示
+},
+onHide: function () {
+  // 页面隐藏
+},
+onUnload: function () {
+  // 页面关闭
+}
 })

@@ -29,7 +29,6 @@ Page({
             })
             return
         }
-
     },
     requestData: function (isNext) {
         var that = this;

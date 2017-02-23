@@ -22,7 +22,8 @@ Page({
         shareData: null,
         shareName: ["有票", "有票，需要的联系", "有票，欢迎各位老板", "有票，欢迎打包", "有票，便宜出", "有票便宜"],
         ticketPrices: [],
-        ticketChange: []
+        ticketChange: [],
+        ticket_list: []
     },
     onLoad: function (opt) {
         if (opt.sellShow != null) {
@@ -89,15 +90,15 @@ Page({
             }
             for (var j = 0; j < arr.length; j++) {
                 if (arr[j] == "1") {
-                    deliveType = deliveType + "快递"
+                    deliveType = deliveType + "快递 "
                 } else if (arr[j] == "2") {
-                    deliveType = deliveType + "上门自取"
+                    deliveType = deliveType + "上门自取 "
                 } else if (arr[j] == "3") {
-                    deliveType = deliveType + "自取"
+                    deliveType = deliveType + "自取 "
                 }
             }
             if (tickets[i].seat_type == 1) {
-                deliveType = deliveType + "连坐"
+                deliveType = deliveType + "连坐 "
             }
             tickets[i].deliveType = deliveType
             console.log(tickets[i].deliveType)
@@ -135,8 +136,8 @@ Page({
         that.setData({
             showDesc: that.data.sessionShow.session,
             shareTitle: that.data.sessionShow.title,
-            sharesubletitle: subtitle
-
+            sharesubletitle: subtitle,
+            ticket_list: tickets
         })
     },
 
@@ -223,7 +224,8 @@ Page({
                     ticketList[j].status_desc = ticket.status == 1 ? "已上线" : "已下线"
                     var tempTicket = ticketList
                     that.setData({
-                        'that.data.showDesc.ticket_list': tempTicket
+                        'that.data.showDesc.ticket_list': tempTicket,
+                        ticket_list: tempTicket
                     })
                     break;
                 }
@@ -255,11 +257,12 @@ Page({
                     tempTicket.push(ticketList[j])
                 }
             }
-             var ticketList = that.data.showDesc.ticket_list
+            var ticketList = that.data.showDesc.ticket_list
             that.setData({
-                        'that.data.showDesc.ticket_list': tempTicket
-                    })
-                    console.log(that.data.showDesc.ticket_list)
+                'that.data.showDesc.ticket_list': tempTicket,
+                 ticket_list: tempTicket
+            })
+            console.log(that.data.showDesc.ticket_list)
             if (res.errors != null) {
                 wx.showModal({
                     title: res.errors[0].error[0].toString(),
@@ -278,18 +281,18 @@ Page({
     requestEditTicket: function (ticket) {
         var that = this
         console.log(that.data)
-        var ticketEdit = {"sessionShow":that.data.sessionShow,"ticket":ticket}
+        var ticketEdit = { "sessionShow": that.data.sessionShow, "ticket": ticket }
         wx.navigateTo({
-          url: '../sell_form/sell_form?ticketEdit=' + JSON.stringify(ticketEdit),
-          success: function(res){
-            // success
-          },
-          fail: function() {
-            // fail
-          },
-          complete: function() {
-            // complete
-          }
+            url: '../sell_form/sell_form?ticketEdit=' + JSON.stringify(ticketEdit),
+            success: function (res) {
+                // success
+            },
+            fail: function () {
+                // fail
+            },
+            complete: function () {
+                // complete
+            }
         })
     },
     pushConfim: function (ticket_number, ticket) {

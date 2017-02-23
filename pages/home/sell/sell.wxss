@@ -10,6 +10,7 @@ page {
   text-align: center;
   line-height: 80rpx;
   background-color: white;
+  top: 0rpx;
 }
 
 .swiper-tab-list {
@@ -38,14 +39,4 @@ page {
 
 .swiper-box view {
   text-align: center;
-}
-
-.testList{
-  align-items: flex-start;
-  text-align: left;
-  background-color: rebeccapurple;
-}
-.dfs{
-  margin-left: 30rpx;
-  background-color: seagreen;
 }

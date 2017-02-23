@@ -2,7 +2,7 @@
 var app = getApp()
 Page({
   data: {
-    temp_sell_type: "请选择",
+    temp_sell_type: "单卖",
     temp_region_type: "请选择",
     temp_row_type: "请选择",
     temp_delivery_type: "请选择",
@@ -37,7 +37,7 @@ Page({
         delivery_type: this.data.delivery_type + "1,",
         selectDelivery: true
       })
-    }else {
+    } else {
       this.setData({
         'address.isExpress': false
       })
@@ -66,7 +66,7 @@ Page({
         "sell_confim.sellForm.self_get_ticket_phone": res.site.phone,
         selectDelivery: true
       })
-    }else {
+    } else {
       this.setData({
         'address.isSite': false
       })
@@ -109,21 +109,38 @@ Page({
       this.setData({
         temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "单卖" : "必须一起卖",
       })
+    } else {
+      this.data.sell_confim.sellForm.sell_type = 1
+      this.setData({
+        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "单卖" : "必须一起卖",
+      })
     }
     if (this.data.sell_confim.sellForm.region != "") {
       this.setData({
         temp_region_type: this.data.sell_confim.sellForm.region.split(' ')[0],
+      })
+    } else {
+      this.data.sell_confim.sellForm.region = "择优分配"
+      this.setData({
+        temp_region_type: "择优分配",
       })
     }
     if (this.data.sell_confim.sellForm.row != "") {
       this.setData({
         temp_row_type: this.data.sell_confim.sellForm.row,
       })
+    } else {
+      this.data.sell_confim.sellForm.row = "择优分配"
+      this.setData({
+        temp_row_type: "择优分配",
+      })
     }
     if (this.data.sell_confim.sellForm.seat_type != "") {
       this.setData({
-        isCheck: this.data.sell_confim.sellForm.seat_type == 1 ? true : false
+        isCheck: this.data.sell_confim.sellForm.seat_type == "1" ? true : false
       })
+    }else{
+      this.data.sell_confim.sellForm.seat_type = "1"
     }
     if (this.data.sell_confim.sellForm.delivery_type != "") {
       var delivery = ""
@@ -168,7 +185,6 @@ Page({
   },
 
   sellTypePickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', this.data.sellType[e.detail.value])
     this.setData({
       changeIndex: e.detail.value,
       "sell_confim.sellForm.sell_type": e.detail.value == false ? "1" : "2",
@@ -282,8 +298,8 @@ Page({
         sessionShow.session = sessionShow.session_list[0]
         var imageUrl = sessionShow.cover
         var arr = imageUrl.split('?')
-        sellTicket.cover = arr[0]
-        sellTicket.cover_end = arr[1]
+        sessionShow.cover = arr[0]
+        sessionShow.cover_end = arr[1]
         sessionShow.category.icon = ""
         sessionShow.venue.venue_map = ""
         console.log(sessionShow)
