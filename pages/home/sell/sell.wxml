@@ -10,7 +10,10 @@
       <view style="margin-bottom: 30rpx;">
         <view style="color: #a2abb5;  font-size: 24rpx;  margin-top: 10rpx;  line-height: 36rpx;  text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 1; -webkit-box-orient: vertical;">场次：{{sessionTitle}}</view>
         <view style="color: #a2abb5;  font-size: 24rpx;  line-height: 36rpx;  text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 1;  -webkit-box-orient: vertical;">票面：{{ticketName}}</view>
-        <view style="color: #a2abb5;  font-size: 24rpx;  line-height: 36rpx;  text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 1;  -webkit-box-orient: vertical;">在售：{{ticketCount}} 已售 {{ticketSold}}</view>
+        <view style="flex-direction: row;  display: flex; align-content: center">
+          <view style="color: #a2abb5;  font-size: 24rpx;  line-height: 36rpx;  text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 1;  -webkit-box-orient: vertical;">在售：{{ticketCount}}</view>
+          <view style="color: #a2abb5;  font-size: 24rpx;  line-height: 36rpx;  text-overflow: -o-ellipsis-lastline;  overflow: hidden;  text-overflow: ellipsis;  display: -webkit-box;  -webkit-line-clamp: 1;  -webkit-box-orient: vertical;margin-left:40rpx;">已售 {{ticketSold}}</view>
+        </view>
       </view>
     </view>
   </view>
