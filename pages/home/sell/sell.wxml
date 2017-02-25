@@ -60,7 +60,7 @@
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange"></swiper>
 <scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
   <view wx:if="{{currentTab == 0}}">
-    <view wx:if="{{isHaveOrder}}" style="height:{{windowsHeigth}}px;width: 100%;flex-direction: column;  display: flex;">
+    <view wx:if="{{isHaveOrder}}" style="height:{{windowsHeigth}}px;width: 100%;flex-direction: column;  display: flex;justify-content: center;align-items: center;align-content: center; margin-top:45%;">
       <view class="none_cover">
         <image src="/images/gloable/Icon_Default.png" mode="aspectFill" class="cover"></image>
       </view>
@@ -82,8 +82,20 @@
     </view>
   </view>
   <view wx:else>
-    <view wx:for="{{ticketSells}}" wx:key="ticketShow" id="sellTap" bindtap="sellTap" wx:for-item="item" data-sellTicket="{{item}}">
-      <template is="ticketManager" data="{{...item}}" />
+    <view wx:if="{{isHaveSellManager}}" style="height:{{windowsHeigth}}px;width: 100%;flex-direction: column;  display: flex;justify-content: center;align-items: center;align-content: center; margin-top:45%;">
+      <view class="none_cover">
+        <image src="/images/gloable/Icon_Default.png" mode="aspectFill" class="cover"></image>
+      </view>
+      <view class="none_text">
+        <view>{{showText}}</view>
+        <view style="margin-top:0rpx;">{{showText1}}
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view wx:for="{{ticketSells}}" wx:key="ticketShow" id="sellTap" bindtap="sellTap" wx:for-item="item" data-sellTicket="{{item}}">
+        <template is="ticketManager" data="{{...item}}" />
+      </view>
     </view>
   </view>
 </scroll-view>

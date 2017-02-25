@@ -18,18 +18,14 @@
 </view>
 <view class="ticketNumber">
   <view class="buttonSb" bindtap="buttonSbTap">-</view>
-
-  <!--<view clasa="ddd">输入数量</view>-->
   <input class="inputText" placeholder="1" value="{{numberTicket}}" bindinput="numberInput" type="number"/>
   <view class="buttonAdd" bindtap="buttonAddTap">+</view>
 </view>
 <view class="sellPrice">
   <view class="sell_price">单张售价（元）
   </view>
-  <!--<view class="sell_suggestPrice">使用建议价格
-  </view>-->
 </view>
-<input class="sellPriceText" placeholder="0" value="{{sellPriceTicket}}" type="number" bindinput="sellPriceInput" />
+<input class="sellPriceText" placeholder="0" value="{{sellPriceTicket}}" placeholder-style="color: #DDE0E5;" type="number" bindinput="sellPriceInput" />
 <view class="service">
 <text class="servicePrice">良票优先显示相同区域更低的票价
 </text>

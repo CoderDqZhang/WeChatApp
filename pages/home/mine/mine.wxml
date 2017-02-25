@@ -1,4 +1,3 @@
-
 <!--pages/mine/mine/mine.wxml-->
 <view class="noneTicketSession" wx:if="{{isHaveOrder}}" style="height:{{                  windowsHeigth}}px;">
   <view class="none_cover">
@@ -22,7 +21,7 @@
       <view class="tableTitle">我的订单</view>
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
     </view>
-    <view style="margin-left: 15px;margin-right: 15px;height:1rpx; background-color: #E9EBF2;"></view>
+    <view style="margin-left: 15px;margin-right: 0px;height:1rpx; background-color: #E9EBF2;"></view>
     <view class="mineClass" id="mysell" bindtap="mysellTap">
       <view class="tableTitle">我的卖票</view>
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>

@@ -1,10 +1,11 @@
 {
-  "pages": [    
+  "pages": [
+    
     "pages/home/home/home",
     "pages/home/mine/mine",
     "pages/home/sell/sell",
-    "pages/home/order_list/order",
     "pages/home/login/login",
+    "pages/home/order_list/order",
     "pages/home/sell_form/sell_form",
     "pages/home/sell_form_confirm/sell_form_confirm",
     "pages/home/sell_delivery/sell_delivery",

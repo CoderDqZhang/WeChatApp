@@ -21,8 +21,9 @@ Page({
   showTap: function (event) {
     var that = this
     var user = wx.getStorageSync('userInfo')
-    if (user != "" && user.data.role == "default") {
-      wx.redirectTo({
+    // 
+    if ( user != "" && user.data.role != "supplier") {
+      wx.navigateTo({
         url: '../login/login',
         success: function(res){
           // success

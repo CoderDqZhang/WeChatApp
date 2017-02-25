@@ -99,7 +99,7 @@ page {
 }
 
 .ticketSession{
-  margin-top: -20rpx;
+  margin-top: 10rpx;
   background-color: white;
 }
 

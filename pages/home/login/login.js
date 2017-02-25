@@ -5,6 +5,10 @@ function countdown(that) {
   console.log(that.data.second)
   if ('发送验证码' == that.data.second) {
     that.data.second = 60
+    that.setData({
+      second: 60
+    })
+    second = 60
   } else {
     second = that.data.second
   }
@@ -34,8 +38,7 @@ Page({
     phone: "",
     second: '发送验证码'
   },
-  onLoad: function (options) {
-
+  onLoad: function (options) {      
     // 页面初始化 options为页面跳转所带来的参数
   },
   onReady: function () {
@@ -57,13 +60,10 @@ Page({
   },
   senderCode: function () {
     var that = this;
-    that.second = 60
     var data = {
       "mobile_num": this.data.phone,
     }
     app.func.requestPost('user/login_code/', data, function (res) {
-      wx.hideToast()
-
       if (res.errors != null) {
         wx.showModal({
           title: res.errors[0].error[0].toString(),
@@ -78,23 +78,13 @@ Page({
         })
         return
       }
-      try {
-        wx.setStorageSync('userInfo', res)
-        wx.navigateBack({
-          delta: 1, // 回退前 delta(默认为1) 页面
-          success: function(res){
-            // success
-          },
-          fail: function() {
-            // fail
-          },
-          complete: function() {
-            // complete
-          }
+      if ('发送验证码' == that.data.second) {
+        countdown(that);
+      } else {
+        that.setData({
+          second: 60
         })
-      } catch (e) {
       }
-      countdown(that);
     })
   },
   formSubmit: function (e) {
@@ -106,7 +96,6 @@ Page({
       "code": e.detail.value.code.toString()
     }
     app.func.requestPost('user/bind_mobile_num/', data, function (res) {
-      wx.hideToast()
       console.log(res)
       if (res.errors != null) {
         wx.showModal({
@@ -122,7 +111,21 @@ Page({
         })
         return
       }
-      countdown(that);
+      var userInfo = wx.getStorageSync('userInfo')
+      userInfo.data.role = "supplier"
+      wx.setStorageSync('userInfo', userInfo)
+      wx.navigateBack({
+        delta: 1, // 回退前 delta(默认为1) 页面
+        success: function (res) {
+          // success
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
     })
   },
 })

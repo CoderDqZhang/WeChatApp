@@ -27,11 +27,8 @@ Page({
     },
     onLoad: function (opt) {
         if (opt.sellShow != null) {
-            console.log(opt.sellShow)
-            var userInfo = wx.getStorageInfoSync('userInfo')
             this.setData({
                 sessionShow: JSON.parse(opt.sellShow),
-
                 shareData: JSON.parse(opt.sellShow),
             })
             wx.setNavigationBarTitle({
@@ -40,9 +37,10 @@ Page({
                     // success
                 }
             })
-            console.log(this.data.sessionShow)
+            console.log(this.data.sessionShow.lp_session_id)
             this.genderData(this.data.sessionShow.session.ticket_list)
         } else {
+            console.log("这是一个" + opt.show)
             this.requestData(opt.show)
         }
     },
@@ -95,6 +93,8 @@ Page({
                     deliveType = deliveType + "上门自取 "
                 } else if (arr[j] == "3") {
                     deliveType = deliveType + "自取 "
+                } else if (arr[j] == "4") {
+                    deliveType = deliveType + "快递到付 "
                 }
             }
             if (tickets[i].seat_type == 1) {
@@ -130,8 +130,6 @@ Page({
                 subtitle = subtitle + tempList[k]
             }
         }
-        console.log(subtitle)
-        console.log(that.data.sessionShow)
         that.data.sessionShow.session.ticket_list = tickets
         that.setData({
             showDesc: that.data.sessionShow.session,
@@ -146,7 +144,8 @@ Page({
 
         var that = this;
         var userInfo = wx.getStorageSync('userInfo')
-        if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id) {
+        console.log("dsfesdfe" + that.data.shareData.lp_session_id)
+        if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id || that.data.shareData.lp_session_id != "userTicket") {
             var ticketList = that.data.showDesc.ticket_list
             var tempTicket
             that.connectService(ticket)
@@ -260,7 +259,7 @@ Page({
             var ticketList = that.data.showDesc.ticket_list
             that.setData({
                 'that.data.showDesc.ticket_list': tempTicket,
-                 ticket_list: tempTicket
+                ticket_list: tempTicket
             })
             console.log(that.data.showDesc.ticket_list)
             if (res.errors != null) {
@@ -318,10 +317,15 @@ Page({
         } else {
             shareTitle = that.data.sessionShow.session.shareTitle + that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (5 + 1))]
         }
+        var shareUrl = 'pages/home/ticket_desc/ticket_desc?show='
+        console.log(that.data.shareData.lp_session_id)
+        if (that.data.shareData.lp_session_id != "userTicket") {
+            shareUrl = 'pages/home/ticket_desc/ticket_desc?sellShow='
+        }
         return {
             title: shareTitle,
             desc: that.data.sharesubletitle,
-            path: 'pages/home/ticket_desc/ticket_desc?show=' + JSON.stringify(that.data.shareData)
+            path: shareUrl + JSON.stringify(that.data.shareData)
         }
     },
 })

@@ -155,10 +155,11 @@ Page({
     currentTab: 0,
     winWidth: 0,
     winHeight: 0,
-    showText:"",
+    showText: "",
     showText1: "快去首页挑选喜欢的演出活动吧",
     isHaveOrder: false,
-    orders:{}
+    isHaveSellManager: false,
+    orders: {}
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -183,7 +184,6 @@ Page({
      * 滑动切换tab 
      */
   bindChange: function (e) {
-
     var that = this;
     that.setData({ currentTab: e.detail.current });
 
@@ -227,16 +227,13 @@ Page({
         tempTicket = res
         console.log(tempTicket)
         wx.stopPullDownRefresh()
-
       }
-      console.log(tempTicket.order_list.length)
-      var haveData =
-        that.setData({
-          isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
-          orders: tempTicket,
-          showText: "还没有订单",
-          showText1: "快去首页挑选喜欢的演出活动吧"
-        })
+      that.setData({
+        isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
+        orders: tempTicket,
+        showText: "还没有订单",
+        showText1: "快去首页挑选喜欢的演出活动吧"
+      })
     });
   },
   requestData: function () {
@@ -244,7 +241,8 @@ Page({
     app.func.requestGet('supplier/ticket/', {}, function (res) {
       console.log(res)
       that.setData({
-        ticketSell: res
+        ticketSell: res,
+        isHaveSellManager: res.length == 0 ? true : false,
       })
       console.log(that.data.ticketSell)
       that.genderData()

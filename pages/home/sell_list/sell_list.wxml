@@ -6,19 +6,21 @@
       <image src="{{cover}}" class="ticketPost" mode="aspectFill"></image>
     </view>
     <view class="ticket_info">
-      <view class="ticketTitle">
-        <text>{{title}}</text>
-      </view>
-      <view class="ticketTime">{{show_date}}</view>
-      <view class="ticketLocation">{{venue.name}}</view>
-      <view class="ticket_other">
-        <view class="ticket_price">
-          <text class="ticketMuch" wx:if="{{min_price != 0 && ticket_count != 0}}">{{min_price}}-{{max_price}}</text>
-          <text class="ticketMuchM" wx:if="{{ticket_count == 0 || min_price == 0}}">暂时缺票</text>
-          <text class="ticketMuchM" wx:else>元</text>
+      <view class="ticket">
+        <view class="ticketTitle">
+          <text>{{title}}</text>
         </view>
-        <view class="sellButton">卖票</view>
+        <view class="ticketTime">{{show_date}}</view>
+        <view class="ticketLocation">{{venue.name}}</view>
       </view>
+      <view class="ticket_other">
+          <view class="ticket_price">
+            <text class="ticketMuch" wx:if="{{min_price != 0 && ticket_count != 0}}">{{min_price}}-{{max_price}}</text>
+            <text class="ticketMuchM" wx:if="{{ticket_count == 0 || min_price == 0}}">暂时缺票</text>
+            <text class="ticketMuchM" wx:else>元</text>
+          </view>
+          <view class="sellButton">卖票</view>
+        </view>
     </view>
   </view>
 </template>

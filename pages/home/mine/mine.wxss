@@ -13,7 +13,7 @@ page {
   justify-content: center;
 }
 .userName{
-  margin-top: 30rpx;
+  margin-top: 15pt;
   font: 32rpx;
   color: white;
 }
@@ -21,7 +21,6 @@ page {
 .table{
   background-color: white;
   width: 100%;
-  padding-top: 30rpx;
 }
 
 .mineClass{
@@ -53,11 +52,10 @@ page {
 }
 
 .cover {
-  margin-top: 30rpx;
   width: 200rpx;
   height: 200rpx;
   border-radius: 100rpx;
-  border: 6rpx solid #384249;
+  border: 6rpx solid #FFFFFF;
   border-color: white;
 }
 

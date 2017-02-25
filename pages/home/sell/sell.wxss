@@ -6,7 +6,7 @@ page {
 
 .swiper-tab {
   width: 100%;
-  border-bottom: 1rpx solid #E9EBF2;
+  border-bottom: 1rpx solid #e9ebf2;
   text-align: center;
   line-height: 80rpx;
   background-color: white;
@@ -18,10 +18,9 @@ page {
   display: inline-block;
   width: 33.33%;
   color: #384249;
-
 }
 
-.swiper-container{
+.swiper-container {
   position: fixed;
 }
 
@@ -39,4 +38,16 @@ page {
 
 .swiper-box view {
   text-align: center;
+}
+
+.cover {
+  width: 136rpx;
+  height: 190rpx;
+}
+
+.none_text {
+  margin-top: 75rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #bbc1cb;
 }

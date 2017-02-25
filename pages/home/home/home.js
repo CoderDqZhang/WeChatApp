@@ -114,7 +114,6 @@ Page({
   onPullDownRefresh: function () {
     var that = this
     var userInfo = wx.getStorageSync('userInfo')
-    console.log("userInfo" + userInfo)
     if (userInfo != "") {
       that.setData({
         isAllowUser: false

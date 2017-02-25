@@ -56,8 +56,18 @@
 <view class="cell_title_info_image">
   <view class="title">连坐
   </view>
-  <view>
-    <switch bindchange="seatTypeChange" checked="{{isCheck}}" />
+  <view class="section" style="width:{{windowWidth}}px;">
+    <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="picket" wx:if="{{selectSeat}}">
+      <view class="detail">{{sellSeat[seatIndex]}}
+      </view>
+    </picker>
+    <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="address_detail" wx:else>
+      <view class="detail">{{temp_seat_type}}
+      </view>
+    </picker>
+  </view>
+  <view class="detail_image">
+    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
@@ -67,7 +77,7 @@
   <view class="section" style="width:{{windowWidth}}px;">
     <view class="detail" wx:if="{{selectDelivery}}">{{sellDelivery}}
     </view>
-    <view class="detail" wx:else>{{deliveryStr}}
+    <view class="detail" wx:else>{{sellDelivery}}
     </view>
   </view>
   <view class="detail_image">
@@ -76,15 +86,19 @@
 </view>
 <view class="service">
   <view class="serviceMuch">
-    <text class="serviceTitle">结算总价：</text>
-    <text class="allMuch">{{sellMuch}}.00</text>
-    <text class="serviceTitle"> 元</text>
-    <text class="serviceTitle">      交易手续费：{{poundage}} 元</text>
+    <view>
+      <text class="serviceTitle">结算总价：</text>
+      <text class="allMuch">{{sellMuch}}.00</text>
+      <text class="serviceTitle"> 元</text>
+    </view>
+    <view class="poundageClass">
+      <text class="serviceTitle"> 交易手续费：{{poundage}} 元</text>
+    </view>
   </view>
   <view class="much">
     <view class="serviceInfo">第三方支付平台手续费1%
     </view>
-    <view class="serviceInfos">订单票款结算金额将于演出结束后24小时内转入账户钱包中</view>
+    <view class="serviceInfos">票款结算金额将于对方确认收货后转入账户钱包</view>
   </view>
 </view>
 <view class="next" bindtap="nextTap">挂票</view>

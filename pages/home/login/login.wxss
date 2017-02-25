@@ -9,9 +9,9 @@
 
 .senderCode {
   background-color: #4bd4c5;
-  height: 40rpx;
   width: 140rpx;
-  padding-top: 18rpx;
+  height: 50rpx;
+  padding-top: 14rpx;
   margin-top: 90rpx;
   text-align: center;
   margin-right: 30rpx;
@@ -21,7 +21,7 @@
 }
 
 .input_text {
-  margin-top: 90rpx;
+  margin-top: 45rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
 }
@@ -33,7 +33,7 @@
 }
 
 .confim{
-  margin-top: 30rpx;
+  margin-top: 60rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
   background-color: #4bd4c5;

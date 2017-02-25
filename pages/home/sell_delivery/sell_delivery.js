@@ -13,11 +13,16 @@ Page({
       [
         "3",
         "上门自取"
+      ],
+      [
+        "4",
+        "快递到付"
       ]
     ],
     isVisite: false,
     isSite: false,
     isExpressage: false,
+    isUserPay: false,
     deliveryForm: {
       "visite": {
         "phone": "",
@@ -33,6 +38,9 @@ Page({
       },
       "express": {
         "isSelect": false
+      },
+      "userPay": {
+        "isSelect": false
       }
     },
     address: {}
@@ -46,6 +54,12 @@ Page({
       this.setData({
         isExpressage: true,
         'deliveryForm.express.isSelect': true
+      })
+    }
+    if (this.data.address.isUserPay) {
+      this.setData({
+        isUserPay: true,
+        'deliveryForm.isUserPay.isSelect': true
       })
     }
     if (this.data.address.isVisite) {
@@ -74,6 +88,12 @@ Page({
     this.setData({
       isExpressage: e.detail.value,
       'deliveryForm.express.isSelect': e.detail.value
+    })
+  },
+  isUserChange: function (e){
+    this.setData({
+      isUserPay: e.detail.value,
+      'deliveryForm.userPay.isSelect': e.detail.value
     })
   },
   siteChange: function (e) {

@@ -5,13 +5,15 @@ Page({
     temp_sell_type: "单卖",
     temp_region_type: "请选择",
     temp_row_type: "请选择",
+    temp_seat_type: "请选择",
     temp_delivery_type: "请选择",
     isCheck: false,
     deliveryStr: "",
     address: {
       'isExpress': false,
       'isVisite': false,
-      'isSite': false
+      'isSite': false,
+      'isUserPay': false
     },
     sellTicket: {},
     sell_confim: null,
@@ -27,6 +29,7 @@ Page({
     selectDelivery: false,
     sellMuch: 0.00,
     poundage: 0.00,
+    sellSeat: []
 
   },
   changeData: function (res) {
@@ -40,6 +43,17 @@ Page({
     } else {
       this.setData({
         'address.isExpress': false
+      })
+    }
+    if (res.userPay.isSelect) {
+      this.setData({
+        sellDelivery: this.data.sellDelivery + "快递到付 ",
+        delivery_type: this.data.delivery_type + "4,",
+        selectDelivery: true
+      })
+    } else {
+      this.setData({
+        'address.isUserPay': false
       })
     }
     if (res.visite.isSelect) {
@@ -102,8 +116,9 @@ Page({
       sellType: tempSellType,
       sellRegion: tempSellRgion,
       sellRow: tempSellRow,
+      sellSeat: ["是", "否"],
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
-      poundage: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01
+      poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2)
     })
     if (this.data.sell_confim.sellForm.sell_type != "") {
       this.setData({
@@ -137,12 +152,17 @@ Page({
     }
     if (this.data.sell_confim.sellForm.seat_type != "") {
       this.setData({
-        isCheck: this.data.sell_confim.sellForm.seat_type == "1" ? true : false
+        isCheck: this.data.sell_confim.sellForm.seat_type == "1" ? true : false,
+        selectSeat: true,
+        temp_seat_type: this.data.sell_confim.sellForm.seat_type == "1" ? "是" : "否"
       })
-    }else{
+    } else {
       this.data.sell_confim.sellForm.seat_type = "1"
+      this.setData({
+        temp_seat_type: "否"
+      })
     }
-    if (this.data.sell_confim.sellForm.delivery_type != "") {
+    if (this.data.sell_confim.sellForm.delivery_type != "" && this.data.sell_confim.sellForm.delivery_type != null) {
       var delivery = ""
       var arr = this.data.sell_confim.sellForm.delivery_type.split(',')
       for (var i = 0; i < arr.length; i++) {
@@ -150,6 +170,12 @@ Page({
           delivery = delivery + "快递 "
           this.setData({
             'address.isExpress': true
+          })
+        }
+        if (arr[i] == "4") {
+          delivery = delivery + "快递到付 "
+          this.setData({
+            'address.isUserPay': true
           })
         }
         if (arr[i] == "2") {
@@ -176,12 +202,17 @@ Page({
         'address.self_get_ticket_phone': sellForm.self_get_ticket_phone,
         'address.scene_get_ticket_address': sellForm.scene_get_ticket_address
       })
+    } else {
+      // delivery = delivery + "快递到付 "
+      this.setData({
+        deliveryStr: "快递到付 ",
+        sellDelivery: "快递到付 ",
+        delivery_type: this.data.delivery_type + "4,",
+        selectDelivery: true,
+        "sell_confim.sellForm.delivery_type": "4,",
+        'address.isUserPay': true
+      })
     }
-  },
-  seatTypeChange: function (e) {
-    this.setData({
-      "sell_confim.sellForm.seat_type": e.detail.value == false ? "1" : "2",
-    })
   },
 
   sellTypePickerChange: function (e) {
@@ -191,7 +222,13 @@ Page({
       isSelect: true
     })
   },
-
+  bindPickerSeat: function (e) {
+    this.setData({
+      seatIndex: e.detail.value,
+      "sell_confim.sellForm.seat_type": parseInt(e.detail.value) + 1,
+      selectSeat: true
+    })
+  },
   bindPickerRegion: function (e) {
     this.setData({
       regionIndex: e.detail.value,

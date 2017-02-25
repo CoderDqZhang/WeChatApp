@@ -1,22 +1,33 @@
 <!--pages/sell/sell_delivery/sell_delivery.wxml-->
 <view class="cell_title_info_image">
   <view class="cell_title">
+    <view class="title">快递到付
+    </view>
+  </view>
+  <view class="swithClass">
+    <switch bindchange="isUserChange" checked="{{isUserPay}}" color="#4bd4c5" style="color:#4bd4c5;"/>
+  </view>
+</view>
+<!--<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view class="cell_title_info_image">
+  <view class="cell_title">
     <view class="title">普通快递（8元）、顺丰快递（13元）
     </view>
     <view class="detail_title">超出部分由商家自行承担
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="expressChange" checked="{{isExpressage}}"/>
+    <switch bindchange="expressChange" checked="{{isExpressage}}" color="#4bd4c5" style="color:#4bd4c5;"/>
   </view>
-</view>
+</view>-->
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
 <view class="cell_title_info_image">
   <view class="cell_title">
     <view class="title">现场取票
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="siteChange" checked="{{isSite}}"/>
+    <switch bindchange="siteChange" checked="{{isSite}}" color="#4bd4c5"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
@@ -34,7 +45,7 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="visitChange" checked="{{isVisite}}"/>
+    <switch bindchange="visitChange" checked="{{isVisite}}" color="#4bd4c5"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
