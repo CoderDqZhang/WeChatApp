@@ -14,10 +14,10 @@ page {
 }
 
 .swiper-tab-list {
-  font-size: 30rpx;
+  font-size: 26rpx;
   display: inline-block;
-  width: 33.33%;
-  color: #384249;
+  width: 50%;
+  color: #8a96a2;
 }
 
 .swiper-container {
@@ -50,4 +50,5 @@ page {
   text-align: center;
   font-size: 32rpx;
   color: #bbc1cb;
+  
 }

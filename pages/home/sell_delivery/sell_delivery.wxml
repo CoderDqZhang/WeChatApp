@@ -5,7 +5,7 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="isUserChange" checked="{{isUserPay}}" color="#4bd4c5" style="color:#4bd4c5;"/>
+    <switch bindchange="isUserChange" checked="{{deliveryForm.userPay.isSelect}}" color="#4bd4c5" style="color:#4bd4c5;"/>
   </view>
 </view>
 <!--<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
@@ -27,11 +27,11 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="siteChange" checked="{{isSite}}" color="#4bd4c5"/>
+    <switch bindchange="siteChange" checked="{{deliveryForm.site.isSelect}}" color="#4bd4c5"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-<view wx:if="{{isSite}}"  class="inputClass">
+<view wx:if="{{deliveryForm.site.isSelect}}"  class="inputClass">
     <input class="inputText" value="{{deliveryForm.site.location}}" bindinput="location" placeholder="输入取票地点" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
     <input class="inputText" value="{{deliveryForm.site.time}}" bindinput="time" placeholder="输入取票时间" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
@@ -45,11 +45,11 @@
     </view>
   </view>
   <view class="swithClass">
-    <switch bindchange="visitChange" checked="{{isVisite}}" color="#4bd4c5"/>
+    <switch bindchange="visitChange" checked="{{deliveryForm.visite.isSelect}}" color="#4bd4c5"/>
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-<view wx:if="{{isVisite}}" class="inputClass">
+<view wx:if="{{deliveryForm.visite.isSelect}}" class="inputClass">
     <input class="inputText" value="{{deliveryForm.visite.location}}" bindinput="visitLocation" placeholder="输入取票地点" placeholder="输入取票地点" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <input class="inputText" value="{{deliveryForm.visite.time}}" bindinput="visitTime" placeholder="输入取票时间" placeholder="输入取票时间" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>
     <input class="inputText" value="{{deliveryForm.visite.phone}}" bindinput="visitPhone" placeholder="联系电话" placeholder="输入取票电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;"/>

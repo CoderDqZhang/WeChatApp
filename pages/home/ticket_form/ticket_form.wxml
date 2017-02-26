@@ -50,7 +50,7 @@
     </view>
   </view>
   <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="cell_title_info_image" wx:if="{{ delivery_type == 1}}" id="addressTap" bindtap="addressTap">
+  <view class="cell_title_info_image" wx:if="{{ delivery_type == 1 || delivery_type == 4}}" id="addressTap" bindtap="addressTap">
     <view class="title" wx:if="{{address == null}}">新增收货地址
     </view>
     <view class="address_title" wx:else>收货地址
@@ -70,6 +70,15 @@
     <view class="title">配送方式
     </view>
     <view class="detail">{{delivery_muchs}}
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>
+  </view>
+  <view class="cell_title_info_image" wx:elif="{{            delivery_type == 4}}" bindtap="deliveryMuchTap">
+    <view class="title">配送方式
+    </view>
+    <view class="detail">买家支付快递费用
     </view>
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>

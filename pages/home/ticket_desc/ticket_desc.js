@@ -1,4 +1,17 @@
 var app = getApp()
+function getArray(a) {
+ var hash = {},
+     len = a.length,
+     result = [];
+
+ for (var i = 0; i < len; i++){
+     if (!hash[a[i]]){
+         hash[a[i]] = true;
+         result.push(a[i]);
+     } 
+ }
+ return result;
+}
 function uniQueue(array) {
     var arr = [];
     var m;
@@ -37,16 +50,13 @@ Page({
                     // success
                 }
             })
-            console.log(this.data.sessionShow.lp_session_id)
             this.genderData(this.data.sessionShow.session.ticket_list)
         } else {
-            console.log("这是一个" + opt.show)
             this.requestData(opt.show)
         }
     },
     requestData: function (show) {
         var that = this;
-        console.log(that.data.shareName[Math.floor(Math.random() * (6 + 1))])
         var userInfo = wx.getStorageInfoSync('userInfo')
 
         that.setData({
@@ -82,6 +92,7 @@ Page({
             }
             tickets[i].region = ticket_row
             var arr = tickets[i].delivery_type.split(',');
+            arr = getArray(arr);
             var deliveType = ""
             if (tickets[i].sell_type == 2) {
                 deliveType = "打包购买 "
@@ -92,7 +103,7 @@ Page({
                 } else if (arr[j] == "2") {
                     deliveType = deliveType + "上门自取 "
                 } else if (arr[j] == "3") {
-                    deliveType = deliveType + "自取 "
+                    deliveType = deliveType + "现场取票 "
                 } else if (arr[j] == "4") {
                     deliveType = deliveType + "快递到付 "
                 }
@@ -122,7 +133,6 @@ Page({
             }
         }
         var subtitle = ''
-
         for (var k = 0; k < tempList.length; k++) {
             if (k < tempList.length - 1) {
                 subtitle = subtitle + tempList[k] + "、"
@@ -138,13 +148,11 @@ Page({
             ticket_list: tickets
         })
     },
-
     ticketTap: function (event) {
         var ticket = event.currentTarget.dataset.ticket
 
         var that = this;
         var userInfo = wx.getStorageSync('userInfo')
-        console.log("dsfesdfe" + that.data.shareData.lp_session_id)
         if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id || that.data.shareData.lp_session_id != "userTicket") {
             var ticketList = that.data.showDesc.ticket_list
             var tempTicket
@@ -261,7 +269,6 @@ Page({
                 'that.data.showDesc.ticket_list': tempTicket,
                 ticket_list: tempTicket
             })
-            console.log(that.data.showDesc.ticket_list)
             if (res.errors != null) {
                 wx.showModal({
                     title: res.errors[0].error[0].toString(),
@@ -318,7 +325,6 @@ Page({
             shareTitle = that.data.sessionShow.session.shareTitle + that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (5 + 1))]
         }
         var shareUrl = 'pages/home/ticket_desc/ticket_desc?show='
-        console.log(that.data.shareData.lp_session_id)
         if (that.data.shareData.lp_session_id != "userTicket") {
             shareUrl = 'pages/home/ticket_desc/ticket_desc?sellShow='
         }

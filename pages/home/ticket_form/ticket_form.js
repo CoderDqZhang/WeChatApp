@@ -76,7 +76,8 @@ Page({
       index: e.detail.value,
       isSelect: true,
       regions: this.data.numbers[e.detail.value],
-      allMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price + this.data.ticket.delivery_price
+      allMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price + this.data.ticket.delivery_price,
+      ticketMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price
     })
   },
   genderData: function (show) {
@@ -106,7 +107,7 @@ Page({
       }
       that.setData({
         numbers: tmpNumber,
-        allMuch: that.data.sessionShow.ticket.price
+        allMuch: that.data.sessionShow.ticket.price,
       })
     }
     console.log(that.data.allMuch)
@@ -127,6 +128,11 @@ Page({
         if (tempDevery == "") {
           tempDevery = 3
         }
+      }else if (arr[i] == "4") {
+        that.data.deliverys.push("快递到付")
+        if (tempDevery == "") {
+          tempDevery = 4
+        }
       }
     }
     that.data.deliveryMuchs.push("普通快递（" + that.data.ticket.delivery_price.toString() + "）元")
@@ -140,6 +146,7 @@ Page({
       choosedelivery: that.data.deliverys[0],
       delivery_muchs: that.data.deliveryMuchs[0],
       allMuch: that.data.allMuch + that.data.ticket.delivery_price,
+      ticketMuch: that.data.allMuch,
       // allMuch: "600"
     })
     console.log(that.data.allMuch)
@@ -153,10 +160,22 @@ Page({
       itemList: that.data.deliverys,
       success: function (res) {
         if (!res.cancel) {
-          that.data.orderForm.delivery_type = res.tapIndex + 1
+          if (that.data.deliverys[res.tapIndex] == "快递到付") {
+          that.data.orderForm.delivery_type = 4
+
+          } else if (that.data.deliverys[res.tapIndex] == "现场取票") {
+          that.data.orderForm.delivery_type = 2
+
+          }else if (that.data.deliverys[res.tapIndex] == "上门取票") {
+          that.data.orderForm.delivery_type = 3
+
+          }else if (that.data.deliverys[res.tapIndex] == "快递") {
+          that.data.orderForm.delivery_type = 1
+
+          }
           console.log(that.data.orderForm.delivery_type)
           that.setData({
-            delivery_type: res.tapIndex + 1,
+            delivery_type: that.data.orderForm.delivery_type,
             choosedelivery: that.data.deliverys[res.tapIndex]
           })
         }

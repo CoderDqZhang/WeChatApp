@@ -137,21 +137,42 @@ function ticketShowModelTicketName(data) {
         var ticket = data.session_list[0].ticket_list[k]
         ticketName = ticketName + "、" + ticket.original_ticket.name
       }
+      
     } else {
       ticketName = ticketName + "、" + data.session_list[0].ticket_list[0].original_ticket.name
     }
   }
+  var arr = ticketName.split('、')
+  arr = getArray(arr)
+  ticketName = ""
+  for (var l = 0; l < arr.length; l ++) {
+    ticketName = ticketName + "、" + arr[l]
+  }
   // if (ticketName.length > 1){
 
   // }
-  return ticketName.substring(1, ticketName.length)
+  return ticketName.substring(2, ticketName.length)
+}
+
+function getArray(a) {
+ var hash = {},
+     len = a.length,
+     result = [];
+
+ for (var i = 0; i < len; i++){
+     if (!hash[a[i]]){
+         hash[a[i]] = true;
+         result.push(a[i]);
+     } 
+ }
+ return result;
 }
 
 Page({
   data: {
     ticketSell: [],
     ticketSells: [],
-    ticketList: "dfss",
+    ticketList: "",
     currentTab: 0,
     winWidth: 0,
     winHeight: 0,

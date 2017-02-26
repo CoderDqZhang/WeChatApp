@@ -24,6 +24,7 @@ page {
 .ticketPost {
   width: 164rpx;
   height: 220rpx;
+  border-radius: 4rpx;
   background-color: #4bd4c5;
 }
 
@@ -85,7 +86,7 @@ page {
 
 .ticket_price {
   display: inline-block;
-  float: left;
+  margin-top: -10rpx;
 }
 
 .ticketMuch {
@@ -103,13 +104,14 @@ page {
 
 .sellButton {
   font-size: 24rpx;
-  border: 4rpx solid #4bd4c5;
+  margin-top: -20rpx;
+  border: 6rpx solid #4bd4c5;
   border-radius: 6rpx;
   color: #4bd4c5;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   height: 35rpx;
   text-align: center;
-  border-width: 1rpx;
+  border-width: 2rpx;
   width: 92rpx;
 }

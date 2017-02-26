@@ -10,10 +10,24 @@ Page({
     isCheck: false,
     deliveryStr: "",
     address: {
-      'isExpress': false,
-      'isVisite': false,
-      'isSite': false,
-      'isUserPay': false
+      "visite": {
+        "phone": "",
+        "location": "",
+        "time": "",
+        "isSelect": false
+      },
+      "site": {
+        "phone": "",
+        "location": "",
+        "time": "",
+        "isSelect": false
+      },
+      "express": {
+        "isSelect": false
+      },
+      "userPay": {
+        "isSelect": false
+      }
     },
     sellTicket: {},
     sell_confim: null,
@@ -34,6 +48,7 @@ Page({
   },
   changeData: function (res) {
     this.data.sellDelivery = ""
+    this.data.delivery_type = ""
     if (res.express.isSelect) {
       this.setData({
         sellDelivery: this.data.sellDelivery + "快递 ",
@@ -42,7 +57,7 @@ Page({
       })
     } else {
       this.setData({
-        'address.isExpress': false
+        'address.express.isSelect': false
       })
     }
     if (res.userPay.isSelect) {
@@ -53,7 +68,7 @@ Page({
       })
     } else {
       this.setData({
-        'address.isUserPay': false
+        'address.userPay.isSelect': false
       })
     }
     if (res.visite.isSelect) {
@@ -68,7 +83,7 @@ Page({
       })
     } else {
       this.setData({
-        'address.isVisite': false
+        'address.visite.isSelect': false
       })
     }
     if (res.site.isSelect) {
@@ -82,11 +97,12 @@ Page({
       })
     } else {
       this.setData({
-        'address.isSite': false
+        'address.site.isSelect': false
       })
     }
     this.setData({
-      "sell_confim.sellForm.delivery_type": this.data.delivery_type
+      "sell_confim.sellForm.delivery_type": this.data.delivery_type,
+      address:res
     })
   },
   onLoad: function (options) {
@@ -169,38 +185,38 @@ Page({
         if (arr[i] == "1") {
           delivery = delivery + "快递 "
           this.setData({
-            'address.isExpress': true
+            'address.express.isSelect': true
           })
         }
         if (arr[i] == "4") {
           delivery = delivery + "快递到付 "
           this.setData({
-            'address.isUserPay': true
+            'address.userPay.isSelect': true
           })
         }
         if (arr[i] == "2") {
           delivery = delivery + "现场取票 ",
             this.setData({
-              'address.isVisite': true
+              'address.visite.isSelect': true
             })
         }
         if (arr[i] == "3") {
           delivery = delivery + "上门自取 ",
             this.setData({
-              'address.isSite': true
+              'address.site.isSelect': true
             })
         }
       }
       var sellForm = this.data.sell_confim.sellForm
       this.setData({
         deliveryStr: delivery,
-        'address.scene_get_ticket_address': sellForm.scene_get_ticket_address,
-        'address.scene_get_ticket_date': sellForm.scene_get_ticket_date,
-        'address.scene_get_ticket_phone': sellForm.scene_get_ticket_phone,
-        'address.self_get_ticket_address': sellForm.self_get_ticket_address,
-        'address.self_get_ticket_date': sellForm.self_get_ticket_date,
-        'address.self_get_ticket_phone': sellForm.self_get_ticket_phone,
-        'address.scene_get_ticket_address': sellForm.scene_get_ticket_address
+        'address.site.scene_get_ticket_address': sellForm.scene_get_ticket_address,
+        'address.site.scene_get_ticket_date': sellForm.scene_get_ticket_date,
+        'address.site.scene_get_ticket_phone': sellForm.scene_get_ticket_phone,
+        'address.visite.self_get_ticket_address': sellForm.self_get_ticket_address,
+        'address.visite.self_get_ticket_date': sellForm.self_get_ticket_date,
+        'address.visite.self_get_ticket_phone': sellForm.self_get_ticket_phone,
+        'address.visite.scene_get_ticket_address': sellForm.scene_get_ticket_address
       })
     } else {
       // delivery = delivery + "快递到付 "
@@ -210,7 +226,7 @@ Page({
         delivery_type: this.data.delivery_type + "4,",
         selectDelivery: true,
         "sell_confim.sellForm.delivery_type": "4,",
-        'address.isUserPay': true
+        'address.userPay.isSelect': true
       })
     }
   },

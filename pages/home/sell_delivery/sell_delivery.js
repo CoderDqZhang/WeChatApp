@@ -50,37 +50,40 @@ Page({
     this.setData({
       address: JSON.parse(options.address)
     })
-    if (this.data.address.isExpress) {
-      this.setData({
-        isExpressage: true,
-        'deliveryForm.express.isSelect': true
-      })
-    }
-    if (this.data.address.isUserPay) {
-      this.setData({
-        isUserPay: true,
-        'deliveryForm.isUserPay.isSelect': true
-      })
-    }
-    if (this.data.address.isVisite) {
-      this.setData({
-        isVisite: true,
-        'deliveryForm.visite.isSelect': true,
-        'deliveryForm.visite.location': this.data.address.scene_get_ticket_address,
-        'deliveryForm.visite.time': this.data.address.scene_get_ticket_date,
-        'deliveryForm.visite.phone': this.data.address.scene_get_ticket_phone
-      })
-    }
-    if (this.data.address.isSite) {
-      this.setData({
-        isSite: true,
-        'deliveryForm.site.isSelect': true,
-        'deliveryForm.visite.isSelect': true,
-        'deliveryForm.site.location': this.data.address.self_get_ticket_address,
-        'deliveryForm.site.time': this.data.address.self_get_ticket_date,
-        'deliveryForm.site.phone': this.data.address.self_get_ticket_phone
-      })
-    }
+    this.setData({
+      deliveryForm: this.data.address
+    })
+    // if (this.data.address.isExpress) {
+    //   this.setData({
+    //     isExpressage: true,
+    //     'deliveryForm.express.isSelect': true
+    //   })
+    // }
+    // if (this.data.address.isUserPay) {
+    //   this.setData({
+    //     isUserPay: true,
+    //     'deliveryForm.isUserPay.isSelect': true
+    //   })
+    // }
+    // if (this.data.address.isVisite) {
+    //   this.setData({
+    //     isVisite: true,
+    //     'deliveryForm.visite.isSelect': true,
+    //     'deliveryForm.visite.location': this.data.address.scene_get_ticket_address,
+    //     'deliveryForm.visite.time': this.data.address.scene_get_ticket_date,
+    //     'deliveryForm.visite.phone': this.data.address.scene_get_ticket_phone
+    //   })
+    // }
+    // if (this.data.address.isSite) {
+    //   this.setData({
+    //     isSite: true,
+    //     'deliveryForm.site.isSelect': true,
+    //     'deliveryForm.visite.isSelect': true,
+    //     'deliveryForm.site.location': this.data.address.self_get_ticket_address,
+    //     'deliveryForm.site.time': this.data.address.self_get_ticket_date,
+    //     'deliveryForm.site.phone': this.data.address.self_get_ticket_phone
+    //   })
+    // }
     console.log(this.data.address)
     // 页面初始化 options为页面跳转所带来的参数
   },
@@ -90,7 +93,7 @@ Page({
       'deliveryForm.express.isSelect': e.detail.value
     })
   },
-  isUserChange: function (e){
+  isUserChange: function (e) {
     this.setData({
       isUserPay: e.detail.value,
       'deliveryForm.userPay.isSelect': e.detail.value
@@ -206,16 +209,16 @@ Page({
       }
     })
   },
-onReady: function () {
-  // 页面渲染完成
-},
-onShow: function () {
-  // 页面显示
-},
-onHide: function () {
-  // 页面隐藏
-},
-onUnload: function () {
-  // 页面关闭
-}
+  onReady: function () {
+    // 页面渲染完成
+  },
+  onShow: function () {
+    // 页面显示
+  },
+  onHide: function () {
+    // 页面隐藏
+  },
+  onUnload: function () {
+    // 页面关闭
+  }
 })
