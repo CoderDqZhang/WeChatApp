@@ -6,6 +6,8 @@ Page({
     ticketPrice: [],
     numberTicket: 1,
     sellTicket: {},
+    winWidth: 0,
+    winHeight: 0,
     sellForm: {
       "show_session_ticket": "",
       "seat_type": "",
@@ -20,6 +22,20 @@ Page({
     sellPrice: ""
   },
   onLoad: function (options) {
+    var that = this;
+    /** 
+     * 获取系统信息 
+     */
+    wx.getSystemInfo({
+
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+
+    });
     if (options.ticketEdit != null) {
       var editData = JSON.parse(options.ticketEdit)
       console.log(editData)

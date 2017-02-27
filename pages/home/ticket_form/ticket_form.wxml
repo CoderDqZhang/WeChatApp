@@ -75,7 +75,7 @@
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view class="cell_title_info_image" wx:elif="{{            delivery_type == 4}}" bindtap="deliveryMuchTap">
+  <!--<view class="cell_title_info_image" wx:elif="{{            delivery_type == 4}}" bindtap="deliveryMuchTap">
     <view class="title">配送方式
     </view>
     <view class="detail">买家支付快递费用
@@ -83,8 +83,8 @@
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
-  </view>
-  <view class="title_input" wx:else>
+  </view>-->
+  <view class="title_input" wx:elif="{{delivery_type != 4}}">
     <view class="input_title">联系人电话</view>
     <input name="phone" class="input_text" placeholder="联系人电话" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
   </view>
@@ -102,7 +102,7 @@
     <input name="message" class="input_text" placeholder="备注关于本次交易特别说明" placeholder-style="font-size: 15px;color: #BBC1CB;letter-spacing: 0;" />
   </view>
   <view class="bottomView">
-    <view class="introduct">票品售出后不可退换，可转授</view>
+    <view class="introduct">票品售出后不可退换，可转售</view>
     <button formType="submit" class="confim">提交</button>
   </view>
 </form>

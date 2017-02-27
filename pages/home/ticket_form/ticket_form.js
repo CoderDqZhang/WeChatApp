@@ -166,7 +166,7 @@ Page({
           } else if (that.data.deliverys[res.tapIndex] == "现场取票") {
           that.data.orderForm.delivery_type = 2
 
-          }else if (that.data.deliverys[res.tapIndex] == "上门取票") {
+          }else if (that.data.deliverys[res.tapIndex] == "上门自取") {
           that.data.orderForm.delivery_type = 3
 
           }else if (that.data.deliverys[res.tapIndex] == "快递") {
@@ -273,9 +273,7 @@ Page({
         'package': wxpay.package,
         'signType': 'MD5',
         'paySign': wxpay.sign,
-
       }
-
       console.log(payData)
       wx.requestPayment({
         // 'appId':wxpay.appid,

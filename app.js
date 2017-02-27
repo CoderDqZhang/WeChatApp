@@ -18,8 +18,8 @@ App({
     TD.launch({
             appkey: '949AC2A588DA47B9AA5499B5CB15250D',
             appName: '良票演出',
-            versionName: 'v1.0.0',
-            versionCode: 'v1.0.0',
+            versionName: 'v1.1.0',
+            versionCode: 'v1.1.0',
             autoOnAppShow: true,
             autoOnAppHide: true,
             autoOnPageUnload: true,
@@ -57,8 +57,8 @@ App({
                 console.log(resU.userInfo)
                 console.log(res.code)
                 wx.request({
-                    url: "https://api.liangpiao.me/user/weixin_login/",
-                  // url: "https://api.niceticket.cc/user/weixin_login/",
+                    // url: "https://api.liangpiao.me/user/weixin_login/",
+                  url: "https://api.niceticket.cc/user/weixin_login/",
                   data: {
                     "gender": resU.userInfo.gender,
                     "nickname": resU.userInfo.nickName,

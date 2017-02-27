@@ -1,5 +1,5 @@
-// var rootDocment = 'https://api.niceticket.cc/';//你的域名  
-var rootDocment = 'https://api.liangpiao.me/'
+var rootDocment = 'https://api.niceticket.cc/';//你的域名  
+// var rootDocment = 'https://api.liangpiao.me/'
 
 function requestPut(url, data, cb) {
   var lp_session_id;

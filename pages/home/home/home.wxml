@@ -69,5 +69,5 @@
       <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}"></view>
     </view>
   </view>
-  <view style="height:30rpx;" ></view>
+  <view style="height:20rpx; background-color: #ffffff;"></view>
 </view>

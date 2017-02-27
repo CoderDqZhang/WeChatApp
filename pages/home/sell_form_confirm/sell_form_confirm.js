@@ -43,7 +43,9 @@ Page({
     selectDelivery: false,
     sellMuch: 0.00,
     poundage: 0.00,
-    sellSeat: []
+    sellSeat: [],
+    winWidth: 0,
+    winHeight: 0,
 
   },
   changeData: function (res) {
@@ -102,10 +104,24 @@ Page({
     }
     this.setData({
       "sell_confim.sellForm.delivery_type": this.data.delivery_type,
-      address:res
+      address: res
     })
   },
   onLoad: function (options) {
+    var that = this;
+    /** 
+     * 获取系统信息 
+     */
+    wx.getSystemInfo({
+
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+
+    });
     console.log(options.sell_confim)
     this.setData({
       sell_confim: JSON.parse(options.sell_confim),
@@ -132,7 +148,7 @@ Page({
       sellType: tempSellType,
       sellRegion: tempSellRgion,
       sellRow: tempSellRow,
-      sellSeat: ["是", "否"],
+      sellSeat: ["连座", "不连座"],
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
       poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2)
     })
@@ -170,12 +186,12 @@ Page({
       this.setData({
         isCheck: this.data.sell_confim.sellForm.seat_type == "1" ? true : false,
         selectSeat: true,
-        temp_seat_type: this.data.sell_confim.sellForm.seat_type == "1" ? "是" : "否"
+        temp_seat_type: this.data.sell_confim.sellForm.seat_type == "1" ? "连座" : "不连座"
       })
     } else {
       this.data.sell_confim.sellForm.seat_type = "1"
       this.setData({
-        temp_seat_type: "否"
+        temp_seat_type: "不连座"
       })
     }
     if (this.data.sell_confim.sellForm.delivery_type != "" && this.data.sell_confim.sellForm.delivery_type != null) {

@@ -94,11 +94,12 @@ page {
 }
 
 .topSession{
-  height: 510rpx;
+  height: 500rpx;
   background-color: white;
 }
 
 .ticketSession{
+  margin-top: -10rpx;
   background-color: white;
 }
 

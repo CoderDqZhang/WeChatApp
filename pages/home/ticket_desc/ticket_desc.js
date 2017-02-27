@@ -101,11 +101,11 @@ Page({
                 if (arr[j] == "1") {
                     deliveType = deliveType + "快递 "
                 } else if (arr[j] == "2") {
-                    deliveType = deliveType + "上门自取 "
+                    deliveType = deliveType + "自取 "
                 } else if (arr[j] == "3") {
-                    deliveType = deliveType + "现场取票 "
+                    deliveType = deliveType + "现场 "
                 } else if (arr[j] == "4") {
-                    deliveType = deliveType + "快递到付 "
+                    deliveType = deliveType + "快递 "
                 }
             }
             if (tickets[i].seat_type == 1) {
@@ -153,7 +153,7 @@ Page({
 
         var that = this;
         var userInfo = wx.getStorageSync('userInfo')
-        if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id || that.data.shareData.lp_session_id != "userTicket") {
+        if (that.data.shareData.lp_session_id == userInfo.data.lp_session_id) {
             var ticketList = that.data.showDesc.ticket_list
             var tempTicket
             that.connectService(ticket)

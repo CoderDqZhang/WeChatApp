@@ -1,104 +1,107 @@
 
 <!--pages/sell/sell_form_confirm/sell_form_confirm.wxml-->
-<view class="cell_title_info_image">
-  <view class="title">出售方式
-  </view>
-  <view class="section" style="width:{{windowWidth}}px;">
-    <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="picket" wx:if="{{isSelect}}">
-      <view class="detail">{{sellType[changeIndex]}}
-      </view>
-    </picker>
-    <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="address_detail" wx:else>
-      <view class="detail">{{temp_sell_type}}
-      </view>
-    </picker>
-  </view>
-  <view class="detail_image">
-    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-  </view>
-</view>
-<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-<view class="cell_title_info_image">
-  <view class="title">区域
-  </view>
-  <view class="section" style="width:{{windowWidth}}px;">
-    <picker bindchange="bindPickerRegion" value="{{index}}" range="{{sellRegion}}" class="picket" wx:if="{{selectRegion}}">
-      <view class="detail">{{sellRegion[regionIndex]}}
-      </view>
-    </picker>
-    <picker bindchange="bindPickerRegion" value="{{index}}" range="{{sellRegion}}" class="address_detail" wx:else>
-      <view class="detail">{{temp_region_type}}
-      </view>
-    </picker>
-  </view>
-  <view class="detail_image">
-    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-  </view>
-</view>
-<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-<view class="cell_title_info_image">
-  <view class="title">排数
-  </view>
-  <view class="section" style="width:{{windowWidth}}px;">
-    <picker bindchange="bindPickerRow" value="{{index}}" range="{{sellRow}}" class="picket" wx:if="{{selectRow}}">
-      <view class="detail">{{sellRow[rowIndex]}}
-      </view>
-    </picker>
-    <picker bindchange="bindPickerRow" value="{{index}}" range="{{sellRow}}" class="address_detail" wx:else>
-      <view class="detail">{{temp_row_type}}
-      </view>
-    </picker>
-  </view>
-  <view class="detail_image">
-    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-  </view>
-</view>
-<view class="cell_title_info_image">
-  <view class="title">连坐
-  </view>
-  <view class="section" style="width:{{windowWidth}}px;">
-    <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="picket" wx:if="{{selectSeat}}">
-      <view class="detail">{{sellSeat[seatIndex]}}
-      </view>
-    </picker>
-    <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="address_detail" wx:else>
-      <view class="detail">{{temp_seat_type}}
-      </view>
-    </picker>
-  </view>
-  <view class="detail_image">
-    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-  </view>
-</view>
-<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-<view class="cell_title_info_image" bindtap="deliveryTap">
-  <view class="title">配送方式
-  </view>
-  <view class="section" style="width:{{windowWidth}}px;">
-    <view class="detail" wx:if="{{selectDelivery}}">{{sellDelivery}}
+<scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
+  <view class="cell_title_info_image">
+    <view class="title">出售方式
     </view>
-    <view class="detail" wx:else>{{sellDelivery}}
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="picket" wx:if="{{isSelect}}">
+        <view class="detail">{{sellType[changeIndex]}}
+        </view>
+      </picker>
+      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_sell_type}}
+        </view>
+      </picker>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view class="detail_image">
-    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-  </view>
-</view>
-<view class="service">
-  <view class="serviceMuch">
-    <view>
-      <text class="serviceTitle">结算总价：</text>
-      <text class="allMuch">{{sellMuch}}.00</text>
-      <text class="serviceTitle"> 元</text>
+  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view class="cell_title_info_image">
+    <view class="title">区域
     </view>
-    <view class="poundageClass">
-      <text class="serviceTitle"> 交易手续费：{{poundage}} 元</text>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="bindPickerRegion" value="{{index}}" range="{{sellRegion}}" class="picket" wx:if="{{selectRegion}}">
+        <view class="detail">{{sellRegion[regionIndex]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerRegion" value="{{index}}" range="{{sellRegion}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_region_type}}
+        </view>
+      </picker>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view class="much">
-    <view class="serviceInfo">第三方支付平台手续费1%
+  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view class="cell_title_info_image">
+    <view class="title">排数
     </view>
-    <view class="serviceInfos">票款结算金额将于对方确认收货后转入账户钱包</view>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="bindPickerRow" value="{{index}}" range="{{sellRow}}" class="picket" wx:if="{{selectRow}}">
+        <view class="detail">{{sellRow[rowIndex]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerRow" value="{{index}}" range="{{sellRow}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_row_type}}
+        </view>
+      </picker>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>
   </view>
-</view>
+  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view class="cell_title_info_image">
+    <view class="title">是否连座
+    </view>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="picket" wx:if="{{selectSeat}}">
+        <view class="detail">{{sellSeat[seatIndex]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_seat_type}}
+        </view>
+      </picker>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>
+  </view>
+  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view class="cell_title_info_image" bindtap="deliveryTap">
+    <view class="title">配送方式
+    </view>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <view class="detail" wx:if="{{selectDelivery}}">{{sellDelivery}}
+      </view>
+      <view class="detail" wx:else>{{sellDelivery}}
+      </view>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>
+  </view>
+  <view class="service">
+    <view class="serviceMuch">
+      <view>
+        <text class="serviceTitle">结算总价：</text>
+        <text class="allMuch">{{sellMuch}}.00</text>
+        <text class="serviceTitle"> 元</text>
+      </view>
+      <view class="poundageClass">
+        <text class="serviceTitle"> 交易手续费：{{poundage}} 元</text>
+      </view>
+    </view>
+    <view class="much">
+      <view class="serviceInfo">第三方支付平台手续费1%
+      </view>
+      <view class="serviceInfos">票款结算金额将于对方确认收货后转入账户钱包</view>
+    </view>
+  </view>
+</scroll-view>
 <view class="next" bindtap="nextTap">挂票</view>
