@@ -171,6 +171,7 @@ Page({
         var iconUrls = imageIcon.split('?')
         data.show.category.icon = iconUrls[0]
         data.show.category.icon_end = iconUrls[1]
+        data.orderStatus = "user"
         var order = JSON.stringify(data)
         console.log(order)
         wx.navigateTo({

@@ -73,10 +73,9 @@ App({
                     console.log(pages)
                     var home = pages[0]
                     console.log(home)
-                    home.isAllowUser = false
-                    // home.setData({
-                    //   isAllowUser: false
-                    // })
+                    home.setData({
+                      isAllowUser: false
+                    })
                     console.log(home)
                     try {
                       wx.setStorageSync('userInfo', res)

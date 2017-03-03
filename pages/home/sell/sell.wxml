@@ -74,7 +74,7 @@
       </view>
     </view>
     <view class="ticketListSession" wx:else>
-      <view wx:for="{{orders.order_list}}" wx:key="ticketShow" style="background-color: white;  flex-direction: column;  justify-content: center;  align-items: center;  display: flex;  margin-bottom: 20rpx;">
+      <view wx:for="{{orders.order_list}}" wx:key="ticketShow" style="background-color: white;  flex-direction: column;  justify-content: center;  align-items: center;  display: flex;  margin-bottom: 20rpx;" bindtap="orderTap" id="orderTap" wx:for-item="item" data-order="{{item}}">
         <template is="ticketList" data="{{...item}}" />
       </view>
     </view>

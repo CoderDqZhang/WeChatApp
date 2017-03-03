@@ -209,7 +209,7 @@ Page({
     console.log(form)
     console.log(that.data)
 
-    if (form.delivery_type == 1) {
+    if (form.delivery_type == 1 || form.delivery_type == 4) {
       if (that.data.address == null) {
         wx.showModal({
           title: "请输入收货地址",

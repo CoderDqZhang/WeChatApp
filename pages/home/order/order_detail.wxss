@@ -6,27 +6,31 @@ page {
 
 .ticketSession {
   background-color: white;
+  margin-top: 20rpx;
 }
 
 .ticket_desc {
   width: 100%;
-  margin-top: 0px;
   flex-direction: row;
   display: flex;
+  height: 300rpx;
 }
 
 .show_cover {
-  width: 270rpx;
   height: 100%;
+  align-content: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }
 
 .ticketPost {
+  margin-top: 44rpx;
   margin-left: 30rpx;
-  margin-top: 30rpx;
   margin-bottom: 20rpx;
-  width: 220rpx;
+  width: 164rpx;
   border-radius: 4rpx;
-  height: 300rpx;
+  height: 220rpx;
 }
 
 .show_ticket_info {
@@ -49,9 +53,9 @@ page {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: #384249;
-  font-size: 32rpx;
-  margin-top: 30rpx;
-  line-height: 44rpx;
+  font-size: 28rpx;
+  margin-top: 40rpx;
+  line-height: 40rpx;
 }
 
 .show_session {
@@ -88,14 +92,14 @@ page {
 }
 
 .venue {
-  margin-top: 44rpx;
+  margin-top: 40rpx;
   font-size: 26rpx;
   color: #384249;
 }
 
 .venue_address {
   font-size: 24rpx;
-  margin-top: 8rpx;
+  margin-top: 4rpx;
   color: #bbc1cb;
 }
 
@@ -105,8 +109,8 @@ page {
   height: 74rpx;
 }
 
-.ticket_price {
-  min-height: 238rpx;
+.ticketInfo {
+  min-height: 248rpx;
   background-color: white;
   flex-direction: row;
   display: flex;
@@ -114,11 +118,13 @@ page {
 }
 
 .ticke_info {
+  margin-top: 10rpx;
   margin-left: 30rpx;
   width: 5000rpx;
 }
 
 .ticke_price {
+  /*margin-top: -10rpx;*/
   flex-direction: column;
   align-items: flex-end;
   display: flex;
@@ -127,7 +133,7 @@ page {
 }
 
 .info {
-  margin-top: 36rpx;
+  margin-top: 30rpx;
   font-size: 24rpx;
   color: #384249;
 }
@@ -138,31 +144,84 @@ page {
   color: #384249;
 }
 
-.ticket_sum{
-  min-height: 104rpx;
+.ticket_sum {
+  height: 104rpx;
   background-color: white;
   flex-direction: row;
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
+  align-items: center;
 }
-.ticke_sum_info{
+
+.ticke_sum_info {
   margin-left: 30rpx;
-  margin-top: 40rpx;
   font-size: 24rpx;
   width: 5000rpx;
   color: #384249;
 }
-.sum_price{
+
+.sum_price {
   margin-right: 30rpx;
   text-align: right;
-  margin-top: 40rpx;
   font-size: 24rpx;
   width: 5000rpx;
   color: #4bd4c5;
 }
-.server_info{
+
+.server_info {
   margin-left: 30rpx;
-  margin-top: 10rpx;
+  margin-top: 4rpx;
   font-size: 24rpx;
-  color: #BBC1CB;
+  color: #bbc1cb;
+}
+
+.ticketStatus {
+  margin-top: 0rpx;
+  background-color: white;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-start;
+  display: flex;
+}
+
+.ticket_status_s {
+  margin-top: 52rpx;
+  margin-left: 30rpx;
+  font-size: 34rpx;
+  color: #384249;
+}
+
+.ticket_status {
+  margin-top: 52rpx;
+  margin-left: 30rpx;
+  font-size: 34rpx;
+  color: #4bd4c5;
+}
+
+.delivery {
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  margin-bottom: 52rpx;
+}
+
+.deliveryTitle {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #556169;
+}
+
+.order_message{
+  flex-direction: row;
+  display: flex;
+  background-color: white;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.message_title{
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  margin-left: 30rpx;
+  font-size: 24rpx;
+  color: #384249; 
 }

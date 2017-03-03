@@ -3,14 +3,12 @@
 <template name="ticketDesc">
   <view class="ticket_desc">
     <view class="show_cover">
-      <image src="{{show.cover}}" class="ticketPost" mode="aspectFill"></image>
+        <image src="{{show.cover}}" class="ticketPost" mode="aspectFill"></image>
     </view>
     <view class="show_info">
       <view class="show_title">{{show.title}}</view>
       <view class="show_ticket_info">
         <view class="show_session">场次：{{session.name}}</view>
-
-        <!--<view class="show_detail">场馆：{{venue.name}}{{venue.address}}</view>-->
         <view class="show_detail">票面：{{ticket.original_ticket.name}}x{{ticket.buy_number}}</view>
         <view class="show_detail">数量：{{ticket_count}}</view>
         <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
@@ -20,6 +18,15 @@
   </view>
   <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
 </template>
+<view class="ticketStatus">
+  <view class="ticket_status" wx:if="{{isHandel}}">{{ticketStatus}}</view>
+  <view class="ticket_status_s" wx:else>{{ticketStatus}}</view>
+  <view class="delivery">
+    <view class="deliveryTitle">{{delivery_type}}</view>
+    <view class="deliveryTitle">{{name}}</view>
+    <view class="deliveryTitle">{{address}}</view>
+  </view>
+</view>
 <view class="ticketSession">
   <template is="ticketDesc" data="{{...order}}" />
 </view>
@@ -35,7 +42,11 @@
   </view>
 </view>
 <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1rpx;"></view>
-<view class="ticket_price">
+<view wx:if="{{order.message != ''}}" class="order_message">
+  <view class="message_title">{{order.message}}</view>
+</view>
+<view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1rpx;" wx:if="{{order.message != ''}}"></view>
+<view class="ticketInfo">
   <view class="ticke_info">
     <view class="info">价格
     </view>
@@ -57,7 +68,9 @@
 <view class="ticket_sum">
   <view class="ticke_sum_info">实付金额
   </view>
-  <view class="sum_price">{{order.total}}元
+  <view class="sum_price">
+  <text>{{order.total}}.00</text>
+  <text style="color:#384249">元</text>
   </view>
 </view>
 <view style="margin-top: 30rpx;">
@@ -70,3 +83,4 @@
   <view class="server_info">客服工作时间：周一至周六 9:00-21:00
   </view>
 </view>
+<view style="height:60rpx;"></view>

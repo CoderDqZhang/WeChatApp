@@ -348,7 +348,11 @@ Page({
         sessionShow.cover = arr[0]
         sessionShow.cover_end = arr[1]
         sessionShow.category.icon = ""
-        var show = JSON.stringify(sellTicket)
+        for (var j = 0; j < sessionShow.session_list.length; j++) {
+          sessionShow.session_list[j].venue_map = ""
+        }
+        sessionShow.venue.venue_map = ""
+        var show = JSON.stringify(sessionShow)
 
         wx.navigateTo({
           url: '../scene/ticket_scen?sellShow=' + show,
@@ -371,8 +375,8 @@ Page({
         sessionShow.cover_end = arr[1]
         sessionShow.category.icon = ""
         sessionShow.venue.venue_map = ""
+        sessionShow.session.venue_map = ""
         console.log(sessionShow)
-        // that.data.sessionShow.session = session
         var sellShow = JSON.stringify(sessionShow)
         wx.navigateTo({
           url: '../ticket_desc/ticket_desc?sellShow=' + sellShow,

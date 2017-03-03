@@ -60,7 +60,8 @@ Page({
       }
 
       that.setData({
-        categoryArray: tempData
+        categoryArray: tempData,
+        // isAllowUser: false
       })
     });
 

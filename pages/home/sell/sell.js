@@ -137,7 +137,7 @@ function ticketShowModelTicketName(data) {
         var ticket = data.session_list[0].ticket_list[k]
         ticketName = ticketName + "、" + ticket.original_ticket.name
       }
-      
+
     } else {
       ticketName = ticketName + "、" + data.session_list[0].ticket_list[0].original_ticket.name
     }
@@ -145,7 +145,7 @@ function ticketShowModelTicketName(data) {
   var arr = ticketName.split('、')
   arr = getArray(arr)
   ticketName = ""
-  for (var l = 0; l < arr.length; l ++) {
+  for (var l = 0; l < arr.length; l++) {
     ticketName = ticketName + "、" + arr[l]
   }
   // if (ticketName.length > 1){
@@ -155,17 +155,17 @@ function ticketShowModelTicketName(data) {
 }
 
 function getArray(a) {
- var hash = {},
-     len = a.length,
-     result = [];
+  var hash = {},
+    len = a.length,
+    result = [];
 
- for (var i = 0; i < len; i++){
-     if (!hash[a[i]]){
-         hash[a[i]] = true;
-         result.push(a[i]);
-     } 
- }
- return result;
+  for (var i = 0; i < len; i++) {
+    if (!hash[a[i]]) {
+      hash[a[i]] = true;
+      result.push(a[i]);
+    }
+  }
+  return result;
 }
 
 Page({
@@ -296,6 +296,10 @@ Page({
       sellTicket.cover = arr[0]
       sellTicket.cover_end = arr[1]
       sellTicket.category.icon = ""
+      for (var j = 0; j < sellTicket.session_list.length; j++) {
+        sellTicket.session_list[j].venue_map = ""
+      }
+      sellTicket.venue.venue_map = ""
       var show = JSON.stringify(sellTicket)
 
       wx.navigateTo({
@@ -319,6 +323,7 @@ Page({
       sellTicket.cover_end = arr[1]
       sessionShow.category.icon = ""
       sessionShow.venue.venue_map = ""
+      sessionShow.session.venue_map = ""
       console.log(sessionShow)
       // that.data.sessionShow.session = session
       var sellShow = JSON.stringify(sessionShow)
@@ -336,7 +341,26 @@ Page({
       })
     }
   },
-
+  orderTap: function (event) {
+    var data = event.currentTarget.dataset.order
+    var imageUrl = data.show.cover
+    var arr = imageUrl.split('?')
+    data.show.cover = arr[0]
+    data.show.cover_end = arr[1]
+    var imageS = data.session.venue_map
+    var urls = imageS.split('?')
+    data.session.venue_map = urls[0]
+    data.session.venue_end = urls[1]
+    var imageIcon = data.show.category.icon
+    var iconUrls = imageIcon.split('?')
+    data.show.category.icon = iconUrls[0]
+    data.show.category.icon_end = iconUrls[1]
+    var order = JSON.stringify(data)
+    console.log(order)
+    wx.navigateTo({
+      url: '../order/order_detail?order=' + order
+    })
+  },
   onReady: function () {
     // 页面渲染完成
   },

@@ -14,7 +14,7 @@ Page({
         var that = this;
         var url
         if (isNext) {
-            url = url = "show/list/?cat_id=0&start=" + categoty.next_start
+            url = url = "show/list/?cat_id="+that.data.categoryShow.id+"&start=" + categoty.next_start
         } else {
             console.log(categoty)
             that.setData({
