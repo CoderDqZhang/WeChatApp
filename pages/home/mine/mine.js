@@ -59,5 +59,8 @@ Page({
             // complete
           }
         })
+    },
+    myWalletTap: function () {
+        
     }
 })

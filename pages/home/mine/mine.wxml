@@ -17,6 +17,10 @@
     <view class="userName">{{userInfo.username}}</view>
   </view>
   <view class="table">
+  <view class="mineClass" id="myoWallet" bindtap="myWalletTap">
+      <view class="tableTitle">我的钱包</view>
+      <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+    </view>
     <view class="mineClass" id="myorder" bindtap="myorderTap">
       <view class="tableTitle">我的订单</view>
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>

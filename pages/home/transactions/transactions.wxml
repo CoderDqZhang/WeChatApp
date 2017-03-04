@@ -1,0 +1,23 @@
+
+<!--pages/home/wallet/transactions/transactions.wxml-->
+<template name="transactionsT">
+  <view class="transaction_class">
+    <view class="transaction_info">
+      <view class="transaction_title">{{desc}}
+      </view>
+      <view class="transaction_time">{{created}}</view>
+    </view>
+    <view class="transaction_much_a" wx:if="{{option_desc == '+'}}">
+        <view>{{option_desc}}{{amount/100}}</view>
+    </view>
+    <view class="transaction_much_s" wx:else>
+        <view>{{option_desc}}{{amount/100}}</view>
+    </view>
+  </view>
+  <view class="row_line"></view>
+</template>
+<view>
+  <view wx:for="{{transactions.his_list}}" wx:key="transactions" class="transactions">
+    <template is="transactionsT" data="{{...item}}" />
+  </view>
+</view>

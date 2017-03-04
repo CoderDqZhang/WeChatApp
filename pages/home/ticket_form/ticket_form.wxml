@@ -106,3 +106,4 @@
     <button formType="submit" class="confim">提交</button>
   </view>
 </form>
+<view style="height:60rpx;"></view>

@@ -97,15 +97,15 @@ Page({
             if (tickets[i].sell_type == 2) {
                 deliveType = "打包购买 "
             }
+            var isExpress = false
             for (var j = 0; j < arr.length; j++) {
-                if (arr[j] == "1") {
+                if ((arr[j] == "1" || arr[j] == "4") && !isExpress) {
+                    isExpress = true
                     deliveType = deliveType + "快递 "
                 } else if (arr[j] == "2") {
                     deliveType = deliveType + "自取 "
                 } else if (arr[j] == "3") {
                     deliveType = deliveType + "现场 "
-                } else if (arr[j] == "4") {
-                    deliveType = deliveType + "快递 "
                 }
             }
             if (tickets[i].seat_type == 1) {

@@ -9,7 +9,7 @@
       <view class="show_title">{{show.title}}</view>
       <view class="show_ticket_info">
         <view class="show_session">场次：{{session.name}}</view>
-        <view class="show_detail">票面：{{ticket.original_ticket.name}}x{{ticket.buy_number}}</view>
+        <view class="show_detail">票面：{{ticket.original_ticket.name}}</view>
         <view class="show_detail">数量：{{ticket_count}}</view>
         <view class="show_detail" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优分配</view>
         <view class="show_detail" wx:else>区域：{{ticket.region}}</view>
@@ -48,15 +48,15 @@
 <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1rpx;" wx:if="{{order.message != ''}}"></view>
 <view class="ticketInfo">
   <view class="ticke_info">
-    <view class="info">价格
+    <view class="info">代收票款
     </view>
-    <view class="info">折扣
+    <view class="info">优惠券
     </view>
-    <view class="info">快递价格
+    <view class="info">配送费
     </view>
   </view>
   <view class="ticke_price">
-    <view class="detail_info">{{order.ticket.price}}.00 元
+    <view class="detail_info">{{order.ticket.price * order.ticket_count}}.00 元
     </view>
     <view class="detail_info">0.00 元
     </view>
@@ -69,8 +69,8 @@
   <view class="ticke_sum_info">实付金额
   </view>
   <view class="sum_price">
-  <text>{{order.total}}.00</text>
-  <text style="color:#384249">元</text>
+  <text>{{order.total}}.00    </text>
+  <text style="color:#384249; font-size:24rpx;">元</text>
   </view>
 </view>
 <view style="margin-top: 30rpx;">

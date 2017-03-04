@@ -1,0 +1,128 @@
+/* pages/home/wallet/wallet/my_wallet.wxss */
+
+.
+page {
+  background-color: #efeff4;
+}
+
+.table_header {
+  background-color: #4bd4c5;
+  height: 382rpx;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.header_info {
+  margin-top: 78rpx;
+  color: white;
+  font-size: 28rpx;
+}
+
+.wall_much {
+  margin-top: 36rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.much {
+  color: white;
+  font-size: 100rpx;
+}
+
+.transactions {
+  margin-left: 12rpx;
+  margin-top: 40rpx;
+  font-size: 24rpx;
+  color: white;
+}
+
+.wall_info {
+  flex-direction: row;
+  display: flex;
+}
+
+.info_class {
+  flex-direction: column;
+  display: flex;
+  width: 33.3%;
+  height: 160rpx;
+}
+
+.info_title {
+  margin-top: 50rpx;
+  margin-left: 40rpx;
+  font-size: 24rpx;
+  color: #556169;
+}
+
+.info_detail {
+  color: #a2abb5;
+  margin-top: 10rpx;
+  margin-left: 40rpx;
+  font-size: 28rpx;
+}
+
+.column_line {
+  background-color: #e9ebf2;
+  width: 1rpx;
+  margin-top: 24rpx;
+  height: 100rpx;
+}
+
+.row_line {
+  background-color: #e9ebf2;
+  height: 1rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.bottom_view {
+  height: 280rpx;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.wallet_rule {
+  font-size: 26rpx;
+  color: #4bd4c5;
+}
+
+.wallet_action {
+  flex-direction: row;
+  display: flex;
+  height: 98rpx;
+  margin-top: 82rpx;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.top_up {
+  padding-top: 28rpx;
+  margin-left: 30rpx;
+  border-width: 2rpx;
+  border-radius: 4rpx;
+  color: #4bd4c5;
+  font-size: 30rpx;
+  width: 100%;
+  border-color: #4bd4c5;
+  border: 2rpx solid #4bd4c5;
+  margin-right: 15rpx;
+  text-align: center;
+}
+
+.withdraw {
+    padding-top: 28rpx;
+  background-color: #4bd4c5;
+  border-radius: 4rpx;
+  margin-left: 15rpx;
+  color: #fff;
+  font-size: 30rpx;
+  width: 100%;
+  margin-right: 30rpx;
+  text-align: center;
+  border-color: #4bd4c5;
+}

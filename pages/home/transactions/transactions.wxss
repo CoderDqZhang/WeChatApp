@@ -1,0 +1,45 @@
+/* pages/home/wallet/transactions/transactions.wxss */
+
+.transaction_class {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 130rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.transaction_info {
+  flex-direction: column;
+  display: flex;
+}
+
+.transaction_title {
+  color: #384249;
+  font-size: 28rpx;
+}
+
+.transaction_time {
+  font-size: 24rpx;
+  color: #a2abb5;
+  margin-top: 4rpx;
+  margin-right: 30rpx;
+}
+
+.transaction_much_a {
+  font-size: 30rpx;
+  color: #4bd4c5;
+}
+
+.transaction_much_s {
+  font-size: 30rpx;
+  color: #8a96a2;
+}
+
+.row_line {
+  background-color: #e9ebf2;
+  height: 1rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
