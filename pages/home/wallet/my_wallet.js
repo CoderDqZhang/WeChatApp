@@ -1,11 +1,12 @@
 // pages/home/wallet/wallet/my_wallet.js
+var app = getApp()
 Page({
-  data:{
-    winWidth:0,
-    winHeight:0,
-
+  data: {
+    winWidth: 0,
+    winHeight: 0,
+    wallet:{}
   },
-  onLoad:function(options){
+  onLoad: function (options) {
     var that = this;
     /** 
      * 获取系统信息 
@@ -18,32 +19,57 @@ Page({
           winHeight: res.windowHeight
         });
       }
-
     });
     // 页面初始化 options为页面跳转所带来的参数
+    that.requestData()
   },
-  onReady:function(){
+  requestData: function () {
+    var that = this
+    app.func.requestGet('account/', {}, function (res) {
+      res.balance = (res.balance / 100).toFixed(2)
+      res.deposit = (res.deposit/100).toFixed(2)
+      res.pending_balance = (res.pending_balance / 100).toFixed(2)
+      that.setData({
+        wallet:res
+      })
+    });
+  },
+  onReady: function () {
     // 页面渲染完成
   },
-  onShow:function(){
+  onShow: function () {
     // 页面显示
   },
-  onHide:function(){
+  onHide: function () {
     // 页面隐藏
   },
-  onUnload:function(){
+  onUnload: function () {
     // 页面关闭
   },
-  transactionsTap: function (){
+  transactionsTap: function () {
     wx.navigateTo({
       url: '../transactions/transactions',
-      success: function(res){
+      success: function (res) {
         // success
       },
-      fail: function() {
+      fail: function () {
         // fail
       },
-      complete: function() {
+      complete: function () {
+        // complete
+      }
+    })
+  },
+  withdrawTap: function () {
+    wx.navigateTo({
+      url: '../withdraw/withdraw?balance=' + JSON.stringify(this.data.wallet),
+      success: function (res) {
+        // success
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
         // complete
       }
     })

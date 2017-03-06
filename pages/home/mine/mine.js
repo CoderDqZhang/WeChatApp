@@ -61,6 +61,17 @@ Page({
         })
     },
     myWalletTap: function () {
-        
+        wx.navigateTo({
+          url: '../wallet/my_wallet',
+          success: function(res){
+            // success
+          },
+          fail: function() {
+            // fail
+          },
+          complete: function() {
+            // complete
+          }
+        })
     }
 })

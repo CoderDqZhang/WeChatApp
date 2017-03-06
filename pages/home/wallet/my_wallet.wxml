@@ -4,24 +4,24 @@
   <view class="header_info">账户余额（元）
   </view>
   <view class="wall_much">
-    <view class="much">650.20</view>
+    <view class="much">{{wallet.balance}}</view>
     <view class="transactions" id="transactionsTap" bindtap="transactionsTap">明细 > </view>
   </view>
 </view>
 <view class="wall_info" >
   <view class="info_class">
     <view class="info_title">可用余额（元）</view>
-    <view class="info_detail">600.00</view>
+    <view class="info_detail">{{wallet.balance}}</view>
   </view>
   <view class="column_line"></view>
   <view class="info_class">
     <view class="info_title">冻结余额（元）</view>
-    <view class="info_detail">600.00</view>
+    <view class="info_detail">{{wallet.deposit}}</view>
   </view>
   <view class="column_line"></view>
   <view class="info_class">
     <view class="info_title">即将到账（元）</view>
-    <view class="info_detail">600.00</view>
+    <view class="info_detail">{{wallet.pending_balance}}</view>
   </view>
 </view>
 <view class="row_line"></view>
@@ -29,6 +29,6 @@
 <view class="wallet_rule">查看规则说明</view>
 <view class="wallet_action">
     <!--<view class="top_up">充值</view>-->
-    <view class="withdraw">提现</view>
+    <view class="withdraw" id="withdraw" bindtap="withdrawTap">提现</view>
 </view>
 </view>

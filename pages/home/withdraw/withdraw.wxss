@@ -1,0 +1,74 @@
+/* pages/home/withdraw/withdraw.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.table {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  height: 96rpx;
+  background-color: white;
+}
+
+.table_much {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 96rpx;
+  background-color: white;
+}
+
+.input_text {
+  margin-left: 48rpx;
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.info_title {
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.input_much {
+  margin-left: 44rpx;
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.info_handel {
+  margin-right: 30rpx;
+  font-size: 26rpx;
+  color: #4bd4c5;
+}
+
+.row_line {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 1rpx;
+  color: #e9ebf2;
+  margin-top: -1px;
+}
+
+.service{
+    margin-top: 40rpx;
+    margin-left: 30rpx;
+}
+
+.service_title{
+    font-size: 24rpx;
+    color: #BBC1CB;
+    margin-top: 4rpx;
+}
+
+.withdraw{
+    margin-top: 60rpx;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    background-color: #4bd4c5;
+  font-size: 36rpx;
+  color: white;
+}

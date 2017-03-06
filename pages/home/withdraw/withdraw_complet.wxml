@@ -1,0 +1,20 @@
+
+<!--pages/home/withdraw/withdraw_complet.wxml-->
+<view style="background-color:white; height:506rpx;">
+  <view class="top_session">
+    <view><image class="image" src="/images/gloable/finished.png" mode="aspectFill"></image>
+    </view>
+    <view class="withdraw_title">提现申请已提交</view>
+  </view>
+  <view class="withdraw_info">
+    <view class="table_info">
+      <view class="table_title">支付宝账号</view>
+      <view class="table_detail">{{withdraw.alipay_account}}</view>
+    </view>
+    <view class="table_info">
+      <view class="table_title">提现金额</view>
+      <view class="table_detail">{{withdraw.amount}}</view>
+    </view>
+  </view>
+</view>
+<button class="confim" bindtap="completTap">完成</button>

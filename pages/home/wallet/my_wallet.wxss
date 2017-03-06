@@ -115,10 +115,10 @@ page {
 }
 
 .withdraw {
-    padding-top: 28rpx;
+  padding-top: 28rpx;
   background-color: #4bd4c5;
   border-radius: 4rpx;
-  margin-left: 15rpx;
+  margin-left: 30rpx;
   color: #fff;
   font-size: 30rpx;
   width: 100%;

@@ -1,4 +1,5 @@
 // pages/home/wallet/transactions/transactions.js
+var app = getApp()
 Page({
   data: {
     transactions: {
@@ -21,10 +22,60 @@ Page({
       ],
       "next_page": 0,
       "total": 2
-    }
+    },
+    isHaveTransan: false
   },
   onLoad: function (options) {
+    this.requestData(false)
     // 页面初始化 options为页面跳转所带来的参数
+  },
+  requestData: function (isNext) {
+    var that = this;
+    // that.setData({
+    //     isHaveOrder: false
+    // })
+    var tempTicket = that.data.transactions
+    var url
+    if (isNext) {
+      url = url = "account/history/?page=" + tempTicket.next_page
+    } else {
+      url = 'account/history/'
+    }
+    app.func.requestGet(url, {}, function (res) {
+      if (isNext) {
+        for (var j = 0; j < res.his_list.length; j++) {
+          res.his_list[j].amount = (res.his_list[j].amount / 100).toFixed(2)
+          tempTicket.his_list.push(res.his_list[j])
+        }
+        tempTicket.next_page = res.next_page
+        tempTicket.has_next = res.has_next
+      } else {
+        for (var j = 0; j < res.his_list.length; j++) {
+          res.his_list[j].amount = (res.his_list[j].amount / 100).toFixed(2)
+        }
+        tempTicket = res
+        console.log(tempTicket)
+        wx.stopPullDownRefresh()
+
+      }
+      that.setData({
+        isHaveTransan: tempTicket.his_list.length != 0 ? false : true,
+        transactions: tempTicket,
+      })
+    });
+  },
+  onPullDownRefresh: function () {
+    var that = this
+    that.requestData(false)
+  },
+
+  onReachBottom: function () {
+    var that = this
+    if (that.data.transactions.has_next) {
+      that.requestData(true)
+    } else {
+      return
+    }
   },
   onReady: function () {
     // 页面渲染完成

@@ -1,0 +1,26 @@
+
+<!--pages/home/withdraw/withdraw.wxml-->
+<form bindsubmit="formSubmit">
+  <view class="table">
+    <view class="info_title">支付宝账户</view>
+    <input name="phone" class="input_text" placeholder="" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;" style="width:{{winWidth - 120}}px; " value="{{alipay_acount}}"/>
+  </view>
+  <view class="row_line"></view>
+  <view class="table">
+    <view class="info_title">支付宝姓名</view>
+    <input name="name" class="input_text" placeholder="" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;" style="width:{{winWidth - 120}}px; " value="{{alipay_name}}"/>
+  </view>
+  <view class="row_line"></view>
+  <view class="table_much">
+    <view class="info_title">提现金额</view>
+    <input name="much" class="input_much" placeholder="最多可以提现:{{balance.balance}} 元" placeholder-style="font-size: 26rpx;color: #DDE0E5;letter-spacing: 0;" style="width:{{winWidth - 180}}px;" type="number" value="{{allbalance}}"/>
+    <view class="info_handel" id = "allbalance" bindtap="allbalanceTap">全部提现</view>
+  </view>
+  <view class="service">
+    <view class="service_title">目前仅支持支付宝提现</view>
+    <view class="service_title">提现免费，单笔提现金额不小于 50 元
+    </view>
+    <view class="service_title">提现到账时间为 3 - 5 个工作日，节假日顺延</view>
+  </view>
+  <button class="withdraw" formType="submit">提现</button>
+</form>

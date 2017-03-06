@@ -1,0 +1,57 @@
+/* pages/home/withdraw/withdraw_complet.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.top_session {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.image {
+  width: 116rpx;
+  height: 116rpx;
+  margin-top: 86rpx;
+}
+
+.withdraw_title {
+  font-size: 32rpx;
+  color: #4bd4c5;
+  margin-top: 34rpx;
+}
+
+.withdraw_info {
+  margin-top: 82rpx;
+}
+
+.table_info {
+  margin-bottom: 30rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table_title {
+  margin-left: 30rpx;
+  font-size: 24rpx;
+  color: #384249;
+}
+
+.table_detail {
+  margin-right: 30rpx;
+  font-size: 24rpx;
+  color: #384249;
+}
+
+.confim {
+  margin-top: 60rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  background-color: #4bd4c5;
+  font-size: 36rpx;
+  color: white;
+}

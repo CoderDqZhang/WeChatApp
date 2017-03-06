@@ -36,7 +36,7 @@ Page({
   },
 
   onLoad: function (options) {
-    this.genderData(options.show)
+    this.genderDataform(options.show)
     var that = this
     wx.getStorage({
       key: 'userInfo',
@@ -80,7 +80,7 @@ Page({
       ticketMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price
     })
   },
-  genderData: function (show) {
+  genderDataform: function (show) {
     var that = this;
     that.setData({
       sessionShow: JSON.parse(show),

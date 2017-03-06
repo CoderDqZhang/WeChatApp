@@ -21,6 +21,7 @@
       <view class="tableTitle">我的钱包</view>
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
     </view>
+    <view style="margin-left: 15px;margin-right: 0px;height:1rpx; background-color: #E9EBF2;"></view>
     <view class="mineClass" id="myorder" bindtap="myorderTap">
       <view class="tableTitle">我的订单</view>
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>

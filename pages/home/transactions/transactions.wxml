@@ -8,10 +8,10 @@
       <view class="transaction_time">{{created}}</view>
     </view>
     <view class="transaction_much_a" wx:if="{{option_desc == '+'}}">
-        <view>{{option_desc}}{{amount/100}}</view>
+        <view>{{option_desc}}{{amount}}</view>
     </view>
     <view class="transaction_much_s" wx:else>
-        <view>{{option_desc}}{{amount/100}}</view>
+        <view>{{option_desc}}{{amount}}</view>
     </view>
   </view>
   <view class="row_line"></view>
