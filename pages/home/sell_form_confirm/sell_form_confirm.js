@@ -46,7 +46,8 @@ Page({
     sellSeat: [],
     winWidth: 0,
     winHeight: 0,
-
+    isRuleView: false,
+    srollerViewHeight: 45
   },
   changeData: function (res) {
     this.data.sellDelivery = ""
@@ -297,6 +298,13 @@ Page({
         // complete
       }
     })
+  },
+  cancelRuleView: function (){
+    this.setData({
+      isRuleView: this.data.isRuleView == false ? true : false,
+      srollerViewHeight : this.data.isRuleView == false ? 220 : 45
+    })
+    console.log( this.data.srollerViewHeight)
   },
   nextTap: function () {
     console.log(this.data)

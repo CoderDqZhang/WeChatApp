@@ -28,6 +28,11 @@
   </view>
 </view>
 <view class="ticketSession">
+  <view class="order_info">
+    <view class="order_id">订单号：{{order.id}}</view>
+    <view class="contact" wx:if="{{isHaveConnect}}" bindtap="callPhone">联系商家</view>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
   <template is="ticketDesc" data="{{...order}}" />
 </view>
 <view class="location">
@@ -74,8 +79,6 @@
   </view>
 </view>
 <view style="margin-top: 30rpx;">
-  <view class="server_info">订单号：{{order.id}}
-  </view>
   <view class="server_info">订单时间：{{order.created}}
   </view>
   <view class="server_info">客服电话：400-873-8011

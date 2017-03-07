@@ -34,7 +34,7 @@ page {
 }
 
 .input_much {
-  margin-left: 44rpx;
+  margin-left: 52rpx;
   font-size: 26rpx;
   color: #384249;
 }
@@ -48,27 +48,27 @@ page {
 .row_line {
   margin-left: 30rpx;
   margin-right: 30rpx;
-  height: 1rpx;
+  height: 2rpx;
   color: #e9ebf2;
   margin-top: -1px;
 }
 
-.service{
-    margin-top: 40rpx;
-    margin-left: 30rpx;
+.service {
+  margin-top: 40rpx;
+  margin-left: 30rpx;
 }
 
-.service_title{
-    font-size: 24rpx;
-    color: #BBC1CB;
-    margin-top: 4rpx;
+.service_title {
+  font-size: 24rpx;
+  color: #bbc1cb;
+  margin-top: 4rpx;
 }
 
-.withdraw{
-    margin-top: 60rpx;
-    margin-left: 30rpx;
-    margin-right: 30rpx;
-    background-color: #4bd4c5;
+.withdraw {
+  margin-top: 60rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  background-color: #4bd4c5;
   font-size: 36rpx;
   color: white;
 }

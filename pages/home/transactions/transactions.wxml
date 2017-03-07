@@ -8,15 +8,23 @@
       <view class="transaction_time">{{created}}</view>
     </view>
     <view class="transaction_much_a" wx:if="{{option_desc == '+'}}">
-        <view>{{option_desc}}{{amount}}</view>
+      <view>{{option_desc}}{{amount}}</view>
     </view>
     <view class="transaction_much_s" wx:else>
-        <view>{{option_desc}}{{amount}}</view>
+      <view>{{option_desc}}{{amount}}</view>
     </view>
   </view>
   <view class="row_line"></view>
 </template>
-<view>
+<view wx:if="{{isHaveTransan}}" style="height:{{winHeight}}px;width: 100%;flex-direction: column;  display: flex;justify-content: center;align-items: center;background-color:#F6F7FA;">
+  <view class="none_cover">
+    <image src="/images/gloable/Icon_Detail.png" mode="aspectFill" class="cover"></image>
+  </view>
+  <view class="none_text">
+    <view>还没有交易明细哦</view>
+  </view>
+</view>
+<view wx:else>
   <view wx:for="{{transactions.his_list}}" wx:key="transactions" class="transactions">
     <template is="transactionsT" data="{{...item}}" />
   </view>

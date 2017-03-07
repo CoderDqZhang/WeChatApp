@@ -43,3 +43,16 @@
   margin-left: 30rpx;
   margin-right: 30rpx;
 }
+
+.cover {
+  margin-top: -96rpx;
+  width: 204rpx;
+  height: 144rpx;
+}
+
+.none_text {
+  margin-top: 75rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #BBC1CB;
+}

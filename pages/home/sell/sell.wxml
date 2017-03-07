@@ -35,7 +35,7 @@
 <template name="ticketList">
   <view style="height: 10px; background-color: #EFEFF4; justify-content: flex-start; align-items: flex-start;"></view>
   <view style="margin-left: 30rpx; margin-right: 30rpx;">
-    <view wx:if="{{ status== 3 || status == 7 }}" style="margin-top: 26rpx;font-size: 26rpx; color: #4bd4c5;">{{status_desc}}</view>
+    <view wx:if="{{ status== 3 || status == 7 || status == 10}}" style="margin-top: 26rpx;font-size: 26rpx; color: #4bd4c5;">{{status_desc}}</view>
     <view style="margin-top: 26rpx;font-size: 26rpx;color: #8a96a2;" wx:else>{{status_desc}}</view>
     <view style="height: 1rpx; background-color: #E9EBF2; margin-top: 13px;"></view>
     <view style="margin-bottom:30rpx;">
@@ -45,13 +45,12 @@
       <view style="font-size: 26rpx;line-height: 34rpx;color: #8a96a2;" wx:if="{{ticket.region == '' || ticket.row == ''}}">区域：择优选择</view>
       <view style="font-size: 26rpx;line-height: 34rpx;color: #8a96a2;" wx:else>区域：{{ticket.region}} {{ticket.row}}排</view>
       <view style="font-size: 26rpx;line-height: 34rpx;color: #8a96a2;">实付金额：{{total}} 元</view>
-      <view class="ticket_wid" wx:if="{{ status== 0 || status== 7}}" style="margin-top: 16rpx;font-size: 26rpx;color: #bbc1cb;min-height: 80rpx;margin-bottom: 106rpx;">订单号：{{id}}</view>
+      <view class="ticket_wid" wx:if="{{ status== 3}}" style="margin-top: 16rpx;font-size: 26rpx;color: #bbc1cb;min-height: 80rpx;margin-bottom: 106rpx;">订单号：{{id}}</view>
       <view style="margin-top: 16rpx;font-size: 26rpx;color: #bbc1cb; min-height: 80rpx; margin-bottom: 30rpx;" wx:else>订单号：{{id}}
       </view>
-      <view wx:if="{{ status== 0 || status == 7}}" style="flex-direction: row;display: flex;float: right;position: relative;margin-top: -86rpx;font-size: 26rpx;color: #bbc1cb;">
-        <view class="cancel_button" bindtap="cancelEventhandle" id="cancelTap" data-order="{{order_id}}" wx:if="{{ status== 0}}" style="padding-top: 14rpx;padding-bottom: 14rpx;border: 4rpx solid #4bd4c5; border-radius: 6rpx;color: #4bd4c5;text-align: center;border-width: 1rpx;width: 120rpx;margin-right: 20rpx;">取消</view>
-        <view bindtap="payEventhandle" id="payTap" data-order="{{order_id}}" wx:if="{{ status== 0}}" style="padding-top: 14rpx;padding-bottom: 14rpx;border-radius: 6rpx;align-content: center;text-align: center; width: 120rpx;background-color: #4bd4c5;margin-right: 0px;color: #fff;">付款</view>
-        <view bindtap="reciveEventhandle" id="payTap" data-order="{{order_id}}" wx:if="{{ status== 7}}" style="padding-top: 14rpx;padding-bottom: 14rpx;border-radius: 6rpx;align-content: center;text-align: center; width: 120rpx;background-color: #4bd4c5;margin-right: 0px;color: #fff;">确认收货</view>
+      <view wx:if="{{ status== 3}}" style="flex-direction: row;display: flex;float: right;position: relative;margin-top: -86rpx;font-size: 26rpx;color: #bbc1cb;">
+        <view class="cancel_button" catchtap="cancelEventhandle" id="cancelTap" data-order="{{order_id}}" wx:if="{{ status== 3}}" style="padding-top: 14rpx;padding-bottom: 14rpx;border: 4rpx solid #4bd4c5; border-radius: 6rpx;color: #4bd4c5;text-align: center;border-width: 1rpx;width: 120rpx;margin-right: 20rpx;">取消</view>
+        <view catchtap="payEventhandle" id="payTap" data-order="{{order_id}}" wx:if="{{ status== 3}}" style="padding-top: 14rpx;padding-bottom: 14rpx;border-radius: 6rpx;align-content: center;text-align: center; width: 120rpx;background-color: #4bd4c5;margin-right: 0px;color: #fff;">确认发货</view>
       </view>
     </view>
   </view>

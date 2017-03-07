@@ -58,6 +58,7 @@ page {
 
 .poundageClass{
   margin-left: 40rpx;
+  align-items: center;
 }
 
 .serviceTitle {
@@ -93,4 +94,82 @@ page {
   color: white;
   position: absolute;
   bottom: 0;
+}
+
+.rule_view {
+  height: 440rpx;  
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.line{
+  width: 100%;
+  height: 1rpx;
+  background-color: #e9ebf2;
+
+}
+
+.rule_image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 16rpx;
+}
+
+.rule_info{
+  margin-top: 14rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeImage{
+  margin-right: 40rpx;
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.rule_info_title{
+  margin-left: 40rpx;
+  color: #384249;
+  font-size: 28rpx;
+}
+
+.rule_info_line_r{
+  width: 60rpx;
+  background-color: #384249;
+  height: 1rpx;
+  margin-left: 40rpx;
+}
+
+.rule_info_line{
+  width: 60rpx;
+  height: 1rpx;
+  background-color: #384249;
+}
+
+.cancel{
+  margin-top: 20rpx;
+  height: 62rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.rule_detail{
+  margin-top: 64rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rule_detail_info{
+  font-size: 26rpx;
+  color: #556169;
 }

@@ -1,6 +1,6 @@
 
 <!--pages/sell/sell_form_confirm/sell_form_confirm.wxml-->
-<scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
+<scroll-view scroll-y="true" style="height:{{winHeight - srollerViewHeight}}px;">
   <view class="cell_title_info_image">
     <view class="title">出售方式
     </view>
@@ -93,8 +93,9 @@
         <text class="allMuch">{{sellMuch}}.00</text>
         <text class="serviceTitle"> 元</text>
       </view>
-      <view class="poundageClass">
+      <view class="poundageClass" bindtap="cancelRuleView" id="cancelRuleView">
         <text class="serviceTitle"> 交易手续费：{{poundage}} 元</text>
+        <image src="/images/gloable/rule_info.png" mode="scaleToFill" class="rule_image"></image>
       </view>
     </view>
     <view class="much">
@@ -104,4 +105,19 @@
     </view>
   </view>
 </scroll-view>
-<view class="next" bindtap="nextTap">挂票</view>
+<view class="rule_view" style="margin-top:10px;" wx:if="{{isRuleView}}">
+  <view class="line"></view>
+  <view class="cancel" bindtap="cancelRuleView" id="cancelRuleView">
+    <image class="closeImage" src="/images/gloable/close.png" mode="aspectFill"></image>
+  </view>
+  <view class="rule_info" >
+    <view class="rule_info_line"></view>
+    <view class="rule_info_title">佣金说明</view>
+    <view class="rule_info_line_r"></view>
+  </view>
+  <view class="rule_detail">
+    <view class="rule_detail_info">订单票款将于对方确认收货后立即结算至钱包账户</view>
+    <view class="rule_detail_info">所有交易免佣金，仅含1%第三方支付平台交易手续费</view>
+  </view>
+</view>
+<view class="next" bindtap="nextTap" wx:else>挂票</view>

@@ -4,7 +4,8 @@ Page({
   data: {
     winWidth: 0,
     winHeight: 0,
-    wallet:{}
+    wallet:{},
+    isRuleView:false
   },
   onLoad: function (options) {
     var that = this;
@@ -33,6 +34,11 @@ Page({
         wallet:res
       })
     });
+  },
+  cancelRuleView: function (){
+    this.setData({
+      isRuleView: this.data.isRuleView == false ? true : false
+    })
   },
   onReady: function () {
     // 页面渲染完成

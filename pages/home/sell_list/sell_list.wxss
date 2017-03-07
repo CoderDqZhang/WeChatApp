@@ -35,6 +35,7 @@ page {
   flex-direction: column;
   justify-content: space-between;
   display: flex;
+  width: 1000px;
 }
 
 .ticketTitle {

@@ -5,15 +5,17 @@
     <view class="info_title">支付宝账户</view>
     <input name="phone" class="input_text" placeholder="" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;" style="width:{{winWidth - 120}}px; " value="{{alipay_acount}}"/>
   </view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="row_line"></view>
   <view class="table">
     <view class="info_title">支付宝姓名</view>
     <input name="name" class="input_text" placeholder="" placeholder-style="font-size: 26rpx;color: #BBC1CB;letter-spacing: 0;" style="width:{{winWidth - 120}}px; " value="{{alipay_name}}"/>
   </view>
+  <view style=" margin-left: 15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="row_line"></view>
   <view class="table_much">
     <view class="info_title">提现金额</view>
-    <input name="much" class="input_much" placeholder="最多可以提现:{{balance.balance}} 元" placeholder-style="font-size: 26rpx;color: #DDE0E5;letter-spacing: 0;" style="width:{{winWidth - 180}}px;" type="number" value="{{allbalance}}"/>
+    <input name="much" class="input_much" placeholder="最多可以提现:{{balance.balance}} 元" placeholder-style="font-size: 26rpx;color: #DDE0E5;letter-spacing: 0;" style="width:{{winWidth - 185}}px;" type="number" value="{{allbalance}}"/>
     <view class="info_handel" id = "allbalance" bindtap="allbalanceTap">全部提现</view>
   </view>
   <view class="service">

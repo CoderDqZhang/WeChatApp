@@ -113,7 +113,7 @@ Page({
             success: function (res) {
                 if (res.confirm) {
                     var url = "order/" + event.currentTarget.dataset.order + "/"
-                    app.func.requestPost(url, { "status": "1" }, function (res) {
+                    app.func.requestPost(url, { "status": "4" }, function (res) {
                         console.log(res)
                         console.log(that.data.tickets.order_list)
                         for (var j = 0; j < that.data.tickets.order_list.length; j++) {
@@ -135,12 +135,10 @@ Page({
         })
 
     },
-
-
     reciveEventhandle: function (event) {
         var that = this
         var url = "order/" + event.currentTarget.dataset.order + "/"
-        app.func.requestPost(url, { "status": "8" }, function (res) {
+        app.func.requestPost(url, { "status": "7" }, function (res) {
             console.log(res)
             for (var j = 0; j < that.data.tickets.order_list.length; j++) {
 

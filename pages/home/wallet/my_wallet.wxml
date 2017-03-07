@@ -1,14 +1,14 @@
 
 <!--pages/home/wallet/wallet/my_wallet.wxml-->
 <view class="table_header">
-  <view class="header_info">账户余额（元）
+  <view class="header_info">账户余额 ( 元 )
   </view>
   <view class="wall_much">
     <view class="much">{{wallet.balance}}</view>
     <view class="transactions" id="transactionsTap" bindtap="transactionsTap">明细 > </view>
   </view>
 </view>
-<view class="wall_info" >
+<view class="wall_info">
   <view class="info_class">
     <view class="info_title">可用余额（元）</view>
     <view class="info_detail">{{wallet.balance}}</view>
@@ -25,10 +25,24 @@
   </view>
 </view>
 <view class="row_line"></view>
-<view class="bottom_view" style="margin-top:{{winHeight - 210}}rpx;">
-<view class="wallet_rule">查看规则说明</view>
-<view class="wallet_action">
-    <!--<view class="top_up">充值</view>-->
-    <view class="withdraw" id="withdraw" bindtap="withdrawTap">提现</view>
+<view class="rule_view" style="margin-top:{{winHeight - 490}}px;" wx:if="{{isRuleView}}">
+  <view class="line"></view>
+  <view class="cancel" bindtap="cancelRuleView" id="cancelRuleView">
+    <image class="closeImage" src="/images/gloable/close.png" mode="aspectFill"></image>
+  </view>
+  <view class="rule_info" >
+    <view class="rule_info_line"></view>
+    <view class="rule_info_title">佣金说明</view>
+    <view class="rule_info_line_r"></view>
+  </view>
+  <view class="rule_detail">
+    <view class="rule_detail_info">订单票款将于对方确认收货后立即结算至钱包账户</view>
+    <view class="rule_detail_info">所有交易免佣金，仅含1%第三方支付平台交易手续费</view>
+  </view>
 </view>
+<view class="bottom_view" style="margin-top:{{winHeight - 411}}px;" wx:else>
+  <view class="wallet_rule" bindtap="cancelRuleView" id="cancelRuleView">查看规则说明</view>
+  <view class="wallet_action">
+    <button class="withdraw" id="withdraw" bindtap="withdrawTap">提现</button>
+  </view>
 </view>

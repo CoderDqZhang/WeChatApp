@@ -58,6 +58,26 @@ page {
   line-height: 40rpx;
 }
 
+.order_info{
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 98rpx;
+}
+
+.order_id{
+  margin-left: 30rpx;
+  font-size: 24rpx;
+  color: #8a96a2;
+}
+
+.contact{
+  margin-right: 30rpx;
+  font-size: 28rpx;
+  color: #4bd4c5;
+}
+
 .show_session {
   color: #a2abb5;
   font-size: 24rpx;

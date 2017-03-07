@@ -60,7 +60,6 @@ page {
 
 .info_detail {
   color: #a2abb5;
-  margin-top: 10rpx;
   margin-left: 40rpx;
   font-size: 28rpx;
 }
@@ -68,7 +67,7 @@ page {
 .column_line {
   background-color: #e9ebf2;
   width: 1rpx;
-  margin-top: 24rpx;
+  margin-top: 32rpx;
   height: 100rpx;
 }
 
@@ -80,7 +79,7 @@ page {
 }
 
 .bottom_view {
-  height: 280rpx;
+  height: 280rpx;  
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -115,14 +114,81 @@ page {
 }
 
 .withdraw {
-  padding-top: 28rpx;
-  background-color: #4bd4c5;
-  border-radius: 4rpx;
-  margin-left: 30rpx;
-  color: #fff;
-  font-size: 30rpx;
   width: 100%;
+  margin-left: 30rpx;
   margin-right: 30rpx;
-  text-align: center;
-  border-color: #4bd4c5;
+  background-color: #4bd4c5;
+  font-size: 36rpx;
+  color: white;
+}
+
+.rule_view {
+  height: 440rpx;  
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.line{
+  width: 100%;
+  height: 1rpx;
+  background-color: #e9ebf2;
+
+}
+
+.rule_info{
+  margin-top: 14rpx;
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeImage{
+  margin-right: 40rpx;
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.rule_info_title{
+  margin-left: 40rpx;
+  color: #384249;
+  font-size: 28rpx;
+}
+
+.rule_info_line_r{
+  width: 60rpx;
+  background-color: #384249;
+  height: 1rpx;
+  margin-left: 40rpx;
+}
+
+.rule_info_line{
+  width: 60rpx;
+  height: 1rpx;
+  background-color: #384249;
+}
+
+.cancel{
+  margin-top: 20rpx;
+  height: 62rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+
+.rule_detail{
+  margin-top: 64rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rule_detail_info{
+  font-size: 26rpx;
+  color: #556169;
 }

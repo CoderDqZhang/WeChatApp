@@ -206,7 +206,11 @@ Page({
      */
   bindChange: function (e) {
     var that = this;
-    that.setData({ currentTab: e.detail.current });
+    that.setData({
+      currentTab: e.detail.current,
+      showText: e.detail.current == 0 ? "还没有订单" : "还没有票品",
+      showText1: e.detail.current == 0 ? "快去首页挑选喜欢的演出活动吧" : "快去去卖票首页挂票吧"
+    });
 
   },
   /** 
@@ -220,8 +224,22 @@ Page({
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current
+        currentTab: e.target.dataset.current,
+        showText: this.data.currentTab == 1 ? "还没有订单" : "还没有票品",
+        showText1: this.data.currentTab == 1 ? "快去首页挑选喜欢的演出活动吧" : "快去卖票首页挂票吧",
+
       })
+      if (that.data.currentTab == 1) {
+        that.setData({
+          isHaveSellManager: that.data.ticketSells.length == 0 ? true : false,
+          isHaveOrder: false,
+        })
+      } else {
+        that.setData({
+          isHaveSellManager: false,
+          isHaveOrder: that.data.orders.length == 0 ? true : false,
+        })
+      }
     }
   },
   requestOrderData: function (isNext) {
@@ -252,8 +270,6 @@ Page({
       that.setData({
         isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
         orders: tempTicket,
-        showText: "还没有订单",
-        showText1: "快去首页挑选喜欢的演出活动吧"
       })
     });
   },
@@ -360,6 +376,86 @@ Page({
     wx.navigateTo({
       url: '../order/order_detail?order=' + order
     })
+  },
+  cancelEventhandle: function (event) {
+    var that = this;
+    wx.showModal({
+      title: '确定要放弃本次订单吗',
+      content: '',
+      cancelText: '稍等一会',
+      confirmText: '确定',
+      cancelColor: '#4bd4c5',
+      confirmColor: '#384249',
+      success: function (res) {
+        if (res.confirm) {
+          var url = "order/" + event.currentTarget.dataset.order + "/"
+          app.func.requestPost(url, { "status": "4" }, function (res) {
+            if (res.errors != null) {
+              wx.showModal({
+                title: res.errors[0].error[0].toString(),
+                showCancel: false,
+                confirmText: "知道了",
+                confirmColor: "#4bd4c5",
+                success: function (res) {
+                  if (res.confirm) {
+                  }
+                }
+              })
+              return
+            }
+            console.log(res)
+            console.log(that.data.orders.order_list)
+            for (var j = 0; j < that.data.orders.order_list.length; j++) {
+
+              if (that.data.orders.order_list[j].order_id = event.currentTarget.dataset.order) {
+                var show = that.data.orders.order_list[j].show
+                that.data.orders.order_list[j].status = 4;
+                that.data.orders.order_list[j].status_desc = "交易取消"
+                var tempTicket = that.data.orders
+                that.setData({
+                  orders: tempTicket
+                })
+                break;
+              }
+            }
+          });
+        }
+      }
+    })
+
+  },
+  payEventhandle: function (event) {
+    var that = this
+    var url = "order/" + event.currentTarget.dataset.order + "/"
+    app.func.requestPost(url, { "status": "7" }, function (res) {
+      if (res.errors != null) {
+        wx.showModal({
+          title: res.errors[0].error[0].toString(),
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+        return
+      }
+      console.log(res)
+      console.log(that.data.orders)
+      for (var j = 0; j < that.data.orders.order_list.length; j++) {
+
+        if (that.data.orders.order_list[j].order_id = res.order_id) {
+          that.data.orders.order_list[j].status = 7;
+          that.data.orders.order_list[j].status_desc = "待收货"
+          var tempTicket = that.data.orders
+          that.setData({
+            orders: tempTicket
+          })
+          break;
+        }
+      }
+    });
   },
   onReady: function () {
     // 页面渲染完成

@@ -24,15 +24,15 @@ Page({
       address: data
     })
     var that = this
-    wx.getSystemInfo({
-      success: function (res) {
-        // success
-        that.setData({
-          windowWidth: res.windowWidth - 148
-        })
-        console.log(that.data.windowWidth)
-      }
-    })
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     // success
+    //     that.setData({
+    //       windowWidth: res.windowWidth - 148
+    //     })
+    //     console.log(that.data.windowWidth)
+    //   }
+    // })
   },
 
   onLoad: function (options) {
