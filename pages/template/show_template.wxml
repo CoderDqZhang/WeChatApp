@@ -1,11 +1,11 @@
 
 <!--pages/template/show/show_template.wxml-->
 <template name="show_template">
-  <view class="ticketShowView" style="width: 100%;margin-top: 0px; height: 100%; flex-direction: row;justify-content: center; align-items: flex-start;background-color: white;">
-    <view style="margin-top: 15px; width: 95px;height:100%; background-color:#4bd4c5;margin-bottom: 15px; ">
-      <image src="{{cover}}" class="ticketPost" mode="aspectFill" style="margin-left: 15px; width: 80px;height: 106px;float: left; border-radius: 4rpx;"></image>
+  <view class="ticketShowView" style="width: 100%; height: 274rpx; flex-direction: row;justify-content: space-betweens; align-items: center;background-color: #FFFFFF; display: flex;">
+    <view style="width: 95px;height:213rpx; background-color:#FFFFFF;">
+      <image src="{{cover}}" class="ticketPost" mode="aspectFill" style="margin-left: 15px; width: 80px;height: 106px;border-radius: 4rpx;"></image>
     </view>
-    <view class="ticket_info" style=" margin-left: 105px;position: relative;margin-right:15px;height: 115px;margin-top: 15px;background-color:#FFFFFF;">
+    <view class="ticket_info" style=" margin-left: 20rpx;position: relative;margin-right:15px;height: 115px;background-color:#FFFFFF;">
       <view class="ticketTitle" style="color: #384249;font-size: 16px;line-height:22px; max-height:54px; text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; ">
         <text>{{title}}</text>
       </view>

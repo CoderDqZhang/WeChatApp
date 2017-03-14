@@ -116,3 +116,31 @@ page {
   border-width: 2rpx;
   width: 92rpx;
 }
+
+.searchContent{
+  height: 88rpx;
+  background-color: #EFEFF4;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputText{
+  padding-left: 30rpx;
+  background-color: white;
+  border-radius: 10rpx;
+  height: 56rpx;
+  color: #384249;
+  border: 1rpx solid #e6e6ea;
+  font-size: 26rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+}
+
+.cancelClass{
+  width: 70rpx;
+  margin-right: 18rpx;
+  font-size: 32rpx;
+  color: #4bd4c5;
+}

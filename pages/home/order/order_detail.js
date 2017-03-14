@@ -7,9 +7,20 @@ Page({
     address: "",
     ticketStatus: "",
     isHandel: false,
-    isHaveConnect: false
+    isHaveConnect: false,
+    winWidth: 0,
+    winHeight: 0,
   },
   onLoad: function (options) {
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          winHeight: res.windowHeight,
+          winWidth: res.windowWidth,
+        })
+      }
+    })
     console.log(options.order)
     this.setData({
       order: JSON.parse(options.order)
@@ -26,12 +37,12 @@ Page({
   },
   genderData: function () {
     var that = this
-    if (this.data.order.type == "user") {
-      if (this.data.order.delivery_type == 1) {
+    if (this.data.order.orderStatus == "user") {
+      if (this.data.order.delivery_type == 1 || this.data.order.delivery_type == 4) {
         this.setData({
-          delivery_type: "配送方式：快递到付",
+          delivery_type: "配送方式：快递",
           name: "收货人：" + that.data.order.address.name + "      " + that.data.order.address.mobile_num,
-          address: "配送地址" + that.data.order.address.address,
+          address: "配送地址：" + that.data.order.address.address,
           ticketStatus: that.data.order.status_desc,
           isHandel: that.data.order.status == 1 || that.data.order.status == 2 || that.data.order.status == 5 ? false : true
         })
@@ -45,9 +56,9 @@ Page({
         })
       }
     } else {
-      if (this.data.order.delivery_type == 1) {
+      if (this.data.order.delivery_type == 1  || this.data.order.delivery_type == 4) {
         this.setData({
-          delivery_type: "配送方式：快递到付",
+          delivery_type: "配送方式：快递",
           name: "收货人：" + that.data.order.address.name + "      " + that.data.order.address.mobile_num,
           address: "配送地址：" + that.data.order.address.address,
           ticketStatus: that.data.order.supplier_status_desc,

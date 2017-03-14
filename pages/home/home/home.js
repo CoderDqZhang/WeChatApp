@@ -7,7 +7,13 @@ Page({
     catagorys: [],
     userInfo: {},
     isAllowUser: false,
-    windowsHeigth: 0,
+    winWidth: 0,
+    winHeight: 0,
+    searchBarWidth:0,
+    inputValue:"",
+    isInPut:false,
+    searchList:null,
+    searchText:""
   },
   onLoad: function (opt) {
     console.log("首页数据")
@@ -15,7 +21,9 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          windowsHeigth: res.windowHeight
+          winHeight: res.windowHeight,
+          winWidth: res.windowWidth,
+          searchBarWidth : res.windowWidth - 16
         })
       }
     })
@@ -127,5 +135,36 @@ Page({
       })
       wx.stopPullDownRefresh()
     }
+  },
+  requestSearchData: function(data) {
+    var that = this
+    var url = "show/search/?kw="+data
+    console.log(url)
+    app.func.requestGet(url, {}, function (res) {
+      that.setData({
+        searchList: res.show_list
+      })
+      console.log(that.data.searchList)
+    });
+  },
+  cancelTap: function (e) {
+    this.setData({
+      isInPut:false,
+      searchBarWidth: this.data.winWidth - 16,
+      searchText : ""
+    })
+  },
+  bindKeyInput: function(e) {
+    this.setData({
+      inputValue: e.detail.value,
+    })
+    this.requestSearchData(this.data.inputValue)
+  },
+  inputFocus: function (e){
+    this.setData({
+      isInPut:true,
+      searchBarWidth: this.data.winWidth - 75
+    })
+    console.log(e)
   },
 })

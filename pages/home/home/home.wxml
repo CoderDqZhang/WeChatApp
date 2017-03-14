@@ -43,7 +43,7 @@
   </view>
 </template>
 <import src="../../template/show_template.wxml" />
-<view class="noneTicketSession" wx:if="{{isAllowUser}}" style="height:{{                  windowsHeigth}}px;">
+<view class="noneTicketSession" wx:if="{{isAllowUser}}" style="height:{{winHeight}}px;">
   <view class="none_cover">
     <image src="/images/gloable/Icon_Default.png" mode="aspectFill" class="none_covers"></image>
   </view>
@@ -53,21 +53,38 @@
   </view>
 </view>
 <view wx:else>
-  <view style="width:100%; height: 10rpx; background-color: #FFFFFF;"></view>
-  <view class="topSession">
-    <view wx:for="{{categoryArray}}" wx:key="categoryArray" class="category" bindtap="categoryTap" wx:for-item="item" data-category="{{item}}">
-      <template is="homeCategoryl" wx:if="{{index == 4}}" data="{{...item}}" />
-      <template is="homeCategory" wx:elif="{{index%2 == 0}}" data="{{...item}}" />
-      <template is="homeCategorys" wx:else data="{{...item}}" />
-    </view>
+  <view class="searchContent">
+    <input class="inputText" id="HotSell" value="{{    searchText}}" bindinput="bindKeyInput" placeholder="搜索名称、演员..." placeholder-style="font-size: 13px;color: #BBC1CB;letter-spacing: 0; text-align:left;" style="width:{{searchBarWidth}}px;" bindfocus="inputFocus"
+    focus="{{isInPut}}" />
+    <view class="cancelClass" wx:if="{{isInPut}}" bindtap="cancelTap">取消</view>
+    
   </view>
-  <view class="ticketSession">
-    <view class="sessionTitle">近期热门
+  <view style="width:100%; height:1rpx;background-color: #E9EBF2;"></view>
+  <scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
+    <view wx:if="{{isInPut}}" style="background-color: #FFFFFF; height:100%;">
+      <view wx:for="{{searchList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+          <template is="show_template" data="{{...item}}" />
+          <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;" wx:if="{{index != ticketShow.length - 1}}"></view>
+        </view>
     </view>
-    <view wx:for="{{ticketShow}}" wx:key="ticketShow" class="ticketShowView" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
-      <template is="show_template" data="{{...item}}" />
-      <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 7px;" wx:if="{{index != ticketShow.length - 1}}"></view>
+    <view wx:else>
+      <view style="width:100%; height: 10rpx; background-color: #FFFFFF;"></view>
+      <view class="topSession">
+        <view wx:for="{{categoryArray}}" wx:key="categoryArray" class="category" bindtap="categoryTap" wx:for-item="item" data-category="{{item}}">
+          <template is="homeCategoryl" wx:if="{{index == 4}}" data="{{...item}}" />
+          <template is="homeCategory" wx:elif="{{index%2 == 0}}" data="{{...item}}" />
+          <template is="homeCategorys" wx:else data="{{...item}}" />
+        </view>
+      </view>
+      <view class="ticketSession">
+        <view class="sessionTitle">近期热门
+        </view>
+        <view wx:for="{{ticketShow}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+          <template is="show_template" data="{{...item}}" />
+          <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;" wx:if="{{index != ticketShow.length - 1}}"></view>
+        </view>
+      </view>
+      <view style="height:20rpx; background-color: #ffffff;"></view>
     </view>
-  </view>
-  <view style="height:20rpx; background-color: #ffffff;"></view>
+  </scroll-view>
 </view>

@@ -24,7 +24,23 @@
     </view>
   </view>
 </template>
-<view wx:for="{{sellList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
-  <template is="show_template" data="{{...item}}" />
-  <view style="margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;" wx:if="{{index != sellList.length - 1}}"></view>
+<view class="searchContent">
+  <input class="inputText" id="sellSearch"  value="{{searchText}}" bindinput="bindKeyInput" placeholder="搜索想转卖的演出..." placeholder-style="font-size: 13px;color: #BBC1CB;letter-spacing: 0; text-align:left;" style="width:{{searchBarWidth}}px;" bindfocus="inputFocus"
+  focus="{{isInPut}}" />
+  <view class="cancelClass" wx:if="{{isInPut}}" bindtap="cancelTap">取消</view>
 </view>
+<view style="width:100%; height:1rpx;background-color: #E9EBF2;"></view>
+<scroll-view scroll-y="true" style="height:{{winHeight - 90}}px;">
+  <view wx:if="{{isInPut}}" style="background-color: #FFFFFF; height:100%;">
+    <view wx:for="{{searchList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+      <template is="show_template" data="{{...item}}" />
+      <view style="margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;" wx:if="{{index != sellList.length - 1}}"></view>
+    </view>
+  </view>
+  <view wx:else>
+    <view wx:for="{{sellList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
+      <template is="show_template" data="{{...item}}" />
+      <view style="margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: -1px;" wx:if="{{index != sellList.length - 1}}"></view>
+    </view>
+  </view>
+</scroll-view>

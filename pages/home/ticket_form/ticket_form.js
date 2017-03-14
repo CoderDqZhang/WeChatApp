@@ -228,7 +228,7 @@ Page({
         "ticket_count": that.data.ticket.buy_number.toString(),
         "pay_type": "2",
         "address_id": that.data.address.id.toString(),
-        "delivery_price": that.data.orderForm.delivery_price.toString(),
+        "delivery_price": that.data.delivery_type.toString() == "4" ? "0" : that.data.orderForm.delivery_price.toString(),
         "message": e.detail.value.message,
         "delivery_type": that.data.delivery_type.toString()
       }
