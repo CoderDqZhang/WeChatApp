@@ -369,6 +369,7 @@ Page({
     data.session.venue_end = urls[1]
     var imageIcon = data.show.category.icon
     var iconUrls = imageIcon.split('?')
+    data.orderStatus = "supplier"
     data.show.category.icon = iconUrls[0]
     data.show.category.icon_end = iconUrls[1]
     var order = JSON.stringify(data)

@@ -9,11 +9,11 @@ Page({
     isAllowUser: false,
     winWidth: 0,
     winHeight: 0,
-    searchBarWidth:0,
-    inputValue:"",
-    isInPut:false,
-    searchList:null,
-    searchText:""
+    searchBarWidth: 0,
+    inputValue: "",
+    isInPut: false,
+    searchList: null,
+    searchText: ""
   },
   onLoad: function (opt) {
     console.log("首页数据")
@@ -23,7 +23,7 @@ Page({
         that.setData({
           winHeight: res.windowHeight,
           winWidth: res.windowWidth,
-          searchBarWidth : res.windowWidth - 16
+          searchBarWidth: res.windowWidth - 16
         })
       }
     })
@@ -42,6 +42,13 @@ Page({
     that.requestData()
   },
   requestData: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    })
+
+
     console.log("请求数据")
     var that = this;
     var tempData = [{}, {}, {}, {}, {
@@ -85,12 +92,9 @@ Page({
         ticketShow: res
       })
     });
-    if (that.data.categoryArray.length == 0) {
-      console.log("0")
-    } else {
-      console.log("1")
-    }
-
+    setTimeout(function () {
+      wx.hideToast()
+    }, 500)
     wx.stopPullDownRefresh()
   },
   showTap: function (event) {
@@ -136,9 +140,9 @@ Page({
       wx.stopPullDownRefresh()
     }
   },
-  requestSearchData: function(data) {
+  requestSearchData: function (data) {
     var that = this
-    var url = "show/search/?kw="+data
+    var url = "show/search/?kw=" + data
     console.log(url)
     app.func.requestGet(url, {}, function (res) {
       that.setData({
@@ -149,20 +153,20 @@ Page({
   },
   cancelTap: function (e) {
     this.setData({
-      isInPut:false,
+      isInPut: false,
       searchBarWidth: this.data.winWidth - 16,
-      searchText : ""
+      searchText: ""
     })
   },
-  bindKeyInput: function(e) {
+  bindKeyInput: function (e) {
     this.setData({
       inputValue: e.detail.value,
     })
     this.requestSearchData(this.data.inputValue)
   },
-  inputFocus: function (e){
+  inputFocus: function (e) {
     this.setData({
-      isInPut:true,
+      isInPut: true,
       searchBarWidth: this.data.winWidth - 75
     })
     console.log(e)

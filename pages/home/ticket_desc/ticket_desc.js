@@ -1,16 +1,16 @@
 var app = getApp()
 function getArray(a) {
- var hash = {},
-     len = a.length,
-     result = [];
+    var hash = {},
+        len = a.length,
+        result = [];
 
- for (var i = 0; i < len; i++){
-     if (!hash[a[i]]){
-         hash[a[i]] = true;
-         result.push(a[i]);
-     } 
- }
- return result;
+    for (var i = 0; i < len; i++) {
+        if (!hash[a[i]]) {
+            hash[a[i]] = true;
+            result.push(a[i]);
+        }
+    }
+    return result;
 }
 function uniQueue(array) {
     var arr = [];
@@ -36,9 +36,11 @@ Page({
         shareName: ["有票", "有票，需要的联系", "有票，欢迎各位老板", "有票，欢迎打包", "有票，便宜出", "有票便宜"],
         ticketPrices: [],
         ticketChange: [],
-        ticket_list: []
+        ticket_list: [],
+        quert:0
     },
     onLoad: function (opt) {
+        
         if (opt.sellShow != null) {
             this.setData({
                 sessionShow: JSON.parse(opt.sellShow),
@@ -54,6 +56,26 @@ Page({
         } else {
             this.requestData(opt.show)
         }
+        // var that = this;
+        // var userInfo = wx.getStorageInfoSync('userInfo')
+
+        // that.setData({
+        //     shareData: JSON.parse(opt.show),
+        //     'shareData.lp_session_id': "userTicket",
+        //     sessionShow: JSON.parse(opt.show)
+        // })
+        // // let url = "show/3535216744/session/"+this.data.sessionid
+        // if (this.data.quert == 1){
+        //     let url = "show/3535216744/session/3535216969"
+        // app.func.requestGet(url, {}, function (res) {
+        //     var data = res;
+        //     var imageUrl = data.show.cover
+        //     console.log(that.data)
+        //     that.data.sessionShow.cover = imageUrl
+        //     that.genderData(data.ticket_list)
+        // });
+        // }
+        
     },
     requestData: function (show) {
         var that = this;

@@ -1,4 +1,5 @@
 // pages/home/order/order_detail.js
+var app = getApp()
 Page({
   data: {
     order: {},
@@ -10,6 +11,7 @@ Page({
     isHaveConnect: false,
     winWidth: 0,
     winHeight: 0,
+    nextButtonHeight: 0
   },
   onLoad: function (options) {
     var that = this
@@ -28,7 +30,7 @@ Page({
     this.genderData()
     console.log(this.data.order)
     console.log(this.data.order.ticket.supplier)
-    if (this.data.order.ticket.supplier != null && this.data.order.status != 0 && this.data.order.delivery_type != 1){
+    if (this.data.order.ticket.supplier != null && this.data.order.status != 0 && this.data.order.delivery_type != 1) {
       this.setData({
         isHaveConnect: true
       })
@@ -38,6 +40,11 @@ Page({
   genderData: function () {
     var that = this
     if (this.data.order.orderStatus == "user") {
+      if (this.data.order.status == 0 || this.data.order.status == 7) {
+        this.setData({
+          nextButtonHeight: 45
+        })
+      }
       if (this.data.order.delivery_type == 1 || this.data.order.delivery_type == 4) {
         this.setData({
           delivery_type: "配送方式：快递",
@@ -47,6 +54,11 @@ Page({
           isHandel: that.data.order.status == 1 || that.data.order.status == 2 || that.data.order.status == 5 ? false : true
         })
       } else {
+        if (this.data.order.status == 3) {
+          this.setData({
+            nextButtonHeight: 45
+          })
+        }
         this.setData({
           delivery_type: "配送方式：" + that.data.order.delivery_type == 2 ? "现场取票" : "上门自取",
           name: that.data.order.name,
@@ -56,7 +68,7 @@ Page({
         })
       }
     } else {
-      if (this.data.order.delivery_type == 1  || this.data.order.delivery_type == 4) {
+      if (this.data.order.delivery_type == 1 || this.data.order.delivery_type == 4) {
         this.setData({
           delivery_type: "配送方式：快递",
           name: "收货人：" + that.data.order.address.name + "      " + that.data.order.address.mobile_num,
@@ -84,6 +96,23 @@ Page({
         // success
       }
     })
+  },
+  nextTap: function (e) {
+    var that = this
+    var url = "order/" + that.data.order.order_id + "/"
+    var data 
+    if (this.data.order.status == 3) {
+      data = { "status": "7" }
+    }else if (this.data.order.status == '7'){
+      data = {"status" : "8"}
+    }
+    app.func.requestPost(url, data, function (res) {
+      console.log(res)
+      var orderStatus = that.data.order.orderStatus
+      that.setData({
+        order:res
+      })
+    });
   },
   onReady: function () {
     // 页面渲染完成
