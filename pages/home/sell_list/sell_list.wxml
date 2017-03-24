@@ -19,7 +19,7 @@
           <text class="ticketMuchM" wx:if="{{ticket_count == 0 || min_price == 0}}">暂时缺票</text>
           <text class="ticketMuchM" wx:else>元</text>
         </view>
-        <view class="sellButton">卖票</view>
+        <view class="sellButton">挂票</view>
       </view>
     </view>
   </view>

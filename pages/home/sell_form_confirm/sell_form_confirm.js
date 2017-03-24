@@ -5,7 +5,6 @@ Page({
     temp_sell_type: "单卖",
     temp_region_type: "请选择",
     temp_row_type: "请选择",
-    temp_seat_type: "请选择",
     temp_delivery_type: "请选择",
     isCheck: false,
     deliveryStr: "",
@@ -32,7 +31,6 @@ Page({
     sellTicket: {},
     sell_confim: null,
     sellType: "",
-    seatType: "",
     sellRow: "",
     delivery_type: "",
     sellRegion: "",
@@ -47,7 +45,9 @@ Page({
     winWidth: 0,
     winHeight: 0,
     isRuleView: false,
-    srollerViewHeight: 45
+    srollerViewHeight: 45,
+    isSeat: true,
+    isTicketStatus: false
   },
   changeData: function (res) {
     this.data.sellDelivery = ""
@@ -149,7 +149,6 @@ Page({
       sellType: tempSellType,
       sellRegion: tempSellRgion,
       sellRow: tempSellRow,
-      sellSeat: ["连座", "不连座"],
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
       poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2)
     })
@@ -178,21 +177,38 @@ Page({
         temp_row_type: this.data.sell_confim.sellForm.row,
       })
     } else {
-      this.data.sell_confim.sellForm.row = "择优分配"
+      this.data.sell_confim.sellForm.row = ""
       this.setData({
         temp_row_type: "择优分配",
       })
     }
-    if (this.data.sell_confim.sellForm.seat_type != "") {
+    if (this.data.sell_confim.sellForm.ticket_count == 1) {
+      this.data.sell_confim.sellForm.seat_type = "1"
+        this.setData({
+          isSeat: false
+        })
+    } else {
       this.setData({
-        isCheck: this.data.sell_confim.sellForm.seat_type == "1" ? true : false,
-        selectSeat: true,
-        temp_seat_type: this.data.sell_confim.sellForm.seat_type == "1" ? "连座" : "不连座"
+          isSeat: true
+        })
+      if (this.data.sell_confim.sellForm.seat_type != "") {
+        this.setData({
+          selectSeat: this.data.sell_confim.sellForm.seat_type == "1" ? true : false,
+        })
+      } else {
+        this.data.sell_confim.sellForm.seat_type = "1"
+        this.setData({
+          selectSeat: true
+        })
+      }
+    }
+    if (this.data.sell_confim.sellForm.sell_category == "0") {
+      this.setData({
+        isTicketStatus: false
       })
     } else {
-      this.data.sell_confim.sellForm.seat_type = "1"
       this.setData({
-        temp_seat_type: "不连座"
+        isTicketStatus: true
       })
     }
     if (this.data.sell_confim.sellForm.delivery_type != "" && this.data.sell_confim.sellForm.delivery_type != null) {
@@ -255,13 +271,20 @@ Page({
       isSelect: true
     })
   },
-  bindPickerSeat: function (e) {
+  ticketSeatTap: function (e){
     this.setData({
-      seatIndex: e.detail.value,
-      "sell_confim.sellForm.seat_type": parseInt(e.detail.value) + 1,
-      selectSeat: true
+      "sell_confim.sellForm.seat_type":e.currentTarget.id == "1" ? "2" : "1",
+      selectSeat: e.currentTarget.id == "2" ? true : false
     })
   },
+  ticketStatusTap: function (e){
+    console.log(e.currentTarget.id)
+    this.setData({
+      "sell_confim.sellForm.sell_category":e.currentTarget.id,
+      isTicketStatus: e.currentTarget.id == "1" ? true : false
+    })
+  },
+
   bindPickerRegion: function (e) {
     this.setData({
       regionIndex: e.detail.value,
@@ -273,16 +296,22 @@ Page({
     if (this.data.sell_confim.sellForm.region == "择优分配") {
       this.setData({
         rowIndex: "0",
-        "sell_confim.sellForm.row": "择优分配",
+        "sell_confim.sellForm.row": "",
         selectRow: true
       })
       return
     } else {
       this.setData({
         rowIndex: e.detail.value,
-        "sell_confim.sellForm.row": this.data.sellRow[e.detail.value] == "" ? "择优分配" : this.data.sellRow[e.detail.value],
+        "sell_confim.sellForm.row": this.data.sellRow[e.detail.value] == "" ? "" : this.data.sellRow[e.detail.value],
         selectRow: true
       })
+
+      if (this.data.sell_confim.sellForm.row == "择优分配") {
+        this.setData({
+          "sell_confim.sellForm.row":""
+        })
+      }
     }
   },
   deliveryTap: function (e) {
@@ -299,12 +328,12 @@ Page({
       }
     })
   },
-  cancelRuleView: function (){
+  cancelRuleView: function () {
     this.setData({
       isRuleView: this.data.isRuleView == false ? true : false,
-      srollerViewHeight : this.data.isRuleView == false ? 220 : 45
+      srollerViewHeight: this.data.isRuleView == false ? 220 : 45
     })
-    console.log( this.data.srollerViewHeight)
+    console.log(this.data.srollerViewHeight)
   },
   nextTap: function () {
     console.log(this.data)

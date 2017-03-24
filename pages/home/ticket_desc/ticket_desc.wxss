@@ -294,3 +294,14 @@ page {
   margin-right: 4rpx;
   font-size: 20rpx;
 }
+
+.ticket_status_type{
+  display: inline-block;
+  background-color: #FF7A5E;
+  color: #fff;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  border-radius: 4rpx;
+  margin-right: 4rpx;
+  font-size: 20rpx;
+}

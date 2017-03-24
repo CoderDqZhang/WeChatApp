@@ -173,3 +173,40 @@ page {
   font-size: 26rpx;
   color: #556169;
 }
+
+.ticketStatus{
+  padding-left: 30rpx;
+  margin-top: 20rpx;
+  height: 140rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.button_normal{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  background-color: white;
+  margin-right: 20rpx;
+  font-size: 24rpx;
+  border:1rpx solid #8a96a2;
+  color: #8a96a2;
+  /*text-align: center;*/
+  border-radius: 4rpx;
+}
+
+.button_select{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-right: 20rpx;
+  border:1rpx solid #4bd4c5;
+  background-color: #4bd4c5;
+  font-size: 24rpx;
+  color: #ffffff;
+  border-radius: 4rpx;
+}

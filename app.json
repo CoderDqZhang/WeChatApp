@@ -48,7 +48,7 @@
         "selectedIconPath": "images/tabBar/sell_select.png",
         "iconPath": "images/tabBar/sell_normal.png",
         "pagePath": "pages/home/sell_list/sell_list",
-        "text": "卖票"
+        "text": "挂票"
       },
       {
         "selectedIconPath": "images/tabBar/mine_select.png",

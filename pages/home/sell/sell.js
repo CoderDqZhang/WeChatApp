@@ -243,6 +243,11 @@ Page({
     }
   },
   requestOrderData: function (isNext) {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      suration: 10000
+    })
     var that = this;
     that.setData({
       isHaveOrder: false
@@ -271,10 +276,18 @@ Page({
         isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
         orders: tempTicket,
       })
+      setTimeout(function () {
+      wx.hideToast()
+    }, 500)
     });
   },
   requestData: function () {
     var that = this
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      suration: 10000
+    })
     app.func.requestGet('supplier/ticket/', {}, function (res) {
       console.log(res)
       that.setData({
@@ -299,6 +312,9 @@ Page({
     that.setData({
       ticketSells: that.data.ticketSell
     })
+    setTimeout(function () {
+      wx.hideToast()
+    }, 500)
   },
   sellTap: function (event) {
     var sellTicket = event.currentTarget.dataset.sellticket

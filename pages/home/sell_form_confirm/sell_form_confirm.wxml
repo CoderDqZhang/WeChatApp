@@ -1,25 +1,8 @@
 
 <!--pages/sell/sell_form_confirm/sell_form_confirm.wxml-->
 <scroll-view scroll-y="true" style="height:{{winHeight - srollerViewHeight}}px;">
-  <view class="cell_title_info_image">
-    <view class="title">出售方式
-    </view>
-    <view class="section" style="width:{{windowWidth}}px;">
-      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="picket" wx:if="{{isSelect}}">
-        <view class="detail">{{sellType[changeIndex]}}
-        </view>
-      </picker>
-      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="address_detail" wx:else>
-        <view class="detail">{{temp_sell_type}}
-        </view>
-      </picker>
-    </view>
-    <view class="detail_image">
-      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
-    </view>
-  </view>
-  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="cell_title_info_image">
+
+<view class="cell_title_info_image">
     <view class="title">区域
     </view>
     <view class="section" style="width:{{windowWidth}}px;">
@@ -36,7 +19,7 @@
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image">
     <view class="title">排数
     </view>
@@ -54,17 +37,16 @@
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
-  <view class="cell_title_info_image">
-    <view class="title">是否连座
+  <view class="cell_title_info_image" style="margin-top:20rpx;">
+    <view class="title">出售方式
     </view>
     <view class="section" style="width:{{windowWidth}}px;">
-      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="picket" wx:if="{{selectSeat}}">
-        <view class="detail">{{sellSeat[seatIndex]}}
+      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="picket" wx:if="{{isSelect}}">
+        <view class="detail">{{sellType[changeIndex]}}
         </view>
       </picker>
-      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="address_detail" wx:else>
-        <view class="detail">{{temp_seat_type}}
+      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{sellType}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_sell_type}}
         </view>
       </picker>
     </view>
@@ -85,6 +67,31 @@
     <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
+  </view>
+  <view class="ticketStatus">
+    <view wx:if="{{isSeat}}">
+    <view class="button_normal" id ="1"  wx:if="{{selectSeat}}" bindtap="ticketSeatTap">保证连坐</view>
+    <view class="button_select" id ="2"  wx:else bindtap="ticketSeatTap">保证连坐</view>
+    </view>
+    <view class="button_normal" wx:if="{{isTicketStatus}}" id ="0" bindtap="ticketStatusTap">期票预售</view>
+    <view class="button_select" wx:else id ="1" bindtap="ticketStatusTap">期票预售</view>
+    <!--<view>
+    <view class="cell_title_info_image">
+    <view class="title">是否连座
+    </view>
+    <view class="section" style="width:{{windowWidth}}px;">
+      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="picket" wx:if="{{selectSeat}}">
+        <view class="detail">{{sellSeat[seatIndex]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerSeat" value="{{seatIndex}}" range="{{sellSeat}}" class="address_detail" wx:else>
+        <view class="detail">{{temp_seat_type}}
+        </view>
+      </picker>
+    </view>
+    <view class="detail_image">
+      <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+    </view>-->
   </view>
   <view class="service">
     <view class="serviceMuch">

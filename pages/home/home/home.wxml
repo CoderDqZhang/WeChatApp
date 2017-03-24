@@ -60,7 +60,7 @@
     
   </view>
   <view style="width:100%; height:1rpx;background-color: #E9EBF2;"></view>
-  <scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
+  <scroll-view scroll-y="true" upper-threshold = "30" bindscrolltoupper="pullDowne" style="height:{{winHeight - 45}}px;">
     <view wx:if="{{isInPut}}" style="background-color: #FFFFFF; height:100%;">
       <view wx:for="{{searchList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
           <template is="show_template" data="{{...item}}" />

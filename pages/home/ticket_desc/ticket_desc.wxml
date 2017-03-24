@@ -32,6 +32,7 @@
     <view class="ticket_price_template">
       <view wx:if="{{status == 0}}" class="ticket_now_price_template_0">{{price}}元</view>
       <view wx:else class="ticket_now_price_template">{{price}}元</view>
+      <view class="ticket_status_type" wx:if="{{sell_category == '1'}}">期票</view>
       <view class="ticket_status_number" wx:if="{{20 < remain_count}}">还剩{{remain_count}}张</view>
       <view class="ticket_status_number" wx:else>最后{{remain_count}}张</view>
     </view>

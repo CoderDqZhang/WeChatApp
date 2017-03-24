@@ -110,7 +110,7 @@ Page({
             if (tickets[i].region == "") {
                 ticket_row = "择优分配"
             } else {
-                ticket_row = tickets[i].row != "" ? tickets[i].region + ' ' + tickets[i].row + "排" : "择优分配"
+                ticket_row = tickets[i].row != "" ? tickets[i].region + ' ' + tickets[i].row + "排" : tickets[i].region + " 择优分配"
             }
             tickets[i].region = ticket_row
             var arr = tickets[i].delivery_type.split(',');
