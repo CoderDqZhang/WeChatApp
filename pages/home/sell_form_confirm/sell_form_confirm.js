@@ -47,7 +47,8 @@ Page({
     isRuleView: false,
     srollerViewHeight: 45,
     isSeat: true,
-    isTicketStatus: false
+    isTicketStatus: false,
+    isEditeTicket: false
   },
   changeData: function (res) {
     this.data.sellDelivery = ""
@@ -141,7 +142,7 @@ Page({
       tempSellRgion.push(this.data.sell_confim.sellTicket.region_choices[j][0])
     }
     var tempSellRow = []
-    tempSellRow.push("择优分配")
+    tempSellRow.push("随机")
     for (var k = 0; k < this.data.sell_confim.sellTicket.row.length; k++) {
       tempSellRow.push(this.data.sell_confim.sellTicket.row[k])
     }
@@ -154,22 +155,23 @@ Page({
     })
     if (this.data.sell_confim.sellForm.sell_type != "") {
       this.setData({
-        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "单卖" : "必须一起卖",
+        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "可以分开卖" : "必须一起卖",
       })
     } else {
       this.data.sell_confim.sellForm.sell_type = 1
       this.setData({
-        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "单卖" : "必须一起卖",
+        temp_sell_type: this.data.sell_confim.sellForm.sell_type == 1 ? "可以分开卖" : "必须一起卖",
       })
     }
     if (this.data.sell_confim.sellForm.region != "") {
       this.setData({
         temp_region_type: this.data.sell_confim.sellForm.region.split(' ')[0],
+        "sell_confim.sellForm.region": this.data.sell_confim.sellForm.region.split(' ')[0]
       })
     } else {
-      this.data.sell_confim.sellForm.region = "择优分配"
+      this.data.sell_confim.sellForm.region = "随机"
       this.setData({
-        temp_region_type: "择优分配",
+        temp_region_type: "随机",
       })
     }
     if (this.data.sell_confim.sellForm.row != "") {
@@ -179,21 +181,21 @@ Page({
     } else {
       this.data.sell_confim.sellForm.row = ""
       this.setData({
-        temp_row_type: "择优分配",
+        temp_row_type: "随机",
       })
     }
     if (this.data.sell_confim.sellForm.ticket_count == 1) {
       this.data.sell_confim.sellForm.seat_type = "1"
-        this.setData({
-          isSeat: false
-        })
+      this.setData({
+        isSeat: false
+      })
     } else {
       this.setData({
-          isSeat: true
-        })
+        isSeat: true
+      })
       if (this.data.sell_confim.sellForm.seat_type != "") {
         this.setData({
-          selectSeat: this.data.sell_confim.sellForm.seat_type == "1" ? true : false,
+          selectSeat: this.data.sell_confim.sellForm.seat_type == "1" ? false : true,
         })
       } else {
         this.data.sell_confim.sellForm.seat_type = "1"
@@ -202,7 +204,7 @@ Page({
         })
       }
     }
-    if (this.data.sell_confim.sellForm.sell_category == "0") {
+    if (this.data.sell_confim.sellForm.sell_category == "1") {
       this.setData({
         isTicketStatus: false
       })
@@ -215,12 +217,6 @@ Page({
       var delivery = ""
       var arr = this.data.sell_confim.sellForm.delivery_type.split(',')
       for (var i = 0; i < arr.length; i++) {
-        if (arr[i] == "1") {
-          delivery = delivery + "快递 "
-          this.setData({
-            'address.express.isSelect': true
-          })
-        }
         if (arr[i] == "4") {
           delivery = delivery + "快递到付 "
           this.setData({
@@ -243,6 +239,8 @@ Page({
       var sellForm = this.data.sell_confim.sellForm
       this.setData({
         deliveryStr: delivery,
+        sellDelivery: delivery,
+        isEditeTicket: true,
         'address.site.scene_get_ticket_address': sellForm.scene_get_ticket_address,
         'address.site.scene_get_ticket_date': sellForm.scene_get_ticket_date,
         'address.site.scene_get_ticket_phone': sellForm.scene_get_ticket_phone,
@@ -258,6 +256,7 @@ Page({
         sellDelivery: "快递到付 ",
         delivery_type: this.data.delivery_type + "4,",
         selectDelivery: true,
+        isEditeTicket: false,
         "sell_confim.sellForm.delivery_type": "4,",
         'address.userPay.isSelect': true
       })
@@ -271,29 +270,47 @@ Page({
       isSelect: true
     })
   },
-  ticketSeatTap: function (e){
+  ticketSeatTap: function (e) {
     this.setData({
-      "sell_confim.sellForm.seat_type":e.currentTarget.id == "1" ? "2" : "1",
+      "sell_confim.sellForm.seat_type": e.currentTarget.id == "1" ? "2" : "1",
       selectSeat: e.currentTarget.id == "2" ? true : false
     })
   },
-  ticketStatusTap: function (e){
-    console.log(e.currentTarget.id)
-    this.setData({
-      "sell_confim.sellForm.sell_category":e.currentTarget.id,
-      isTicketStatus: e.currentTarget.id == "1" ? true : false
-    })
+  ticketStatusTap: function (e) {
+    var that = this
+    if (e.currentTarget.id == "1") {
+      wx.showModal({
+        title: "提示",
+        content: "现票必须保证72小时内发货，期票发货时间需与买家商议。现票快递类违约不能付票，每张赔付50元，期票违约每张赔付100元.",
+        confirmColor: "#4bd4c5",
+        confirmText: "确定",
+        success: function (res) {
+          if (res.confirm) {
+            that.setData({
+              "sell_confim.sellForm.sell_category": e.currentTarget.id,
+              isTicketStatus: e.currentTarget.id == "1" ? false : true
+            })
+          }
+        }
+      })
+    } else {
+      console.log(e.currentTarget.id)
+      that.setData({
+        "sell_confim.sellForm.sell_category": parseInt(e.currentTarget.id),
+        isTicketStatus: e.currentTarget.id == "1" ? false : true
+      })
+    }
   },
 
   bindPickerRegion: function (e) {
     this.setData({
       regionIndex: e.detail.value,
-      "sell_confim.sellForm.region": this.data.sellRegion[e.detail.value] == "" ? "择优分配" : this.data.sellRegion[e.detail.value],
+      "sell_confim.sellForm.region": this.data.sellRegion[e.detail.value] == "" ? "随机" : this.data.sellRegion[e.detail.value],
       selectRegion: true
     })
   },
   bindPickerRow: function (e) {
-    if (this.data.sell_confim.sellForm.region == "择优分配") {
+    if (this.data.sell_confim.sellForm.region == "随机") {
       this.setData({
         rowIndex: "0",
         "sell_confim.sellForm.row": "",
@@ -307,9 +324,9 @@ Page({
         selectRow: true
       })
 
-      if (this.data.sell_confim.sellForm.row == "择优分配") {
+      if (this.data.sell_confim.sellForm.row == "随机") {
         this.setData({
-          "sell_confim.sellForm.row":""
+          "sell_confim.sellForm.row": ""
         })
       }
     }
@@ -336,7 +353,74 @@ Page({
     console.log(this.data.srollerViewHeight)
   },
   nextTap: function () {
+    if (!this.data.isEditeTicket) {
+      this.requestNewTicket()
+    } else {
+      this.requestEditeTicket()
+    }
     console.log(this.data)
+
+  },
+  requestEditeTicket: function () {
+    var that = this
+    var url = "supplier/ticket/" + this.data.sell_confim.ticket.id + "/"
+    wx.showToast({
+      title: '修改中...',
+      icon: 'loading',
+      duration: 2000
+    })
+    app.func.requestPost(url, this.data.sell_confim.sellForm, function (res) {
+      wx.hideToast()
+      if (res.message != null) {
+        wx.showModal({
+          title: res.message,
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+        return
+      }
+      if (res.errors != null) {
+        wx.showModal({
+          title: res.errors[0].error[0].toString(),
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+        return
+      }
+      wx.showToast({
+        title: '保存成功',
+        icon: 'success',
+        duration: 10000
+      })
+
+      setTimeout(function () {
+        wx.hideToast()
+      }, 2000)
+      wx.navigateBack({
+        delta: 2, // 回退前 delta(默认为1) 页面
+        success: function (res) {
+          // success
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
+    })
+  },
+  requestNewTicket: function () {
     var that = this
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/session/" + this.data.sell_confim.ticketSession.session.id + "/ticket/"
     wx.showToast({
@@ -371,6 +455,7 @@ Page({
       that.requestOneShowTicket()
     })
   },
+
   requestOneShowTicket: function () {
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/ticket/"
     app.func.requestGet(url, {}, function (res) {

@@ -1,0 +1,35 @@
+
+<!--pages/home/logistice/logistice.wxml-->
+<template name="logistice">
+  <view class="express_status">
+    <view class="express_detail_info">
+      <view class="express_accepttion">{{AcceptStation}}</view>
+      <view class="express_time">{{AcceptTime}}</view>
+    </view>
+  </view>
+</template>
+<template name="logistices">
+<view class="express">
+    <view class="express_status">
+    <view class="express_detail_info">
+      <view class="express_accepttion" style="color:#4bd4c5;">{{AcceptStation}}</view>
+      <view class="express_time" style="color:#4bd4c5;">{{AcceptTime}}</view>
+    </view>
+  </view>
+</view>
+  
+</template>
+<view class="express_info">
+  <view class="express_title">由 {{express_info.ShipperCode}} 负责承运 </view>
+  <view class="express_detail">
+    <view>配送方式：快递到付</view>
+    <view>快递单号：{{express_info.LogisticCode}}</view>
+  </view>
+</view>
+<view class="logistice_class">
+  <view wx:for="{{express_info.Traces}}">
+    <template is="logistices" wx:if="{{index == 0}}" data="{{...item}}" />
+    <template is="logistice" wx:else data="{{...item}}" />
+    <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1px;"></view>
+  </view>
+</view>

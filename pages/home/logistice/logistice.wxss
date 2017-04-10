@@ -1,0 +1,58 @@
+/* pages/home/logistice/logistice.wxss */
+page {
+  background-color: #efeff4;
+}
+
+.express_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.express_title{
+    margin-left: 30rpx;
+    margin-top: 52rpx;
+    font-size: 28rpx;
+    color: #384249;
+    font-weight: 500;
+}
+
+.express_detail{
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+    font-size: 26rpx;
+    color: #A2ABB5;
+    margin-bottom: 52rpx;
+}
+
+.logistice_class{
+    margin-top: 20rpx;
+}
+
+.express_status{
+    background-color: white;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}
+
+.express_detail_info{
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+}
+
+.express_accepttion{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    font-size: 26rpx;
+    color: #A2ABB5;
+}
+
+
+.express_time{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    font-size: 26rpx;
+    color: #A2ABB5;
+}

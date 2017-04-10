@@ -6,7 +6,7 @@ Page({
         isHaveOrder: false,
         showText:"须完成微信授权才能继续使用",
         showText1:"请删除后重新授权",
-        userInfo:null
+        userInfo:null,
     },
     onLoad: function (opt) {
         var that = this
@@ -46,6 +46,8 @@ Page({
           }
         })
     },
+
+
     mysellTap: function(){
         wx.navigateTo({
           url: '../sell/sell',
@@ -71,6 +73,14 @@ Page({
           },
           complete: function() {
             // complete
+          }
+        })
+    },
+    serviceTap: function (){
+        wx.makePhoneCall({
+          phoneNumber: '400-873-8011',
+          success: function(res) {
+            // success
           }
         })
     }

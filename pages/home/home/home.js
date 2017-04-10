@@ -47,8 +47,6 @@ Page({
       icon: 'loading',
       suration: 10000
     })
-
-
     console.log("请求数据")
     var that = this;
     var tempData = [{}, {}, {}, {}, {
@@ -145,6 +143,10 @@ Page({
     var url = "show/search/?kw=" + data
     console.log(url)
     app.func.requestGet(url, {}, function (res) {
+      for (var i = 0; i < res.show_list.length; i++) {
+        var dic_count = res.show_list[i].min_discount * 10
+        res.show_list[i].min_discount = dic_count.toFixed(1)
+      }
       that.setData({
         searchList: res.show_list
       })

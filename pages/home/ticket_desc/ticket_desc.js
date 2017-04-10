@@ -1,4 +1,5 @@
 var app = getApp()
+//数组去重
 function getArray(a) {
     var hash = {},
         len = a.length,
@@ -12,18 +13,18 @@ function getArray(a) {
     }
     return result;
 }
-function uniQueue(array) {
-    var arr = [];
-    var m;
-    while (array.length > 0) {
-        m = array[0];
-        arr.push(m);
-        array = $.grep(array, function (n, i) {
-            return n == m;
-        }, true);
+
+//数组去重
+function unique1(arr) {
+    var newArr = [];//新建一个数组
+    for (var i = 0, len = arr.length; i < len; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {//若新数组中未包含该项则将其存入新数组
+            newArr.push(arr[i]);
+        }
     }
-    return arr;
+    return newArr;
 }
+
 Page({
     data: {
         navigationTitle: "",
@@ -37,10 +38,30 @@ Page({
         ticketPrices: [],
         ticketChange: [],
         ticket_list: [],
-        quert:0
+        temp_ticket_list: [],
+        quert: 0,
+        winWidth: 0,
+        winHeight: 0,
+        isPrice: false,
+        ticketNames: [],
+        priceHeight: 0,
+        isSortPrice:false
     },
     onLoad: function (opt) {
-        
+        // 页面初始化 options为页面跳转所带来的参数
+        var that = this;
+        /** 
+         * 获取系统信息 
+         */
+        wx.getSystemInfo({
+
+            success: function (res) {
+                that.setData({
+                    winWidth: res.windowWidth,
+                    winHeight: res.windowHeight
+                });
+            }
+        })
         if (opt.sellShow != null) {
             this.setData({
                 sessionShow: JSON.parse(opt.sellShow),
@@ -75,7 +96,7 @@ Page({
         //     that.genderData(data.ticket_list)
         // });
         // }
-        
+
     },
     requestData: function (show) {
         var that = this;
@@ -167,7 +188,8 @@ Page({
             showDesc: that.data.sessionShow.session,
             shareTitle: that.data.sessionShow.title,
             sharesubletitle: subtitle,
-            ticket_list: tickets
+            ticket_list: tickets,
+            temp_ticket_list: tickets
         })
     },
     ticketTap: function (event) {
@@ -204,11 +226,63 @@ Page({
         }
 
     },
+
+    priceTap: function (e) {
+        var that = this
+        this.setData({
+            isPrice: that.data.isPrice == false ? true : false
+        })
+        var tempList = []
+        tempList.push('全部')
+        for (var i = 0; i < this.data.temp_ticket_list.length; i++) {
+            tempList.push(this.data.temp_ticket_list[i].original_ticket.name)
+
+        }
+        this.setData({
+            priceHeight: getArray(tempList).length * 60 > that.data.winHeight - 45 ? that.data.winHeight - 45 : getArray(tempList).length * 60
+        })
+
+        // var unique1d = unique1(tempList)
+        // var uniQueued = getArray(tempList)
+        this.setData({
+            ticketNames: getArray(tempList)
+        })
+    },
+
+    priceNameTap: function (event) {
+        var that = this
+        var name = event.currentTarget.dataset.name
+        var tempList = []
+        if (name == '全部') {
+            tempList = that.data.temp_ticket_list
+        } else {
+            for (var i = 0; i < that.data.temp_ticket_list.length; i++) {
+                if (name == that.data.temp_ticket_list[i].original_ticket.name) {
+                    tempList.push(that.data.temp_ticket_list[i])
+                }
+            }
+        }
+        that.setData({
+            ticket_list: tempList,
+            isPrice: false,
+            isSortPrice: false
+        })
+    },
+
+    sortpriceTap: function (e){
+        var that = this
+        this.setData({
+            isSortPrice: that.data.isSortPrice == false ? true : false,
+            ticket_list: that.data.ticket_list.reverse()
+        })
+    },
+
     connectService: function (ticket) {
         var tempList = []
         if (ticket.status != 2) {
             if (ticket.status == 0) {
                 tempList.push("删除")
+
             }
             tempList.push(ticket.status == 1 ? "下架" : "上架")
         }

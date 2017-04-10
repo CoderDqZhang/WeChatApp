@@ -15,8 +15,10 @@ Page({
       "region": "",
       "sell_type": "",
       "ticket_count": "",
-      "row": ""
+      "row": "",
+      "sell_category":"0"
     },
+    ticket:null,
     selectTicketPrice: "",
     sellPriceTicket: "",
     sellPrice: ""
@@ -41,10 +43,11 @@ Page({
       console.log(editData)
       this.setData({
         sessionShow: editData.sessionShow,
-        'sellForm.show_session_ticket': editData.ticket.id,
+        'sellForm.show_session_ticket': editData.ticket.original_ticket.id,
+        'sellForm.sell_category': editData.ticket.sell_category,
         'sellForm.seat_type': editData.ticket.seat_type,
         'sellForm.sell_type': editData.ticket.sell_type,
-        'sellForm.ticket_count': editData.ticket.ticket_count,
+        'sellForm.ticket_count': editData.ticket.remain_count,
         'sellForm.price': editData.ticket.price,
         'sellForm.region': editData.ticket.region,
         'sellForm.row': editData.ticket.row,
@@ -57,10 +60,11 @@ Page({
         "sellForm.delivery_type": editData.ticket.delivery_type,
         "sellForm.seat_type": editData.ticket.seat_type,
         "sellForm.sell_type": editData.ticket.sell_type,
-        numberTicket: editData.ticket.ticket_count,
+        numberTicket: editData.ticket.remain_count,
         sellPrice: editData.ticket.price,
         sellPriceTicket: editData.ticket.price,
-        selectTicketPrice: editData.ticket.original_ticket.id
+        selectTicketPrice: editData.ticket.original_ticket.id,
+        ticket: editData.ticket
       })
       this.requestData()
 
@@ -104,8 +108,14 @@ Page({
     app.func.requestGet(url, {}, function (res) {
       console.log(res)
       that.setData({
-        sellTicket: res
+        sellTicket: res,
+       
       })
+      if (that.ticket != null) {
+        that.setData({
+           "sellTicket.id": that.data.ticket.id
+        })
+      }
       that.genderData()
       console.log(that.data.sellForm)
     });
@@ -161,7 +171,7 @@ Page({
     this.data.sellForm.ticket_count = this.data.numberTicket
     this.data.sellForm.price = this.data.sellPrice
     console.log(this.data.sellForm)
-    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket, "ticketSession": this.data.sessionShow }
+    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket, "ticketSession": this.data.sessionShow,'ticket':this.data.ticket }
     wx.navigateTo({
       url: '../sell_form_confirm/sell_form_confirm?sell_confim=' + JSON.stringify(confirm),
       success: function (res) {

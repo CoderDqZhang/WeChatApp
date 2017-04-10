@@ -30,12 +30,21 @@ Page({
     });
     this.requestData()
   },
+
   requestData: function () {
     var that = this
+     wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      suration: 10000
+    })
     app.func.requestGet("show/hot_sell/", {}, function (res) {
       that.setData({
         sellList: res
       })
+      setTimeout(function () {
+      wx.hideToast()
+    }, 500)
       console.log(that.data.sellList)
     });
   },

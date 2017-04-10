@@ -209,7 +209,7 @@ Page({
     that.setData({
       currentTab: e.detail.current,
       showText: e.detail.current == 0 ? "还没有订单" : "还没有票品",
-      showText1: e.detail.current == 0 ? "快去首页挑选喜欢的演出活动吧" : "快去去卖票首页挂票吧"
+      showText1: e.detail.current == 0 ? "快去首页挑选喜欢的演出活动吧" : "您暂未挂票，在挂票页可以上票哦~"
     });
 
   },
@@ -226,7 +226,7 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current,
         showText: this.data.currentTab == 1 ? "还没有订单" : "还没有票品",
-        showText1: this.data.currentTab == 1 ? "快去首页挑选喜欢的演出活动吧" : "快去卖票首页挂票吧",
+        showText1: this.data.currentTab == 1 ? "快去首页挑选喜欢的演出活动吧" : "您暂未挂票，在挂票页可以上票哦~",
 
       })
       if (that.data.currentTab == 1) {
@@ -239,6 +239,21 @@ Page({
           isHaveSellManager: false,
           isHaveOrder: that.data.orders.length == 0 ? true : false,
         })
+      }
+    }
+  },
+  upateOrderList: function (order) {
+    var that = this
+    for (var j = 0; j < that.data.orders.order_list.length; j++) {
+
+      if (that.data.orders.order_list[j].order_id = order.order_id) {
+        that.data.orders.order_list[j].status = 7;
+        that.data.orders.order_list[j].status_desc = "待收货"
+        var tempTicket = that.data.orders
+        that.setData({
+          orders: tempTicket
+        })
+        break;
       }
     }
   },
@@ -277,8 +292,8 @@ Page({
         orders: tempTicket,
       })
       setTimeout(function () {
-      wx.hideToast()
-    }, 500)
+        wx.hideToast()
+      }, 500)
     });
   },
   requestData: function () {
@@ -443,36 +458,40 @@ Page({
   },
   payEventhandle: function (event) {
     var that = this
-    var url = "order/" + event.currentTarget.dataset.order + "/"
-    app.func.requestPost(url, { "status": "7" }, function (res) {
-      if (res.errors != null) {
-        wx.showModal({
-          title: res.errors[0].error[0].toString(),
-          showCancel: false,
-          confirmText: "知道了",
-          confirmColor: "#4bd4c5",
-          success: function (res) {
-            if (res.confirm) {
-            }
-          }
-        })
-        return
-      }
-      console.log(res)
-      console.log(that.data.orders)
-      for (var j = 0; j < that.data.orders.order_list.length; j++) {
+    var data 
+    for (var j = 0; j < that.data.orders.order_list.length; j++) {
 
-        if (that.data.orders.order_list[j].order_id = res.order_id) {
-          that.data.orders.order_list[j].status = 7;
-          that.data.orders.order_list[j].status_desc = "待收货"
-          var tempTicket = that.data.orders
-          that.setData({
-            orders: tempTicket
-          })
-          break;
-        }
+              if (that.data.orders.order_list[j].order_id = event.currentTarget.dataset.order) {
+                data = that.data.orders.order_list[j]
+                break;
+              }
+    }
+    var imageUrl = data.show.cover
+    var arr = imageUrl.split('?')
+    data.show.cover = arr[0]
+    data.show.cover_end = arr[1]
+    var imageS = data.session.venue_map
+    var urls = imageS.split('?')
+    data.session.venue_map = urls[0]
+    data.session.venue_end = urls[1]
+    var imageIcon = data.show.category.icon
+    var iconUrls = imageIcon.split('?')
+    data.show.category.icon = iconUrls[0]
+    data.show.category.icon_end = iconUrls[1]
+    data.orderStatus = "user"
+    var order = JSON.stringify(data)
+    wx.navigateTo({
+      url: '../order_deliver/order_deliver?order=' + order,
+      success: function (res) {
+        // success
+      },
+      fail: function (res) {
+        // fail
+      },
+      complete: function (res) {
+        // complete
       }
-    });
+    })
   },
   onReady: function () {
     // 页面渲染完成

@@ -1,9 +1,21 @@
 //app.js
 var http = require('gloable/service/http.js')
 var TD = require('gloable/service/tdweapp.js');
+var MD5 = require('gloable/service/jqueryMD5.js');
 App({
   data: {
-    userInfo: {}
+    userInfo: {},
+    deliver: {
+      "顺丰": "SF",
+      "EMS": "EMS",
+      "圆通": "YTO",
+      "中通": "ZTO",
+      "申通": "STO",
+      "宅急送": "ZJS",
+      "韵达": "YD"
+    },
+    expressDelivierKey: "a72a6d2f-019f-463f-8d20-a99bef74f1ce",
+    expressDelivierEBusinessID: "1281351"
   },
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -16,17 +28,17 @@ App({
       that.globalData.userInfo = userInfo
     })
     TD.launch({
-            appkey: '949AC2A588DA47B9AA5499B5CB15250D',
-            appName: '良票演出',
-            versionName: 'v1.1.0',
-            versionCode: 'v1.1.0',
-            autoOnAppShow: true,
-            autoOnAppHide: true,
-            autoOnPageUnload: true,
-            autoOnPullDownRefresh: true,
-            autoOnReachBottom: true,
-            autoOnShare: true
-        });
+      appkey: '949AC2A588DA47B9AA5499B5CB15250D',
+      appName: '良票演出',
+      versionName: 'v1.1.0',
+      versionCode: 'v1.1.0',
+      autoOnAppShow: true,
+      autoOnAppHide: true,
+      autoOnPageUnload: true,
+      autoOnPullDownRefresh: true,
+      autoOnReachBottom: true,
+      autoOnShare: true
+    });
   },
   getUserInfo: function (cb) {
     var that = this
@@ -57,7 +69,7 @@ App({
                 console.log(resU.userInfo)
                 console.log(res.code)
                 wx.request({
-                    url: "https://api.liangpiao.me/user/weixin_login/",
+                  url: "https://api.liangpiao.me/user/weixin_login/",
                   // url: "https://api.niceticket.cc/user/weixin_login/",
                   data: {
                     "gender": resU.userInfo.gender,

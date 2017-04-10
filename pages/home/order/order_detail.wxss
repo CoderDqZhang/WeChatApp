@@ -257,3 +257,30 @@ page {
   position: absolute;
   bottom: 0;
 }
+
+.express_info{
+  flex-direction: column;
+  display: flex;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.express_title{
+  color: #384249;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+  margin-top: 52rpx;
+}
+
+.express_detail{
+  color: #A2ABB5;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  margin-bottom: 52rpx;
+  margin-left: 30rpx;
+  
+}
+
+.express{
+  margin-top: 8rpx;
+}

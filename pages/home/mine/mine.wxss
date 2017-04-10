@@ -1,7 +1,7 @@
 /* pages/mine/mine/mine.wxss */
 
 page {
-  background-color: #efeff4;
+  background-color: #ffffff;
 }
 
 .userInfo{
@@ -63,4 +63,24 @@ page {
   text-align: center;
   font-size: 32rpx;
   color: #BBC1CB;
+}
+
+
+.serviceConnect{
+  margin-top:20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.service{
+  font-size: 26rpx;
+  color: #DDE0E5;
+}
+
+.phone{
+  font-size: 26rpx;
+  color: #4bd4c5;
 }

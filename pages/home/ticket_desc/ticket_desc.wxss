@@ -168,9 +168,10 @@ page {
 }
 
 .ticket_normal_price {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
   text-align: left;
-  padding-top: 26rpx;
-  padding-bottom: 26rpx;
   color: #8a96a2;
   width: 1000rpx;
   font-size: 24rpx;
@@ -193,10 +194,23 @@ page {
   text-align: right;
   color: #8a96a2;
   height: 100%;
-  padding-top: 26rpx;
-  padding-bottom: 26rpx;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /*background-color: cadetblue;*/
   width: 1000rpx;
   font-size: 24rpx;
+}
+
+.ticket_price_sort{
+  margin-right: 24rpx;
+}
+
+.class_price_sort {
+  margin-right: 0rpx;
+  width: 14rpx;
+  height: 22rpx;
 }
 
 .thin-border-right::before {
@@ -223,6 +237,13 @@ page {
   color: #384249;
   font-size: 26rpx;
   width: 1000rpx;
+}
+
+.class_price {
+  margin-top: 6rpx;
+  margin-left: 24rpx;
+  width: 14rpx;
+  height: 8rpx;
 }
 
 .ticket_row_template {
@@ -255,7 +276,7 @@ page {
   width: 1000rpx;
 }
 
-.ticket_normal_price_template_0{
+.ticket_normal_price_template_0 {
   text-align: left;
   color: #bbc1cb;
   font-size: 26rpx;
@@ -270,13 +291,13 @@ page {
   font-size: 26rpx;
 }
 
-.ticket_row_type_0{
+.ticket_row_type_0 {
   color: #bbc1cb;
   font-size: 26rpx;
   line-height: 30rpx;
 }
 
-.ticket_now_price_template_0{
+.ticket_now_price_template_0 {
   color: #bbc1cb;
   margin-bottom: 8rpx;
   height: 18rpx;
@@ -295,13 +316,27 @@ page {
   font-size: 20rpx;
 }
 
-.ticket_status_type{
+.ticket_status_type {
   display: inline-block;
-  background-color: #FF7A5E;
+  background-color: #ff7a5e;
   color: #fff;
   padding-left: 8rpx;
   padding-right: 8rpx;
   border-radius: 4rpx;
   margin-right: 4rpx;
   font-size: 20rpx;
+}
+
+.priceName {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  height: 120rpx;
+}
+
+.ticketName {
+  margin-left: 30rpx;
+  height: 26rpx;
+  font-size: 26rpx;
+  color: #384249;
 }

@@ -54,13 +54,14 @@
 </view>
 <view wx:else>
   <view class="searchContent">
-    <input class="inputText" id="HotSell" value="{{    searchText}}" bindinput="bindKeyInput" placeholder="搜索名称、演员..." placeholder-style="font-size: 13px;color: #BBC1CB;letter-spacing: 0; text-align:left;" style="width:{{searchBarWidth}}px;" bindfocus="inputFocus"
+    <input class="inputText" id="HotSell" value="{{    searchText}}" bindinput="bindKeyInput" type="text"
+     placeholder="搜索名称、演员..." placeholder-style="font-size: 13px;color: #BBC1CB;letter-spacing: 0; text-align:left;" style="width:{{searchBarWidth}}px;" bindfocus="inputFocus"
     focus="{{isInPut}}" />
     <view class="cancelClass" wx:if="{{isInPut}}" bindtap="cancelTap">取消</view>
     
   </view>
   <view style="width:100%; height:1rpx;background-color: #E9EBF2;"></view>
-  <scroll-view scroll-y="true" upper-threshold = "30" bindscrolltoupper="pullDowne" style="height:{{winHeight - 45}}px;">
+  <scroll-view scroll-y="true" upper-threshold = "50" bindscrolltoupper="pullDowne" style="height:{{winHeight - 45}}px;">
     <view wx:if="{{isInPut}}" style="background-color: #FFFFFF; height:100%;">
       <view wx:for="{{searchList}}" wx:key="ticketShow" id="showTap" bindtap="showTap" wx:for-item="item" data-show="{{item}}">
           <template is="show_template" data="{{...item}}" />

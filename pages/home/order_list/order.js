@@ -4,8 +4,8 @@ Page({
         tickets: {},
         windowsHeigth: 0,
         isHaveOrder: false,
-        showText:"须完成微信授权才能继续使用",
-        showText1:"请删除后重新授权"
+        showText: "须完成微信授权才能继续使用",
+        showText1: "请删除后重新授权"
     },
     onLoad: function (opt) {
         var that = this
@@ -28,6 +28,22 @@ Page({
                 isHaveOrder: true
             })
             return
+        }
+    },
+
+    upateOrderList: function (order) {
+        var that = this
+        for (var j = 0; j < that.data.tickets.order_list.length; j++) {
+
+            if (that.data.tickets.order_list[j].order_id = order.order_id) {
+                that.data.tickets.order_list[j].status = 8;
+                that.data.tickets.order_list[j].status_desc = "已完成"
+                var tempTicket = that.data.tickets
+                that.setData({
+                    tickets: tempTicket
+                })
+                break;
+            }
         }
     },
     requestData: function (isNext) {
@@ -60,8 +76,8 @@ Page({
                 that.setData({
                     isHaveOrder: tempTicket.order_list.length != 0 ? false : true,
                     tickets: tempTicket,
-                    showText:"还没有订单",
-                    showText1:"快去首页挑选喜欢的演出活动吧"
+                    showText: "还没有订单",
+                    showText1: "快去首页挑选喜欢的演出活动吧"
                 })
         });
     },
@@ -137,22 +153,49 @@ Page({
     },
     reciveEventhandle: function (event) {
         var that = this
-        var url = "order/" + event.currentTarget.dataset.order + "/"
-        app.func.requestPost(url, { "status": "7" }, function (res) {
-            console.log(res)
-            for (var j = 0; j < that.data.tickets.order_list.length; j++) {
+        wx.showModal({
+            title: "是否已经收到演出票",
+            showCancel: true,
+            cancelText: "取消",
+            confirmText: "知道了",
+            confirmColor: "#4bd4c5",
+            success: function (res) {
+                if (res.confirm) {
+                    var url = "order/" + event.currentTarget.dataset.order + "/"
+                    app.func.requestPost(url, { "status": "8" }, function (res) {
+                        if (res.errors != null) {
+                            wx.showModal({
+                                title: res.errors[0].error[0].toString(),
+                                showCancel: false,
+                                confirmText: "知道了",
+                                confirmColor: "#4bd4c5",
+                                success: function (uwres) {
+                                    if (uwres.confirm) {
+                                    }
+                                }
+                            })
+                            return
+                        }
+                        console.log(res)
+                        for (var j = 0; j < that.data.tickets.order_list.length; j++) {
 
-                if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
-                    that.data.tickets.order_list[j].status = 8;
-                    that.data.tickets.order_list[j].status_desc = "已完成"
-                    var tempTicket = that.data.tickets
-                    that.setData({
-                        tickets: tempTicket
-                    })
-                    break;
+                            if (that.data.tickets.order_list[j].order_id = event.currentTarget.dataset.order) {
+                                that.data.tickets.order_list[j].status = res.status;
+                                that.data.tickets.order_list[j].status_desc = res.status_desc
+                                that.data.tickets.order_list[j].supplier_status_desc = res.supplier_status_desc
+                                var tempTicket = that.data.tickets
+                                that.setData({
+                                    tickets: tempTicket
+                                })
+                                break;
+                            }
+                        }
+                    });
                 }
             }
-        });
+        })
+
+
     },
 
     orderTap: function (event) {

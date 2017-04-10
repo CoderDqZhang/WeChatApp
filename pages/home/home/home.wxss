@@ -184,6 +184,7 @@ page {
   font-size: 26rpx;
   margin-left: 16rpx;
   margin-right: 16rpx;
+  
 }
 
 .cancelClass{
