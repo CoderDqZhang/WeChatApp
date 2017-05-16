@@ -58,7 +58,7 @@ page {
   line-height: 40rpx;
 }
 
-.order_info{
+.order_info {
   flex-direction: row;
   display: flex;
   justify-content: space-between;
@@ -66,13 +66,13 @@ page {
   height: 98rpx;
 }
 
-.order_id{
+.order_id {
   margin-left: 30rpx;
   font-size: 24rpx;
   color: #8a96a2;
 }
 
-.contact{
+.contact {
   margin-right: 30rpx;
   font-size: 28rpx;
   color: #4bd4c5;
@@ -230,7 +230,7 @@ page {
   color: #556169;
 }
 
-.order_message{
+.order_message {
   flex-direction: row;
   display: flex;
   background-color: white;
@@ -238,12 +238,12 @@ page {
   align-content: center;
 }
 
-.message_title{
+.message_title {
   margin-top: 30rpx;
   margin-bottom: 30rpx;
   margin-left: 30rpx;
   font-size: 24rpx;
-  color: #384249; 
+  color: #384249;
 }
 
 .next {
@@ -281,6 +281,12 @@ page {
   height: 42rpx;
 }
 
+.detailImage {  
+  width: 16rpx;
+  height: 26rpx;
+  margin-right: 30rpx;
+}
+
 .text_class {
   margin-left: 24rpx;
   margin-right: 30rpx;
@@ -294,13 +300,7 @@ page {
   -webkit-box-orient: vertical;
 }
 
-.detailImage {  
-  width: 16rpx;
-  height: 26rpx;
-  margin-right: 30rpx;
-}
-
-.express{
+.express {
   margin-top: 8rpx;
 }
 
@@ -316,19 +316,6 @@ page {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.eventButtonDisble{
-  padding-left: 20rpx;
-  padding-top: 12rpx;
-  padding-bottom: 12rpx;
-  padding-right: 20rpx;
-  margin-right: 20rpx;
-  color: #BBC1CB;
-  font-size: 26rpx;
-  background-color: #fff;
-  border: 2rpx solid #BBC1CB;
-  border-radius: 4rpx;
 }
 
 .eventButtonL {
@@ -354,4 +341,3 @@ page {
   background-color: #4bd4c5;
   border-radius: 4rpx;
 }
-

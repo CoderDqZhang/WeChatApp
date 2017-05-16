@@ -45,10 +45,13 @@ Page({
         isPrice: false,
         ticketNames: [],
         priceHeight: 0,
-        isSortPrice:false
+        isSortPrice: false,
+        showDate:"false"
     },
     onLoad: function (opt) {
         // 页面初始化 options为页面跳转所带来的参数
+        // var date = util.formatTime(new Date)
+        
         var that = this;
         /** 
          * 获取系统信息 
@@ -129,9 +132,9 @@ Page({
         for (var i = 0; i < tickets.length; i++) {
             var ticket_row = ""
             if (tickets[i].region == "") {
-                ticket_row = "择优分配"
+                ticket_row = "随机"
             } else {
-                ticket_row = tickets[i].row != "" ? tickets[i].region + ' ' + tickets[i].row + "排" : tickets[i].region + " 择优分配"
+                ticket_row = tickets[i].row != "" ? tickets[i].region + ' ' + tickets[i].row + "排" : tickets[i].region + " 随机"
             }
             tickets[i].region = ticket_row
             var arr = tickets[i].delivery_type.split(',');
@@ -162,7 +165,7 @@ Page({
             if (tickets[j].region == '') {
                 ticket_row = ''
             } else {
-                ticket_row = tickets[j].region != '择优分配' ? tickets[j].region : ''
+                ticket_row = tickets[j].region != '随机' ? tickets[j].region : ''
             }
             that.data.ticketPrices.push(tickets[j].original_ticket.price)
         }
@@ -269,7 +272,7 @@ Page({
         })
     },
 
-    sortpriceTap: function (e){
+    sortpriceTap: function (e) {
         var that = this
         this.setData({
             isSortPrice: that.data.isSortPrice == false ? true : false,
@@ -279,13 +282,11 @@ Page({
 
     connectService: function (ticket) {
         var tempList = []
-        if (ticket.status != 2) {
-            if (ticket.status == 0) {
-                tempList.push("删除")
-
-            }
-            tempList.push(ticket.status == 1 ? "下架" : "上架")
-        }
+        // if (ticket.status != 2) {
+        //   tempList.push("删除")
+        //     // tempList.push(ticket.status == 1 ? "下架" : "上架")
+        // }
+        tempList.push("删除")
         tempList.push("编辑")
         this.setData({
             ticketChange: tempList
@@ -305,49 +306,49 @@ Page({
     changeTicketStatus: function (data, ticket) {
         if (data == "编辑") {
             this.requestEditTicket(ticket)
-        } else if (data == "上架") {
-            this.requestChangeTicket(ticket)
-        } else if (data == "下架") {
-            this.requestChangeTicket(ticket)
+        // } else if (data == "上架") {
+        //     this.requestChangeTicket(ticket)
+        // } else if (data == "下架") {
+        //     this.requestChangeTicket(ticket)
         } else if (data == "删除") {
             this.requestDeleteTicket(ticket)
         }
     },
-    requestChangeTicket: function (ticket) {
-        var that = this
-        let url = "supplier/ticket/" + ticket.id + "/"
-        app.func.requestPut(url, {}, function (res) {
-            console.log(res)
-            var ticketList = that.data.showDesc.ticket_list
-            for (var j = 0; j < ticketList.length; j++) {
+    // requestChangeTicket: function (ticket) {
+    //     var that = this
+    //     let url = "supplier/ticket/" + ticket.id + "/"
+    //     app.func.requestPut(url, {}, function (res) {
+    //         console.log(res)
+    //         var ticketList = that.data.showDesc.ticket_list
+    //         for (var j = 0; j < ticketList.length; j++) {
 
-                if (ticketList[j].id == ticket.id) {
-                    var ticket_list = ticketList[j]
-                    ticketList[j].status = ticketList[j].status == 1 ? 0 : 1;
-                    ticketList[j].status_desc = ticket.status == 1 ? "已上线" : "已下线"
-                    var tempTicket = ticketList
-                    that.setData({
-                        'that.data.showDesc.ticket_list': tempTicket,
-                        ticket_list: tempTicket
-                    })
-                    break;
-                }
-            }
-            if (res.errors != null) {
-                wx.showModal({
-                    title: res.errors[0].error[0].toString(),
-                    showCancel: false,
-                    confirmText: "知道了",
-                    confirmColor: "#4bd4c5",
-                    success: function (res) {
-                        if (res.confirm) {
-                        }
-                    }
-                })
-                return
-            }
-        });
-    },
+    //             if (ticketList[j].id == ticket.id) {
+    //                 var ticket_list = ticketList[j]
+    //                 ticketList[j].status = ticketList[j].status == 1 ? 0 : 1;
+    //                 ticketList[j].status_desc = ticket.status == 1 ? "已上线" : "已下线"
+    //                 var tempTicket = ticketList
+    //                 that.setData({
+    //                     'that.data.showDesc.ticket_list': tempTicket,
+    //                     ticket_list: tempTicket
+    //                 })
+    //                 break;
+    //             }
+    //         }
+    //         if (res.errors != null) {
+    //             wx.showModal({
+    //                 title: res.errors[0].error[0].toString(),
+    //                 showCancel: false,
+    //                 confirmText: "知道了",
+    //                 confirmColor: "#4bd4c5",
+    //                 success: function (res) {
+    //                     if (res.confirm) {
+    //                     }
+    //                 }
+    //             })
+    //             return
+    //         }
+    //     });
+    // },
     requestDeleteTicket: function (ticket) {
         var that = this
         let url = "supplier/ticket/" + ticket.id + "/"

@@ -1,48 +1,51 @@
 /* pages/home/order_deliver/order_deliver.wxss */
+
 page {
   background-color: #efeff4;
 }
 
-.order_info{
-    background-color: white;
-    flex-direction: column;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.order_info {
+  background-color: white;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.title{
-    font-size: 26rpx;
-    color: #384249;
-    margin-left: 30rpx;
-    margin-top: 40rpx;
+.title {
+  font-size: 26rpx;
+  color: #384249;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
 }
 
-.detail_info{
-    font-size: 26rpx;
-    color: #A2ABB5;
-    margin-top: 16rpx;
-    margin-left: 30rpx;
-    margin-bottom: 40rpx;
+.detail_info {
+  font-size: 26rpx;
+  color: #a2abb5;
+  margin-top: 16rpx;
+  margin-left: 30rpx;
+  margin-bottom: 40rpx;
 }
-.detail_title{
-    margin-top: 8rpx;
+
+.detail_title {
+  margin-top: 8rpx;
 }
 
 .cell_title_info_image {
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: white;
   display: flex;
   height: 88rpx;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
+  /*padding-left: 30rpx;
+  padding-right: 30rpx;*/
 }
 
 .title_section {
+  width: 600rpx;
   margin-left: 30rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
   color: #384249;
 }
 
@@ -54,7 +57,7 @@ page {
   width: 500rpx;
   margin-right: 12rpx;
   text-align: right;
-  font-size: 30rpx;
+  font-size: 26rpx;
   color: #8a96a2;
   letter-spacing: 0;
 }
@@ -65,10 +68,43 @@ page {
   height: 26rpx;
 }
 
-.deliverText{
-    text-align: right;
-    margin-right: 30rpx;
+.section{
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
 
+.detail {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 26rpx;
+  color: #8a96a2;
+  letter-spacing: 0;
+}
+
+.add_detail {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 26rpx;
+  color: #8a96a2;
+  letter-spacing: 0;
+}
+
+.detail_image {
+  margin-right: 30rpx;
+  width: 16rpx;
+  height: 26rpx;
+}
+
+.deliverText {
+  text-align: right;
+  margin-right: 30rpx;
 }
 
 .next {
@@ -81,4 +117,24 @@ page {
   color: white;
   position: absolute;
   bottom: 0;
+}
+
+.section_photo{
+  margin-right: 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.image{
+  width: 100%;
+  height: 130rpx;
+  background-color: white;
+}
+
+.select_image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 30rpx;
 }

@@ -1,7 +1,9 @@
 //app.js
-var http = require('gloable/service/http.js')
+var http = require('gloable/service/http.js');
 var TD = require('gloable/service/tdweapp.js');
 var MD5 = require('gloable/service/jqueryMD5.js');
+// var util = require('../../utils/util.js');
+
 App({
   data: {
     userInfo: {},
@@ -128,6 +130,7 @@ App({
   },
   func: {
     requestPost: http.requestPost,
+    requestUpload: http.requestUpload,
     requestGet: http.requestGet,
     requestPut: http.requestPut,
     requestDelete: http.requestDelete

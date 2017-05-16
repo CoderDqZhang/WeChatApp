@@ -1,0 +1,8 @@
+<!--pages/home/top_up/top_up.wxml-->
+<form bindsubmit="formSubmit">
+  <view class="top_up_class">
+    <view class="title">充值金额（元）</view>
+    <input class="topUpPriceText" placeholder="0" value="{{topUpPrice}}" placeholder-style="color: #DDE0E5;" type="number" bindinput="topUpPriceInput" />
+  </view>
+  <button formType="submit" class="confim">充值</button>
+</form>

@@ -1,4 +1,3 @@
-
 <!--pages/home/order_deliver/order_deliver.wxml-->
 <view class="order_info">
   <view class="title">配送信息</view>
@@ -9,27 +8,45 @@
   </view>
 </view>
 <view class="cell_title_info_image" style="margin-top:20rpx;">
-    <view class="title_section">物流公司
+  <view class="title_section">物流公司
+  </view>
+  <view class="section" >
+    <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{deliverArray}}" class="picket" wx:if="{{isSelect}}">
+      <view class="detail">{{deliverArray[changeIndex]}}
+      </view>
+    </picker>
+    <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{deliverArray}}" class="address_detail" wx:else>
+      <view class="detail">{{temp_deliver}}
+      </view>
+    </picker>
+  </view>
+  <view class="detail_image">
+    <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
+  </view>
+</view>
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view class="cell_title_info_image">
+  <view class="title_section">订单编号
+  </view>
+  <view class="section" style="width:{{winWidth}}px;">
+    <input class="deliverText" placeholder="填写快递单号" value="{{deliverText}}" placeholder-style="color: #BBC1CB;font-size:26rpx;" type="number" bindinput="deliverInput" />
+  </view>
+</view>
+<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+<view class="cell_title_info_image" bindtap="chooseImage"> 
+  <view class="title_section">添加发货凭证
+  </view>
+  <view class="section_photo">
+    <view class="add_detail" wx:if="{{photo == ''}}">点击上传照片
     </view>
-    <view class="section" style="width:{{winWidth - 100}}px;">
-      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{deliverArray}}" class="picket" wx:if="{{isSelect}}">
-        <view class="detail">{{deliverArray[changeIndex]}}
-        </view>
-      </picker>
-      <picker bindchange="sellTypePickerChange" value="{{index}}" range="{{deliverArray}}" class="address_detail" wx:else>
-        <view class="detail">{{temp_deliver}}
-        </view>
-      </picker>
+    <view class="add_detail" wx:else>重新上传
     </view>
-    <view class="detail_image">
+  </view>
+  <view class="detail_image">
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
-  </view>
-  <view class="cell_title_info_image" >
-    <view class="title_section">订单编号
-    </view>
-    <view class="section" style="width:{{windowWidth}}px;">
-    <input class="deliverText" placeholder="填写快递单号" value="{{deliverText}}" placeholder-style="color: #BBC1CB;font-size:26rpx;" type="number" bindinput="deliverInput" />
-    </view>
-  </view>
-  <view  class="next" bindtap="nextTap">立即发货</view>
+</view>
+<view class="image" wx:if="{{imageSelect}}">
+ <image src="{{imagePath}}" class="select_image" bindtap="showImage"></image>
+</view>
+<view class="next" bindtap="nextTap">立即发货</view>

@@ -43,6 +43,7 @@
 <view class="bottom_view" style="margin-top:{{winHeight - 411}}px;" wx:else>
   <view class="wallet_rule" bindtap="cancelRuleView" id="cancelRuleView">查看规则说明</view>
   <view class="wallet_action">
-    <button class="withdraw" id="withdraw" bindtap="withdrawTap">提现</button>
+    <view class="top_up" id="withdraw" bindtap="topUpTap">充值</view>
+    <view class="withdraw" id="withdraw" bindtap="withdrawTap">提现</view>
   </view>
 </view>

@@ -164,7 +164,52 @@ function requestGet(url, data, cb) {
   })
 }
 
+function requestUpload(url, data, filePath, name, cb){
+  var lp_session_id;
+  console.log("请求Upload")
+  wx.getStorage({
+    key: 'userInfo',
+
+    success: function (res) {
+      lp_session_id = res.data.data.lp_session_id
+      wx.uploadFile({
+        url: rootDocment + url,
+        filePath: filePath,
+        name:name,
+        formData: data,
+        method: 'post',
+        header: {
+          "content-type": "application/json",
+          "cache-control": "no-cache",
+          'Authorization': res.data.data.lp_session_id
+        },
+        success: function (res) {
+          return typeof cb == "function" && cb(res.data)
+        },
+        fail: function () {
+          
+          return typeof cb == "function" && cb(false)
+        },
+      })
+    },
+    fail: function () {
+      if (res.message != null) {
+        wx.showModal({
+          title: "请允许获取用户信息",
+          confirmColor: "#4bd4c5",
+          confirmText: "知道了",
+          success: function (res) {
+            console.log('用户点击确定')
+          }
+        })
+      }
+      return typeof cb == "function" && cb(false)
+    }
+  })
+}
+
 module.exports.requestPost = requestPost
 module.exports.requestGet = requestGet
 module.exports.requestDelete = requestDelete
 module.exports.requestPut = requestPut
+module.exports.requestUpload = requestUpload

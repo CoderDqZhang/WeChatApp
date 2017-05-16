@@ -8,9 +8,12 @@ Page({
     changeIndex: 0,
     winHeight: 0,
     winWidth: 0,
+    imagePath:'',
+    imageSelect:false,
+    photo:"",
     form: {
       "express_name": "SF",
-      "express_num": ""
+      "express_num": "",
     }
   },
   onLoad: function (options) {
@@ -74,40 +77,131 @@ Page({
   },
 
   nextTap: function (e) {
-
     var that = this
-
+    if (that.data.photo == '') {
+      that.uploadWithNoImage()
+    }else{
+      that.uploadWithImage()
+    }
+          
+  },
+  uploadWithNoImage: function (){
+    var that = this
     var urls = "supplier/order/" + that.data.order.order_id + "/express/"
     app.func.requestPost(urls, this.data.form, function (res) {
-      that.data.order.express_info = res
-      var url = "order/" + that.data.order.order_id + "/"
-
-      var data = { "status": "7" }
-      app.func.requestPost(url, data, function (res) {
-        that.data.order.status = res.status
-        that.data.order.status_desc = res.status_desc
-        that.data.order.supplier_status_desc = res.supplier_status_desc
-        var pages = getCurrentPages();
-        if (pages.length > 1) {
-          //上一个页面实例对象
-          var prePage = pages[pages.length - 2];
-          //关键在这里
-          prePage.updataOrder(that.data.order)
-        }
-        wx.navigateBack({
-          delta: 1, // 回退前 delta(默认为1) 页面
-          success: function(res){
-            // success
-          },
-          fail: function(res) {
-            // fail
-          },
-          complete: function(res) {
-            // complete
+      if (res.errors != null) {
+        wx.showModal({
+          title: res.errors[0].error[0].toString(),
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (uwres) {
+            if (uwres.confirm) {
+            }
           }
         })
-      });
-    });
+        return
+      }
+      that.data.express_info = res
+      that.changeOrderStatus()
+    })
+  },
+  uploadWithImage: function (){
+    wx.showToast({
+      title: '上传中',
+      icon: 'loading',
+      suration: 10000
+    })
+    var that = this
+    var urls = "supplier/order/" + that.data.order.order_id + "/express/"
+    app.func.requestUpload(urls, this.data.form, this.data.photo, 'photo', function (res) {
+      setTimeout(function () {
+        wx.hideToast()
+      }, 500)
+      if (res == false) {
+        wx.showModal({
+          title: '上传出错',
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (uwres) {
+            if (uwres.confirm) {
+            }
+          }
+        })
+        return
+      }
+      var express_info = JSON.parse(res)
+      let imageUrls = express_info.photo.split("?")
+      express_info.photo = imageUrls[0]
+      express_info.photo_end = imageUrls[1]
+      that.data.order.express_info = express_info
+      that.changeOrderStatus()
+    })
+  },
+
+  changeOrderStatus: function (){
+    var that = this
+    var url = "order/" + that.data.order.order_id + "/"
+
+    var data = { "status": "7" }
+    app.func.requestPost(url, data, function (ures) {
+      if (ures.errors != null) {
+        wx.showModal({
+          title: ures.errors[0].error[0].toString(),
+          showCancel: false,
+          confirmText: "知道了",
+          confirmColor: "#4bd4c5",
+          success: function (uwres) {
+            if (uwres.confirm) {
+            }
+          }
+        })
+        return
+      }
+      that.data.order.status = ures.status
+      that.data.order.status_desc = ures.status_desc
+      that.data.order.supplier_status_desc = ures.supplier_status_desc
+      var pages = getCurrentPages();
+      if (pages.length > 1) {
+        //上一个页面实例对象
+        var prePage = pages[pages.length - 2];
+        //关键在这里
+        prePage.updataOrder(that.data.order)
+      }
+      wx.navigateBack({
+        delta: 1, // 回退前 delta(默认为1) 页面
+        success: function (res) {
+          // success
+        },
+        fail: function (res) {
+          // fail
+        },
+        complete: function (res) {
+          // complete
+        }
+      })
+    })
+  },
+  //图片选择
+  chooseImage: function(){
+    var that = this
+    wx.chooseImage({
+      count: 1, 
+      success: function(res) {
+        that.setData({
+          imageSelect:true,
+          imagePath:res.tempFilePaths,
+          photo: res.tempFilePaths[0]
+        })
+      },
+    })
+  },
+  showImage: function () {
+    var that = this
+    wx.previewImage({
+      urls: that.data.imagePath,
+    })
   },
   onReady: function () {
     // 页面渲染完成

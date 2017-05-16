@@ -36,7 +36,7 @@ Page({
       order: JSON.parse(options.order)
     })
     this.genderData()
-    this.genderDeverlilyData()
+    this.genderDeverliyer()
     console.log(this.data.order)
     console.log(this.data.order.ticket.supplier)
     if (this.data.order.ticket.supplier != null && this.data.order.status != 0 && this.data.order.delivery_type != 1) {
@@ -73,6 +73,7 @@ Page({
   genderData: function () {
     var that = this
     if (this.data.order.orderStatus == "user") {
+      
       if (this.data.order.delivery_type == 1 || this.data.order.delivery_type == 4) {
         this.setData({
           delivery_type: "配送方式：快递到付",
@@ -82,6 +83,7 @@ Page({
           isHandel: that.data.order.status == 1 || that.data.order.status == 2 || that.data.order.status == 5 ? false : true
         })
       } else {
+        
         this.setData({
           delivery_type: "配送方式：" + that.data.order.delivery_type == 2 ? "现场取票" : "上门自取",
           name: that.data.order.name,
@@ -109,14 +111,15 @@ Page({
         })
       }
     }
-
   },
 
-  genderDeverlilyData: function (){
+  genderDeverliyer: function () {
     var that = this 
-    that.setData({
-      isHaveDeverliyPhoto: that.data.order.express_info.photo != null && that.data.order.express_info.photo != '' ? true : false
-    })
+    if (that.data.order.express_info.photo != null && that.data.order.express_info.photo != ''){
+      that.setData({
+        isHaveDeverliyPhoto: true
+      })
+    }
   },
 
   requestExpress: function (e) {
@@ -185,7 +188,16 @@ Page({
       }
     })
   },
-  
+  callPhone: function (e) {
+    console.log(this.data.order)
+    wx.makePhoneCall({
+      phoneNumber: this.data.order.ticket.supplier.mobile_num,
+      success: function (res) {
+        // success
+      }
+    })
+  },
+
   logisticeTap: function (e) {
     var express_info = this.data.delivery_info
     wx.navigateTo({
@@ -206,86 +218,97 @@ Page({
     var that = this
     var url = "order/" + that.data.order.order_id + "/"
     var data
-    if (this.data.order.status == 7) {
-      wx.showModal({
-        title: "是否已经收到演出票",
-        showCancel: true,
-        cancelText: "取消",
-        confirmText: "确认收货",
-        confirmColor: "#4bd4c5",
+    if (this.data.order.status == 3) {
+      var data = this.data.order
+      var imageUrl = data.show.cover
+      var arr = imageUrl.split('?')
+      data.show.cover = arr[0]
+      data.show.cover_end = arr[1]
+      var imageS = data.session.venue_map
+      var urls = imageS.split('?')
+      data.session.venue_map = urls[0]
+      data.session.venue_end = urls[1]
+      var imageIcon = data.show.category.icon
+      var iconUrls = imageIcon.split('?')
+      data.show.category.icon = iconUrls[0]
+      data.show.category.icon_end = iconUrls[1]
+      var order = JSON.stringify(data)
+      wx.navigateTo({
+        url: '../order_deliver/order_deliver?order=' + order,
         success: function (res) {
-          if (res.confirm) {
-            data = { "status": "8" }
-            app.func.requestPost(url, data, function (res) {
-              console.log(res)
-              if (res.errors != null) {
-                wx.showModal({
-                  title: res.errors[0].error[0].toString(),
-                  showCancel: false,
-                  confirmText: "知道了",
-                  confirmColor: "#4bd4c5",
-                  success: function (uwres) {
-                    if (uwres.confirm) {
-                    }
-                  }
-                })
-                return
-              }
-              var orderStatus = that.data.order.orderStatus
-              var tempOrder = that.data.order
-              tempOrder.status = res.status
-              tempOrder.status_desc = res.status_desc
-              tempOrder.supplier_status_desc = res.supplier_status_desc
-              that.setData({
-                ticketStatus: res.status_desc,
-                order: tempOrder,
-                isDone: true,
-                nextButtonHeight: 0
-              })
-              var pages = getCurrentPages();
-              if (pages.length > 1) {
-                //上一个页面实例对象
-                var prePage = pages[pages.length - 2];
-                //关键在这里
-                prePage.upateOrderList(tempOrder)
-              }
-            });
-          }
+          // success
+        },
+        fail: function (res) {
+          // fail
+        },
+        complete: function (res) {
+          // complete
         }
       })
     }
-
   },
-  //查看凭证
+//查看凭证
   showDeverliyImage: function (){
     var that = this
-    if (!that.data.isHaveDeverliyPhoto){
-      wx.showModal({
-        title: '请联系卖家上传',
-        showCancel: false,
-        confirmText: "知道了",
-        confirmColor: "#4bd4c5",
-        success: function (uwres) {
-          if (uwres.confirm) {
-          }
-        }
+    let url = that.data.order.express_info.photo + "?" + that.data.order.express_info.photo_end
+    wx.previewImage({
+      urls: [url],
+    })
+  },
+  //上传凭证
+  uploadImage: function (){
+    var that = this
+    if (that.data.order.express_info.photo != null){
+      let form = { 'express_num': that.data.order.express_info.express_num, 'express_name': that.data.order.express_info.express_name,}
+      wx.chooseImage({
+        count: 1,
+        success: function (ires) {
+          wx.showToast({
+            title: '上传中',
+            icon: 'loading',
+            suration: 10000
+          })
+          var urls = "supplier/order/" + that.data.order.order_id + "/express/"
+          app.func.requestUpload(urls, form, ires.tempFilePaths[0], 'photo', function (res) {
+            setTimeout(function () {
+              wx.hideToast()
+            }, 500)
+            if (res == false) {
+              wx.showModal({
+                title: '上传出错',
+                showCancel: false,
+                confirmText: "知道了",
+                confirmColor: "#4bd4c5",
+                success: function (uwres) {
+                  if (uwres.confirm) {
+                  }
+                }
+              })
+              return
+            }
+            var express_info = JSON.parse(res)
+            let imageUrls = express_info.photo.split("?")
+            express_info.photo = imageUrls[0]
+            express_info.photo_end = imageUrls[1]
+            that.data.order.express_info = express_info
+            that.setData({
+              isHaveDeverliyPhoto: true
+            })
+          })
+        },
       })
     }else{
-      let url = that.data.order.express_info.photo + "?" + that.data.order.express_info.photo_end
-      wx.previewImage({
-        urls: [url],
-      })
+      that.nextTap()
     }
   },
-  //联系卖家
-  connectSupplier: function () {
+  //联系买家
+  connectBuyer: function (){
     var that = this
     wx.makePhoneCall({
-      phoneNumber: that.data.order.ticket.supplier.mobile_num,
+      phoneNumber: that.data.order.user.mobile_num,
     })
-
   },
-   onReady: function () {
+  onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {

@@ -17,10 +17,15 @@
   </view>
   <view class="tickeCategory">售卖数量
   </view>
-  <view class="ticketNumber">
+  <view class="ticketNumber" wx:if="{{!isEditeTicke}}">
     <view class="buttonSb" bindtap="buttonSbTap">-</view>
     <input class="inputText" placeholder="1" value="{{numberTicket}}" bindinput="numberInput" type="number" />
     <view class="buttonAdd" bindtap="buttonAddTap">+</view>
+  </view>
+  <view class="ticketNumberDisble" wx:else>
+    <view class="buttonSbDisble">-</view>
+    <input class="inputTextDisble" placeholder="1" value="{{numberTicket}}" bindinput="numberInput" type="number" />
+    <view class="buttonAddDisble">+</view>
   </view>
   <view class="sellPrice">
     <view class="sell_price">单张售价（元）

@@ -1,7 +1,6 @@
 /* pages/home/wallet/wallet/my_wallet.wxss */
 
-.
-page {
+.page {
   background-color: #efeff4;
 }
 
@@ -115,11 +114,14 @@ page {
 
 .withdraw {
   width: 100%;
+  padding-top: 28rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
   background-color: #4bd4c5;
-  font-size: 36rpx;
+  font-size: 30rpx;
   color: white;
+  border-radius: 4rpx;
+  text-align: center;
 }
 
 .rule_view {

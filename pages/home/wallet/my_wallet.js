@@ -24,11 +24,22 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     that.requestData()
   },
+
+
+//充值完成后更新数据
+updateBlance: function (amount) {
+  var that = this
+  var blance = that.data.wallet.balance * 100 + amount
+  that.setData({
+    'wallet.balance': (blance / 100).toFixed(2)
+  })
+},
+
   requestData: function () {
     var that = this
     app.func.requestGet('account/', {}, function (res) {
       res.balance = (res.balance / 100).toFixed(2)
-      res.deposit = (res.deposit/100).toFixed(2)
+      res.deposit = (res.deposit / 100).toFixed(2)
       res.pending_balance = (res.pending_balance / 100).toFixed(2)
       that.setData({
         wallet:res
@@ -66,6 +77,13 @@ Page({
       }
     })
   },
+  //充值按钮点击
+  topUpTap: function () {
+    wx.navigateTo({
+      url: '../top_up/top_up',
+    })
+  },
+  //提现按钮点击
   withdrawTap: function () {
     wx.navigateTo({
       url: '../withdraw/withdraw?balance=' + JSON.stringify(this.data.wallet),

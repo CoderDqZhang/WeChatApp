@@ -1,0 +1,43 @@
+/* pages/home/top_up/top_up.wxss */
+page {
+  background-color: #efeff4;
+}
+
+.top_up_class{
+  margin-top: 30rpx;
+  height: 228rpx;
+  background-color: white;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title{
+  margin-left: 30rpx;
+  font-size: 30rpx;
+  color: #384249;
+  height: 42rpx;
+  width: 400rpx;
+}
+
+.topUpPriceText{
+  margin-right: 30rpx;
+  text-align: right;
+  height: 172rpx;
+  font-size: 70rpx;
+  color: #4bd4c5;
+}
+
+.confim {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 60rpx;
+  background-color: #4bd4c5;
+  font-size: 36rpx;
+  color: #fff;
+  letter-spacing: 0;
+  text-align: center;
+  margin-bottom: 100rpx;
+}

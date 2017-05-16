@@ -16,12 +16,13 @@ Page({
       "sell_type": "",
       "ticket_count": "",
       "row": "",
-      "sell_category":"0"
+      "sell_category": "0"
     },
-    ticket:null,
+    ticket: null,
     selectTicketPrice: "",
     sellPriceTicket: "",
-    sellPrice: ""
+    sellPrice: "",
+    isEditeTicke:false
   },
   onLoad: function (options) {
     var that = this;
@@ -42,6 +43,7 @@ Page({
       var editData = JSON.parse(options.ticketEdit)
       console.log(editData)
       this.setData({
+        isEditeTicke: true,
         sessionShow: editData.sessionShow,
         'sellForm.show_session_ticket': editData.ticket.original_ticket.id,
         'sellForm.sell_category': editData.ticket.sell_category,
@@ -70,6 +72,7 @@ Page({
 
     } else {
       this.setData({
+        isEditeTicke: false,
         sessionShow: JSON.parse(options.sellShow)
       })
       this.requestData()
@@ -109,11 +112,11 @@ Page({
       console.log(res)
       that.setData({
         sellTicket: res,
-       
+
       })
       if (that.ticket != null) {
         that.setData({
-           "sellTicket.id": that.data.ticket.id
+          "sellTicket.id": that.data.ticket.id
         })
       }
       that.genderData()
@@ -167,23 +170,31 @@ Page({
     })
   },
   nextTap: function () {
-    this.data.sellForm.show_session_ticket = this.data.selectTicketPrice
-    this.data.sellForm.ticket_count = this.data.numberTicket
-    this.data.sellForm.price = this.data.sellPrice
-    console.log(this.data.sellForm)
-    var confirm = { "sellForm": this.data.sellForm, "sellTicket": this.data.sellTicket, "ticketSession": this.data.sessionShow,'ticket':this.data.ticket }
-    wx.navigateTo({
-      url: '../sell_form_confirm/sell_form_confirm?sell_confim=' + JSON.stringify(confirm),
-      success: function (res) {
-        // success
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
-    })
+    var that = this
+    let url = "supplier/ticket/" + that.data.selectTicketPrice + "/regions/"
+    app.func.requestGet(url, {}, function (res) {
+      console.log(res)
+      that.setData({
+        'sellTicket.region_choices': res,
+      })
+      that.data.sellForm.show_session_ticket = that.data.selectTicketPrice
+      that.data.sellForm.ticket_count = that.data.numberTicket
+      that.data.sellForm.price = that.data.sellPrice
+      console.log(that.data.sellForm)
+      var confirm = { "sellForm": that.data.sellForm, "sellTicket": that.data.sellTicket, "ticketSession": that.data.sessionShow, 'ticket': that.data.ticket }
+      wx.navigateTo({
+        url: '../sell_form_confirm/sell_form_confirm?sell_confim=' + JSON.stringify(confirm),
+        success: function (res) {
+          // success
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
+    });
   },
   showTap: function () {
     wx.showModal({

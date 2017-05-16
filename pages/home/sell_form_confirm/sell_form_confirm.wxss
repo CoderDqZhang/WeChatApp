@@ -167,9 +167,11 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 30rpx;
 }
 
 .rule_detail_info{
+  margin-right: 30rpx;
   font-size: 26rpx;
   color: #556169;
 }

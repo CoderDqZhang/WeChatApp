@@ -2,7 +2,7 @@
 var app = getApp()
 Page({
   data: {
-    temp_sell_type: "单卖",
+    temp_sell_type: "可以分开卖",
     temp_region_type: "请选择",
     temp_row_type: "请选择",
     temp_delivery_type: "请选择",
@@ -48,7 +48,9 @@ Page({
     srollerViewHeight: 45,
     isSeat: true,
     isTicketStatus: false,
-    isEditeTicket: false
+    isEditeTicket: false,
+    disposite:0,
+    isDespositView: false,
   },
   changeData: function (res) {
     this.data.sellDelivery = ""
@@ -109,6 +111,12 @@ Page({
       address: res
     })
   },
+  updateBlance: function (amount) {
+    var that = this
+    this.setData({
+      'sell_confim.sellTicket.balance': ((parseFloat( that.data.sell_confim.sellTicket.balance) * 100 + amount) / 100).toFixed(2)
+    })
+  },
   onLoad: function (options) {
     var that = this;
     /** 
@@ -146,12 +154,14 @@ Page({
     for (var k = 0; k < this.data.sell_confim.sellTicket.row.length; k++) {
       tempSellRow.push(this.data.sell_confim.sellTicket.row[k])
     }
+
     this.setData({
       sellType: tempSellType,
       sellRegion: tempSellRgion,
       sellRow: tempSellRow,
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
-      poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2)
+      poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2),
+      disposite: (this.data.sell_confim.sellForm.ticket_count * 50).toFixed(2)
     })
     if (this.data.sell_confim.sellForm.sell_type != "") {
       this.setData({
@@ -272,7 +282,7 @@ Page({
   },
   ticketSeatTap: function (e) {
     this.setData({
-      "sell_confim.sellForm.seat_type": e.currentTarget.id == "1" ? "2" : "1",
+      "sell_confim.sellForm.seat_type": e.currentTarget.id == "1" ? "1" : "2",
       selectSeat: e.currentTarget.id == "2" ? true : false
     })
   },
@@ -280,15 +290,15 @@ Page({
     var that = this
     if (e.currentTarget.id == "1") {
       wx.showModal({
-        title: "提示",
-        content: "现票必须保证72小时内发货，期票发货时间需与买家商议。现票快递类违约不能付票，每张赔付50元，期票违约每张赔付100元.",
+        title: "现票必须保证72小时内发货，期票发货时间需与买家商议。现票快递类违约不能付票，每张赔付50元，期票违约每张赔付100元.",
         confirmColor: "#4bd4c5",
         confirmText: "确定",
         success: function (res) {
           if (res.confirm) {
             that.setData({
               "sell_confim.sellForm.sell_category": e.currentTarget.id,
-              isTicketStatus: e.currentTarget.id == "1" ? false : true
+              isTicketStatus: e.currentTarget.id == "1" ? false : true,
+              disposite: (that.data.sell_confim.sellForm.ticket_count * 100).toFixed(2)
             })
           }
         }
@@ -297,15 +307,16 @@ Page({
       console.log(e.currentTarget.id)
       that.setData({
         "sell_confim.sellForm.sell_category": parseInt(e.currentTarget.id),
-        isTicketStatus: e.currentTarget.id == "1" ? false : true
+        isTicketStatus: e.currentTarget.id == "1" ? false : true,
+        disposite: (that.data.sell_confim.sellForm.ticket_count * 50).toFixed(2)
       })
     }
   },
-
+//这个兼容老版本
   bindPickerRegion: function (e) {
     this.setData({
       regionIndex: e.detail.value,
-      "sell_confim.sellForm.region": this.data.sellRegion[e.detail.value] == "" ? "随机" : this.data.sellRegion[e.detail.value],
+      "sell_confim.sellForm.region": this.data.sellRegion[e.detail.value] == "" ? "择优分配" : this.data.sellRegion[e.detail.value],
       selectRegion: true
     })
   },
@@ -345,12 +356,20 @@ Page({
       }
     })
   },
+  //交易手续费说明点击
   cancelRuleView: function () {
     this.setData({
       isRuleView: this.data.isRuleView == false ? true : false,
       srollerViewHeight: this.data.isRuleView == false ? 220 : 45
     })
     console.log(this.data.srollerViewHeight)
+  },
+  //押金说明点击
+  cancelDespositeView: function () {
+    this.setData({
+      isDespositView: this.data.isDespositView == false ? true : false,
+      srollerViewHeight: this.data.isDespositView == false ? 220 : 45
+    })
   },
   nextTap: function () {
     if (!this.data.isEditeTicket) {
@@ -422,6 +441,26 @@ Page({
   },
   requestNewTicket: function () {
     var that = this
+    if (that.data.sell_confim.sellTicket.need_deposit == true && parseFloat(that.data.disposite) > that.data.sell_confim.sellTicket.balance) {
+      var blance = parseFloat(that.data.sell_confim.sellTicket.balance / 100).toFixed(2)
+      wx.showModal({
+          title: "押金不足",
+          content: "本次挂票，需缴纳押金共 " + that.data.disposite + "元，当前余额 " + blance +"元不足，请充值",
+          showCancel: true,
+          cancelText:"稍等一会",
+          confirmText: "立即充值",
+          confirmColor: "#4bd4c5",
+          success: function (res) {
+            if (res.confirm) {
+              var amount = ((parseFloat(that.data.disposite * 100) - that.data.sell_confim.sellTicket.balance) / 100).toFixed(2)
+              wx.navigateTo({
+                url: '../top_up/top_up?amount=' + amount,
+              })
+            }
+          }
+        })
+      return
+    }
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/session/" + this.data.sell_confim.ticketSession.session.id + "/ticket/"
     wx.showToast({
       title: '挂票中...',

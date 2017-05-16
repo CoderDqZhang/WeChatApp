@@ -213,6 +213,13 @@ Page({
         data.show.category.icon = iconUrls[0]
         data.show.category.icon_end = iconUrls[1]
         data.orderStatus = "user"
+        if (data.express_info.photo != null) {
+          var expressPhoto = data.express_info.photo.split('?')
+          if (expressPhoto.length > 1) {
+            data.express_info.photo = expressPhoto[0]
+            data.express_info.photo_end = expressPhoto[1]
+          }
+        }    
         var order = JSON.stringify(data)
         console.log(order)
         wx.navigateTo({

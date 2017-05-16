@@ -1,8 +1,7 @@
-
 <!--pages/sell/sell_form_confirm/sell_form_confirm.wxml-->
 <scroll-view scroll-y="true" style="height:{{winHeight - srollerViewHeight}}px;">
 
-<view class="cell_title_info_image">
+  <view class="cell_title_info_image">
     <view class="title">区域
     </view>
     <view class="section" style="width:{{windowWidth}}px;">
@@ -19,7 +18,7 @@
       <image src="/images/gloable/Chevron.png" mode="scaleToFill" class="detail_image"></image>
     </view>
   </view>
-<view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
+  <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>
   <view class="cell_title_info_image">
     <view class="title">排数
     </view>
@@ -70,11 +69,11 @@
   </view>
   <view class="ticketStatus">
     <view wx:if="{{isSeat}}">
-    <view class="button_normal" id ="1"  wx:if="{{selectSeat}}" bindtap="ticketSeatTap">保证连坐</view>
-    <view class="button_select" id ="2"  wx:else bindtap="ticketSeatTap">保证连坐</view>
+      <view class="button_normal" id="1" wx:if="{{selectSeat}}" bindtap="ticketSeatTap">保证连坐</view>
+      <view class="button_select" id="2" wx:else bindtap="ticketSeatTap">保证连坐</view>
     </view>
-    <view class="button_normal" wx:if="{{isTicketStatus}}" id ="1" bindtap="ticketStatusTap">期票预售</view>
-    <view class="button_select" wx:else id ="0" bindtap="ticketStatusTap">期票预售</view>
+    <view class="button_normal" wx:if="{{isTicketStatus}}" id="1" bindtap="ticketStatusTap">期票预售</view>
+    <view class="button_select" wx:else id="0" bindtap="ticketStatusTap">期票预售</view>
     <!--<view>
     <view class="cell_title_info_image">
     <view class="title">是否连座
@@ -111,13 +110,30 @@
       <view class="serviceInfos">票款结算金额将于对方确认收货后转入账户钱包</view>
     </view>
   </view>
+  <view wx:if="{{sell_confim.sellTicket.need_deposit}}">
+    <view class="service">
+      <view class="serviceMuch">
+        <view>
+          <text class="serviceTitle"> 余额：{{sell_confim.sellTicket.balance}} </text>
+        </view>
+        <view class="poundageClass" bindtap="cancelDespositeView" id="cancelDespositeView">
+          <text class="serviceTitle"> 押金：{{disposite}} 元</text>
+          <image src="/images/gloable/rule_info.png" mode="scaleToFill" class="rule_image"></image>
+        </view>
+      </view>
+      <view class="much">
+        <view class="serviceInfo">保证金将于订单完成后直接返回至账户钱包中，挂单删除或下架后押金亦退还至钱包中
+        </view>
+      </view>
+    </view>
+  </view>
 </scroll-view>
 <view class="rule_view" style="margin-top:10px;" wx:if="{{isRuleView}}">
   <view class="line"></view>
   <view class="cancel" bindtap="cancelRuleView" id="cancelRuleView">
     <image class="closeImage" src="/images/gloable/close.png" mode="aspectFill"></image>
   </view>
-  <view class="rule_info" >
+  <view class="rule_info">
     <view class="rule_info_line"></view>
     <view class="rule_info_title">佣金说明</view>
     <view class="rule_info_line_r"></view>
@@ -125,6 +141,21 @@
   <view class="rule_detail">
     <view class="rule_detail_info">订单票款将于对方确认收货后立即结算至钱包账户</view>
     <view class="rule_detail_info">所有交易免佣金，仅含1%第三方支付平台交易手续费</view>
+  </view>
+</view>
+<view class="rule_view" style="margin-top:10px;" wx:if="{{isDespositView}}">
+  <view class="line"></view>
+  <view class="cancel" bindtap="cancelDespositeView" id="cancelDespositeView">
+    <image class="closeImage" src="/images/gloable/close.png" mode="aspectFill"></image>
+  </view>
+  <view class="rule_info">
+    <view class="rule_info_line"></view>
+    <view class="rule_info_title">押金说明</view>
+    <view class="rule_info_line_r"></view>
+  </view>
+  <view class="rule_detail">
+    <view class="rule_detail_info">挂票押金：现票50元、张，期票100元、张</view>
+    <view class="rule_detail_info">信誉商家缴纳1000元保证金后，挂票时免押金</view>
   </view>
 </view>
 <view class="next" bindtap="nextTap" wx:else>挂票</view>

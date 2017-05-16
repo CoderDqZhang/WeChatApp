@@ -1,5 +1,73 @@
 // pages/home/ticket_form/ticket_form.js
 var app = getApp()
+
+function transDate(mescStr) {
+  var n = mescStr;
+  var date = new Date(n);
+  var Y = date.getFullYear() + '-';
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+  var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  return (Y + M + D)
+}
+
+function formatTime(date) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+
+  var hour = date.getHours()
+  var minute = date.getMinutes()
+  var second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+function getDateDiff(dateTimeStamp) {
+  var result;
+  var minute = 1000 * 60;
+  var hour = minute * 60;
+  var day = hour * 24;
+  var halfamonth = day * 15;
+  var month = day * 30;
+  var now = new Date().getTime();
+  var diffValue = now - dateTimeStamp;
+  if (diffValue < 0) {
+    var hourS = parseInt(diffValue / hour);
+    if (hourS <= -23) {
+      return "true"
+    }
+    return "false"
+  }
+  var monthC = diffValue / month;
+  var weekC = diffValue / (7 * day);
+  var dayC = diffValue / day;
+  var hourC = diffValue / hour;
+  var minC = diffValue / minute;
+  if (monthC >= 1) {
+    if (monthC <= 12)
+      result = "" + parseInt(monthC) + "月前";
+    else {
+      result = "" + parseInt(monthC / 12) + "年前";
+    }
+  }
+  else if (weekC >= 1) {
+    result = "" + parseInt(weekC) + "周前";
+  }
+  else if (dayC >= 1) {
+    result = "" + parseInt(dayC) + "天前";
+  }
+  else if (hourC >= 1) {
+    return "false"
+    // result=""+ parseInt(hourC) +"小时前";
+  }
+  else if (minC >= 1) {
+    result = "" + parseInt(minC) + "分钟前";
+  } else {
+    result = "刚刚";
+  }
+  return result;
+};
+
 Page({
   data: {
     sessionShow: null,
@@ -36,7 +104,7 @@ Page({
   },
 
   onLoad: function (options) {
-    this.genderDataform(options.show)
+    this.genderData(options.show)
     var that = this
     wx.getStorage({
       key: 'userInfo',
@@ -54,16 +122,16 @@ Page({
     })
     wx.getStorage({
       key: 'address',
-      success: function(res){
+      success: function (res) {
         // success
         that.setData({
-          address:res.data
+          address: res.data
         })
       },
-      fail: function() {
+      fail: function () {
         // fail
       },
-      complete: function() {
+      complete: function () {
         // complete
       }
     })
@@ -80,7 +148,7 @@ Page({
       ticketMuch: this.data.numbers[e.detail.value] * this.data.sessionShow.ticket.price
     })
   },
-  genderDataform: function (show) {
+  genderData: function (show) {
     var that = this;
     that.setData({
       sessionShow: JSON.parse(show),
@@ -128,7 +196,7 @@ Page({
         if (tempDevery == "") {
           tempDevery = 3
         }
-      }else if (arr[i] == "4") {
+      } else if (arr[i] == "4") {
         that.data.deliverys.push("快递到付")
         if (tempDevery == "") {
           tempDevery = 4
@@ -161,16 +229,16 @@ Page({
       success: function (res) {
         if (!res.cancel) {
           if (that.data.deliverys[res.tapIndex] == "快递到付") {
-          that.data.orderForm.delivery_type = 4
+            that.data.orderForm.delivery_type = 4
 
           } else if (that.data.deliverys[res.tapIndex] == "现场取票") {
-          that.data.orderForm.delivery_type = 2
+            that.data.orderForm.delivery_type = 2
 
-          }else if (that.data.deliverys[res.tapIndex] == "上门自取") {
-          that.data.orderForm.delivery_type = 3
+          } else if (that.data.deliverys[res.tapIndex] == "上门自取") {
+            that.data.orderForm.delivery_type = 3
 
-          }else if (that.data.deliverys[res.tapIndex] == "快递") {
-          that.data.orderForm.delivery_type = 1
+          } else if (that.data.deliverys[res.tapIndex] == "快递") {
+            that.data.orderForm.delivery_type = 1
 
           }
           console.log(that.data.orderForm.delivery_type)
@@ -208,7 +276,27 @@ Page({
     var data
     console.log(form)
     console.log(that.data)
-
+    var showData = that.data.sessionShow.session.start_time.split(" ")
+    var someday = getDateDiff(new Date(showData).getTime());
+    
+    // if (someday != "true" && form.delivery_type == 4) {
+    //   wx.showModal({
+    //     title: "该票已不符合快递要求，可联系商家自取",
+    //     confirmColor: "#4bd4c5",
+    //     confirmText: "联系商家",
+    //     success: function (res) {
+    //       if (res.confirm) {
+    //         wx.makePhoneCall({
+    //           phoneNumber: that.data.ticket.supplier.mobile_num,
+    //           success: function(res) {
+    //             // success
+    //           }
+    //         })
+    //       }
+    //     }
+    //   })
+    //   return
+    // }
     if (form.delivery_type == 1 || form.delivery_type == 4) {
       if (that.data.address == null) {
         wx.showModal({

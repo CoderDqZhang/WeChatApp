@@ -242,13 +242,17 @@ Page({
       }
     }
   },
+//发货凭证界面更新
+  updataOrder: function(order) {
+    this.upateOrderList(order)
+  },
+  //订单详情更新
   upateOrderList: function (order) {
     var that = this
     for (var j = 0; j < that.data.orders.order_list.length; j++) {
 
       if (that.data.orders.order_list[j].order_id = order.order_id) {
-        that.data.orders.order_list[j].status = 7;
-        that.data.orders.order_list[j].status_desc = "待收货"
+        that.data.orders.order_list[j] = order
         var tempTicket = that.data.orders
         that.setData({
           orders: tempTicket
@@ -403,10 +407,17 @@ Page({
     data.orderStatus = "supplier"
     data.show.category.icon = iconUrls[0]
     data.show.category.icon_end = iconUrls[1]
+    if (data.express_info.photo != null) {
+      var expressPhoto = data.express_info.photo.split('?')
+      if (expressPhoto.length > 1) {
+        data.express_info.photo = expressPhoto[0]
+        data.express_info.photo_end = expressPhoto[1]
+      }
+    }
     var order = JSON.stringify(data)
     console.log(order)
     wx.navigateTo({
-      url: '../order/order_detail?order=' + order
+      url: '../order_status/order_status?order=' + order
     })
   },
   cancelEventhandle: function (event) {
@@ -456,6 +467,7 @@ Page({
     })
 
   },
+  //立即发货
   payEventhandle: function (event) {
     var that = this
     var data 
@@ -478,7 +490,13 @@ Page({
     var iconUrls = imageIcon.split('?')
     data.show.category.icon = iconUrls[0]
     data.show.category.icon_end = iconUrls[1]
-    data.orderStatus = "user"
+    if (data.express_info.photo != null) {
+      var expressPhoto = data.express_info.photo.split('?')
+      if (expressPhoto.length > 1) {
+        data.express_info.photo = expressPhoto[0]
+        data.express_info.photo_end = expressPhoto[1]
+      }
+    }    
     var order = JSON.stringify(data)
     wx.navigateTo({
       url: '../order_deliver/order_deliver?order=' + order,
