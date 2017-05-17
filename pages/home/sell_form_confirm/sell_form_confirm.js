@@ -161,7 +161,8 @@ Page({
       sellRow: tempSellRow,
       sellMuch: this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count,
       poundage: (this.data.sell_confim.sellForm.price * this.data.sell_confim.sellForm.ticket_count * 0.01).toFixed(2),
-      disposite: (this.data.sell_confim.sellForm.ticket_count * 50).toFixed(2)
+      disposite: (this.data.sell_confim.sellForm.ticket_count * 50).toFixed(2),
+      'sell_confim.sellTicket.balance': parseFloat(this.data.sell_confim.sellTicket.balance / 100).toFixed(2)
     })
     if (this.data.sell_confim.sellForm.sell_type != "") {
       this.setData({
@@ -442,7 +443,7 @@ Page({
   requestNewTicket: function () {
     var that = this
     if (that.data.sell_confim.sellTicket.need_deposit == true && parseFloat(that.data.disposite) > that.data.sell_confim.sellTicket.balance) {
-      var blance = parseFloat(that.data.sell_confim.sellTicket.balance / 100).toFixed(2)
+      var blance = that.data.sell_confim.sellTicket.balance
       wx.showModal({
           title: "押金不足",
           content: "本次挂票，需缴纳押金共 " + that.data.disposite + "元，当前余额 " + blance +"元不足，请充值",
@@ -452,7 +453,7 @@ Page({
           confirmColor: "#4bd4c5",
           success: function (res) {
             if (res.confirm) {
-              var amount = ((parseFloat(that.data.disposite * 100) - that.data.sell_confim.sellTicket.balance) / 100).toFixed(2)
+              var amount = ((parseFloat(that.data.disposite * 100) - that.data.sell_confim.sellTicket.balance * 100) / 100).toFixed(2)
               wx.navigateTo({
                 url: '../top_up/top_up?amount=' + amount,
               })
@@ -491,6 +492,11 @@ Page({
       setTimeout(function () {
         wx.hideToast()
       }, 2000)
+      if (that.data.sell_confim.sellTicket.need_deposit == true){
+        that.setData({
+          'sell_confim.sellTicket.balance': ((that.data.sell_confim.sellTicket.balance * 100 - that.data.disposite * 100)/100).toFixed(2)
+        })
+      }
       that.requestOneShowTicket()
     })
   },

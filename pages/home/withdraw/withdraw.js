@@ -116,6 +116,13 @@ Page({
         })
         return
       }
+      var pages = getCurrentPages();
+      if (pages.length > 1) {
+        //上一个页面实例对象
+        var prePage = pages[pages.length - 2];
+        //关键在这里
+        prePage.updateBlance(-(parseFloat(e.detail.value.much) * 100))
+      }
       that.pushComplet(data)
     })
   },
