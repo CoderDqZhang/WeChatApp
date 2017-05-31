@@ -1,4 +1,3 @@
-
 <!--pages/home/order/order_detail.wxml-->
 <template name="ticketDesc">
   <view class="ticket_desc">
@@ -31,11 +30,11 @@
   <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:-1px;" wx:if="{{delivery_info != null}}"></view>
   <view class="express_info" wx:if="{{delivery_info != null}}" bindtap="logisticeTap">
     <view class="express_address">
-    <image class="address_image" src="/images/gloable/Icon_Address.png" mode="aspectFill"></image>
-    <text class="text_class">物流追踪：{{accpetStatus}} {{accpetTime}}</text>
+      <image class="address_image" src="/images/gloable/Icon_Address.png" mode="aspectFill"></image>
+      <text class="text_class">物流追踪：{{accpetStatus}} {{accpetTime}}</text>
     </view>
     <view>
-    <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+      <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
     </view>
   </view>
   <view class="ticketExpress" wx:if="{{express_info}}"></view>
@@ -102,8 +101,10 @@
   </view>
 </scroll-view>
 <view class="bottomView">
-<view wx:if="{{isHaveDeverliyPhoto}}" class="eventButtonL" bindtap="showDeverliyImage">查看凭证</view>
-<view class="eventButtonL" wx:else bindtap="uploadImage">上传凭证</view>
-<view class="eventButtonL" bindtap="connectBuyer">联系买家</view>
-<view class="eventButton" wx:if="{{order.status == 3}}" bindtap="nextTap">立即发货</view>
+  <view wx:if="{{order.status > 3}}" class="bottom_class">
+    <view wx:if="{{isHaveDeverliyPhoto}}" class="eventButtonL" bindtap="showDeverliyImage">查看凭证</view>
+    <view class="eventButtonL" wx:else bindtap="uploadImage">上传凭证</view>
+  </view>
+  <view class="eventButtonL" bindtap="connectBuyer">联系买家</view>
+  <view class="eventButton" wx:if="{{order.status == 3}}" bindtap="nextTap">立即发货</view>
 </view>

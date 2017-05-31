@@ -100,11 +100,14 @@
   <view style="height:60rpx;">
   </view>
 </scroll-view>
-<view class="bottomView">
-  <view wx:if="{{order.status >= 7}}">
-    <view wx:if="{{!isHaveDeverliyPhoto}}" class="eventButtonDisble" bindtap="showDeverliyImage">查看凭证</view>
-    <view class="eventButtonL" wx:else bindtap="showDeverliyImage">查看凭证</view>
+<view class="bottomView" wx:if="{{order.status != 2}}">
+  <view wx:if="{{order.status != 1}}" class="bottom_class">
+    <view wx:if="{{order.status >= 7}}">
+      <view wx:if="{{!isHaveDeverliyPhoto}}" class="eventButtonDisble" bindtap="showDeverliyImage">查看凭证</view>
+      <view class="eventButtonL" wx:else bindtap="showDeverliyImage">查看凭证</view>
+    </view>
+    <view class="eventButtonL" wx:if="{{order.status == 0}}" bindtap="payButtonTap">立即付款</view>
+    <view class="eventButtonL" bindtap="connectSupplier" wx:else>联系卖家</view>
+    <view class="eventButton" wx:if="{{order.status == 7}}" bindtap="nextTap">确认收货</view>
   </view>
-  <view class="eventButtonL" bindtap="connectSupplier">联系卖家</view>
-  <view class="eventButton" wx:if="{{order.status == 7}}" bindtap="nextTap">确认收货</view>
 </view>

@@ -103,6 +103,7 @@ Page({
         return
       }
       that.data.express_info = res
+      that.data.order.express_info = res
       that.changeOrderStatus()
     })
   },

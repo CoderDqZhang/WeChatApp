@@ -251,7 +251,9 @@ Page({
     var that = this
     for (var j = 0; j < that.data.orders.order_list.length; j++) {
 
-      if (that.data.orders.order_list[j].order_id = order.order_id) {
+      console.log(that.data.orders.order_list[j].id)
+      console.log(order.id)
+      if (that.data.orders.order_list[j].id == order.id) {
         that.data.orders.order_list[j] = order
         var tempTicket = that.data.orders
         that.setData({
@@ -510,6 +512,9 @@ Page({
         // complete
       }
     })
+  },
+  onPullDownRefresh: function () {
+    var that = this
   },
   onReady: function () {
     // 页面渲染完成

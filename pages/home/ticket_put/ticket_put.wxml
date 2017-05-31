@@ -1,0 +1,55 @@
+<template name="ticketInfo">
+  <view class="ticket_info">
+    <view wx:if="{{status == 0}}" class="ticket_normal_price_template_0">{{original_ticket.name}}</view>
+    <view wx:else class="ticket_normal_price_template">{{original_ticket.name}}</view>
+    <view class="ticket_row_template">
+      <view wx:if="{{status == 0}}" class="ticket_row_type_0">{{region}}</view>
+      <view wx:else class="ticket_row_type">{{region}}</view>
+      <view class="ticket_deverliy_type">{{deliveType}}</view>
+    </view>
+    <view class="ticket_price_template">
+      <view wx:if="{{status == 0}}" class="ticket_now_price_template_0">{{price}}元</view>
+      <view wx:else class="ticket_now_price_template">{{price}}元</view>
+      <view class="ticket_status_type" wx:if="{{sell_category == '1'}}">期票</view>
+      <view class="ticket_status_number" wx:if="{{20 < remain_count}}">还剩{{remain_count}}张</view>
+      <view class="ticket_status_number" wx:else>最后{{remain_count}}张</view>
+    </view>
+  </view>
+</template>
+<view class="tickets">
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2;"></view>
+  <view class="ticket_tools">
+    <view class="ticket_normal_price" bindtap="priceTap">
+      <view class="ticket_price">票面价格</view>
+      <image src="/images/gloable/price_up.png" mode="aspectFill" class="class_price" wx:if="{{!isPrice}}"></image>
+      <image src="/images/gloable/price_down.png" mode="aspectFill" class="class_price" wx:else></image>
+    </view>
+    <view class="ticket_row">座位
+    </view>
+    <view class="ticket_now_price" bindtap="sortpriceTap">
+      <view class="ticket_price_sort">价格
+      </view>
+      <image src="/images/gloable/ranking_up.png" mode="aspectFill" class="class_price_sort" wx:if="{{!isSortPrice}}"></image>
+      <image src="/images/gloable/ranking_down.png" mode="aspectFill" class="class_price_sort" wx:else></image>
+    </view>
+  </view>
+  <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top: 0px;"></view>
+  <view wx:if="{{isPrice}}">
+    <scroll-view scroll-y="true" style="height:{{priceHeight}}px;">
+      <view class="priceName" wx:for="{{ticketNames}}" wx:for-item="item" wx:key="ticketName" data-name="{{item}}" bindtap="priceNameTap">
+        <view class="ticketName">{{item}}</view>
+        <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:60rpx;"></view>
+      </view>
+    </scroll-view>
+    <view class="otherView" style="height:{{winHeight - priceHeight -45}}px; background-color: #E9EBF2;" bindtap="priceTap"></view>
+  </view>
+  <view wx:else>
+    <scroll-view scroll-y="true" style="height:{{winHeight - 45 - 44}}px;">
+      <view wx:for="{{ticket_list}}" wx:key="ticketInfos" class="ticketInfos" id="showTap" bindtap="ticketTap" wx:for-item="item" data-ticket="{{item}}">
+        <template is="ticketInfo" data="{{...item}}" />
+        <view style=" margin-left: 15px;margin-right:15px;height: 1rpx; background-color: #E9EBF2; margin-top:32rpx;"></view>
+      </view>
+    </scroll-view>
+  </view>
+   <view class="next" bindtap="nextTap">继续挂票</view>
+</view>

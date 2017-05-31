@@ -29,7 +29,7 @@
   <view class="title_section">订单编号
   </view>
   <view class="section" style="width:{{winWidth}}px;">
-    <input class="deliverText" placeholder="填写快递单号" value="{{deliverText}}" placeholder-style="color: #BBC1CB;font-size:26rpx;" type="number" bindinput="deliverInput" />
+    <input class="deliverText" placeholder="填写快递单号" value="{{deliverText}}" placeholder-style="color: #BBC1CB;font-size:26rpx;" bindinput="deliverInput" />
   </view>
 </view>
 <view style=" margin-left: 15px;height: 1rpx;margin-right: 15px; background-color: #E9EBF2; margin-top: -1px;"></view>

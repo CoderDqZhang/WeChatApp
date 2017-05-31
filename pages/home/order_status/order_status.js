@@ -53,6 +53,11 @@ Page({
     order.show = this.data.order.show
     order.session = this.data.order.session
     order.ticket = this.data.order.ticket
+    if (order.express_info.photo != ''){
+      this.setData({
+        isHaveDeverliyPhoto:true
+      })
+    }
     this.setData({
       order: order,
       isDone: true,

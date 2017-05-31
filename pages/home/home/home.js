@@ -176,5 +176,17 @@ Page({
 
   pullDowne: function (e){
     this.onPullDownRefresh()
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '良票演出',
+      path: 'pages/home/home/home',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   }
 })

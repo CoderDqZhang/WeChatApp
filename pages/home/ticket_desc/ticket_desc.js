@@ -129,6 +129,13 @@ Page({
     },
     genderData: function (tickets) {
         var that = this;
+        var tempTickets = []
+        for (var j = 0; j < tickets.length; j ++ ){
+          if (tickets[j].remain_count > 0){
+            tempTickets.push(tickets[j])
+          }
+        }
+        tickets = tempTickets
         for (var i = 0; i < tickets.length; i++) {
             var ticket_row = ""
             if (tickets[i].region == "") {
@@ -179,6 +186,7 @@ Page({
             }
         }
         var subtitle = ''
+        tempList = unique1(tempList)
         for (var k = 0; k < tempList.length; k++) {
             if (k < tempList.length - 1) {
                 subtitle = subtitle + tempList[k] + "、"

@@ -112,11 +112,47 @@ Page({
 
   },
 
-  genderDeverlilyData: function (){
-    var that = this 
+  genderDeverlilyData: function () {
+    var that = this
     that.setData({
       isHaveDeverliyPhoto: that.data.order.express_info.photo != null && that.data.order.express_info.photo != '' ? true : false
     })
+  },
+
+  payButtonTap: function () {
+    var that = this
+    var url = "order/pay_info/" + that.data.order.order_id + "/"
+    console.log(event.currentTarget.dataset)
+
+    app.func.requestGet(url, {}, function (res) {
+      var wxpay = res.wxpay
+      wx.requestPayment({
+        // 'appId':wxpay.appid,
+        'timeStamp': wxpay.timeStamp,
+        'nonceStr': wxpay.nonceStr,
+        'package': wxpay.package,
+        'signType': 'MD5',
+        'paySign': wxpay.sign,
+        'success': function (wres) {
+
+          that.setData({
+            'that.data.order.status': 3,
+            'that.data.order.status_desc': "待发货",
+            'that.data.order.supplier_status_desc': "待发货"
+          })
+          var pages = getCurrentPages();
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.upateOrderList(that.data.order)
+          }
+        },
+        'fail': function (res) {
+          console.log(res)
+        }
+      })
+    });
   },
 
   requestExpress: function (e) {
@@ -185,7 +221,7 @@ Page({
       }
     })
   },
-  
+
   logisticeTap: function (e) {
     var express_info = this.data.delivery_info
     wx.navigateTo({
@@ -257,9 +293,9 @@ Page({
 
   },
   //查看凭证
-  showDeverliyImage: function (){
+  showDeverliyImage: function () {
     var that = this
-    if (!that.data.isHaveDeverliyPhoto){
+    if (!that.data.isHaveDeverliyPhoto) {
       wx.showModal({
         title: '请联系卖家上传',
         showCancel: false,
@@ -270,7 +306,7 @@ Page({
           }
         }
       })
-    }else{
+    } else {
       let url = that.data.order.express_info.photo + "?" + that.data.order.express_info.photo_end
       wx.previewImage({
         urls: [url],
@@ -285,7 +321,7 @@ Page({
     })
 
   },
-   onReady: function () {
+  onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {

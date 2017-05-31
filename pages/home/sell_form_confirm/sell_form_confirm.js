@@ -49,7 +49,7 @@ Page({
     isSeat: true,
     isTicketStatus: false,
     isEditeTicket: false,
-    disposite:0,
+    disposite: 0,
     isDespositView: false,
   },
   changeData: function (res) {
@@ -114,7 +114,7 @@ Page({
   updateBlance: function (amount) {
     var that = this
     this.setData({
-      'sell_confim.sellTicket.balance': ((parseFloat( that.data.sell_confim.sellTicket.balance) * 100 + amount) / 100).toFixed(2)
+      'sell_confim.sellTicket.balance': ((parseFloat(that.data.sell_confim.sellTicket.balance) * 100 + amount) / 100).toFixed(2)
     })
   },
   onLoad: function (options) {
@@ -289,31 +289,41 @@ Page({
   },
   ticketStatusTap: function (e) {
     var that = this
-    if (e.currentTarget.id == "1") {
+    if (that.data.sell_confim.sellTicket.need_deposit == true && that.data.isEditeTicket) {
       wx.showModal({
-        title: "现票必须保证72小时内发货，期票发货时间需与买家商议。现票快递类违约不能付票，每张赔付50元，期票违约每张赔付100元.",
+        title: "该票绑定了押金，状态不可更改哦",
         confirmColor: "#4bd4c5",
-        confirmText: "确定",
+        confirmText: "我知道了",
         success: function (res) {
-          if (res.confirm) {
-            that.setData({
-              "sell_confim.sellForm.sell_category": e.currentTarget.id,
-              isTicketStatus: e.currentTarget.id == "1" ? false : true,
-              disposite: (that.data.sell_confim.sellForm.ticket_count * 100).toFixed(2)
-            })
-          }
         }
       })
     } else {
-      console.log(e.currentTarget.id)
-      that.setData({
-        "sell_confim.sellForm.sell_category": parseInt(e.currentTarget.id),
-        isTicketStatus: e.currentTarget.id == "1" ? false : true,
-        disposite: (that.data.sell_confim.sellForm.ticket_count * 50).toFixed(2)
-      })
+      if (e.currentTarget.id == "1") {
+        wx.showModal({
+          title: "现票必须保证72小时内发货，期票发货时间需与买家商议。现票快递类违约不能付票，每张赔付50元，期票违约每张赔付100元.",
+          confirmColor: "#4bd4c5",
+          confirmText: "确定",
+          success: function (res) {
+            if (res.confirm) {
+              that.setData({
+                "sell_confim.sellForm.sell_category": e.currentTarget.id,
+                isTicketStatus: e.currentTarget.id == "1" ? false : true,
+                disposite: (that.data.sell_confim.sellForm.ticket_count * 100).toFixed(2)
+              })
+            }
+          }
+        })
+      } else {
+        console.log(e.currentTarget.id)
+        that.setData({
+          "sell_confim.sellForm.sell_category": parseInt(e.currentTarget.id),
+          isTicketStatus: e.currentTarget.id == "1" ? false : true,
+          disposite: (that.data.sell_confim.sellForm.ticket_count * 50).toFixed(2)
+        })
+      }
     }
   },
-//这个兼容老版本
+  //这个兼容老版本
   bindPickerRegion: function (e) {
     this.setData({
       regionIndex: e.detail.value,
@@ -426,18 +436,18 @@ Page({
       setTimeout(function () {
         wx.hideToast()
       }, 2000)
-      wx.navigateBack({
-        delta: 2, // 回退前 delta(默认为1) 页面
-        success: function (res) {
-          // success
-        },
-        fail: function () {
-          // fail
-        },
-        complete: function () {
-          // complete
-        }
-      })
+      // wx.navigateBack({
+      //   delta: 2, // 回退前 delta(默认为1) 页面
+      //   success: function (res) {
+      //     // success
+      //   },
+      //   fail: function () {
+      //     // fail
+      //   },
+      //   complete: function () {
+      //     // complete
+      //   }
+      // })
     })
   },
   requestNewTicket: function () {
@@ -445,21 +455,21 @@ Page({
     if (that.data.sell_confim.sellTicket.need_deposit == true && parseFloat(that.data.disposite) > that.data.sell_confim.sellTicket.balance) {
       var blance = that.data.sell_confim.sellTicket.balance
       wx.showModal({
-          title: "押金不足",
-          content: "本次挂票，需缴纳押金共 " + that.data.disposite + "元，当前余额 " + blance +"元不足，请充值",
-          showCancel: true,
-          cancelText:"稍等一会",
-          confirmText: "立即充值",
-          confirmColor: "#4bd4c5",
-          success: function (res) {
-            if (res.confirm) {
-              var amount = ((parseFloat(that.data.disposite * 100) - that.data.sell_confim.sellTicket.balance * 100) / 100).toFixed(2)
-              wx.navigateTo({
-                url: '../top_up/top_up?amount=' + amount,
-              })
-            }
+        title: "押金不足",
+        content: "本次挂票，需缴纳押金共 " + that.data.disposite + "元，当前余额 " + blance + "元不足，请充值",
+        showCancel: true,
+        cancelText: "稍等一会",
+        confirmText: "立即充值",
+        confirmColor: "#4bd4c5",
+        success: function (res) {
+          if (res.confirm) {
+            var amount = ((parseFloat(that.data.disposite * 100) - that.data.sell_confim.sellTicket.balance * 100) / 100).toFixed(2)
+            wx.navigateTo({
+              url: '../top_up/top_up?amount=' + amount,
+            })
           }
-        })
+        }
+      })
       return
     }
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/session/" + this.data.sell_confim.ticketSession.session.id + "/ticket/"
@@ -492,16 +502,17 @@ Page({
       setTimeout(function () {
         wx.hideToast()
       }, 2000)
-      if (that.data.sell_confim.sellTicket.need_deposit == true){
+      if (that.data.sell_confim.sellTicket.need_deposit == true) {
         that.setData({
-          'sell_confim.sellTicket.balance': ((that.data.sell_confim.sellTicket.balance * 100 - that.data.disposite * 100)/100).toFixed(2)
+          'sell_confim.sellTicket.balance': ((that.data.sell_confim.sellTicket.balance * 100 - that.data.disposite * 100) / 100).toFixed(2)
         })
       }
-      that.requestOneShowTicket()
+
+      that.requestOneShowTicket(res)
     })
   },
 
-  requestOneShowTicket: function () {
+  requestOneShowTicket: function (data) {
     var url = "supplier/show/" + this.data.sell_confim.ticketSession.id + "/ticket/"
     app.func.requestGet(url, {}, function (res) {
       console.log(res)
@@ -509,57 +520,44 @@ Page({
       sessionShow.session_list = res.session_list
       var userInfo = wx.getStorageSync('userInfo')
       sessionShow.lp_session_id = userInfo.data.lp_session_id
-      if (sessionShow.session_list.length > 1) {
-        var imageUrl = sessionShow.cover
-        var arr = imageUrl.split('?')
-        sessionShow.cover = arr[0]
-        sessionShow.cover_end = arr[1]
-        sessionShow.category.icon = ""
-        for (var j = 0; j < sessionShow.session_list.length; j++) {
-          sessionShow.session_list[j].venue_map = ""
+      var sessionShow = res.show
+      sessionShow.session = sessionShow.session_list[0]
+      var imageUrl = sessionShow.cover
+      var arr = imageUrl.split('?')
+      sessionShow.cover = arr[0]
+      sessionShow.cover_end = arr[1]
+      sessionShow.category.icon = ""
+      sessionShow.venue.venue_map = ""
+      sessionShow.session.venue_map = ""
+      console.log(sessionShow)
+      var sellShow = JSON.stringify(sessionShow)
+      var pages = getCurrentPages();
+      for (var i = 0; i < pages.length; i++) {
+        if (pages[i].route == 'pages/home/ticket_put/ticket_put') {
+          var prePage = pages[i];
+          prePage.changeData(sessionShow)
+          //关键在这里
+          wx.navigateBack({
+            delta: pages.length - i - 1
+          })
+          return
         }
-        sessionShow.venue.venue_map = ""
-        var show = JSON.stringify(sessionShow)
-
-        wx.navigateTo({
-          url: '../scene/ticket_scen?sellShow=' + show,
-          success: function (res) {
-            // success
-          },
-          fail: function () {
-            // fail
-          },
-          complete: function () {
-            // complete
-          }
-        })
-      } else {
-        var sessionShow = res.show
-        sessionShow.session = sessionShow.session_list[0]
-        var imageUrl = sessionShow.cover
-        var arr = imageUrl.split('?')
-        sessionShow.cover = arr[0]
-        sessionShow.cover_end = arr[1]
-        sessionShow.category.icon = ""
-        sessionShow.venue.venue_map = ""
-        sessionShow.session.venue_map = ""
-        console.log(sessionShow)
-        var sellShow = JSON.stringify(sessionShow)
-        wx.navigateTo({
-          url: '../ticket_desc/ticket_desc?sellShow=' + sellShow,
-          success: function (res) {
-            // success
-          },
-          fail: function () {
-            // fail
-          },
-          complete: function () {
-            // complete
-          }
-        })
       }
+      wx.navigateTo({
+        url: '../ticket_put/ticket_put?sellShow=' + sellShow,
+        success: function (res) {
+          // success
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
+      })
     });
   },
+
   onReady: function () {
     // 页面渲染完成
   },

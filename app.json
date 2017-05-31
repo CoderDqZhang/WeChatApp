@@ -22,6 +22,7 @@
     "pages/home/category/category",
     "pages/home/scene/ticket_scen",
     "pages/home/ticket_desc/ticket_desc",
+    "pages/home/ticket_put/ticket_put",
     "pages/home/ticket_form/ticket_form",
     "pages/home/address/address",
     "pages/template/refresh_template",

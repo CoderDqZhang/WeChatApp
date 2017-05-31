@@ -5,7 +5,7 @@
     <view style="width: 164rpx;height:220rpx; background-color:#FFFFFF; margin-left:30rpx;">
       <image src="{{cover}}" class="ticketPost" mode="aspectFill" style="width: 164rpx;height: 220rpx;border-radius: 4rpx;"></image>
     </view>
-    <view class="ticket_info" style=" margin-left: 20rpx;margin-right:30rpx;height:230rpx;background-color:#FFFFFF; flex-direction: column;justify-content: space-between;display: flex;margin-top:0rpx;">
+    <view class="ticket_info" style=" margin-left: 20rpx;margin-right:30rpx;height:230rpx;background-color:#FFFFFF; flex-direction: column;justify-content: space-between;display: flex;margin-top:0rpx; width:600rpx;">
       <view class="ticketInfo" style="background-color: #FFFFFF;">
         <view class="ticketTitle" style="color: #384249;font-size: 16px;line-height:22px; max-height:54px; text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical; ">
           <text>{{title}}</text>
