@@ -12,7 +12,8 @@ Page({
   requestData: function (show) {
     var that = this;
     that.setData({
-      sessionShow: JSON.parse(show)
+      sessionShow: JSON.parse(show),
+      'sessionShow.session_list':[]
     })
     var url = "show/" + JSON.parse(show).id + "/session/"
     app.func.requestGet(url, {}, function (res) {
@@ -97,10 +98,13 @@ Page({
   },
   genderTicket: function (data) {
     var ticket_list = []
-    for (var i = 0; i < data.session_list[0].ticket_list.length; i++) {
-      if (data.session_list[0].ticket_list[i].remain_count != 0)
-        ticket_list.push(data.session_list[0].ticket_list[i])
+    if (data.session_list[0].ticket_list != null) {
+      for (var i = 0; i < data.session_list[0].ticket_list.length; i++) {
+        if (data.session_list[0].ticket_list[i].remain_count != 0)
+          ticket_list.push(data.session_list[0].ticket_list[i])
+      }
     }
+    
     data.session_list[0].ticket_list = ticket_list
     return data
   },

@@ -77,8 +77,10 @@ Page({
       })
     } else {
       data.session.venue_map = ""
+      if (data.session_list == null) {
+        data.session_list = []
+      }
       that.showSellTicket(data)
-
     }
   },
 
@@ -128,9 +130,11 @@ Page({
 
   genderTicket: function (data) {
     var ticket_list = []
-    for (var i = 0; i < data.session_list[0].ticket_list.length; i++) {
-      if (data.session_list[0].ticket_list[i].remain_count != 0)
-        ticket_list.push(data.session_list[0].ticket_list[i])
+    if (data.session_list[0].ticket_list != null) {
+      for (var i = 0; i < data.session_list[0].ticket_list.length; i++) {
+        if (data.session_list[0].ticket_list[i].remain_count != 0)
+          ticket_list.push(data.session_list[0].ticket_list[i])
+      }
     }
     data.session_list[0].ticket_list = ticket_list
     return data
