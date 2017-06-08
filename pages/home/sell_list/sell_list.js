@@ -28,19 +28,6 @@ Page({
         });
       }
     });
-    // var user = wx.getStorageSync('userInfo')
-    // wx.showModal({
-    //   title: user.data.lp_session_id,
-    //   content: user.data.lp_session_id,
-    //   showCancel: false,
-    //   confirmText: "知道了",
-    //   confirmColor: "#4bd4c5",
-    //   success: function (res) {
-    //     if (res.confirm) {
-
-    //     }
-    //   }
-    // })
     this.requestData()
   },
 
@@ -74,18 +61,6 @@ Page({
         console.log(userData)
         user.data.role = userData.role
         wx.setStorageSync('userInfo', user)
-        // wx.showModal({
-        //   title: user.data.role,
-        //   content: userData.role + userData.id + userData.username, 
-        //   showCancel: false,
-        //   confirmText: "知道了",
-        //   confirmColor: "#4bd4c5",
-        //   success: function (res) {
-        //     if (res.confirm) {
-
-        //     }
-        //   }
-        // })
         if (user.data.role != 'supplier') {
           wx.navigateTo({
             url: '../login/login',
