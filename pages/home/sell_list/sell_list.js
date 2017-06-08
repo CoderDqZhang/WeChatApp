@@ -28,6 +28,19 @@ Page({
         });
       }
     });
+    // var user = wx.getStorageSync('userInfo')
+    // wx.showModal({
+    //   title: user.data.lp_session_id,
+    //   content: user.data.lp_session_id,
+    //   showCancel: false,
+    //   confirmText: "知道了",
+    //   confirmColor: "#4bd4c5",
+    //   success: function (res) {
+    //     if (res.confirm) {
+
+    //     }
+    //   }
+    // })
     this.requestData()
   },
 
@@ -51,26 +64,58 @@ Page({
   showTap: function (event) {
     var that = this
     var user = wx.getStorageSync('userInfo')
+    user.data.role = 'default'
     // 
-    if (user != "" && user.data.role != "supplier") {
-      wx.navigateTo({
-        url: '../login/login',
-        success: function (res) {
-          // success
-        },
-        fail: function () {
-          // fail
-        },
-        complete: function () {
-          // complete
+    // user.data.lp_session_id = "de4e0da3-cac8-436e-a32e-2cb1b1ba32f2"
+    
+    wx.setStorageSync('userInfo', user)
+    if (user != '' && user.data.role != 'supplier') {
+      app.func.requestGet('user/', {}, function (userData) {
+        console.log(userData)
+        user.data.role = userData.role
+        wx.setStorageSync('userInfo', user)
+        // wx.showModal({
+        //   title: user.data.role,
+        //   content: userData.role + userData.id + userData.username, 
+        //   showCancel: false,
+        //   confirmText: "知道了",
+        //   confirmColor: "#4bd4c5",
+        //   success: function (res) {
+        //     if (res.confirm) {
+
+        //     }
+        //   }
+        // })
+        if (user.data.role != 'supplier') {
+          wx.navigateTo({
+            url: '../login/login',
+            success: function (res) {
+              // success
+            },
+            fail: function () {
+              // fail
+            },
+            complete: function () {
+              // complete
+            }
+          })
+          return
+        } else {
+          var data = event.currentTarget.dataset.show
+          that.showSellScen(data)
         }
       })
-      return
+    } else {
+      var data = event.currentTarget.dataset.show
+      that.showSellScen(data)
     }
-    var data = event.currentTarget.dataset.show
+  },
+
+  showSellScen: function (data) {
+    var that = this;
     data.cover = ""
     data.category.icon = ""
-    if (event.currentTarget.dataset.show.session_count > 1) {
+    if (data.session_count > 1) {
       var show = JSON.stringify(data)
       wx.navigateTo({
         url: '../sell_scen/sell_scen?show=' + show

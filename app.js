@@ -45,7 +45,6 @@ App({
   getUserInfo: function (cb) {
     var that = this
     console.log(that)
-
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
       try {
@@ -68,8 +67,6 @@ App({
               that.globalData.userInfo = resU.userInfo
               typeof cb == "function" && cb(that.globalData.userInfo)
               if (res.code) {
-                console.log(resU.userInfo)
-                console.log(res.code)
                 wx.request({
                   // url: "https://api.liangpiao.me/user/weixin_login/",
                   url: "https://api.niceticket.cc/user/weixin_login/",
@@ -81,7 +78,31 @@ App({
                   },
                   method: 'post',
                   success: function (res) {
-                    console.log(res.lp_session_id)
+                    if (res.errors != null) {
+                      wx.showModal({
+                        title: res.errors[0].error[0].toString(),
+                        showCancel: false,
+                        confirmText: "知道了",
+                        confirmColor: "#4bd4c5",
+                        success: function (res) {
+                          if (res.confirm) {
+                          }
+                        }
+                      })
+                      return
+                    }
+                    // wx.showModal({
+                    //   title: res.data.lp_session_id,
+                    //   showCancel: false,
+                    //   confirmText: "知道了",
+                    //   confirmColor: "#4bd4c5",
+                    //   success: function (res) {
+                    //     if (res.confirm) {
+
+                    //     }
+                    //   }
+                    // })
+                    console.log(res.data.lp_session_id)
                     console.log(res)
                     var pages = getCurrentPages();
                     console.log(pages)
@@ -93,31 +114,34 @@ App({
                     console.log(home)
                     try {
                       wx.setStorageSync('userInfo', res)
-
                     } catch (e) {
+                      wx.showModal({
+                        title: '微信保存用户信息失败',
+                        showCancel: false,
+                        confirmText: "知道了",
+                        confirmColor: "#4bd4c5",
+                        success: function (res) {
+                          if (res.confirm) {
+
+                          }
+                        }
+                      })
                     }
                   }
                 })
-                // wx.request({
-                //   url: "https://api.liangpiao.me/user/weixin_login/",
-                //   data: {
-                //     "gender": resU.userInfo.gender,
-                //     "nickname": resU.userInfo.nickName,
-                //     "avatar": resU.userInfo.avatarUrl,
-                //     "code": res.code
-                //   },
-                //   method: 'post',
-                //   success: function (res) {
-                //     console.log(res.lp_session_id)
-                //     try {
-                //       wx.setStorageSync('userInfo', res)
-                //     } catch (e) {
-                //     }
-                //     console.log(res)
-                //   }
-                // })
               } else {
                 console.log('获取用户登录态失败！' + res.errMsg)
+                wx.showModal({
+                  title: '微信登录失败',
+                  showCancel: false,
+                  confirmText: "知道了",
+                  confirmColor: "#4bd4c5",
+                  success: function (res) {
+                    if (res.confirm) {
+
+                    }
+                  }
+                })
               }
             }
           })
