@@ -144,3 +144,35 @@ page {
   font-size: 32rpx;
   color: #4bd4c5;
 }
+
+.historyClass{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100rpx;
+}
+
+.searchText{
+  margin-left: 20rpx;
+  font-size: 26rpx;
+  color: #384249;
+}
+
+.searchClass{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.Icon_info{
+  width: 26rpx;
+  height: 26rpx;
+  margin-left: 30rpx;
+}
+
+.Close_Info{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 30rpx;
+}

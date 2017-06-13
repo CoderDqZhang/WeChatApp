@@ -10,7 +10,8 @@ Page({
     inputValue: "",
     isInPut: false,
     searchList: null,
-    searchText: ""
+    searchText: "",
+    searchHistory: []
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
@@ -50,6 +51,26 @@ Page({
   },
   showTap: function (event) {
     var that = this
+    if (this.data.searchText != '') {
+      var searchHistory = wx.getStorageSync('searchHistorySell')
+      if (searchHistory != null && searchHistory != '') {
+        var isHaveKey = false
+        for (var i = 0; i < searchHistory.length; i++) {
+          if (searchHistory[i] == this.data.searchText) {
+            isHaveKey = true
+          }
+        }
+        if (!isHaveKey) {
+          searchHistory.push(this.data.searchText)
+        }
+      } else {
+        searchHistory = [this.data.searchText]
+      }
+      that.setData({
+        searchHistory: searchHistory
+      })
+      wx.setStorageSync('searchHistorySell', searchHistory)
+    }
     var user = wx.getStorageSync('userInfo')
     user.data.role = 'default'
     // 
@@ -162,6 +183,9 @@ Page({
 
   requestSearchData: function (data) {
     var that = this
+    that.setData({
+      searchText: data
+    })
     var url = "/show/search/sell/?kw=" + data
     console.log(url)
     app.func.requestGet(url, {}, function (res) {
@@ -181,14 +205,37 @@ Page({
   bindKeyInput: function (e) {
     this.setData({
       inputValue: e.detail.value,
+      searchText: e.detail.value
     })
     this.requestSearchData(this.data.inputValue)
   },
   inputFocus: function (e) {
     this.setData({
+      searchHistory: wx.getStorageSync('searchHistorySell')
+    })
+    this.setData({
       isInPut: true,
       searchBarWidth: this.data.winWidth - 75
     })
+    console.log(e)
+  },
+
+  searchHistTap: function (e) {
+    console.log(e)
+    var index = e.currentTarget.id
+    var data = this.data.searchHistory[parseInt(index)]
+    this.requestSearchData(data)
+  },
+
+  searchHistoryCancelTap: function (e) {
+    var that = this
+    var index = e.currentTarget.id
+    var list = that.data.searchHistory.splice(parseInt(index), 1)
+    list = that.data.searchHistory
+    that.setData({
+      searchHistory: list
+    })
+    wx.setStorageSync("searchHistorySell", that.data.searchHistory)
     console.log(e)
   },
   onReady: function () {

@@ -13,7 +13,8 @@ Page({
     inputValue: "",
     isInPut: false,
     searchList: null,
-    searchText: ""
+    searchText: "",
+    searchHistory:[]
   },
   onLoad: function (opt) {
     console.log("首页数据")
@@ -96,6 +97,28 @@ Page({
     wx.stopPullDownRefresh()
   },
   showTap: function (event) {
+    var that = this
+    if (this.data.searchText != ''){
+      var searchHistory = wx.getStorageSync('searchHistoryTicket')
+      if (searchHistory != null && searchHistory != '') {
+        var isHaveKey = false
+        for (var i = 0; i < searchHistory.length; i ++) {
+          if (searchHistory[i] == this.data.searchText){
+            isHaveKey = true
+          }
+        }
+        if (!isHaveKey){
+          searchHistory.push(this.data.searchText)
+        }
+        
+      }else{
+        searchHistory = [this.data.searchText]
+      }
+      that.setData({
+        searchHistory: searchHistory
+      })
+      wx.setStorageSync('searchHistoryTicket', searchHistory)
+    }
     var data = event.currentTarget.dataset.show
     data.cover = ""
     data.category.icon = ""
@@ -140,6 +163,9 @@ Page({
   },
   requestSearchData: function (data) {
     var that = this
+    that.setData({
+      searchText:data
+    })
     var url = "show/search/?kw=" + data
     console.log(url)
     app.func.requestGet(url, {}, function (res) {
@@ -168,9 +194,31 @@ Page({
   },
   inputFocus: function (e) {
     this.setData({
+      searchHistory: wx.getStorageSync('searchHistoryTicket')
+    })
+    this.setData({
       isInPut: true,
       searchBarWidth: this.data.winWidth - 75
     })
+    console.log(e)
+  },
+
+  searchHistTap: function (e){
+    console.log(e)
+    var index = e.currentTarget.id
+    var data = this.data.searchHistory[parseInt(index)]
+    this.requestSearchData(data)
+  },
+
+  searchHistoryCancelTap: function (e) {
+    var that = this
+    var index = e.currentTarget.id
+    var list = that.data.searchHistory.splice(parseInt(index), 1)
+    list = that.data.searchHistory
+    that.setData({
+      searchHistory: list
+    })
+    wx.setStorageSync("searchHistoryTicket", that.data.searchHistory)
     console.log(e)
   },
 
