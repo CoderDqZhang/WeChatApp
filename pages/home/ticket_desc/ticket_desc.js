@@ -53,6 +53,16 @@ Page({
         // var date = util.formatTime(new Date)
         
         var that = this;
+        // var otherUserInfo = wx.getStorageSync('userInfo')
+
+        // wx.setStorageSync("otherUserInfo", otherUserInfo.data)
+        // wx.getStorage({
+        //   key: 'userInfo',
+        //   success: function(res) {
+        //     console.log("dsfds" + res.data.data.role)
+        //   },
+        // })
+        console.log("fdggdfdfsfdg")
         /** 
          * 获取系统信息 
          */
@@ -65,20 +75,35 @@ Page({
                 });
             }
         })
-        if (opt.sellShow != null) {
+        if (opt.ticketList != null) {
+          console.log("fdggdfdfsfdgfsdfwwe")
+          this.setData({
+            sessionShow: JSON.parse(opt.ticketList),
+            shareData: JSON.parse(opt.ticketList),
+          })
+          this.genderData(this.data.sessionShow.session.ticket_list)
+        }else{
+          console.log(opt)
+          if (opt.sellShow != null) {
+            console.log("fdggdfdfsfdgfsdfwwewewwe")
             this.setData({
-                sessionShow: JSON.parse(opt.sellShow),
-                shareData: JSON.parse(opt.sellShow),
+              sessionShow: JSON.parse(opt.sellShow),
+              shareData: JSON.parse(opt.sellShow),
             })
+            wx.setStorageSync("otherUserInfo", this.data.sessionShow.otherUserInfo)
+            console.log("gdfgdfgf" + wx.getStorageSync("otherUserInfo"))
+            console.log(this.data.sessionShow.otherUserInfo)
             wx.setNavigationBarTitle({
-                title: this.data.sessionShow.session.name,
-                success: function (res) {
-                    // success
-                }
+              title: this.data.sessionShow.session.name,
+              success: function (res) {
+                // success
+              }
             })
+            console.log(this.data.sessionShow)
             this.genderData(this.data.sessionShow.session.ticket_list)
-        } else {
+          } else {
             this.requestData(opt.show)
+          }
         }
         // var that = this;
         // var userInfo = wx.getStorageInfoSync('userInfo')
@@ -252,7 +277,6 @@ Page({
         this.setData({
             priceHeight: getArray(tempList).length * 60 > that.data.winHeight - 45 ? that.data.winHeight - 45 : getArray(tempList).length * 60
         })
-
         // var unique1d = unique1(tempList)
         // var uniQueued = getArray(tempList)
         this.setData({
@@ -424,6 +448,9 @@ Page({
     onShareAppMessage: function () {
         var that = this
         var shareTitle = ""
+        var userInfo = wx.getStorageSync('userInfo')
+        that.data.shareData.otherUserInfo = userInfo.data
+        console.log(that.data.shareData)
         if (that.data.sessionShow.session.shareTitle == null) {
             shareTitle = that.data.sharesubletitle + that.data.shareName[Math.floor(Math.random() * (5 + 1))]
         } else {

@@ -157,6 +157,7 @@ App({
     requestUpload: http.requestUpload,
     requestGet: http.requestGet,
     requestPut: http.requestPut,
-    requestDelete: http.requestDelete
+    requestDelete: http.requestDelete,
+    requestSessionIDGet: http.requestSessionIDGet
   }
 })

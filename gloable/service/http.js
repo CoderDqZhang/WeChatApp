@@ -208,8 +208,30 @@ function requestUpload(url, data, filePath, name, cb){
   })
 }
 
+function requestSessionIDGet(url, data,lp_session_id, cb){
+  wx.request({
+    url: rootDocment + url,
+    data: data,
+    header: {
+      'content-type': 'application/json',
+      'Authorization': lp_session_id
+    },
+    method: 'get',
+    success: function (res) {
+      return typeof cb == "function" && cb(res.data)
+    },
+    fail: function () {
+      return typeof cb == "function" && cb(false)
+    },
+
+  })
+}
+
+
+
 module.exports.requestPost = requestPost
 module.exports.requestGet = requestGet
 module.exports.requestDelete = requestDelete
 module.exports.requestPut = requestPut
 module.exports.requestUpload = requestUpload
+module.exports.requestSessionIDGet = requestSessionIDGet

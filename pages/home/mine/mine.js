@@ -83,5 +83,10 @@ Page({
             // success
           }
         })
+    },
+    myProgramTap: function () {
+      wx.navigateTo({
+        url: '../my_program/my_program',
+      })
     }
 })

@@ -1,3 +1,91 @@
+function ticketSellCount(data) {
+  var ticketCount = 0
+  if (data.session_list.count != 1) {
+    for (var i = 0; i < data.session_list.length; i++) {
+      var session = data.session_list[i]
+      for (var j = 0; j < session.ticket_list.length; j++) {
+        var ticket = session.ticket_list[j]
+        if (ticket.status == 1) {
+          ticketCount = ticketCount + ticket.remain_count
+        }
+      }
+    }
+  } else {
+    for (var k = 0; k < data.session[0].ticket_list.length; k++) {
+      var ticket = data.session[0].ticket_list[k]
+      if (ticket.status == 1) {
+        ticketCount = ticketCount + ticket.remainCount
+      }
+    }
+  }
+  return ticketCount
+}
+
+function ticketMinDiscount(data) {
+  var min_discount = 1.00
+  if (data.ticket_list.count != 1) {
+    for (var j = 0; j < data.ticket_list.length; j++) {
+      var discount = parseFloat(data.ticket_list[j].discount)
+      if (discount < min_discount) {
+        min_discount = discount
+      }
+    }
+  } else {
+    min_discount = parseFloat(data.ticket_list[0].discount)
+  }
+  return min_discount
+}
+
+function ticketMinDiscountShow(data) {
+  var min_discount = 1.00
+  if (data.session_list.count != 1) {
+    for (var i = 0; i < data.session_list.length; i++) {
+      var mindiscount = ticketMinDiscount(data.session_list[i])
+      if (mindiscount < min_discount) {
+        min_discount = mindiscount
+      }
+    }
+  } else {
+    min_discount = ticketMinDiscount(data.session_list[0])
+  }
+  return min_discount
+}
+
+function ticketSellManagerMinPrice(data) {
+  var min_price = 0
+  if (data.session_list.count != 1) {
+    min_price = data.session_list[0].min_price
+    for (var i = 0; i < data.session_list.length; i++) {
+      var session = data.session_list[i]
+      if (session.ticket_list.count != 1) {
+        for (var j = 0; j < session.ticket_list.length; j++) {
+          var ticket = session.ticket_list[j]
+          if (ticket.price < min_price) {
+            min_price = ticket.price
+          }
+        }
+      } else {
+        if (session.min_price < min_price) {
+          min_price = session.min_price
+        }
+      }
+    }
+  } else {
+    min_price = data.min_price
+    if (data.session_list[0].ticket_list.count != 1) {
+      for (var j = 0; j < data.session_list[0].ticket_list.length; j++) {
+        var ticket = data.session_list[0].ticket_list[j]
+        if (ticket.price < min_price) {
+          min_price = ticket.price
+        }
+      }
+    } else {
+      min_price = data.session_list[0].ticket_list[0].price
+    }
+  }
+  return min_price
+}
+
 var app = getApp()
 Page({
   data: {
@@ -14,7 +102,14 @@ Page({
     isInPut: false,
     searchList: null,
     searchText: "",
-    searchHistory:[]
+    searchHistory: [],
+    //绑定某个商家后的数据
+    isUserSession: false,
+    ticketSell: null,
+    isNoneTicket:false,
+    title: '',
+    avatar:'',
+    shareData: null
   },
   onLoad: function (opt) {
     console.log("首页数据")
@@ -30,7 +125,6 @@ Page({
     })
     //调用应用实例的方法获取全局数据
     var userInfo = wx.getStorageSync('userInfo')
-    console.log("userInfo" + userInfo)
     if (userInfo != "") {
       that.setData({
         isAllowUser: false
@@ -40,9 +134,58 @@ Page({
         isAllowUser: true
       })
     }
-    that.requestData()
+    if (opt.ticketList != null) {
+      var ticketList = JSON.parse(opt.ticketList)
+      this.setData({
+        ticketSell: ticketList.ticketList,
+        shareData: ticketList,
+      })
+      
+    } else {
+      var otherUserInfo = wx.getStorageSync('otherUserInfo')
+      if (otherUserInfo != null && otherUserInfo.role == "supplier") {
+        wx.setNavigationBarTitle({
+          title: '',
+        })
+        that.setData({
+          title: otherUserInfo.username,
+          avatar: otherUserInfo.avatar,
+          isUserSession: true,
+        })
+        that.requestSessionIDData(otherUserInfo.id)
+      } else {
+        wx.setNavigationBarTitle({
+          title: '良票演出',
+        })
+        that.requestData()
+      }
+    }
+  },
+  requestSessionIDData: function (data) {
+    var that = this
+    data = '3535216720'
+    app.func.requestGet('supplier/' + data + '/ticket/', {}, function (res) {
+      console.log(res)
+      for (var i = 0; i < res.length; i++) {
+        var dic_count = (ticketMinDiscountShow(res[i]) * 10)
+        var sellCount = ticketSellCount(res[i])
+        var minPrice = ticketSellManagerMinPrice(res[i])
+        res[i].min_discount = dic_count.toFixed(1)
+        res[i].ticket_count = sellCount
+        res[i].min_price = minPrice
+      }
+      that.setData({
+        ticketSell: res,
+        isNoneTicket: res.length == 0 ? true : false,
+        isHaveSellManager: res.length == 0 ? true : false,
+        'shareData.ticketList': res,
+        'shareData.otherUserInfo': wx.getStorageSync('otherUserInfo')
+      })
+      console.log(that.data.ticketSell)
+    });
   },
   requestData: function () {
+
     wx.showToast({
       title: '加载中',
       icon: 'loading',
@@ -98,20 +241,20 @@ Page({
   },
   showTap: function (event) {
     var that = this
-    if (this.data.searchText != ''){
+    if (this.data.searchText != '') {
       var searchHistory = wx.getStorageSync('searchHistoryTicket')
       if (searchHistory != null && searchHistory != '') {
         var isHaveKey = false
-        for (var i = 0; i < searchHistory.length; i ++) {
-          if (searchHistory[i] == this.data.searchText){
+        for (var i = 0; i < searchHistory.length; i++) {
+          if (searchHistory[i] == this.data.searchText) {
             isHaveKey = true
           }
         }
-        if (!isHaveKey){
+        if (!isHaveKey) {
           searchHistory.push(this.data.searchText)
         }
-        
-      }else{
+
+      } else {
         searchHistory = [this.data.searchText]
       }
       that.setData({
@@ -164,7 +307,7 @@ Page({
   requestSearchData: function (data) {
     var that = this
     that.setData({
-      searchText:data
+      searchText: data
     })
     var url = "show/search/?kw=" + data
     console.log(url)
@@ -203,7 +346,7 @@ Page({
     console.log(e)
   },
 
-  searchHistTap: function (e){
+  searchHistTap: function (e) {
     console.log(e)
     var index = e.currentTarget.id
     var data = this.data.searchHistory[parseInt(index)]
@@ -222,18 +365,75 @@ Page({
     console.log(e)
   },
 
-  pullDowne: function (e){
+  pullDowne: function (e) {
     this.onPullDownRefresh()
   },
+
+  //绑定某个商家的时候点击方法
+  sessionShowTap: function (event) {
+    var data = event.currentTarget.dataset.show
+    var imageUrl = data.cover
+    var arr = imageUrl.split('?')
+    data.cover = arr[0]
+    data.cover_end = arr[1]
+    data.category.icon = ""
+
+    if (data.session_list.length > 1) {
+      var show = JSON.stringify(data)
+      console.log(show)
+      wx.navigateTo({
+        url: '../scene/ticket_scen?ticketList=' + show
+      })
+    } else {
+      data.session_list[0].venue_map = ""
+      data.session = data.session_list[0]
+      var show = JSON.stringify(data)
+      console.log(show)
+      wx.navigateTo({
+        url: '../ticket_desc/ticket_desc?ticketList=' + show
+      })
+    }
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var otherUserInfo = wx.getStorageSync('otherUserInfo')
+    if (otherUserInfo != null && otherUserInfo.role == "supplier") {
+      wx.setNavigationBarTitle({
+        title: '',
+      })
+
+    } else {
+      wx.setNavigationBarTitle({
+        title: '良票演出',
+      })
+    }
+  },
   onShareAppMessage: function () {
-    return {
-      title: '良票演出',
-      path: 'pages/home/home/home',
-      success: function (res) {
-        // 转发成功
-      },
-      fail: function (res) {
-        // 转发失败
+    if (this.data.isUserSession) {
+      var data = JSON.parse(this.data.shareData)
+      console.log(data)
+      return {
+        title: wx.getStorageSync('otherUserInfo').username,
+        path: 'pages/home/home/home?ticketList=' + data,
+        success: function (res) {
+          // 转发成功
+        },
+        fail: function (res) {
+          // 转发失败
+        }
+      }
+    } else {
+      return {
+        title: '良票演出',
+        path: 'pages/home/home/home',
+        success: function (res) {
+          // 转发成功
+        },
+        fail: function (res) {
+          // 转发失败
+        }
       }
     }
   }

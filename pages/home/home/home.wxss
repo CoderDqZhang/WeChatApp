@@ -226,3 +226,59 @@ page {
   margin-right: 30rpx;
 }
 
+.header_view{
+  background-color: #4bd4c5;
+  height: 355rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo_cover{
+  height: 132rpx;
+  width: 132rpx;
+  border-radius: 66rpx;
+  border-color: white;
+  margin-top: 8rpx;
+}
+
+.user_name{
+  margin-top: 34rpx;
+  color: white;
+  font-size: 38rpx;
+}
+
+.tags{
+  margin-top: 24rpx;
+  flex-direction: row;
+  display: flex;
+  margin-left: 18rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag{
+  border: 2rpx solid #FFFFFF;
+  border-radius: 4rpx;
+  padding-left: 21rpx;
+  padding-right: 21rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  font-size: 22rpx;
+  color: white;
+  margin-right: 18rpx;
+}
+
+.none_cover {
+  width: 136rpx;
+  height: 190rpx;
+}
+
+.none_text {
+  margin-top: 75rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #bbc1cb;
+  
+}
+

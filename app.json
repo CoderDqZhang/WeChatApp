@@ -25,13 +25,14 @@
     "pages/home/ticket_put/ticket_put",
     "pages/home/ticket_form/ticket_form",
     "pages/home/address/address",
+    "pages/home/my_program/my_program",
     "pages/template/refresh_template",
     "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#4bd4c5",
-    "navigationBarTitleText": "良票演出",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "#ffffff",
     "backgroundColor": "#efeff4"
   },

@@ -32,6 +32,11 @@
       <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
     </view>
     <view style="margin-left: 15px;margin-right: 0px;height:1rpx; background-color: #E9EBF2;"></view>
+    <view class="mineClass" id="mysell" bindtap="myProgramTap">
+      <view class="tableTitle">我的小程序</view>
+      <image class="detailImage" src="/images/gloable/Chevron.png" mode="aspectFill"></image>
+    </view>
+    <view style="margin-left: 15px;margin-right: 0px;height:1rpx; background-color: #E9EBF2;"></view>
   </view>
   <view class="serviceConnect" id="service" bindtap="serviceTap" style="height:{{windowsHeigth - 420}}px;">
      <view>
