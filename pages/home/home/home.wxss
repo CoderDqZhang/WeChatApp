@@ -279,6 +279,12 @@ page {
   text-align: center;
   font-size: 32rpx;
   color: #bbc1cb;
-  
+}
+
+.bottomView{
+  text-align: center;
+  font-size: 24rpx;
+  color: #BBC1CB;
+  height: 90rpx;
 }
 

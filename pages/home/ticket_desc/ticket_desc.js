@@ -81,6 +81,7 @@ Page({
             sessionShow: JSON.parse(opt.ticketList),
             shareData: JSON.parse(opt.ticketList),
           })
+          console.log(this.data.sessionShow)
           this.genderData(this.data.sessionShow.session.ticket_list)
         }else{
           console.log(opt)
@@ -449,6 +450,7 @@ Page({
         var that = this
         var shareTitle = ""
         var userInfo = wx.getStorageSync('userInfo')
+        userInfo.data.avatar = userInfo.data.avatar.split('?')[0]
         that.data.shareData.otherUserInfo = userInfo.data
         console.log(that.data.shareData)
         if (that.data.sessionShow.session.shareTitle == null) {

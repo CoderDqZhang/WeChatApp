@@ -1,6 +1,6 @@
 <!--pages/home/my_program/my_program.wxml-->
 <import src="../../template/show_template.wxml" />
-<scroll-view>
+<scroll-view scroll-y="true" style="height:{{windowsHeigth - 45}}px;">
   <view class="header_view">
     <view class="photo">
       <image src="{{userInfoShow.avatar}}" class="photo"></image>
@@ -27,5 +27,6 @@
       <view>暂时未挂售演出票</view>
     </view>
   </view>
-
 </scroll-view>
+<view class="bottomView">由良票提供技术支持
+</view>

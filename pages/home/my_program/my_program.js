@@ -22,7 +22,7 @@ function ticketSellCount(data) {
   return ticketCount
 }
 
-function ticketMinDiscount(data){
+function ticketMinDiscount(data) {
   var min_discount = 1.00
   if (data.ticket_list.count != 1) {
     for (var j = 0; j < data.ticket_list.length; j++) {
@@ -31,22 +31,22 @@ function ticketMinDiscount(data){
         min_discount = discount
       }
     }
-  }else{
+  } else {
     min_discount = parseFloat(data.ticket_list[0].discount)
   }
   return min_discount
 }
 
-function ticketMinDiscountShow(data){
+function ticketMinDiscountShow(data) {
   var min_discount = 1.00
   if (data.session_list.count != 1) {
-    for (var i = 0; i < data.session_list.length; i ++){
+    for (var i = 0; i < data.session_list.length; i++) {
       var mindiscount = ticketMinDiscount(data.session_list[i])
-      if (mindiscount < min_discount){
+      if (mindiscount < min_discount) {
         min_discount = mindiscount
       }
     }
-  }else{
+  } else {
     min_discount = ticketMinDiscount(data.session_list[0])
   }
   return min_discount
@@ -92,10 +92,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ticketSell:null,
+    ticketSell: null,
     shareData: null,
-    userInfoShow:null,
+    userInfoShow: null,
     windowsHeigth: 0,
+    otherUserInfo: null,
+    isOtherUserInfo: false
   },
 
   /**
@@ -103,7 +105,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    console.log(options)  
+    console.log(options)
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -111,21 +113,20 @@ Page({
         })
         // success
       }
-    })  
+    })
     if (options.show != null) {
       var shareData = JSON.parse(options.show)
-      console.log("shareData" + shareData)
       this.setData({
-        ticketSell: shareData.ticketList,
-        shareData: JSON.parse(options.show),
+        isOtherUserInfo: true
       })
-      console.log("fsdfwef" + shareData.otherUserInfo)
-      wx.setStorageSync("otherUserInfo", shareData.otherUserInfo)
+      this.requestSessionIDData(shareData.id)
+      console.log('otherUserInfo' + shareData)
+      wx.setStorageSync("otherUserInfo", shareData)
       wx.setNavigationBarTitle({
         title: '',
       })
       this.setData({
-        userInfoShow: shareData.otherUserInfo
+        userInfoShow: shareData
       })
     } else {
       this.requestData()
@@ -141,6 +142,27 @@ Page({
     }
   },
 
+  requestSessionIDData: function (data) {
+    var that = this
+    app.func.requestGet('supplier/' + data + '/ticket/', {}, function (res) {
+      console.log(res)
+      for (var i = 0; i < res.length; i++) {
+        var dic_count = (ticketMinDiscountShow(res[i]) * 10)
+        var sellCount = ticketSellCount(res[i])
+        var minPrice = ticketSellManagerMinPrice(res[i])
+        res[i].min_discount = dic_count.toFixed(1)
+        res[i].ticket_count = sellCount
+        res[i].min_price = minPrice
+      }
+      that.setData({
+        ticketSell: res,
+        isNoneTicket: res.length == 0 ? true : false,
+        isHaveSellManager: res.length == 0 ? true : false,
+      })
+      console.log(that.data.ticketSell)
+    });
+  },
+
   requestData: function () {
     var that = this
     // wx.showToast({
@@ -151,7 +173,7 @@ Page({
     app.func.requestGet('supplier/ticket/', {}, function (res) {
       console.log(res)
       for (var i = 0; i < res.length; i++) {
-        var dic_count = (ticketMinDiscountShow(res[i])* 10)
+        var dic_count = (ticketMinDiscountShow(res[i]) * 10)
         var sellCount = ticketSellCount(res[i])
         var minPrice = ticketSellManagerMinPrice(res[i])
         res[i].min_discount = dic_count.toFixed(1)
@@ -195,42 +217,42 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
@@ -239,22 +261,19 @@ Page({
   onShareAppMessage: function () {
     var that = this
     var shareTitle = ""
-    var userInfo = wx.getStorageSync('userInfo')
-    that.data.shareData.otherUserInfo = userInfo.data
-    for (var i = 0; i < that.data.shareData.ticketList.length; i++) {
-      that.data.shareData.ticketList[i].category.icon = ''
-      var arr = that.data.shareData.ticketList[i].cover.split('?')
-      that.data.shareData.ticketList[i].cover = arr[0]
-      that.data.shareData.ticketList[i].cover_end = arr[1]
-      for (var j = 0; j < that.data.shareData.ticketList[i].session_list.length; j++) {
-        that.data.shareData.ticketList[i].session_list[j].venue_map = ''
-      }
+    var userInfo
+    if (!that.data.isOtherUserInfo) {
+      userInfo = wx.getStorageSync('userInfo').data
+      userInfo.avatar = userInfo.avatar.split('?')[0]
+    }else{
+      userInfo = wx.getStorageSync('otherUserInfo')
+      userInfo.avatar = userInfo.avatar.split('?')[0]
     }
-    var shareContent = JSON.stringify(that.data.shareData)
+    var shareContent = JSON.stringify(userInfo)
+    console.log('shareContent' + shareContent)
     var shareUrl = 'pages/home/my_program/my_program?show='
     return {
-      title: userInfo.data.username,
-      desc: that.data.sharesubletitle,
+      title: userInfo.username,
       path: shareUrl + shareContent
     }
   }

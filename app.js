@@ -91,17 +91,6 @@ App({
                       })
                       return
                     }
-                    // wx.showModal({
-                    //   title: res.data.lp_session_id,
-                    //   showCancel: false,
-                    //   confirmText: "知道了",
-                    //   confirmColor: "#4bd4c5",
-                    //   success: function (res) {
-                    //     if (res.confirm) {
-
-                    //     }
-                    //   }
-                    // })
                     console.log(res.data.lp_session_id)
                     console.log(res)
                     var pages = getCurrentPages();

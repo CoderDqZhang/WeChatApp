@@ -135,12 +135,19 @@ Page({
       })
     }
     if (opt.ticketList != null) {
+      var that = this
+      console.log("opt.ticketList" + opt.ticketList)
       var ticketList = JSON.parse(opt.ticketList)
+      console.log(ticketList)
       this.setData({
-        ticketSell: ticketList.ticketList,
-        shareData: ticketList,
+        isUserSession: true,
       })
-      
+      this.setData({
+        title: ticketList.username,
+        avatar: ticketList.avatar,
+      })
+      wx.setStorageSync("otherUserInfo", ticketList)
+      this.requestSessionIDData(ticketList.id)
     } else {
       var otherUserInfo = wx.getStorageSync('otherUserInfo')
       if (otherUserInfo != null && otherUserInfo.role == "supplier") {
@@ -163,7 +170,7 @@ Page({
   },
   requestSessionIDData: function (data) {
     var that = this
-    data = '3535216720'
+    // data = '3535216720'
     app.func.requestGet('supplier/' + data + '/ticket/', {}, function (res) {
       console.log(res)
       for (var i = 0; i < res.length; i++) {
@@ -178,8 +185,6 @@ Page({
         ticketSell: res,
         isNoneTicket: res.length == 0 ? true : false,
         isHaveSellManager: res.length == 0 ? true : false,
-        'shareData.ticketList': res,
-        'shareData.otherUserInfo': wx.getStorageSync('otherUserInfo')
       })
       console.log(that.data.ticketSell)
     });
@@ -411,11 +416,14 @@ Page({
     }
   },
   onShareAppMessage: function () {
+    var that = this
     if (this.data.isUserSession) {
-      var data = JSON.parse(this.data.shareData)
-      console.log(data)
+      this.setData({
+        shareData: wx.getStorageSync('otherUserInfo')
+      })
+      var data = JSON.stringify(this.data.shareData)
       return {
-        title: wx.getStorageSync('otherUserInfo').username,
+        title: that.data.title,
         path: 'pages/home/home/home?ticketList=' + data,
         success: function (res) {
           // 转发成功

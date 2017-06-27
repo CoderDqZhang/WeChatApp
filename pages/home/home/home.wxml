@@ -54,7 +54,7 @@
 </view>
 <view wx:else>
   <view wx:if="{{isUserSession}}">
-    <scroll-view>
+    <scroll-view scroll-y="true" style="height:{{winHeight - 45}}px;">
       <view class="header_view">
         <view class="photo_cover">
           <image src="{{avatar}}" class="photo_cover"></image>
@@ -82,6 +82,8 @@
         </view>
       </view>
     </scroll-view>
+    <view class="bottomView">由良票提供技术支持
+    </view>
   </view>
   <view wx:else>
     <view class="searchContent">

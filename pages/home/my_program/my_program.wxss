@@ -54,3 +54,12 @@
   color: #bbc1cb;
   
 }
+
+.bottomView{
+  background-color: white;
+  text-align: center;
+  font-size: 24rpx;
+  color: #BBC1CB;
+  height: 90rpx;
+  
+}
